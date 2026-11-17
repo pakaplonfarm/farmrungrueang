@@ -1546,7 +1546,7 @@ async function fbInit(){
  try{await loadScript('firebase-config.js')}catch(e){return null}
  const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey||!cfg.projectId)return null;
  try{if(localStorage.getItem('fbOffline')==='1')return null}catch(e){}
- try{await loadScript('fb/firebase-app-compat.js');await loadScript('fb/firebase-auth-compat.js');await loadScript('fb/firebase-firestore-compat.js')}catch(e){FBERR='โหลดระบบคลาวด์ไม่ได้ (ไม่มีอินเทอร์เน็ต?) — ใช้ข้อมูลในเครื่องไปก่อน';return null}
+ try{await loadScript('firebase-app-compat.js');await loadScript('firebase-auth-compat.js');await loadScript('firebase-firestore-compat.js')}catch(e){FBERR='โหลดระบบคลาวด์ไม่ได้ (ไม่มีอินเทอร์เน็ต?) — ใช้ข้อมูลในเครื่องไปก่อน';return null}
  const app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
  const fs=firebase.firestore();try{await fs.enablePersistence({synchronizeTabs:true})}catch(e){}
  const auth=firebase.auth();
