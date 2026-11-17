@@ -1088,6 +1088,15 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .llgrid input{font-family:Prompt,monospace;font-size:16px;letter-spacing:.3px}
 .llbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .gpsbtn{flex:1 1 220px;justify-content:center;min-height:46px;font-size:15px}
+
+.login{min-height:70vh;display:grid;place-items:center;padding:20px 0}
+.lg-card{width:100%;max-width:420px;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--sh2)}
+.lg-card .side-art{display:block;width:100%;height:130px}
+.lg-b{padding:22px 24px 26px;text-align:center}.lg-b .emb{width:56px;height:56px;margin-top:-50px;border-radius:50%;background:#fff;padding:3px}
+.lg-b h1{margin:8px 0 2px}
+.gbtn{width:100%;justify-content:center;margin-top:18px;min-height:50px;font-size:16px;background:#fff!important;color:var(--ink)!important;border:1px solid #DADCE0!important;gap:10px}
+.gbtn:hover{background:#F8FAF8!important}
+.is-login .fab,.is-login #bottom,.is-login .gs{display:none!important}
 </style>
 </head>
 <body>
@@ -1529,9 +1538,38 @@ function lsGet(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'null')}cat
 function lsSet(){try{localStorage.setItem(LS_KEY,JSON.stringify({jobs:S.jobs,expenses:S.expenses,customers:S.customers,plots:S.plots,products:S.products,settings:S.settings}))}catch(e){}}
 function mergeSettings(s){const o=clone(DEFAULTS);Object.assign(o,s||{});if(!o.biz||o.biz==='โดรนเกษตรรับจ้าง'){o.biz=DEFAULTS.biz;if(!s?.phone)o.phone=DEFAULTS.phone;if(!s||s.region==='east')o.region=DEFAULTS.region}['tagline','slogan','area'].forEach(k=>{if(o[k]==null)o[k]=DEFAULTS[k]});o.prices={...DEFAULTS.prices,...(s?.prices||{})};o.orchard={...DEFAULTS.orchard,...(s?.orchard||{})};return o}
 
+/* ---------- Firebase (เวอร์ชัน GitHub / เว็บทั่วไป) ---------- */
+let FB=null,FBMODE=false,FBERR='';
+const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม pakaplonfarm.github.io ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)'};
+const fbErrText=e=>FB_ERR[e&&e.code]||('เกิดข้อผิดพลาด: '+((e&&(e.code||e.message))||''));
+async function fbInit(){
+ try{await loadScript('firebase-config.js')}catch(e){return null}
+ const cfg=window.FIREBASE_CONFIG;if(!cfg||!cfg.apiKey||!cfg.projectId)return null;
+ try{if(localStorage.getItem('fbOffline')==='1')return null}catch(e){}
+ try{await loadScript('fb/firebase-app-compat.js');await loadScript('fb/firebase-auth-compat.js');await loadScript('fb/firebase-firestore-compat.js')}catch(e){FBERR='โหลดระบบคลาวด์ไม่ได้ (ไม่มีอินเทอร์เน็ต?) — ใช้ข้อมูลในเครื่องไปก่อน';return null}
+ const app=firebase.apps.length?firebase.app():firebase.initializeApp(cfg);
+ const fs=firebase.firestore();try{await fs.enablePersistence({synchronizeTabs:true})}catch(e){}
+ const auth=firebase.auth();
+ try{await auth.getRedirectResult()}catch(e){FBERR=fbErrText(e)}
+ const user=await new Promise(r=>{const un=auth.onAuthStateChanged(u=>{un();r(u)})});
+ FB={app,auth,fs,user,farm:window.FARM_ID||'main'};
+ auth.onAuthStateChanged(u=>{if((u&&u.uid)!==(FB.user&&FB.user.uid))location.reload()});
+ if(!user){backend='login';renderLogin();return 'login'}
+ FBMODE=true;const base='farms/'+FB.farm;
+ return {collection:c=>fs.collection(base+'/'+c),doc:p=>fs.doc(base+'/'+p)};
+}
+function renderLogin(){
+ renderNav();document.body.classList.add('is-login');
+ $('#view').innerHTML=`<div class="login"><div class="lg-card">${sideArt('lg')}<div class="lg-b">${emblem('lg')}<h1>${esc(S.settings.biz||'รุ่งเรือง เรื่องไร่')}</h1><div class="sub">สมุดบัญชีโดรนเกษตร · บันทึกบนคลาวด์ ใช้ได้ทุกเครื่อง</div>
+ ${FBERR?`<div class="note bad small" style="margin-top:12px">${esc(FBERR)}</div>`:''}
+ <button class="btn primary gbtn" data-act="fbLogin"><svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>เข้าสู่ระบบด้วย Google</button>
+ <div class="tiny muted" style="margin-top:10px">ใช้ Gmail เดียวกันทุกเครื่อง ข้อมูลจะตรงกันอัตโนมัติ</div>
+ <button class="btn sm ghost" data-act="fbOffline" style="margin-top:14px">ใช้แบบออฟไลน์ในเครื่องนี้ไปก่อน</button></div></div></div>`;
+}
 async function initStore(){
  let db=null;
- if(window.claude&&typeof window.claude.use==='function'){
+ if(STANDALONE){db=await fbInit();if(db==='login')return}
+ else if(window.claude&&typeof window.claude.use==='function'){
   try{db=await window.claude.use('db')}catch(e){db=null}
  }
  const local=lsGet();
@@ -1543,7 +1581,7 @@ async function initStore(){
   const done=(k,meta)=>{if(!meta||!meta.fromCache){pending.delete(k);if(!pending.size){clearTimeout(timer);dbNote=''}}};
   COLLS.forEach(c=>{
    DB.collection(c).onSnapshot(snap=>{S[c]=snap.docs.map(d=>d.data());done(c,snap.metadata);scheduleRender()},
-    err=>{done(c);dbNote='เกิดปัญหาการเชื่อมต่อฐานข้อมูล ('+(err&&err.code||'')+')';scheduleRender()});
+    err=>{done(c);dbNote=FBMODE?fbErrText(err):'เกิดปัญหาการเชื่อมต่อฐานข้อมูล ('+(err&&err.code||'')+')';scheduleRender()});
   });
   DB.doc('settings/main').onSnapshot(s=>{S.settings=mergeSettings(s.exists?s.data():null);done('settings',s.metadata);scheduleRender()},
    err=>{done('settings');scheduleRender()});
@@ -1557,6 +1595,7 @@ async function initStore(){
 let _rq=false;function scheduleRender(){if(_rq)return;_rq=true;requestAnimationFrame(()=>{_rq=false;render()})}
 async function save(coll,obj){
  obj=clone(obj);obj.updatedAt=new Date().toISOString();
+ if(FBMODE){DB.collection(coll).doc(obj.id).set(obj).catch(e=>toast(fbErrText(e),'err'));return true}
  if(backend==='db'){
   try{await DB.collection(coll).doc(obj.id).set(obj);return true}
   catch(e){
@@ -1570,11 +1609,13 @@ async function save(coll,obj){
  const arr=S[coll];const i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj);lsSet();render();return true;
 }
 async function removeDoc(coll,id){
+ if(FBMODE){DB.collection(coll).doc(id).delete().catch(e=>toast(fbErrText(e),'err'));return true}
  if(backend==='db'){try{await DB.collection(coll).doc(id).delete();return true}catch(e){toast('ลบไม่สำเร็จ');return false}}
  S[coll]=S[coll].filter(x=>x.id!==id);lsSet();render();return true;
 }
 async function saveSettings(s){
  S.settings=mergeSettings(s);
+ if(FBMODE){DB.doc('settings/main').set(clone(S.settings)).catch(e=>toast(fbErrText(e),'err'));toast('บันทึกการตั้งค่าแล้ว','ok');return}
  if(backend==='db'){try{await DB.doc('settings/main').set(clone(S.settings));toast('บันทึกการตั้งค่าแล้ว')}catch(e){toast('บันทึกการตั้งค่าไม่สำเร็จ')}}
  else{lsSet();toast('บันทึกการตั้งค่าแล้ว');render()}
 }
@@ -1761,7 +1802,7 @@ function banner(){
  return h;
 }
 function render(){
- if(backend==='loading') return;
+ if(backend==='loading'||backend==='login') return;
  renderNav();
  const v=UI.view;
  const html=v==='dashboard'?viewDashboard():v==='tx'?viewTx():v==='reports'?viewReports():v==='records'?viewRecords():v==='customers'?(UI.custId?viewCustomer(UI.custId):viewCustomers()):v==='map'?viewMap():v==='advisor'?viewAdvisor():v==='library'?viewLibrary():viewSettings();
@@ -1981,6 +2022,8 @@ function viewSettings(){
    <div class="tiny muted" style="margin-top:6px">ค่าเริ่มต้นเป็นตัวอย่าง ปรับตามราคาตลาดในพื้นที่ (ไม้ผลใส่ 0 = ใช้ราคาพืชไร่)</div></div>
   <div class="row" style="grid-column:1/-1"><button class="btn primary" type="submit">บันทึกการตั้งค่า</button></div>
  </form>
+ ${STANDALONE?`<div class="card" style="margin-top:14px"><h2>บัญชีคลาวด์ (Firebase)</h2>${FBMODE?`<div class="row between"><div><div class="b">☁️ เชื่อมต่อแล้ว: ${esc(FB.user.email||'')}</div><div class="small muted">ข้อมูลซิงก์อัตโนมัติทุกเครื่องที่ล็อกอินด้วยบัญชีนี้ · ใช้งานตอนไม่มีเน็ตได้ แล้วซิงก์เมื่อออนไลน์</div></div><button class="btn" data-act="fbLogout">ออกจากระบบ</button></div>`
+ :window.FIREBASE_CONFIG?`<div class="row between"><div class="small">ตอนนี้ใช้แบบออฟไลน์ในเครื่องนี้</div><button class="btn primary" data-act="fbOnline">เปิดใช้คลาวด์</button></div>`:`<div class="small muted">ยังไม่ได้ตั้งค่า Firebase — ใส่ค่าในไฟล์ firebase-config.js เพื่อเปิดใช้คลาวด์</div>`}</div>`:''}
  <div class="card" style="margin-top:14px"><h2>สำรองและกู้คืนข้อมูล</h2>
   <div class="small muted" style="margin-bottom:8px">แนะนำให้สำรองเป็นไฟล์ทุกเดือน ไฟล์ CSV เปิดด้วย Excel/Google Sheets ได้</div>
   <div class="row"><button class="btn" data-act="exportJSON">⬇️ สำรองทั้งหมด (JSON)</button><button class="btn" data-act="exportCSV">⬇️ ตารางงาน (CSV)</button><button class="btn" data-act="exportExpCSV">⬇️ ตารางรายจ่าย (CSV)</button>
@@ -2195,7 +2238,7 @@ function renderNav(){
  const st=S.settings;
  $('#side').innerHTML=`<div class="sb-brand">${sideArt('s')}<div class="sb-id">${emblem('s')}<div class="sb-txt"><div class="sb-name">${esc(st.biz||'โดรนเกษตร')}</div><div class="sb-tag">${esc(st.tagline||'สมุดบัญชีโดรนเกษตร')}</div></div></div></div>
  <nav class="sb-nav">${NAV.map(g=>`<div class="sb-sec">${g.sec}</div>`+g.items.map(it=>{const on=it[0]==='go'&&(UI.view===it[1]);const dq=it[1]==='records'?queueJobs().filter(j=>j.date<=today()).length:0;return `<button class="nav-btn ${on?'on':''}" ${it[0]==='go'?`data-act="go" data-v="${it[1]}"`:`data-act="${it[1]}"`} title="${esc(it[2])}">${IC[it[3]]}<span>${it[2]}</span>${dq?`<i class="nbadge">${dq}</i>`:''}</button>`}).join('')).join('')}</nav>
- <div class="sb-foot"><div class="sb-store">${backend==='db'?'☁️ บันทึกบนคลาวด์':backend==='local'?'💾 บันทึกในเครื่องนี้':''}</div><button class="sb-tog" data-act="sbToggle" title="${SB_COLLAPSED?'ขยายเมนู':'ย่อเมนู'}">${IC.chev}<span>ย่อเมนู</span></button></div>`;
+ <div class="sb-foot"><div class="sb-store">${FBMODE?`☁️ ซิงก์คลาวด์ · ${esc(FB.user.email||'')}`:backend==='db'?'☁️ บันทึกบนคลาวด์':backend==='local'?'💾 บันทึกในเครื่องนี้':''}</div><button class="sb-tog" data-act="sbToggle" title="${SB_COLLAPSED?'ขยายเมนู':'ย่อเมนู'}">${IC.chev}<span>ย่อเมนู</span></button></div>`;
  const mb=$('#mbar');if(mb)mb.innerHTML=`${sideArt('m')}<div class="mb-id">${emblem('m')}<div><div class="sb-name">${esc(st.biz||'')}</div><div class="sb-tag">${esc(st.tagline||'')}</div></div></div>`;
  const mob=[['go','dashboard','ภาพรวม','dash'],['go','tx','ธุรกรรม','tx'],['go','records','งานพ่น','drone'],['go','map','แผนที่','map'],['act','more','เพิ่มเติม','more']];
  const inMore=!['dashboard','tx','records','map'].includes(UI.view);
@@ -2703,7 +2746,10 @@ async function importData(data){
  const n=COLLS.reduce((a,c)=>a+(Array.isArray(data[c])?data[c].length:0),0);
  if(!await confirmBox(`นำเข้าข้อมูล ${n} รายการ? รายการที่มีรหัสเดียวกันจะถูกเขียนทับ ข้อมูลอื่นยังอยู่ครบ`,'นำเข้า',false))return;
  let ok=0;
- if(backend==='db'){
+ if(FBMODE){
+  for(const c of COLLS){for(const o of (data[c]||[])){if(!o||typeof o!=='object'||!o.id)continue;DB.collection(c).doc(String(o.id)).set(clone(o)).catch(e=>toast(fbErrText(e),'err'));ok++}}
+  if(data.settings)DB.doc('settings/main').set(mergeSettings(data.settings)).catch(()=>{});
+ } else if(backend==='db'){
   toast('กำลังนำเข้า…');
   for(const c of COLLS){for(const o of (data[c]||[])){if(!o||typeof o!=='object'||!o.id)continue;try{await DB.collection(c).doc(String(o.id)).set(clone(o));ok++}catch(e){if(e&&(e.code==='resource_exhausted'||e.code==='unavailable')){await new Promise(r=>setTimeout(r,1500));try{await DB.collection(c).doc(String(o.id)).set(clone(o));ok++}catch(e2){}}}}}
   if(data.settings){try{await DB.doc('settings/main').set(mergeSettings(data.settings))}catch(e){}}
@@ -2720,6 +2766,10 @@ async function importData(data){
 const ACT={
  go:a=>go(a.dataset.v,a.closest('.side,#bottom')?{reset:true}:{}),
  back:()=>goBack(),
+ fbLogin:async()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});try{await FB.auth.signInWithPopup(p)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/cancelled-popup-request','auth/web-storage-unsupported'].includes(e.code)){try{await FB.auth.signInWithRedirect(p)}catch(e2){toast(fbErrText(e2),'err')}}else toast(fbErrText(e),'err')}},
+ fbLogout:async()=>{if(await confirmBox('ออกจากระบบคลาวด์บนเครื่องนี้? ข้อมูลบนคลาวด์ยังอยู่ครบ','ออกจากระบบ',false)){await FB.auth.signOut()}},
+ fbOffline:()=>{try{localStorage.setItem('fbOffline','1')}catch(e){}location.reload()},
+ fbOnline:()=>{try{localStorage.removeItem('fbOffline')}catch(e){}location.reload()},
  kpi:a=>{const k=a.dataset.k,P=UI.period,r=periodRange(P);
   if(k==='income')txGo({type:'in',...r});else if(k==='expense'||k==='costrai')txGo({type:'out',...r});else if(k==='unpaid')txGo({type:'in',status:'unpaid'});else if(k==='allTx'){closeModal();txGo({})}
   else if(k==='cash')cashDetail();else if(k==='profit'||k==='avgjob'||k==='profitrai'){go('reports')}
