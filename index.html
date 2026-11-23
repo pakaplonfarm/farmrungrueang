@@ -1285,6 +1285,63 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 @media (max-width:900px){.tgrid,.tgrid.t3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tgrid.t3 .tc:last-child{grid-column:1/-1}.tc-v{font-size:21px}.tc{padding:12px}}
 @media (max-width:380px){.tc-v{font-size:19px}.mstrip b{font-size:14.5px}}
 @media (max-width:900px){.home .card.hq{padding:14px}.mstrip{padding:9px 10px}.mstrip>div+div{padding-left:7px}}
+/* ===== v5: Delta T + หน่วยลม ===== */
+.wuseg{display:inline-flex;background:#EEF2EF;border-radius:8px;padding:2px;margin-left:6px;vertical-align:middle}
+.wuseg button{border:0;background:none;font-family:inherit;font-size:11.5px;font-weight:600;color:#64748B;padding:2px 7px;border-radius:6px;cursor:pointer}
+.wuseg button.on{background:#fff;color:var(--brand);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.field label .wuseg{margin-left:4px}
+.dtc{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+.dtc.empty{background:#F8FAF8}.dtc-h{font-weight:700;margin-bottom:4px}
+.dtc.lv-ok{border-color:#A7F3D0;background:linear-gradient(180deg,#F0FDF4,#fff 60%)}.dtc.lv-warn,.dtc.lv-low{border-color:#FDE68A;background:linear-gradient(180deg,#FFFBEB,#fff 60%)}.dtc.lv-bad{border-color:#FECACA;background:linear-gradient(180deg,#FEF2F2,#fff 60%)}
+.dtc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.dtc-v{display:flex;align-items:baseline;gap:8px}.dtc-v span{font-size:13px;color:var(--muted);font-weight:600}.dtc-v b{font-family:Prompt,sans-serif;font-size:34px;line-height:1.1}.dtc-v em{font-style:normal;font-weight:600;color:#334155}
+.dtc-st{color:#fff;font-weight:700;font-size:13.5px;padding:6px 12px;border-radius:99px}
+.dtbar{position:relative;height:12px;border-radius:99px;margin:14px 0 4px;background:linear-gradient(90deg,#0EA5E9 0%,#0EA5E9 14.3%,#10B981 14.3%,#10B981 57.1%,#F59E0B 57.1%,#F59E0B 71.4%,#EF4444 71.4%,#EF4444 100%)}
+.dtbar i{position:absolute;top:-5px;width:6px;height:22px;margin-left:-3px;border-radius:4px;background:#0F172A;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.dtax{position:relative;height:16px;font-size:10.5px;color:var(--muted)}.dtax span{position:absolute;transform:translateX(-50%)}.dtax span:first-child{left:0;transform:none}.dtax span:last-child{transform:translateX(-100%)}
+.dtg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.dtg>div{background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column}.dtg span{font-size:11.5px;color:var(--muted)}.dtg b{font-size:13.5px;line-height:1.4}
+.dtt{margin:10px 0 0;padding-left:20px;font-size:13.5px;line-height:1.6}.dtt li{margin-bottom:3px}
+.dt-in{margin-bottom:10px}.dt-in .field{margin:0}.dt-in input{font-size:17px;font-weight:600}
+.wxh{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}.wxh-h{display:flex;flex-direction:column;margin-bottom:8px}.wxh-h span{font-size:12px;color:var(--muted)}
+.wxbest{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;border-radius:12px;padding:8px 12px;font-size:13.5px;margin-bottom:10px;line-height:1.7}.wxbest.bad{background:#FFFBEB;border-color:#FDE68A;color:#92400E}
+.wxstrip{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.wxc{flex:0 0 62px;border:0;border-radius:12px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:1px;font-family:inherit;cursor:pointer;color:#0F172A;border-top:4px solid}
+.wxc span{font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center}.wxc span em{font-style:normal;font-size:9.5px;color:var(--brand)}.wxc b{font-family:Prompt,sans-serif;font-size:17px}.wxc small{font-size:10.5px;color:#475569}.wxc .pp{color:#1D4ED8}
+.wxc.lv-ok{background:#ECFDF5;border-color:#10B981}.wxc.lv-low{background:#E0F2FE;border-color:#0EA5E9}.wxc.lv-warn{background:#FFFBEB;border-color:#F59E0B}.wxc.lv-bad{background:#FEF2F2;border-color:#EF4444}
+.wxleg{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;margin-top:6px}.wxleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+@media (max-width:600px){.dtg b{font-size:12.5px}.dt-card .ch{flex-wrap:wrap}}
+/* ===== v6: ตั้งค่าการบิน ===== */
+.fly .ftabs{overflow-x:auto;scrollbar-width:none}.fly .ftabs button{flex:1 0 auto;padding:8px 12px;font-size:13.5px}
+.frec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.frec>div{background:#F0FDF4;border:1px solid #D1FAE5;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0}.frec span{font-size:11.5px;color:var(--muted)}.frec b{font-size:14px}
+.fsls{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-bottom:12px}
+.fsl-h{display:flex;justify-content:space-between;font-size:13px}.fsl-h b{font-family:Prompt,sans-serif;color:var(--brand)}
+.fsl input[type=range]{width:100%;accent-color:#10B981;height:28px}
+.fout{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.fout>div{border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0;background:#fff}.fout span{font-size:11.5px;color:var(--muted)}.fout b{font-family:Prompt,sans-serif;font-size:18px}.fout small{font-size:11px;font-weight:500;color:var(--muted)}
+.fbar{display:block;height:6px;background:#F1F5F9;border-radius:9px;margin-top:4px;overflow:hidden}.fbar em{display:block;height:100%;border-radius:9px}
+.fcmp{margin-top:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden}.fcmp-h{background:#F8FAF8;padding:8px 12px;font-weight:700;font-size:13.5px}
+.fcmp table{width:100%;border-collapse:collapse;font-size:13px}.fcmp td,.fcmp th{padding:7px 10px;border-top:1px solid var(--line);text-align:left}.fcmp th{font-size:12px;color:var(--muted);font-weight:600}.fcmp td:first-child{color:var(--muted);width:34%}
+.fstg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%;margin:4px 0}.fstn{background:#fff;border:1px solid #FDE68A;border-radius:10px;padding:8px 10px;margin-top:6px;font-size:13.5px}
+.fwind{margin-top:12px;border-radius:14px;padding:10px 12px;border:1px solid}.fwind ul{margin:6px 0 4px;padding-left:20px;font-size:13.5px;line-height:1.6}.fwind-h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.fwind-h span{font-size:12.5px;color:var(--muted)}
+.fwind.lv-ok{background:#F0FDF4;border-color:#A7F3D0}.fwind.lv-warn{background:#FFFBEB;border-color:#FDE68A}.fwind.lv-bad{background:#FEF2F2;border-color:#FECACA}.fwind.lv-low{background:#F0F9FF;border-color:#BAE6FD}
+.fnote{margin-top:12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:10px 12px}.fnote ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;line-height:1.6}
+@media (max-width:700px){.frec{grid-template-columns:1fr 1fr}.fsls{grid-template-columns:1fr}.fout{grid-template-columns:1fr 1fr}.fout>div:first-child{grid-column:1/-1}}
+/* ===== v7: คู่มือโรคและศัตรูพืช ===== */
+.dz{padding:0!important;margin-bottom:10px!important;overflow:hidden}
+.dz-h{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.dz-i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0;background:#F1F5F9}
+.dz-i.c-fun{background:#FEF3C7}.dz-i.c-oom{background:#DBEAFE}.dz-i.c-alg{background:#DCFCE7}.dz-i.c-ins{background:#FFE4E6}.dz-i.c-phys{background:#F1F5F9}.dz-i.c-q{background:#FEE2E2}
+.dz-t{flex:1;min-width:0;display:flex;flex-direction:column}.dz-t b{font-family:Prompt,sans-serif;font-size:15.5px}.dz-t>span{font-size:12px;color:var(--muted)}
+.dz-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.dz-tags .tg{font-size:11px;padding:1px 7px}
+.tg.m-drone{background:#DCFCE7;color:#15803D}.tg.m-paint{background:#FEF3C7;color:#92400E}.tg.m-inject{background:#EDE9FE;color:#6D28D9}.tg.m-soil{background:#E0F2FE;color:#0369A1}.tg.m-cut,.tg.m-cult,.tg.m-bag{background:#F1F5F9;color:#475569}
+.dz-x{font-size:22px;color:var(--muted);line-height:1;padding:4px}
+.dz-b{padding:0 14px 14px;border-top:1px solid var(--line)}
+.dz-s{margin-top:10px}.dz-s h4{margin:0 0 4px;font-size:14px}.dz-s ul{margin:0;padding-left:20px;font-size:14px;line-height:1.65}.dz-s p{margin:0;font-size:14px;line-height:1.6}
+.dz.open{border-color:#A7F3D0!important;box-shadow:0 6px 18px rgba(16,185,129,.1)}
+.dz-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.dz-chips button{border:1px solid var(--line);background:#F8FAF8;border-radius:99px;padding:5px 11px;font-family:inherit;font-size:12.5px;cursor:pointer;color:#334155}.dz-chips button:hover{border-color:var(--em);background:#ECFDF5}
+.dz-sec{font-family:Prompt,sans-serif;font-weight:700;font-size:15px;margin:16px 2px 8px;display:flex;gap:8px;align-items:center}.dz-sec span{font-size:12px;background:#EEF2EF;border-radius:99px;padding:1px 8px;color:#475569;font-family:inherit}
+mark{background:#FEF08A;padding:0 1px;border-radius:3px}
 </style>
 </head>
 <body>
@@ -1523,7 +1580,13 @@ const CROPS={
    T('โรคใบติด (ไรซอกโทเนีย)','fun',[6,7,8,9,10],['flush','half','post'],['wet','humid'],['hexa','azoxy','thioph','copoh'],'ระบาดช่วงฝนชุกบนใบอ่อน ตัดแต่งทรงพุ่มให้โปร่ง'),
    T('โรคแอนแทรคโนส/ใบไหม้','fun',[6,7,8,9,10,11],['flush','half','bud','flower'],['wet','humid'],['prochl','difen','azoxy','manco','carben'],'ป้องกันช่วงใบอ่อนและก่อนดอกบาน'),
    T('โรคผลเน่า','fun',[3,4,5,6],['fruit','preharvest'],['humid','wet'],['fosetyl','dimeth','azodif','prochl'],'พบมาก ~1 เดือนก่อนเก็บเกี่ยวถึงหลังเก็บ ไม่วางผลกับพื้นดิน เก็บผลเน่าออกนอกแปลง'),
-   T('โรคราสีชมพู','fun',[6,7,8,9,10],['post','flush','half','mature'],['wet','humid'],['copox','hexa','tebu'],'พบที่กิ่งในทรงพุ่มทึบช่วงฝน ตัดกิ่งเป็นโรคเผาทำลาย')
+   T('โรคราสีชมพู','fun',[6,7,8,9,10],['post','flush','half','mature'],['wet','humid'],['copox','hexa','tebu'],'พบที่กิ่งในทรงพุ่มทึบช่วงฝน ตัดกิ่งเป็นโรคเผาทำลาย'),
+   T('โรคจุดสาหร่าย','fun',[6,7,8,9,10,11],['post','mature','half'],['wet','humid'],['copoh','copox'],'จุดนูนกำมะหยี่สีเขียวเทา/ส้มบนใบแก่ สวนทึบชื้น'),
+   T('ราดำ','fun',[1,2,3,4,5,6],['flush','fruit','preharvest','flushfruit'],['dry','humid'],['petoil','copox'],'เกิดจากน้ำหวานของเพลี้ยแป้ง/เพลี้ยหอย/เพลี้ยไก่แจ้ — ต้องกำจัดแมลงต้นเหตุและมดร่วมด้วย'),
+   T('โรคดอกเน่า/ดอกร่วง','fun',[11,12,1,2],['bud','flower'],['wet','humid'],['metal','fosetyl','prochl','azoxy'],'พ่นป้องกันก่อนดอกบาน (ระยะหัวกำไล) ช่วงดอกบานบินสูง 8–10 ม.'),
+   T('โรคใบจุด (โฟมอปซิส)','fun',[6,7,8,9,10],['flush','half','mature'],['wet','humid'],['difen','azoxy','manco','carben'],'จุดเล็กสีน้ำตาลแดงจำนวนมาก ขอบเหลือง'),
+   T('หนอนเจาะเมล็ดทุเรียน','ins',[1,2,3,4],['fruitset','fruit'],['dry'],['chlorant','cyant','emam','lambda','indox'],'พ่นป้องกันช่วงผลเล็ก ผลแก่มีรูเจาะ ส่งออกไม่ได้ ห่อผลช่วยได้'),
+   T('เพลี้ยหอย','ins',[1,2,3,4,5],['mature','fruit','preharvest'],['dry'],['petoil','spirotet','dino','bupro'],'ตุ่มแข็งคล้ายเกล็ดตามใบ กิ่ง ผล มีราดำตามมา')
   ],
   nutri:[
    N(['post','flush'],'ฟื้นต้นหลังเก็บเกี่ยว เร่งใบอ่อน 2 ชุด: ทางดินปุ๋ยไนโตรเจนสูง + ปุ๋ยอินทรีย์ / พ่นทางใบสูตรเสมอ ร่วมกับอะมิโน สาหร่าย',['f46','f151515','orgf','f212121','amino','seaweed']),
@@ -1544,7 +1607,10 @@ const CROPS={
    T('โรคราแป้ง','fun',[1,2,3,4],['newleaf'],['cool','humid'],['sulfur','hexa','propi'],'ระบาดช่วงแตกใบใหม่ที่อากาศเย็นมีน้ำค้าง พ่นป้องกันเมื่อใบอ่อนเริ่มคลี่'),
    T('โรคใบร่วงและฝักเน่า (ไฟทอปธอรา)','fun',[6,7,8,9,10],['tapping'],['wet','humid'],['metal','fosetyl','phosac'],'ช่วงฝนชุก ระวังโรคเส้นดำที่หน้ากรีดร่วมด้วย'),
    T('โรคใบจุดคอลเลโทตริกัม (ใบอ่อน)','fun',[3,4,5,6,7],['newleaf','half','young'],['wet','humid'],['carben','manco','prochl','azoxy'],'ทำลายใบอ่อนช่วงฝนต้นฤดู'),
-   T('ไร/เพลี้ยไฟในยางเล็ก','ins',[1,2,3,4],['young','newleaf'],['dry','hot'],['abam','propar','imida'],'พบในแปลงยางเล็กช่วงแล้ง')
+   T('ไร/เพลี้ยไฟในยางเล็ก','ins',[1,2,3,4],['young','newleaf'],['dry','hot'],['abam','propar','imida'],'พบในแปลงยางเล็กช่วงแล้ง'),
+   T('โรคใบจุดก้างปลา (Corynespora)','fun',[5,6,7,8,9,10,11],['tapping','half','young'],['wet','humid'],['hexa','difprop','manco','carben','prochl'],'แผลมีเส้นดำแตกแขนงคล้ายก้างปลา ขอบเหลือง ใบร่วงซ้ำ'),
+   T('โรคใบจุดตานก','fun',[4,5,6,7,8,9,10],['young','newleaf'],['wet','hot'],['manco','carben','hexa'],'พบมากในแปลงกล้า/ยางเล็ก จุดขาวขอบน้ำตาลคล้ายตานก บำรุงดินร่วมด้วย'),
+   T('โรคราสีชมพู','fun',[6,7,8,9,10],['young','tapping'],['wet','humid'],['copox','copoh','hexa','tebu'],'ยางอายุ 2–8 ปี ง่ามกิ่งมีแผ่นสีชมพู ระยะแรกพ่นที่ง่ามกิ่งได้ ระยะลุกลามต้องถากทาและตัดกิ่ง')
   ],
   nutri:[
    N(['tapping'],'ใส่ปุ๋ยปีละ 2 ครั้ง ต้นฝน (พ.ค.-มิ.ย.) และปลายฝน (ก.ย.-ต.ค.) สูตรตามคำแนะนำ กยท. หรือตามค่าวิเคราะห์ดิน (โดรนหว่านปุ๋ยเม็ดได้)',['f20820','orgf']),
@@ -1916,9 +1982,9 @@ function rotationStatus(cat,g,hist,refDate){
 }
 function sprayCheck(wx,stage,crop){
  const out=[];const t=num(wx?.temp),rh=num(wx?.rh),w=wx?.wind===''||wx?.wind==null?null:num(wx.wind);const cond=wx?.cond||[];
- if(w!=null&&w>5) out.push(['bad',`ลม ${w} ม./วิ. แรงเกินไป — ไม่ควรบินพ่น ละอองปลิวออกนอกแปลง`]);
- else if(w!=null&&w>3) out.push(['warn',`ลม ${w} ม./วิ. — ลดความสูงบิน ใช้ละอองใหญ่ขึ้น เว้นแนวกันชนด้านใต้ลม`]);
- else if(cond.includes('wind')) out.push(['warn','ลมแรง — วัดความเร็วลมก่อนบิน ถ้าเกิน 3 ม./วิ. ควรเลื่อน']);
+ if(w!=null&&w>5) out.push(['bad',`ลม ${windTxt(w)} แรงเกินไป — ไม่ควรบินพ่น ละอองปลิวออกนอกแปลง`]);
+ else if(w!=null&&w>3) out.push(['warn',`ลม ${windTxt(w)} — ลดความสูงบิน ใช้ละอองใหญ่ขึ้น เว้นแนวกันชนด้านใต้ลม`]);
+ else if(cond.includes('wind')) out.push(['warn','ลมแรง — วัดความเร็วลมก่อนบิน ถ้าเกิน 3 ม./วิ. (≈11 กม./ชม.) ควรเลื่อน']);
  if(w!=null&&w<0.5) out.push(['info','ลมสงบมาก ช่วงเช้ามืดอาจเกิดอุณหภูมิผกผัน ละอองลอยค้าง/ลอยไกล']);
  if(t>=33||cond.includes('hot')) out.push(['warn',`${t?('อุณหภูมิ '+t+'°C — '):''}อากาศร้อน ละอองระเหยเร็ว บินช่วงเช้าตรู่/เย็น เพิ่มอัตราน้ำ ใส่สารลดการระเหย`]);
  if(rh&&rh<50) out.push(['warn',`ความชื้น ${rh}% ต่ำ — ละอองระเหยเร็ว ใช้สารลดการระเหย`]);
@@ -2001,6 +2067,7 @@ function globalResults(q){
  fzRank(S.customers,q,custFields,4).forEach(c=>out.push({html:`👤 <b>${hl(c.name,q)}</b> <span class="tiny muted">ลูกค้า ${esc(c.phone||'')} ${esc(c.address||'')}</span>`,go:()=>{pushNav();UI.custId=c.id;go('customers',{push:false})}}));
  fzRank(S.plots,q,plotFields,4).forEach(p=>out.push({html:`📍 <b>${hl(p.name,q)}</b> <span class="tiny muted">${esc(custById(p.customerId)?.name||'')} · ${esc(cropName(p))} ${esc(p.location||'')}${hasLL(p)?' · มีพิกัด':''}</span>`,go:()=>{if(hasLL(p)){UI.mapFocus=p.id;go('map')}else{pushNav();UI.custId=p.customerId;go('customers',{push:false})}}}));
  fzRank(S.jobs.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')),q,jobFields,4).forEach(j=>out.push({html:`🚁 <b>${fdate(j.date)} ${esc(custById(j.customerId)?.name||'')}</b> <span class="tiny muted">${esc(SVC[j.service]?.n||'')} · ${esc(plotById(j.plotId)?.name||'')} · ${(j.chems||[]).map(c=>esc(c.active||c.product||'')).join(', ')}</span>`,go:()=>{const x=S.jobs.find(y=>y.id===j.id);if(x)openJob(x)}}));
+ dzRank(DZ,q,4).forEach(d=>out.push({html:`${DZ_CAT[d.cat][1]} <b>${hl(d.n,q)}</b> <span class="tiny muted">${esc(CROPS[d.crop]?.n||'')} · ${esc(d.sym[0]).slice(0,60)}…</span>`,go:()=>{UI.dz.crop=d.crop;UI.dz.q='';UI.dz.open=d.id;go('diseases')}}));
  fzRank(ALL_PESTS,q,p=>[p],3).forEach(p=>out.push({html:`🐛 <b>${hl(p,q)}</b> <span class="tiny muted">ดูสารที่ใช้กำจัด</span>`,go:()=>{UI.libQ=p.replace(/\s*\(.*?\)\s*/g,'');go('library')}}));
  fzRank(CHEM,q,chemFields,5).forEach(c=>out.push({html:`🧪 <b>${hl(c.th,q)}</b> <span class="badge b-${c.cat}">${esc(gLabel(c.cat,c.g)||CATS[c.cat].s)}</span> <span class="tiny muted">${esc((TG[c.id]||[]).slice(0,3).join(', '))}${TN[c.id]?' · '+esc(TN[c.id]):''}</span>`,go:()=>{UI.libQ=c.th;go('library')}}));
  return out;
@@ -2020,7 +2087,7 @@ const IC={
  set:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',
  more:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'
 };
-const VIEWS=[['home','หน้าหลัก','home'],['queue','คิวงาน','queue'],['finance','การเงิน','fin'],['dashboard','Dashboard ภาพรวม','dash'],['tx','รายการธุรกรรม','tx'],['reports','รายงานและสถิติ','rep'],['records','งานบริการฉีดพ่น','drone'],['customers','ลูกค้า','cust'],['team','ทีมงาน','team'],['map','แผนที่งาน','map'],['advisor','คำแนะนำการพ่น','adv'],['library','คลังสาร','lib'],['voice','ผู้ช่วยเสียง','mic'],['settings','ตั้งค่าระบบ','set']];
+const VIEWS=[['home','หน้าหลัก','home'],['queue','คิวงาน','queue'],['finance','การเงิน','fin'],['dashboard','Dashboard ภาพรวม','dash'],['tx','รายการธุรกรรม','tx'],['reports','รายงานและสถิติ','rep'],['records','งานบริการฉีดพ่น','drone'],['customers','ลูกค้า','cust'],['team','ทีมงาน','team'],['map','แผนที่งาน','map'],['advisor','คำแนะนำการพ่น','adv'],['diseases','โรคและศัตรูพืช','bug'],['library','คลังสาร','lib'],['voice','ผู้ช่วยเสียง','mic'],['settings','ตั้งค่าระบบ','set']];
 const UI={tx:{q:'',from:'',to:'',type:'',cat:'',status:'',limit:50},view:'dashboard',period:{mode:'month',ym:today().slice(0,7)},rec:{tab:'jobs',q:'',ym:'',svc:''},custQ:'',custId:null,adv:null,libCat:'ins',libQ:'',mapFocus:null,mapSel:null};
 UI.stack=[];
 function pushNav(){const cur={view:UI.view,custId:UI.custId,y:window.scrollY};const top=UI.stack[UI.stack.length-1];if(!top||top.view!==cur.view||top.custId!==cur.custId)UI.stack.push(cur);if(UI.stack.length>25)UI.stack.shift()}
@@ -2054,7 +2121,7 @@ function render(){
  if(backend==='loading'||backend==='login') return;
  renderNav();renderAppChrome();
  const v=UI.view;
- const html=v==='home'?viewHome():v==='queue'?viewQueue():v==='finance'?viewFinance():v==='team'?viewTeam():v==='voice'?viewVoice():v==='dashboard'?viewDashboard():v==='tx'?viewTx():v==='reports'?viewReports():v==='records'?viewRecords():v==='customers'?(UI.custId?viewCustomer(UI.custId):viewCustomers()):v==='map'?viewMap():v==='advisor'?viewAdvisor():v==='library'?viewLibrary():viewSettings();
+ const html=v==='home'?viewHome():v==='queue'?viewQueue():v==='finance'?viewFinance():v==='team'?viewTeam():v==='voice'?viewVoice():v==='diseases'?viewDiseases():v==='dashboard'?viewDashboard():v==='tx'?viewTx():v==='reports'?viewReports():v==='records'?viewRecords():v==='customers'?(UI.custId?viewCustomer(UI.custId):viewCustomers()):v==='map'?viewMap():v==='advisor'?viewAdvisor():v==='library'?viewLibrary():viewSettings();
  const ae=document.activeElement;const keepId=ae&&ae.id&&$('#view').contains(ae)?ae.id:null;const sel=keepId&&ae.selectionStart!=null?[ae.selectionStart,ae.selectionEnd]:null;
  if(CBS&&$('#view').contains(CBS.inp))CBS=null;
  killCharts();
@@ -2176,14 +2243,14 @@ function viewAdvisor(){
  </div>
  <div style="margin-top:10px"><div class="small muted" style="margin-bottom:4px">สภาพอากาศวันนี้ (ไม่เลือก = ใช้ค่าตามฤดูกาลของ${esc(REGIONS.find(r=>r[0]===S.settings.region)?.[1]||'')})</div>
   <div class="row">${WX.map(w=>`<span class="chip ${A.wx.includes(w[0])?'on':''}" data-act="advWx" data-w="${w[0]}">${w[1]}</span>`).join('')}</div>
-  <div class="grid g4" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input id="adv-temp" inputmode="decimal" value="${esc(A.temp)}" data-in="advTemp"></div><div class="field"><label>ความชื้น (%)</label><input id="adv-rh" inputmode="decimal" value="${esc(A.rh)}" data-in="advRh"></div><div class="field"><label>ความเร็วลม (ม./วินาที)</label><input id="adv-wind" inputmode="decimal" value="${esc(A.wind)}" data-in="advWind"></div>
+  <div class="grid g4" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input id="adv-temp" inputmode="decimal" value="${esc(A.temp)}" data-in="advTemp"></div><div class="field"><label>ความชื้น (%)</label><input id="adv-rh" inputmode="decimal" value="${esc(A.rh)}" data-in="advRh"></div><div class="field"><label>ความเร็วลม ${windUnitSeg()}</label><input id="adv-wind" inputmode="decimal" value="${esc(A.windIn&&A.windIn.u===WU()?A.windIn.v:windShow(A.wind))}" data-in="advWind"></div>
   <div class="field"><label>ดูพยากรณ์อากาศ</label><div class="row small"><a href="https://www.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุฯ</a> · <a href="https://www.windy.com/" target="_blank" rel="noopener">Windy (ลม)</a></div></div></div>
- </div></div>
+ </div></div>${advDtHTML()}${flyCardHTML()}
  <div class="grid g2" style="margin-top:14px">
   <div class="card"><h2>🗓️ ฤดูกาล: ${MONTHS_FULL[A.month-1]}</h2><div class="small">${esc(R.season.text)}</div>
    ${!A.stage&&R.inferred.length?`<div class="small muted" style="margin-top:6px">ระยะพืชที่น่าจะเป็น: ${R.inferredNames.map(esc).join(', ')}${cdef.shiftSouth&&String(S.settings.region).startsWith('south')?' (ปรับตามฤดูทุเรียนภาคใต้)':''}</div>`:''}
    ${!A.stage&&!R.inferred.length?`<div class="small muted" style="margin-top:6px">พืชนี้ขึ้นกับวันปลูก — เลือกระยะพืชหรือใส่วันปลูกในแปลงเพื่อคำแนะนำที่แม่นขึ้น</div>`:''}</div>
-  <div class="card"><h2>🚁 ความพร้อมการบินพ่น</h2>${checks.map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}</div>
+  <div class="card"><h2>🚁 ความพร้อมการบินพ่น</h2><div id="adv-checks">${checks.map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}</div></div>
  </div>
  <h2 style="margin:18px 0 10px">⚠️ ศัตรูพืชที่ควรระวัง และสารที่แนะนำ</h2>
  ${R.threats.length?`<div class="grid g2">${R.threats.map(t=>`<div class="threat ${t.level}">
@@ -2478,7 +2545,7 @@ Object.assign(IC,{
 });
 const NAV=[
  {sec:'ภาพรวม',items:[['go','home','หน้าหลัก','home'],['go','dashboard','Dashboard','dash']]},
- {sec:'งานบริการ',items:[['go','queue','คิวงาน','queue'],['go','records','งานบริการฉีดพ่น','drone'],['go','customers','ลูกค้า','cust'],['go','team','ทีมงาน','team'],['go','map','แผนที่งาน','map'],['go','advisor','คำแนะนำการพ่น','adv'],['go','library','คลังสาร','lib']]},
+ {sec:'งานบริการ',items:[['go','queue','คิวงาน','queue'],['go','records','งานบริการฉีดพ่น','drone'],['go','customers','ลูกค้า','cust'],['go','team','ทีมงาน','team'],['go','map','แผนที่งาน','map'],['go','advisor','คำแนะนำการพ่น','adv'],['go','diseases','โรคและศัตรูพืช','bug'],['go','library','คลังสาร','lib']]},
  {sec:'บัญชี',items:[['go','finance','การเงิน','fin'],['act','navIncome','บันทึกรายรับ','inc'],['act','navExpense','บันทึกรายจ่าย','exp'],['go','tx','รายการธุรกรรม','tx'],['go','reports','รายงานและสถิติ','rep']]},
  {sec:'ระบบ',items:[['go','voice','ผู้ช่วยเสียง','mic'],['go','settings','ตั้งค่าระบบ','set']]}];
 let SB_COLLAPSED=false;try{SB_COLLAPSED=localStorage.getItem('sbCollapsed')==='1'}catch(e){}
@@ -2790,7 +2857,9 @@ function renderJobForm(){
   <div class="tiny muted" style="margin-bottom:8px">พิมพ์ชื่อสาร ชื่อการค้า หรือชื่อแมลง/โรค (เช่น “เพลี้ยไฟ”) แล้วเลือกจากรายการ — ระบบรู้กลุ่ม IRAC/FRAC และเตือนเมื่อใช้กลุ่มเดิมกับแปลงนี้</div>
   <div id="jf-chems"></div>
   <div class="row"><button class="btn sm" data-act="addLine" data-c="ins">+ ยาแมลง</button><button class="btn sm" data-act="addLine" data-c="fun">+ ยารา</button><button class="btn sm" data-act="addLine" data-c="her">+ ยาหญ้า</button><button class="btn sm" data-act="addLine" data-c="fer">+ ปุ๋ย</button><button class="btn sm" data-act="addLine" data-c="pgr">+ ฮอร์โมน</button><button class="btn sm" data-act="addLine" data-c="adj">+ สารจับใบ</button></div>
-  <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>${teamPicker(j)}
+  <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>
+  <div class="grid g3" style="margin-top:8px"><div class="field"><label>สูงจากยอดพืช (ม.)</label><input data-f="flyH" inputmode="decimal" value="${esc(j.flyH??'')}" placeholder="เช่น 2.5"></div><div class="field"><label>ระยะร่อง (ม.)</label><input data-f="swath" inputmode="decimal" value="${esc(j.swath??'')}" placeholder="เช่น 6"></div><div class="field"><label>ความเร็ว (ม./วิ.)</label><input data-f="speed" inputmode="decimal" value="${esc(j.speed??'')}" placeholder="เช่น 5"></div></div>
+  <div class="row" style="gap:6px;margin-top:4px"><button class="btn sm" data-act="jfFly">✈️ ใช้ค่าแนะนำตามพืช</button><span class="tiny muted">ดูตัวช่วยเต็มได้ที่ คำแนะนำการพ่น › ตั้งค่าการบิน</span></div>${teamPicker(j)}
   <div id="jf-tank" class="small" style="margin-top:8px"></div>
  </div>
 
@@ -2800,7 +2869,7 @@ function renderJobForm(){
 
  <div class="sec"><h3>🌤️ สภาพอากาศขณะพ่น</h3>
   <div class="row">${WX.map(w=>`<span class="chip ${(j.wx.cond||[]).includes(w[0])?'on':''}" data-act="jfWx" data-w="${w[0]}">${w[1]}</span>`).join('')}</div>
-  <div class="grid g3" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input data-wx="temp" inputmode="decimal" value="${esc(j.wx.temp)}"></div><div class="field"><label>ความชื้น (%)</label><input data-wx="rh" inputmode="decimal" value="${esc(j.wx.rh)}"></div><div class="field"><label>ลม (ม./วินาที)</label><input data-wx="wind" inputmode="decimal" value="${esc(j.wx.wind)}"></div></div>
+  <div class="grid g3" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input data-wx="temp" inputmode="decimal" value="${esc(j.wx.temp)}"></div><div class="field"><label>ความชื้น (%)</label><input data-wx="rh" inputmode="decimal" value="${esc(j.wx.rh)}"></div><div class="field"><label>ลม ${windUnitSeg()}</label><input data-wx="wind" inputmode="decimal" value="${esc(windShow(j.wx.wind))}"></div></div><button class="btn sm" style="margin-top:6px" data-act="jfWxFetch">📍 ดึงอากาศตอนนี้</button>
   <div id="jf-safe" style="margin-top:8px"></div></div>
 
  <div class="sec"><h3>📝 อื่นๆ</h3><div class="grid g3">
@@ -2868,7 +2937,7 @@ function updateJobComputed(){
  `<div class="tot"><span>ค่าบริการ ${fmt(j.area)} ไร่ × ${baht(j.pricePerRai)}</span><span>${baht(base)}</span></div>${cc?`<div class="tot"><span>ค่าสารที่เราจัดหา</span><span>${baht(cc)}</span></div>`:''}${num(j.extraFee)?`<div class="tot"><span>ค่าเดินทาง/อื่นๆ</span><span>${baht(j.extraFee)}</span></div>`:''}${num(j.discount)?`<div class="tot"><span>ส่วนลด</span><span>-${baht(j.discount)}</span></div>`:''}<div class="tot big"><span>ยอดรวม</span><span>${baht(t)}</span></div>${cost?`<div class="tiny muted">ต้นทุนสาร ${baht(cost)} (นับเป็นรายจ่ายอัตโนมัติ) · กำไรงานนี้ก่อนค่าใช้จ่ายอื่น ${baht(t-cost)}</div>`:''}`;
  const tank=num(S.settings.tank)||50,wr=num(j.waterRate),area=num(j.area);
  $('#jf-tank').innerHTML=wr&&area&&j.service!=='fert'&&j.service!=='seed'?`🚁 น้ำรวม ${fmt(wr*area,0)} ล. · 1 ถัง (${fmt(tank,0)} ล.) พ่นได้ ~${fmt(tank/wr,1)} ไร่ · ประมาณ <b>${Math.ceil(wr*area/tank)} เที่ยวบิน</b>`:'';
- $('#jf-safe').innerHTML=sprayCheck(j.wx,j.stage,cropOf(j)).map(c=>`<div class="note ${c[0]}" style="margin-bottom:5px;padding:6px 10px">${esc(c[1])}</div>`).join('');
+ $('#jf-safe').innerHTML=(deltaT(j.wx.temp,j.wx.rh)!=null?dtCard(j.wx.temp,j.wx.rh,j.wx.wind,{compact:true})+'<div style="height:8px"></div>':'')+sprayCheck(j.wx,j.stage,cropOf(j)).map(c=>`<div class="note ${c[0]}" style="margin-bottom:5px;padding:6px 10px">${esc(c[1])}</div>`).join('');
  F.chems.forEach((_,i)=>updateLineInfo(i));
 }
 async function saveJob(){
@@ -3169,7 +3238,7 @@ function onFormInput(e){
   if(k==='supplier'){renderChemLines();updateJobComputed();return}
   if(k==='g'||k==='active'){updateLineInfo(i);return}
   updateJobComputed();return}
- if(t.dataset.wx){F.wx[t.dataset.wx]=t.value;updateJobComputed();return}
+ if(t.dataset.wx){F.wx[t.dataset.wx]=t.dataset.wx==='wind'?windStore(t.value):t.value;updateJobComputed();return}
  if(t.dataset.nc){F._newCust[t.dataset.nc]=t.value;return}
  if(t.dataset.np){F._newPlot[t.dataset.np]=t.value;return}
  if(t.dataset.e){F[t.dataset.e]=t.value;if(t.dataset.rer&&F._body&&e.type==='change'){if(t.dataset.e==='cat')F.activeId='';$('#pf').innerHTML=F._body()}}
@@ -3183,7 +3252,8 @@ $('#modal').addEventListener('change',async e=>{const t=e.target;
 // การกรอกในหน้าหลัก
 document.addEventListener('input',e=>{const t=e.target;if(!$('#view').contains(t))return;const k=t.dataset.in;if(!k)return;
  if(k==='txQ'){UI.tx.q=t.value;UI.tx.limit=50;render()}else if(k==='recQ'){UI.rec.q=t.value;render()}else if(k==='custQ'){UI.custQ=t.value;render()}else if(k==='libQ'){UI.libQ=t.value;render()}
- else if(k==='advTemp'){UI.adv.temp=t.value;render()}else if(k==='advRh'){UI.adv.rh=t.value;render()}else if(k==='advWind'){UI.adv.wind=t.value;render()}});
+ else if(k==='advTemp'||k==='advRh'){dtLive()}else if(k==='dzQ'){UI.dz.q=t.value;UI.dz.open='';render()}else if(k==='advWind'){dtLive()}});
+
 document.addEventListener('change',e=>{const t=e.target;if(!$('#view').contains(t))return;const k=t.dataset.chg;if(!k)return;
  if(k==='dashYm'){if(t.value)UI.period.ym=t.value;render()}
  else if(k==='dashY'){UI.period.ym=t.value+'-'+(UI.period.ym.slice(5,7)||'01');render()}
@@ -3322,8 +3392,8 @@ function viewHome(){
  const tj=dayJobs(t),done=tj.filter(j=>!isQ(j)).length,rai=tj.reduce((s,j)=>s+num(j.area),0);
  const inc=a.income+a.otherIn,incY=b.income+b.otherIn;
  const m=summarize({mode:'month',ym:t.slice(0,7)});
- const tiles=[['tab','queue','งานและคิว','queue','t1'],['newJob','','เพิ่มงาน','plus','t2'],['tab','finance','รายรับรายจ่าย','fin','t3'],['tab','reports','รายงาน','rep','t4'],
-  ['tab','team','ทีมงาน','team','t5'],['tab','map','แผนที่งาน','map','t6'],['tab','advisor','คำแนะนำพ่น','adv','t7'],['tab','voice','สั่งด้วยเสียง','mic','t8']];
+ const tiles=[['tab','queue','งานและคิว','queue','t1'],['newJob','','เพิ่มงาน','plus','t2'],['tab','finance','รายรับรายจ่าย','fin','t3'],['goDt','','เช็คอากาศ','therm','t4'],
+  ['tab','team','ทีมงาน','team','t5'],['tab','map','แผนที่งาน','map','t6'],['tab','advisor','คำแนะนำพ่น','adv','t7'],['tab','diseases','โรค/ศัตรูพืช','bug','t8']];
  const nq=upcomingQueue().slice(0,5),fu=followUps().slice(0,3);
  return `<div class="home"><div class="ph home-ph"><div><div class="ph-k">${esc(S.settings.biz||'')}</div><h1>สวัสดีครับ, ${esc(S.settings.pilot||'นักบินโดรน')} 👋</h1><div class="sub">${thLong(t)}</div></div><div class="row"><button class="btn" data-act="vcMic">${IC.mic} สั่งด้วยเสียง</button><button class="btn" data-act="bell">${IC.bell} แจ้งเตือน${notifCount()?` <span class="nbadge" style="margin-left:4px">${notifCount()}</span>`:''}</button><button class="btn primary" data-act="newQueue">${IC.plus} เพิ่มคิวงาน</button></div></div>
  <div class="tgrid">
@@ -3637,7 +3707,7 @@ function openBell(){const ns=notifs();
 /* ---------- เมนูทั้งหมด ---------- */
 const MENU_GROUPS=[['งานบริการ',[['tab','home','หน้าหลัก','home'],['tab','queue','คิวงาน','queue'],['tab','records','งานบริการฉีดพ่น','drone'],['tab','customers','ลูกค้า','cust'],['tab','team','ทีมงาน','team'],['tab','map','แผนที่งาน','map']]],
  ['บัญชี',[['tab','finance','การเงิน','fin'],['navIncome','','บันทึกรายรับ','inc'],['navExpense','','บันทึกรายจ่าย','exp'],['tab','tx','รายการธุรกรรม','tx'],['tab','reports','รายงานและสถิติ','rep'],['tab','dashboard','Dashboard','dash']]],
- ['ความรู้และระบบ',[['tab','advisor','คำแนะนำการพ่น','adv'],['tab','library','คลังสาร','lib'],['tab','voice','ผู้ช่วยเสียง','mic'],['tab','settings','ตั้งค่าระบบ','set']]]];
+ ['ความรู้และระบบ',[['tab','advisor','คำแนะนำการพ่น','adv'],['tab','diseases','โรคและศัตรูพืช','bug'],['tab','library','คลังสาร','lib'],['goFly','','ตั้งค่าการบิน','drone'],['tab','voice','ผู้ช่วยเสียง','mic'],['tab','settings','ตั้งค่าระบบ','set']]]];
 function openMenu(){openModal(`<div class="sh-h"><div class="row" style="gap:10px;flex-wrap:nowrap;align-items:center;min-width:0">${emblem('mn')}<div><b>${esc(S.settings.biz||'เมนู')}</b><div class="tiny muted">${esc(S.settings.phone||'')} ${esc(S.settings.area||'')}</div></div></div><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
  ${MENU_GROUPS.map(g=>`<div class="mg-t">${g[0]}</div><div class="mg">${g[1].map(x=>`<button class="mi ${x[0]==='tab'&&UI.view===x[1]?'on':''}" data-act="${x[0]==='tab'?'goClose':x[0]}" ${x[1]?`data-v="${x[1]}"`:''}><span>${IC[x[3]]||''}</span>${x[2]}</button>`).join('')}</div>`).join('')}
  ${isStandaloneApp()?'':`<button class="btn" style="width:100%;justify-content:center;margin-top:14px" data-act="installApp">📲 ติดตั้งเป็นแอปบนหน้าจอ</button>`}
@@ -3692,6 +3762,465 @@ Object.assign(ACT,{
   else{vcDraftToForm(d);const dd=d;await saveJob();if(!$('#modal').classList.contains('hidden'))return;UI.voice.res={kind:'ok',q:UI.voice.res?.q||'',html:`<div class="vc-big">✓ จองคิวแล้ว</div><div class="small muted">${esc(dd.name)} · ${thShort(dd.date)}${dd.time?' '+dd.time+' น.':''} · ${esc(SVC_SHORT[dd.service])}${dd.area?' '+fmt(dd.area)+' ไร่':''}</div><div class="vc-btns"><button class="btn" data-act="qGo" data-d="${dd.date}">เปิดคิววันนั้น →</button></div>`};UI.voice.draft=null;F=null;render();speak('จองคิวเรียบร้อยครับ')}}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id==='vc-in'){e.preventDefault();ACT.vcSend()}});
+
+/* =========================================================
+   ส่วนที่ 10: หน่วยความเร็วลม + Delta T + อากาศรายชั่วโมง
+   ========================================================= */
+const WU=()=>{try{return localStorage.getItem('windUnit')==='kmh'?'kmh':'ms'}catch(e){return 'ms'}};
+const WU_LAB={ms:'ม./วิ.',kmh:'กม./ชม.'};
+const r1=x=>Math.round(x*10)/10;
+/* ค่าที่เก็บในระบบเป็น ม./วิ. เสมอ — แปลงตอนแสดง/รับค่า */
+const windShow=ms=>ms===''||ms==null?'':(WU()==='kmh'?String(r1(num(ms)*3.6)):String(ms));
+const windStore=v=>{v=String(v??'').replace(',','.').trim();if(v==='')return '';const n=parseFloat(v);if(isNaN(n))return '';return WU()==='kmh'?String(Math.round(n/3.6*100)/100):v};
+const windTxt=ms=>{const n=num(ms);return WU()==='kmh'?`${fmt(r1(n*3.6),1)} กม./ชม. (${fmt(r1(n),1)} ม./วิ.)`:`${fmt(r1(n),1)} ม./วิ. (${fmt(r1(n*3.6),1)} กม./ชม.)`};
+const windUnitSeg=()=>`<span class="wuseg">${['ms','kmh'].map(u=>`<button type="button" class="${WU()===u?'on':''}" data-act="windUnit" data-u="${u}">${WU_LAB[u]}</button>`).join('')}</span>`;
+
+/* Delta T (สูตรกระเปาะเปียกของ Stull 2011) */
+function wetBulb(T,RH){return T*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(T+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035}
+function deltaT(T,RH){T=num(T);RH=num(RH);if(!T&&T!==0||!RH||RH<5||RH>100)return null;return Math.max(0,T-wetBulb(T,Math.min(RH,99)))}
+function dtGrade(dt,T,w){/* w = ม./วิ. หรือ null */
+ if(dt==null)return null;let lvl,lab,drop,water,ht,tips=[];
+ if(dt<2){lvl='low';lab='ชื้นจัด';drop='250–350 ไมครอน (กลาง–ใหญ่)';water='ปกติ หรือลด 10% ถ้าใบมีน้ำค้างหนา';ht='ปกติ';
+  tips.push('ใบมีน้ำค้าง/ความชื้นสูง — สารสัมผัสอาจเจือจางและไหลทิ้ง รอให้ใบหมาดก่อนถ้าทำได้','ไม่ใช้สารจับใบกลุ่มซิลิโคนเข้มข้นตอนใบเปียกมาก','งานที่เหมาะ: สารดูดซึม ปุ๋ยทางใบ ฮอร์โมน (ดูดซึมดีตอนชื้น)')}
+ else if(dt<=8){lvl='ok';lab='เหมาะสม';drop='150–250 ไมครอน สำหรับยาเชื้อรา/ยาแมลง · 300+ สำหรับยาหญ้า';water='ตามปกติ';ht='ปกติ';
+  tips.push('ช่วงที่ดีที่สุดในการพ่น ละอองลงถึงเป้าดี ระเหยน้อย','ใช้ได้กับงานทุกประเภท')}
+ else if(dt<=10){lvl='warn';lab='เริ่มร้อนแห้ง';drop='250–350 ไมครอน (ใหญ่ขึ้น)';water='เพิ่ม 20%';ht='ลดลง ~0.5 ม. และบินช้าลง';
+  tips.push('ใส่สารลดการระเหย/น้ำมันพืช (MSO)','เลี่ยงปุ๋ยทางใบ ฮอร์โมน น้ำมัน กำมะถัน — เสี่ยงใบไหม้','ถ้าเลื่อนได้ ย้ายไปช่วงเช้าหรือเย็น')}
+ else{lvl='bad';lab='ร้อนแห้งเกินไป';drop='350–450 ไมครอน (หยาบ) ถ้าจำเป็นต้องบิน';water='เพิ่ม 30%';ht='ต่ำสุดที่ปลอดภัย บินช้า';
+  tips.push('ควรเลื่อนการพ่นน้ำยา — ละอองเล็กระเหยหมดก่อนถึงใบ','งานที่ยังทำได้: หว่านปุ๋ยเม็ด หว่านเมล็ด ยาคุมหญ้าก่อนงอก','พักแบตในที่ร่มก่อนชาร์จ/ขึ้นบิน')}
+ if(T>=33)tips.unshift(`อุณหภูมิ ${fmt(T,1)}°C สูง — ระวังพืชเครียด ปากใบปิด สารดูดซึมเข้าได้น้อย`);
+ let wl=null;
+ if(w!=null&&w!==''){w=num(w);
+  if(w>5){wl='bad';tips.unshift(`ลม ${windTxt(w)} แรงเกินไป — ไม่ควรบินพ่น`)}
+  else if(w>3){wl='warn';tips.unshift(`ลม ${windTxt(w)} ค่อนข้างแรง — ใช้ละอองใหญ่ขึ้น บินต่ำ เว้นแนวกันชนด้านใต้ลม`)}
+  else if(w<0.5){wl='warn';tips.unshift(`ลมนิ่ง ${windTxt(w)} — ถ้าเช้ามืด/หัวค่ำ อาจเกิดอากาศผกผัน ละอองเล็กลอยค้างแล้วไปไกล ใช้ละอองกลาง–ใหญ่`)}
+  else{wl='ok'}}
+ const rank={ok:0,low:1,warn:1,bad:2};let all=lvl;if(wl&&rank[wl]>rank[lvl==='low'?'warn':lvl])all=wl;
+ return {lvl,all,lab,drop,water,ht,tips}}
+const DT_COL={ok:'#10B981',low:'#0EA5E9',warn:'#F59E0B',bad:'#EF4444'};
+const DT_TXT={ok:'✅ บินพ่นได้',low:'💧 ได้ แต่ระวังน้ำค้าง/ผกผัน',warn:'⚠️ ระวัง ปรับการตั้งค่า',bad:'⛔ ไม่ควรพ่นน้ำยา'};
+function dtCard(T,RH,w,opt={}){
+ const dt=deltaT(T,RH);
+ if(dt==null)return `<div class="dtc empty"><div class="dtc-h">🌡️ Delta T</div><div class="small muted">กรอก <b>อุณหภูมิ</b> และ <b>ความชื้น</b> ${opt.fetch?'หรือกด “📍 ดึงอากาศตอนนี้”':''} เพื่อดูว่าช่วงนี้พ่นได้ดีแค่ไหน</div></div>`;
+ const g=dtGrade(dt,num(T),w===''||w==null?null:w);const pos=Math.min(100,dt/14*100);
+ return `<div class="dtc lv-${g.all}"><div class="dtc-top"><div class="dtc-v"><span>Delta T</span><b style="color:${DT_COL[g.lvl]}">${fmt(dt,1)}</b><em>${g.lab}</em></div><div class="dtc-st" style="background:${DT_COL[g.all]}">${DT_TXT[g.all]}</div></div>
+ <div class="dtbar"><i style="left:${pos}%"></i></div><div class="dtax"><span>0</span><span style="left:14.3%">2</span><span style="left:57.1%">8</span><span style="left:71.4%">10</span><span style="left:100%">14+</span></div>
+ ${opt.compact?'':`<div class="dtg"><div><span>ขนาดละออง</span><b>${g.drop}</b></div><div><span>น้ำต่อไร่</span><b>${g.water}</b></div><div><span>ความสูง/ความเร็ว</span><b>${g.ht}</b></div><div><span>ลม</span><b>${w===''||w==null?'—':windTxt(w)}</b></div></div>`}
+ <ul class="dtt">${(opt.compact?g.tips.filter(t=>!/^ลม/.test(t)):g.tips).slice(0,opt.compact?2:5).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`}
+
+/* ---------- อากาศรายชั่วโมง (Open-Meteo, ใช้ได้บนเว็บ GitHub) ---------- */
+UI.wxLive=null;
+function areaLatLng(){try{if(!window.THGEO)return null;const a=String(S.settings.area||'');const f=THGEO.d.features.find(f=>a.includes(f.properties.amp_th));if(!f)return null;
+ let pts=[];const g=f.geometry;const rings=g.type==='Polygon'?[g.coordinates[0]]:g.coordinates.map(p=>p[0]);rings.forEach(r=>pts=pts.concat(r));const lng=pts.reduce((s,p)=>s+p[0],0)/pts.length,lat=pts.reduce((s,p)=>s+p[1],0)/pts.length;return {lat,lng,label:'อ.'+f.properties.amp_th}}catch(e){return null}}
+async function wxLocate(){
+ const p=plotById(UI.adv?.plotId);if(hasLL(p))return {lat:+p.lat,lng:+p.lng,label:'แปลง '+p.name};
+ const gp=await new Promise(res=>{if(!navigator.geolocation)return res(null);navigator.geolocation.getCurrentPosition(x=>res({lat:x.coords.latitude,lng:x.coords.longitude,label:'ตำแหน่งปัจจุบัน'}),()=>res(null),{enableHighAccuracy:false,timeout:8000,maximumAge:600000})});
+ if(gp)return gp;try{await loadScript('thgeo.js')}catch(e){}return areaLatLng()}
+async function wxFetch(){
+ if(!STANDALONE){toast('ดึงอากาศอัตโนมัติใช้ได้บนเว็บ GitHub — ที่นี่กรอกเองได้');return}
+ UI.wxLive={busy:true};render();
+ try{const loc=await wxLocate();if(!loc)throw new Error('noloc');
+  const u=`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat.toFixed(4)}&longitude=${loc.lng.toFixed(4)}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,precipitation_probability&wind_speed_unit=ms&timezone=Asia%2FBangkok&forecast_days=2`;
+  const r=await fetch(u);if(!r.ok)throw new Error('http');const d=await r.json();
+  const c=d.current||{};const now=(c.time||'').slice(0,13);
+  const H=(d.hourly?.time||[]).map((t,i)=>({t,temp:d.hourly.temperature_2m[i],rh:d.hourly.relative_humidity_2m[i],wind:d.hourly.wind_speed_10m[i],pop:d.hourly.precipitation_probability?.[i]})).filter(h=>h.t.slice(0,13)>=now).slice(0,24)
+   .map(h=>{const dt=deltaT(h.temp,h.rh);const g=dtGrade(dt,h.temp,h.wind);let lv=g?g.all:'warn';if(h.pop>=60&&lv!=='bad')lv='warn';return {...h,dt,lv}});
+  UI.wxLive={loc,at:new Date().toISOString(),cur:{temp:c.temperature_2m,rh:c.relative_humidity_2m,wind:c.wind_speed_10m,gust:c.wind_gusts_10m},hours:H};
+  const A=UI.adv;if(A){A.windIn=null;A.temp=String(r1(c.temperature_2m));A.rh=String(Math.round(c.relative_humidity_2m));A.wind=String(r1(c.wind_speed_10m))}
+  toast('ดึงอากาศแล้ว: '+loc.label,'ok')}
+ catch(e){UI.wxLive={err:e.message==='noloc'?'หาตำแหน่งไม่ได้ — เปิด GPS หรือเลือกแปลงที่มีพิกัด':'ดึงข้อมูลอากาศไม่ได้ (ไม่มีอินเทอร์เน็ต?) — กรอกเองได้'}}
+ render()}
+function wxHoursHTML(){
+ const L=UI.wxLive;if(!L)return '';if(L.busy)return `<div class="small muted" style="margin-top:10px">⏳ กำลังดึงข้อมูลอากาศ…</div>`;if(L.err)return `<div class="note warn small" style="margin-top:10px">${esc(L.err)}</div>`;
+ const best=L.hours.filter(h=>h.lv==='ok'&&+h.t.slice(11,13)>=5&&+h.t.slice(11,13)<=19);
+ const ranges=[];best.forEach(h=>{const hr=+h.t.slice(11,13),day=h.t.slice(0,10);const last=ranges[ranges.length-1];if(last&&last.day===day&&last.to===hr-1)last.to=hr;else ranges.push({day,from:hr,to:hr})});
+ const dayLab=d=>d===today()?'วันนี้':d===addD(today(),1)?'พรุ่งนี้':fdate(d);
+ return `<div class="wxh"><div class="wxh-h"><b>🕐 ช่วงเวลาพ่น 24 ชม. ข้างหน้า</b><span>${esc(L.loc.label)} · ลมที่ความสูง 10 ม. (ระดับบินมักเบากว่าเล็กน้อย) · แตะชั่วโมงเพื่อดูค่า</span></div>
+ ${ranges.length?`<div class="wxbest">⭐ ช่วงที่เหมาะ: ${ranges.slice(0,4).map(r=>`<b>${dayLab(r.day)} ${String(r.from).padStart(2,'0')}:00–${String(r.to+1).padStart(2,'0')}:00</b>`).join(' · ')}</div>`:`<div class="wxbest bad">ยังไม่มีช่วงที่เหมาะเต็มที่ใน 24 ชม. — ดูชั่วโมงสีเหลืองและปรับการตั้งค่าตามคำแนะนำ</div>`}
+ <div class="wxstrip">${L.hours.map(h=>`<button class="wxc lv-${h.lv}" data-act="wxHour" data-t="${h.t}"><span>${h.t.slice(11,13)===('00')?'<em>'+dayLab(h.t.slice(0,10))+'</em>':''}${h.t.slice(11,16)}</span><b>${h.dt==null?'—':fmt(h.dt,1)}</b><small>${fmt(h.temp,0)}° ${Math.round(h.rh)}%</small><small>💨${WU()==='kmh'?fmt(h.wind*3.6,0):fmt(h.wind,1)}</small>${h.pop>=30?`<small class="pp">🌧${h.pop}%</small>`:''}</button>`).join('')}</div>
+ <div class="wxleg"><span><i style="background:#10B981"></i>เหมาะ</span><span><i style="background:#0EA5E9"></i>ชื้นจัด</span><span><i style="background:#F59E0B"></i>ระวัง/ฝน</span><span><i style="background:#EF4444"></i>ไม่ควร</span><span class="muted">ตัวเลขใหญ่ = Delta T · ลมหน่วย ${WU_LAB[WU()]}</span></div></div>`}
+function dtLive(){const A=UI.adv;if(!A)return;const g=id=>{const e=document.getElementById(id);return e?e.value:null};
+ const t=g('adv-temp'),r=g('adv-rh'),w=g('adv-wind');if(t!=null)A.temp=t;if(r!=null)A.rh=r;if(w!=null){A.wind=windStore(w);A.windIn={u:WU(),v:w}}
+ const sy=(id,v)=>{const e=document.getElementById(id);if(e&&e!==document.activeElement&&v!=null)e.value=v};sy('dt-temp',t);sy('dt-rh',r);sy('dt-wind',w);
+ const el=$('#dt-live');if(el)el.innerHTML=dtCard(A.temp,A.rh,A.wind,{fetch:true});
+ if(UI.fly&&!UI.fly.touched&&A.wind!==''){UI.fly.wind=num(A.wind)}
+ advChecksLive()}
+function advChecksLive(){const A=UI.adv;const el=$('#adv-checks');if(!A||!el)return;let cond=A.wx;if(!cond.length){try{cond=seasonInfo(+A.month,S.settings.region).wx||[]}catch(e){cond=[]}}
+ el.innerHTML=sprayCheck({cond,temp:A.temp,rh:A.rh,wind:A.wind},A.stage,A.crop).map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}
+function advDtHTML(){const A=UI.adv;return `<div class="card dt-card" id="dt-card"><div class="ch"><div><h2>🌡️ เช็คอากาศก่อนบิน (Delta T)</h2><div class="sub">คำนวณใหม่ทันทีที่แก้อุณหภูมิ ความชื้น หรือลม · 2–8 = เหมาะพ่น · ต่ำกว่า 2 ชื้นจัด · เกิน 10 ร้อนแห้งเกิน</div></div><div class="row" style="gap:6px"><button class="btn" data-act="dtRecalc">🔄 คำนวณใหม่</button><button class="btn primary" data-act="wxFetch">📍 ดึงอากาศตอนนี้</button></div></div>
+ <div class="grid g3 dt-in"><div class="field"><label>อุณหภูมิ (°C)</label><input id="dt-temp" inputmode="decimal" value="${esc(A.temp)}" data-dt="temp"></div><div class="field"><label>ความชื้น (%)</label><input id="dt-rh" inputmode="decimal" value="${esc(A.rh)}" data-dt="rh"></div><div class="field"><label>ลม ${windUnitSeg()}</label><input id="dt-wind" inputmode="decimal" value="${esc(A.windIn&&A.windIn.u===WU()?A.windIn.v:windShow(A.wind))}" data-dt="wind"></div></div>
+ <div id="dt-live">${dtCard(A.temp,A.rh,A.wind,{fetch:true})}</div>${wxHoursHTML()}</div>`}
+/* ช่องกรอกในการ์ด Delta T — คำนวณทันที (ไม่ต้องวาดทั้งหน้าใหม่) และซิงก์กับช่องด้านบน */
+['input','keyup','change'].forEach(ev=>document.addEventListener(ev,e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.dt)return;const A=UI.adv;if(!A)return;const k=t.dataset.dt;
+ if(k==='wind'){A.wind=windStore(t.value);A.windIn={u:WU(),v:t.value}}else A[k]=t.value;
+ const top=document.getElementById(k==='temp'?'adv-temp':k==='rh'?'adv-rh':'adv-wind');if(top&&top!==t)top.value=t.value;
+ const el=$('#dt-live');if(el)el.innerHTML=dtCard(A.temp,A.rh,A.wind,{fetch:true});
+ advChecksLive()}));
+Object.assign(ACT,{
+ windUnit:a=>{try{localStorage.setItem('windUnit',a.dataset.u)}catch(e){}if(!$('#modal').classList.contains('hidden')&&F&&F.wx&&$('#jf-safe')){renderJobForm()}else render()},
+ wxFetch:()=>wxFetch(),
+ dtRecalc:()=>{dtLive();const A=UI.adv;['temp','rh'].forEach(k=>{const e=document.getElementById('dt-'+k);if(e&&e.value!==A[k])A[k]=e.value});render();toast('คำนวณใหม่แล้ว','ok')},
+ wxHour:a=>{const h=UI.wxLive?.hours?.find(x=>x.t===a.dataset.t);if(!h)return;const A=UI.adv;A.windIn=null;A.temp=String(r1(h.temp));A.rh=String(Math.round(h.rh));A.wind=String(r1(h.wind));render();toast(`ใช้ค่าอากาศเวลา ${h.t.slice(11,16)} น.`)},
+ goDt:()=>{closeModal();go('advisor');setTimeout(()=>$('#dt-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
+ jfWxFetch:async()=>{if(!STANDALONE){toast('ดึงอากาศอัตโนมัติใช้ได้บนเว็บ GitHub');return}
+  try{const p=plotById(F.plotId);let loc=hasLL(F)?{lat:+F.lat,lng:+F.lng}:hasLL(p)?{lat:+p.lat,lng:+p.lng}:null;if(!loc){toast('กำลังหาตำแหน่ง…');loc=await wxLocate()}if(!loc)throw 0;
+   const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat.toFixed(4)}&longitude=${loc.lng.toFixed(4)}&current=temperature_2m,relative_humidity_2m,wind_speed_10m&wind_speed_unit=ms&timezone=Asia%2FBangkok`);const d=await r.json();const c=d.current;
+   F.wx.temp=String(r1(c.temperature_2m));F.wx.rh=String(Math.round(c.relative_humidity_2m));F.wx.wind=String(r1(c.wind_speed_10m));renderJobForm();toast('เติมค่าอากาศตอนนี้แล้ว','ok')}
+  catch(e){toast('ดึงอากาศไม่ได้ — กรอกเองได้')}}
+});
+IC.therm='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/><path d="M18 5h3M18 9h3"/></svg>';
+
+/* =========================================================
+   ส่วนที่ 11: ตัวช่วยตั้งค่าการบิน (ความสูง · ร่อง · ความเร็ว · น้ำ/ไร่) ตามพืช
+   อ้างอิงสเปก DJI Agras T55: ถัง 50 ล. · ละออง 50–500 µm · ร่องพ่น 4–11 ม.
+   · ปั๊มสูงสุด 40 ล./นาที (หัวเหวี่ยง 2 หัว) / 50 ล./นาที (หัวพ่นหมอก 4 หัว สำหรับสวนผลไม้)
+   ค่าทั้งหมดเป็น "ค่าตั้งต้น" ต้องทดสอบด้วยกระดาษไวน้ำในแปลงจริง
+   ========================================================= */
+const FLY={
+ rice:{n:'ข้าว',tall:'ต่ำ (0.3–1.2 ม.)',h:[2,3],sw:[6,8],v:[5,7],w:[3,5],drop:'150–250',
+  notes:['ข้าวเล็ก/แตกกอ บินสูงจากยอด ~2 ม. · ระยะตั้งท้อง–ออกรวง ~2.5–3 ม.','เพลี้ยกระโดดสีน้ำตาลอยู่โคนกอ: ลดความเร็วเหลือ 4–5 ม./วิ. เพิ่มน้ำเป็น 5–6 ล./ไร่ ให้ลมใบพัดแหวกกอ','ช่วงข้าวออกดอก (ประมาณ 9–11 โมง) เลี่ยงฉีดพ่น']},
+ corn:{n:'ข้าวโพด',tall:'กลาง (0.5–2.5 ม.)',h:[2.5,3],sw:[5,7],v:[4,6],w:[4,6],drop:'200–300',
+  notes:['หนอนกระทู้ข้าวโพดลายจุดอยู่ในยอด/กรวยใบ: บินช้า 3–4 ม./วิ. ให้ลมกดละอองลงกรวย','ข้าวโพดสูงหลังออกช่อดอก ทรงพุ่มทึบ เพิ่มน้ำ 20–30%']},
+ sugarcane:{n:'อ้อย',tall:'สูง (1–4 ม.)',h:[2.5,3.5],sw:[5,7],v:[4,5],w:[5,8],drop:'200–300',
+  notes:['อ้อยโตเต็มที่ใบหนาแน่น ต้องการลมใบพัดแรง → บินช้า ไม่สูงเกิน','ยาคุม/ยาฆ่าหญ้าช่วงอ้อยเล็ก: ละอองหยาบ 300–450 บินต่ำ 2–2.5 ม.']},
+ veg:{n:'ผัก',tall:'ต่ำ (0.2–1 ม.)',h:[1.8,2.5],sw:[4,5],v:[3,5],w:[5,8],drop:'150–250',
+  notes:['แปลงเล็ก/หลายแปลงติดกัน ระวังละอองปลิวไปแปลงข้าง เว้นแนวกันชน','ผักกินใบใกล้เก็บเกี่ยว เช็คระยะปลอดภัยก่อนเก็บ (PHI) ตามฉลาก']},
+ durian:{n:'ทุเรียน',tall:'ไม้ผลสูง (5–15 ม.)',h:[4,6],sw:[6,9],v:[2,3],w:[10,20],drop:'150–250',orchard:true,
+  stageH:{post:[3,5],flush:[5,7],half:[4,6],mature:[3,5],bud:[6,8],flower:[8,10],fruitset:[8,10],flushfruit:[6,8],fruit:[5,7],preharvest:[5,7]},
+  stageNote:{post:'หลังตัดแต่ง ใบแก่แข็งแรง บินต่ำได้ ลมใบพัดช่วยพลิกใบให้ยาถึงใต้ใบ',flush:'ใบอ่อนบาง ช้ำ/ฉีกง่าย — บินสูงขึ้นให้ลมใบพัดเบาลงแต่ยังพลิกใบได้',half:'ใบเพสลาดเริ่มแข็ง ลดความสูงลงได้',mature:'ใบแก่ทนลม — บินต่ำได้ ช่วยให้ยาถึงใต้ใบ (ไรแดง เพลี้ยไฟ)',bud:'ดอกเกิดตามกิ่งใหญ่ใต้ทรงพุ่ม ลมใบพัดแรงทำให้กิ่งสั่น ตาดอกร่วง — บินสูง ช้า',flower:'อ่อนไหวที่สุด ดอกร่วงง่าย — บินสูง 8–10 ม. ลมสงบ (<2 ม./วิ.) และเลี่ยงยาฆ่าแมลงตอนเย็น',fruitset:'ผลอ่อน/หางแย้ร่วงง่ายจากแรงสั่น — บินสูง 8–10 ม. เหมือนช่วงดอก',flushfruit:'มีทั้งใบอ่อนและผลเล็ก — บินสูงปานกลาง–สูง',fruit:'ผลเริ่มแข็งแรง ลดความสูงได้ แต่ระวังกิ่งที่รับน้ำหนักผล',preharvest:'ใกล้เก็บเกี่ยว เช็คระยะปลอดภัยของสาร (PHI) ก่อนพ่น'},
+  notes:['ความสูงวัดจาก “ยอดต้นที่สูงที่สุด” ในแนวบิน — T55 หนัก ~95 กก. ลมใบพัดแรงกว่ารุ่นเล็กมาก จึงต้องบินสูงกว่าตัวเลขของรุ่น T30/T20','สวนต้นสูงไม่เท่ากัน: ใช้ความสูงคงที่ (บารอมิเตอร์) แทนเรดาร์ติดตามพื้น ไม่ให้โดรนจมลงช่องว่างระหว่างต้น','ก่อนบินจริง ลองบินลอยนิ่งเหนือต้น 1 ต้นที่ความสูงต่างกัน ดูว่าใบพลิกไหว แต่กิ่ง/ดอกไม่สะบัด','บินตามแถวต้น (โหมดไม้ผล) ร่อง ≈ ระยะระหว่างแถว · ใช้หัวพ่นหมอก 4 หัว (50 ล./นาที) สำหรับทรงพุ่มใหญ่','บินสูง 6 ม.ขึ้นไป ละอองตกไกลขึ้น → ใช้ละอองกลาง–ใหญ่ 200–300 และพ่นเฉพาะตอนลมสงบ']},
+ rubber:{n:'ยางพารา',tall:'สูงมาก (15–25 ม.)',h:[3,5],sw:[6,8],v:[3,5],w:[8,12],drop:'150–250',orchard:true,
+  notes:['ทรงพุ่มสูงไม่เท่ากัน/พื้นที่ลาดชัน: เปิดเรดาร์ติดตามภูมิประเทศ บินสูงจากยอดที่สูงที่สุด','โรคใบร่วงชนิดใหม่อยู่บนยอดใบ ไม่จำเป็นต้องลงถึงโคน → เน้นละอองกลางคลุมเรือนยอด','ลมบนยอดยางแรงกว่าพื้น: วัดลมที่ระดับบิน ถ้าเกิน 3 ม./วิ. ใช้ละอองใหญ่ขึ้น 250–300','จุดขึ้นบิน/เติมยาให้อยู่ที่โล่ง ระวังกิ่งไม้และสายไฟตามขอบสวน']},
+ other:{n:'พืชอื่น',tall:'—',h:[2,3],sw:[5,7],v:[4,6],w:[4,6],drop:'150–250',notes:['เริ่มจากค่ากลาง แล้วทดสอบกระดาษไวน้ำปรับเพิ่ม/ลด']}
+};
+const FLY_SVC={spray:{n:'ฉีดยา (แมลง/รา)'},foliar:{n:'ปุ๋ยน้ำ/ฮอร์โมน',drop:'100–200'},herb:{n:'ยาหญ้า',drop:'300–450',dh:-0.5},fert:{n:'หว่านปุ๋ยเม็ด',spread:true},seed:{n:'หว่านเมล็ด',spread:true}};
+const CANOPY={s:['เล็ก/โปร่ง',0.8,1],m:['ปานกลาง',1,0.5],d:['ทึบ/ใหญ่',1.3,0]};
+const FLOWMAX=()=>{try{return localStorage.getItem('nozzle')==='mist'?50:40}catch(e){return 40}};
+const TANK=50;
+function flyRange(crop,stg){const P=FLY[crop]||FLY.other;const h=(P.stageH&&stg&&P.stageH[stg])||P.h;return {...P,h,drop:h[0]>=6?'200–300':P.drop}}
+function flyPreset(crop,svc,can,stg){
+ const P=flyRange(crop,stg),S_=FLY_SVC[svc]||FLY_SVC.spray,C=CANOPY[can]||CANOPY.m;
+ const mid=(a,f=.5)=>a[0]+(a[1]-a[0])*f;
+ const h=Math.max(1.5,mid(P.h)+(S_.dh||0)),sw=mid(P.sw),v=mid(P.v,C[2]),w=Math.round(mid(P.w)*C[1]*2)/2;
+ return {P,S:S_,C,h:r1(h),sw:r1(sw),v:r1(v),w,drop:S_.drop||P.drop}}
+function flyCalc(h,sw,v,w,crop,stg){
+ h=num(h);sw=num(sw);v=num(v);w=num(w);const P=flyRange(crop,stg);const fm=FLOWMAX();
+ const raiMin=v*60*sw/1600,need=w*raiMin,maxV=w&&sw?fm*1600/(60*w*sw):0,effV=Math.min(v,maxV||v);
+ const raiHr=effV*sw*3600/1600,perTank=w?TANK/w:0,passes=sw?Math.ceil(100/sw):0;
+ const warn=[];
+ if(need>fm)warn.push(['bad',`ต้องใช้น้ำ ${fmt(need,1)} ล./นาที เกินปั๊ม ${fm} ล./นาที — โดรนจะลดความเร็วเองเหลือ ~${fmt(maxV,1)} ม./วิ. (หรือแคบร่อง/ลดน้ำต่อไร่)`]);
+ if(h&&sw>h*3.5)warn.push(['warn',`ร่อง ${sw} ม. กว้างเกินความสูง ${h} ม. — ขอบร่องละอองบาง เกิดแถบลาย ให้เพิ่มความสูงหรือแคบร่อง (ประมาณร่องไม่เกิน 3–3.5 เท่าของความสูง)`]);
+ if(h&&sw<h*1.5)warn.push(['info',`ร่องแคบเมื่อเทียบกับความสูง — ซ้อนทับมาก ใช้ยาเท่าเดิมแต่เสียเวลาเลี้ยว/บินหลายรอบ`]);
+ if(v>P.v[1]+0.5)warn.push(['warn',`ความเร็ว ${v} ม./วิ. เร็วเกินสำหรับ${P.n} — ลมใบพัดกดลงทรงพุ่มไม่พอ ละอองติดแต่ยอด`]);
+ if(h>P.h[1]+0.5)warn.push(['warn',`บินสูง ${h} ม. เกินช่วงแนะนำ — ละอองปลิวง่าย ลมใบพัดอ่อนลงก่อนถึงพืช`]);
+ if(h&&h<P.h[0]-0.3)warn.push(['warn',`บินต่ำ ${h} ม. — ร่องจะแคบลง ละอองไม่สม่ำเสมอ/เป็นแถบ และเสี่ยงชนสิ่งกีดขวาง`]);
+ if(w&&w<P.w[0]*0.8)warn.push(['warn',`น้ำ ${w} ล./ไร่ น้อยไปสำหรับ${P.n} — ละอองไม่พอคลุมใบ`]);
+ return {need,maxV,effV,raiHr,perTank,passes,warn,fm}}
+UI.fly=null;
+function flyState(){const A=UI.adv||{};if(!UI.fly||UI.fly.crop!==(A.crop||'durian')&&!UI.fly.touched){const crop=A.crop||'durian';const stg=stageGroup(crop,A.stage);const p=flyPreset(crop,'spray','m',stg);UI.fly={crop,svc:'spray',can:'m',stg,h:p.h,sw:p.sw,v:p.v,w:p.w,wind:A.wind!==''&&A.wind!=null?num(A.wind):1.5,touched:false}}return UI.fly}
+function flyCardHTML(){
+ const f=flyState();const p=flyPreset(f.crop,f.svc,f.can,f.stg);const P=p.P;
+ if(p.S.spread){return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการบินตามพืช</h2><div class="sub">${esc(P.n)} · ${esc(p.S.n)}</div></div></div>${flyTabs(f)}
+  <div class="note info small">หว่านเม็ด (ปุ๋ย/เมล็ด) ใช้ระบบหว่าน T55: ร่องหว่าน 3–10 ม. · ทั่วไปบินสูงจากยอด ~3 ม. ร่อง 5–7 ม. ความเร็ว 5–7 ม./วิ. · เม็ดใหญ่/หนักหว่านได้กว้างกว่าเม็ดเล็ก · ทดสอบหว่านลงถาดเก็บตัวอย่างหลายจุดตามแนวขวางร่อง ดูความสม่ำเสมอก่อนตั้งร่องจริง</div></div>`}
+ const sl=(k,l,min,max,st,u)=>`<div class="fsl"><div class="fsl-h"><span>${l}</span><b id="fsl-${k}">${fmt(f[k],1)} ${u}</b></div><input type="range" min="${min}" max="${max}" step="${st}" value="${f[k]}" data-fly="${k}"></div>`;
+ const rng=(a,u)=>`${fmt(a[0],1)}–${fmt(a[1],1)} ${u}`;
+ return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการบินตามพืช</h2><div class="sub">ความสูง · ระยะร่อง · ความเร็ว · น้ำต่อไร่ — ค่าตั้งต้นสำหรับ DJI T55</div></div><button class="btn sm ghost" data-act="flyReset">↺ ค่าแนะนำ</button></div>
+ ${flyTabs(f)}
+ <div class="frec"><div><span>พืช/ความสูงพืช</span><b>${esc(P.n)} · ${esc(P.tall)}</b></div><div><span>สูงจากยอดพืช</span><b>${rng(P.h,'ม.')}</b></div><div><span>ระยะร่อง</span><b>${rng(P.sw,'ม.')}</b></div><div><span>ความเร็ว</span><b>${rng(P.v,'ม./วิ.')}</b></div><div><span>น้ำ</span><b>${rng(P.w,'ล./ไร่')}</b></div><div><span>ขนาดละออง</span><b>${p.drop} µm</b></div></div>
+ <div class="fsls">${sl('h','ความสูงจากยอดพืช',1.5,12,0.5,'ม.')}${sl('sw','ระยะร่อง (Spray width)',3,11,0.5,'ม.')}${sl('v','ความเร็วบิน',1,10,0.5,'ม./วิ.')}${sl('w','น้ำต่อไร่',1,30,0.5,'ล.')}<div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" min="0" max="8" step="0.1" value="${f.wind}" data-fly="wind"></div></div>
+ <div id="fly-out">${flyOutHTML()}</div>
+ <div class="fnote"><b>📌 ข้อแนะนำสำหรับ${esc(P.n)}</b>${P.stageNote&&f.stg&&P.stageNote[f.stg]?`<div class="fstn">ระยะนี้: ${esc(P.stageNote[f.stg])} → แนะนำสูงจากยอด <b>${fmt(P.h[0],0)}–${fmt(P.h[1],0)} ม.</b></div>`:''}<ul>${P.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul></div>
+ <div class="row" style="gap:8px;margin-top:8px;align-items:center"><span class="small muted">หัวพ่น:</span><span class="wuseg">${[['cen','เหวี่ยง 2 หัว (40 ล./นาที)'],['mist','พ่นหมอก 4 หัว (50 ล./นาที)']].map(x=>`<button class="${(FLOWMAX()===50?'mist':'cen')===x[0]?'on':''}" data-act="flyNoz" data-n="${x[0]}">${x[1]}</button>`).join('')}</span></div>
+ <div class="tiny muted" style="margin-top:8px">ทดสอบด้วยกระดาษไวน้ำ วางบน–กลาง–ล่างทรงพุ่ม · เป้าหมายโดยประมาณ: ยาแมลง ≥20–30 จุด/ตร.ซม. · ยาเชื้อรา ≥50–70 · ยาหญ้า ≥20–40 · ถ้าไม่ถึงให้ลดความเร็ว/ร่อง หรือเพิ่มน้ำ</div></div>`}
+function flyOutHTML(){const f=flyState();const P=flyRange(f.crop,f.stg);const c=flyCalc(f.h,f.sw,f.v,f.w,f.crop,f.stg);
+ const lo=flyCalc(P.h[0],Math.min(P.sw[0],P.h[0]*3),P.v[1],f.w,f.crop,f.stg),hi=flyCalc(P.h[1],Math.min(P.sw[1],P.h[1]*3.5),(P.v[0]+P.v[1])/2,f.w,f.crop,f.stg);
+ return `<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
+  <div><span>ความเร็วที่ทำได้จริง</span><b>${fmt(c.effV,1)} <small>ม./วิ.</small></b></div><div><span>พ่นได้ (เฉพาะเวลาบิน)</span><b>${fmt(c.raiHr,0)} <small>ไร่/ชม.</small></b></div><div><span>1 ถัง (${TANK} ล.)</span><b>${fmt(c.perTank,1)} <small>ไร่</small></b></div><div><span>แปลงกว้าง 100 ม.</span><b>${c.passes} <small>รอบ</small></b></div></div>
+ ${c.warn.length?c.warn.map(x=>`<div class="note ${x[0]} small" style="margin-top:6px">${esc(x[1])}</div>`).join(''):`<div class="note ok small" style="margin-top:6px">✅ ค่าอยู่ในช่วงเหมาะสมสำหรับ${esc(P.n)}</div>`}
+ ${windDirHTML(f)}
+ <div class="fcmp"><div class="fcmp-h">เทียบ 2 แบบ (น้ำ ${fmt(f.w,1)} ล./ไร่ เท่ากัน)</div>
+  <table><tr><th></th><th>บินต่ำ ร่องแคบ</th><th>บินสูง ร่องกว้าง</th></tr>
+  <tr><td>ความสูง / ร่อง</td><td>${fmt(P.h[0],1)} ม. / ${fmt(Math.min(P.sw[0],P.h[0]*3),1)} ม.</td><td>${fmt(P.h[1],1)} ม. / ${fmt(Math.min(P.sw[1],P.h[1]*3.5),1)} ม.</td></tr>
+  <tr><td>ความเร็วที่ทำได้</td><td>${fmt(lo.effV,1)} ม./วิ.</td><td>${fmt(hi.effV,1)} ม./วิ.</td></tr>
+  <tr><td>จำนวนรอบ /100 ม.</td><td>${lo.passes}</td><td>${hi.passes}</td></tr>
+  <tr><td>ไร่/ชม.</td><td>${fmt(lo.raiHr,0)}</td><td>${fmt(hi.raiHr,0)}</td></tr>
+  <tr><td>ข้อดี</td><td>ลมกดลงลึก ปลิวน้อย</td><td>รอบน้อย เลี้ยวน้อย</td></tr>
+  <tr><td>ข้อเสีย</td><td>บินหลายรอบ เลี้ยวบ่อย</td><td>ต้องบินช้าลงชดเชยลมใบพัดที่อ่อนลง · ปลิวง่าย</td></tr></table><div class="tiny muted" style="padding:6px 10px">โดรนรักษาน้ำ/ไร่ให้คงที่เอง: ร่องกว้างหรือบินเร็ว = ปั๊มต้องจ่ายมากขึ้น ถ้าเกินกำลังปั๊ม โดรนจะลดความเร็วเอง</div></div>`}
+function windDirHTML(f){
+ const w=num(f.wind),h=num(f.h),herb=f.svc==='herb',orch=(FLY[f.crop]||{}).orchard;
+ const off=Math.min(6,Math.max(0.5,Math.round(h*w*0.3*2)/2)),buf=Math.round((3+2*w+(h>5?3:0))*(herb?2:1));
+ let lv,t,items;
+ if(w>5){lv='bad';t='⛔ ลมแรงเกินไป — หยุดพ่น';items=['รอลมลดต่ำกว่า ~4.5 ม./วิ. (16 กม./ชม.)','ลมกระโชก: โดรนเอียงสู้ลม หัวพ่นเอียงตาม ยิ่งพ่นละอองออกนอกแปลง']}
+ else if(w>3||(h>=6&&w>2)){lv='warn';t='↕️ บินตามแนวลม (ชนลม/ตามลม)';items=[`ร่องสมมาตร ไม่เบี้ยว — แคบร่องลง 1–2 ม. ลดความเร็ว 1–2 ม./วิ. ใช้ละอองหยาบขึ้น 250–350 µm`,`ขาชนลมกินแบตมาก · ขาตามลมละอองพุ่งไปข้างหน้า เผื่อปลายแปลงให้เลยออกไปเล็กน้อย`,`เว้นแนวกันชนด้านใต้ลม ~${buf} ม.`];if(h>=6)items.unshift('บินสูงเหนือยอด 6 ม.ขึ้นไป + ลมเกิน 2 ม./วิ. ละอองปลิวไกลมาก — ถ้าเลื่อนได้ควรรอลมสงบ')}
+ else if(w<0.5){lv='low';t='🌫️ ลมนิ่ง — บินทิศไหนก็ได้';items=['ถ้าเช้ามืด/หัวค่ำ มีหมอก/ควันลอยเป็นชั้น = อากาศผกผัน ละอองเล็กลอยค้างแล้วไปไกล','ใช้ละอองกลาง–ใหญ่ ไม่ใช้ละอองละเอียด']}
+ else{lv='ok';t='↔️ บินตัดขวางลม';items=[`เลื่อนแนวบินไปทางต้นลมประมาณ ${fmt(off,1)} ม. (ลมจะพาละอองลงมาเอง)`,`เริ่มบินจากขอบใต้ลม แล้วไล่ขึ้นไปทางต้นลม · คนบินยืนด้านต้นลม`,`เว้นแนวกันชนด้านใต้ลม ~${buf} ม. ถ้ามีบ้าน แหล่งน้ำ หรือพืชอ่อนไหว`]}
+ if(orch&&w<=5)items.push('สวนไม้ผลบินตามแถวต้นเป็นหลัก — ถ้าลมขวางแถว ให้เลื่อนแนวบินไปทางต้นลมตามระยะด้านบน');
+ if(herb&&w<=5)items.push('ยาหญ้าปลิวไปโดนพืชข้างเคียงเสียหายหนัก — เว้นกันชนเป็น 2 เท่า');
+ return `<div class="fwind lv-${lv}"><div class="fwind-h"><b>🧭 ทิศทางบิน: ${t}</b><span>ลม ${windTxt(w)}</span></div><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="tiny muted">ระยะเลื่อน/กันชนเป็นค่าประมาณ — ตรวจด้วยกระดาษไวน้ำวางขวางแนวบิน</div></div>`}
+function flyTabs(f){return `<div class="ftabs" style="margin-bottom:8px">${Object.entries(FLY).map(([k,v])=>`<button class="${f.crop===k?'on':''}" data-act="flyCrop" data-c="${k}">${esc(v.n)}</button>`).join('')}</div>
+ <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(FLY[f.crop]||{}).stageH?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${[...new Map((CROPS[f.crop]?.stages||[]).map(s=>[s.g,s])).values()].filter(s=>FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}</div>`}
+function flyApply(k){const f=UI.fly;const p=flyPreset(f.crop,f.svc,f.can,f.stg);Object.assign(f,{h:p.h,sw:p.sw,v:p.v,w:p.w})}
+Object.assign(ACT,{
+ flyCrop:a=>{const f=flyState();f.crop=a.dataset.c;f.touched=true;flyApply();render()},
+ flySvc:a=>{const f=flyState();f.svc=a.dataset.s;f.touched=true;flyApply();render()},
+ flyStg:a=>{const f=flyState();f.stg=f.stg===a.dataset.g?'':a.dataset.g;f.touched=true;flyApply();render()},
+ flyCan:a=>{const f=flyState();f.can=a.dataset.k;f.touched=true;flyApply();render()},
+ flyReset:()=>{flyApply();render()},
+ flyNoz:a=>{try{localStorage.setItem('nozzle',a.dataset.n)}catch(e){}render()},
+ goFly:()=>{closeModal();go('advisor');setTimeout(()=>$('#fly-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
+ jfFly:()=>{const cr=FLY[F.crop]?F.crop:'other';const p=flyPreset(cr,F.service||'spray','m',stageGroup(cr,F.stage));if(p.S.spread){F.flyH=3;F.swath=6;F.speed=6}else{F.flyH=p.h;F.swath=p.sw;F.speed=p.v;if(!num(F.waterRate))F.waterRate=p.w}renderJobForm();toast('ใส่ค่าแนะนำสำหรับ'+p.P.n+'แล้ว — ปรับตามหน้างานได้','ok')}
+});
+const FLY_U={h:'ม.',sw:'ม.',v:'ม./วิ.',w:'ล.',wind:''};
+document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){const k=t.dataset.fly;UI.fly[k]=+t.value;UI.fly.touched=true;const l=$('#fsl-'+k);if(l)l.textContent=k==='wind'?windTxt(+t.value):fmt(+t.value,1)+' '+FLY_U[k];const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()}});
+
+/* =========================================================
+   ส่วนที่ 12: คู่มือโรคและศัตรูพืช (อาการ · สาเหตุ · การจัดการ) — ยางพารา + ทุเรียน
+   แหล่งอ้างอิงหลัก: กรมวิชาการเกษตร, การยางแห่งประเทศไทย, FAO (โรคหน้ากรีดยาง)
+   ========================================================= */
+const DZ_PART={leaf:'ใบ',flower:'ดอก',fruit:'ผล/ฝัก',branch:'กิ่ง',trunk:'ลำต้น/โคน',panel:'หน้ากรีด',root:'ราก'};
+const DZ_CAT={fun:['โรคจากเชื้อรา','🍄'],oom:['โรคจากไฟทอปธอรา','💧'],alg:['สาหร่าย','🟢'],ins:['แมลง/ไร','🐛'],phys:['อาการผิดปกติ (ไม่ใช่เชื้อโรค)','⚠️'],q:['โรคกักกัน (ยังไม่พบในไทย)','🚫']};
+const DZ_M={drone:['🚁','พ่นโดรนได้'],paint:['🖌️','ทาแผล/ทาหน้ากรีด'],inject:['💉','ฉีดเข้าลำต้น'],soil:['🪣','ราดดิน/โคนต้น'],cut:['✂️','ตัดแต่ง/ทำลาย'],cult:['🌱','เขตกรรม/ดูแลสวน'],bag:['🛍️','ห่อผล/กับดัก']};
+const D=(id,crop,n,sci,cat,parts,sym,cond,ctrl,m,sol=[],kw='')=>({id,crop,n,sci,cat,parts,sym,cond,ctrl,m,sol,kw});
+const DZ=[
+/* ---------------- ยางพารา ---------------- */
+D('rb-nlf','rubber','โรคใบร่วงชนิดใหม่','Pestalotiopsis / Neopestalotiopsis / Colletotrichum','fun',['leaf'],
+ ['ใบแก่มีจุดแผลกลมสีน้ำตาล/เหลืองซีด ขนาดราว 0.5–1 ซม. เห็นชัดด้านบนใบ','จุดแผลรวมกันมาก ใบเหลืองทั้งใบแล้วร่วง ทรงพุ่มโปร่ง มองเห็นท้องฟ้า','ใบร่วงหนาเป็นชั้นใต้ต้น ผลผลิตน้ำยางลดลงมาก'],
+ 'ฝนตกชุกติดต่อกัน ความชื้นสูง แพร่ด้วยลมและน้ำฝน',
+ ['ต้นเล็ก: เก็บใบเป็นโรคใส่ถุงไปเผา','พ่นสารกลุ่มไตรอะโซล (โพรพิโคนาโซล+ไดฟีโนโคนาโซล, เฮกซะโคนาโซล) หรือคาร์เบนดาซิม — ยางเล็กทุก 15–30 วัน · ยางใหญ่พ่นด้วยโดรน/แอร์บลาสต์ตั้งแต่ต้นฤดูฝน ทุก 1–1.5 เดือน','กำจัดวัชพืชให้โล่ง ใส่ปุ๋ยสม่ำเสมอให้ต้นแข็งแรง'],
+ ['drone','cult'],['difprop','hexa','propi','carben','prochl','manco'],'ใบเหลือง ใบร่วง จุดกลม'),
+D('rb-phy','rubber','โรคใบร่วงและฝักเน่า (ไฟทอปธอรา)','Phytophthora botryosa / P. palmivora','oom',['leaf','fruit'],
+ ['ก้านใบมีแผลช้ำสีน้ำตาลเข้มถึงดำตามความยาวก้าน มีหยดน้ำยางเล็กๆ เกาะที่แผล','สะบัดใบเบาๆ ใบย่อยหลุดทันที (ใบร่วงธรรมชาติจะไม่หลุดง่ายแบบนี้)','แผ่นใบมีแผลช้ำน้ำสีน้ำตาลดำ ขนาดไม่แน่นอน','ฝักยางเน่าดำ ค้างบนต้น'],
+ 'ฝนตกชุก ความชื้นสูงต่อเนื่อง ≥4 วัน แสงแดดน้อยกว่า 3 ชม./วัน — มักเกิดร่วมกับโรคเส้นดำที่หน้ากรีด',
+ ['พ่นเมทาแลกซิล หรือฟอสอีทิล-อะลูมิเนียม ที่ทรงพุ่มเมื่อเริ่มระบาด ทุก 7 วัน','ทาหน้ากรีดป้องกันโรคเส้นดำร่วมด้วย','เก็บฝัก/ใบเป็นโรคทำลาย'],
+ ['drone','paint'],['metal','fosetyl','phosac','dimeth'],'ก้านใบดำ ใบหลุด ฝักเน่า'),
+D('rb-oid','rubber','โรคราแป้ง','Oidium heveae (Erysiphe quercicola)','fun',['leaf','flower'],
+ ['ใบอ่อนมีผงสีขาวคล้ายแป้งเกาะ โดยเฉพาะใต้ใบ','ใบอ่อนหงิก บิดเบี้ยว เหี่ยวแล้วร่วง เหลือแต่ก้าน','ใบเพสลาดเป็นจุดเหลืองซีด/รอยแผลเป็นวงๆ','ช่อดอกร่วง'],
+ 'ช่วงแตกใบใหม่หลังผลัดใบ (ก.พ.–เม.ย.) อากาศเย็น มีน้ำค้าง/หมอก',
+ ['พ่นกำมะถันผง/ชนิดละลายน้ำ หรือกลุ่มไตรอะโซล เมื่อใบอ่อนเริ่มคลี่ ทุก 7–10 วัน 2–3 ครั้ง','ใส่ปุ๋ยเร่งให้ใบผ่านระยะอ่อนเร็วขึ้น'],
+ ['drone'],['sulfur','hexa','propi','difprop'],'ผงขาว ใบอ่อนหงิก'),
+D('rb-col','rubber','โรคใบจุดคอลเลโทตริคัม','Colletotrichum spp.','fun',['leaf'],
+ ['ใบอ่อนเป็นจุดช้ำน้ำสีน้ำตาลดำ ขอบใบม้วน บิดเบี้ยว แล้วร่วง','ใบที่โตขึ้นเป็นจุดกลมสีน้ำตาล ขอบเหลือง กลางแผลแห้งขาว อาจทะลุเป็นรู','ยอดอ่อนแห้งตายในยางเล็ก'],
+ 'ฝนชุกช่วงแตกใบอ่อน ต้นฤดูฝน',
+ ['พ่นคาร์เบนดาซิม แมนโคเซบ หรือโพรคลอราซ ช่วงแตกใบอ่อน','แปลงกล้า/ยางเล็ก เก็บใบเป็นโรคทำลาย'],
+ ['drone'],['carben','manco','prochl','azoxy'],'ใบจุด ใบอ่อนร่วง รูทะลุ'),
+D('rb-cor','rubber','โรคใบจุดก้างปลา','Corynespora cassiicola','fun',['leaf'],
+ ['แผลสีน้ำตาลดำ มีเส้นสีดำแตกแขนงตามเส้นใบคล้ายก้างปลา/ขั้นบันได','ขอบแผลมีวงสีเหลือง ใบเหลืองทั้งใบแล้วร่วง','ระบาดหนักทำให้ใบร่วงซ้ำหลายครั้งในปี'],
+ 'ความชื้นสูง ฝนชุก — พบรุนแรงในพันธุ์อ่อนแอ',
+ ['พ่นสารกลุ่มไตรอะโซล หรือแมนโคเซบ เมื่อเริ่มพบ','ปลูกพันธุ์ต้านทาน/หลีกเลี่ยงพันธุ์อ่อนแอในพื้นที่ระบาด'],
+ ['drone'],['hexa','difprop','manco','carben','prochl'],'ก้างปลา เส้นดำบนใบ'),
+D('rb-bird','rubber','โรคใบจุดตานก','Drechslera heveae (Bipolaris)','fun',['leaf'],
+ ['จุดกลมเล็ก 1–3 มม. กลางแผลสีขาว/สีฟาง ขอบสีน้ำตาลเข้ม คล้ายตานก','ใบอ่อนที่เป็นมากจะเหี่ยว ร่วง ต้นแคระ'],
+ 'พบมากในแปลงกล้าและยางเล็ก ดินขาดความอุดมสมบูรณ์ แดดจัดสลับฝน',
+ ['พ่นแมนโคเซบ หรือคาร์เบนดาซิม ทุก 7–10 วันในแปลงกล้า','บำรุงดิน ใส่ปุ๋ยอินทรีย์ คลุมโคน'],
+ ['drone','cult'],['manco','carben','hexa'],'ตานก จุดขาวขอบน้ำตาล'),
+D('rb-pink','rubber','โรคราสีชมพู','Erythricium salmonicolor (Corticium)','fun',['branch','trunk'],
+ ['บริเวณง่ามกิ่ง/กิ่งมีน้ำยางไหลเป็นทางแล้วแห้งเป็นคราบสีดำ','ระยะแรกมีเส้นใยสีขาวคล้ายใยแมงมุม ต่อมาเป็นแผ่นสีชมพูอมส้มเกาะเปลือก','เปลือกแตก กิ่งแห้งตาย ใบเหลืองแห้งค้างกิ่ง'],
+ 'ยางอายุ 2–8 ปี ฝนชุก สวนทึบ ความชื้นสูง',
+ ['ถากเปลือกส่วนเป็นโรคออก แล้วทาสารคอปเปอร์ หรือเฮกซะโคนาโซล/เทบูโคนาโซล','กิ่งที่แห้งตายตัดต่ำกว่ารอยแผล 15–30 ซม. นำออกไปเผา','ระยะเริ่มต้นพ่นทรงพุ่มบริเวณง่ามกิ่งได้'],
+ ['paint','cut','drone'],['copox','copoh','hexa','tebu'],'ชมพู ใยแมงมุม ง่ามกิ่ง'),
+D('rb-die','rubber','โรคกิ่งแห้ง / ตายจากยอด','Lasiodiplodia theobromae, Phytophthora spp.','fun',['branch','trunk'],
+ ['ยอด/กิ่งแห้งตายจากปลายลงมาเรื่อยๆ เปลือกเปลี่ยนเป็นสีน้ำตาลดำ','มีน้ำยางไหลซึมตามรอยแผล','พบมากในยางเล็ก ต้นที่อ่อนแอ/ขาดปุ๋ย/โดนแดดเผา'],
+ 'ต้นเครียด แล้ง แดดเผา มีบาดแผล หรือฝนชุก (ไฟทอปธอรา)',
+ ['ตัดส่วนที่ตายให้ลึกเข้าไปถึงเนื้อดี 5–10 ซม. แล้วทาแผลด้วยสารป้องกันเชื้อรา','บำรุงปุ๋ย ลดความเครียดของต้น'],
+ ['cut','paint'],['carben','copox','metal'],'ยอดแห้ง ตายจากยอด'),
+D('rb-canker','rubber','โรคเปลือกลำต้นเน่า / เปลือกแตกยางไหล','Phytophthora spp.','oom',['trunk'],
+ ['ลำต้นหรือโคนต้นมีน้ำยางไหลเป็นทาง แห้งเป็นคราบสีดำ','เปลือกช้ำ แตก เมื่อถากออกเนื้อไม้ใต้เปลือกเป็นสีน้ำตาลดำ'],
+ 'ฝนชุก น้ำขัง ดินระบายน้ำไม่ดี',
+ ['ถากแผลให้ถึงเนื้อดี ทาเมทาแลกซิลหรือฟอสอีทิล-อะลูมิเนียม','ปรับปรุงการระบายน้ำ'],
+ ['paint'],['metal','fosetyl'],'ยางไหล เปลือกแตก'),
+D('rb-bs','rubber','โรคเส้นดำ (หน้ากรีด)','Phytophthora palmivora','oom',['panel'],
+ ['เหนือรอยกรีดเปลือกช้ำ ยุบเป็นแอ่งสีคล้ำ','เฉือนเปลือกบางๆ เหนือรอยกรีด เห็น “เส้นสีดำตามแนวตั้ง” บนเนื้อไม้ใต้เปลือก','ลามจนเปลือกเน่า เปลือกที่งอกใหม่ปูดโปนเป็นปุ่ม กรีดต่อไม่ได้'],
+ 'ฝนตกหนักติดต่อกันนาน แพร่ทางน้ำฝนกระเด็นและติดไปกับมีดกรีด',
+ ['หยุดกรีดหน้าที่เป็นโรค','ทาหน้ากรีดด้วยเมทาแลกซิล หรือฟอสอีทิล-อะลูมิเนียม (ผสมแมนโคเซบได้) สัปดาห์ละครั้งช่วงฝนชุก','ล้างมีดกรีดก่อนย้ายต้น · ไม่กรีดตอนเปลือกเปียก · ทำร่มกันฝนหน้ากรีด','โดรนช่วยไม่ได้ — ต้องทาที่หน้ากรีดโดยตรง'],
+ ['paint','cult'],['metal','fosetyl','manco'],'หน้ากรีด เส้นดำ เปลือกยุบ ราดำหน้ายาง'),
+D('rb-mr','rubber','โรคเปลือกเน่า (หน้ากรีด)','Ceratocystis fimbriata','fun',['panel'],
+ ['บนรอยกรีดและเหนือรอยกรีดมีเส้นใยราเป็นขุยสีขาวอมเทา','ต่อมาราเปลี่ยนเป็นสีเทาดำ เปลือกเน่ายุบเป็นแอ่ง','เนื้อไม้ใต้แผลเป็นสีดำ แผลขยายเป็นวงกว้าง เปลือกงอกใหม่ไม่ได้'],
+ 'ฝนชุก ความชื้นสูง สวนทึบ หญ้ารก แพร่ทางลม แมลง และมีดกรีด',
+ ['หยุดกรีดหน้าที่เป็นโรคจนแผลแห้ง','ทาหน้ากรีดด้วยสารกลุ่มเบนซิมิดาโซล (คาร์เบนดาซิม/เบโนมิล/ไทโอฟาเนต-เมทิล) สัปดาห์ละครั้ง','ตัดหญ้า ตัดแต่งกิ่งให้สวนโปร่ง ลดความชื้น'],
+ ['paint','cult'],['carben','benomyl','thioph'],'หน้ากรีด ราขาว ราเทา เปลือกเน่า ราดำหน้ายาง'),
+D('rb-tpd','rubber','อาการเปลือกแห้ง / หน้ายางตาย','ความผิดปกติทางสรีรวิทยา (ไม่ใช่เชื้อโรค)','phys',['panel'],
+ ['กรีดแล้วน้ำยางไม่ไหลบางช่วงของรอยกรีด หรือไม่ไหลทั้งรอย','เปลือกแห้งสีน้ำตาล อาจแตก ล่อน หรือปูด','ลามจากรอยกรีดลงล่าง'],
+ 'กรีดถี่ กรีดลึกเกินไป ใช้สารเร่งน้ำยาง ดินแน่น ขาดธาตุอาหาร (ฟอสฟอรัส แคลเซียม แมกนีเซียม เหล็ก สังกะสี)',
+ ['หยุดกรีดหน้านั้น/พักต้น ลดความถี่กรีด ไม่กรีดลึก','หลีกเลี่ยงสารเร่งน้ำยาง','ปรับปรุงดิน ใส่ปุ๋ยตามค่าวิเคราะห์ดิน','ยังไม่มียารักษาโดยตรง'],
+ ['cult'],[],'น้ำยางไม่ไหล หน้าตาย เปลือกแห้ง'),
+D('rb-wr','rubber','โรครากขาว','Rigidoporus microporus','fun',['root','trunk','leaf'],
+ ['ทรงพุ่มใบเหลืองซีด ขอบใบห่อลงเล็กน้อย ใบหนาเป็นคลื่น กิ่งแห้ง ยืนต้นตาย','โคนต้นเปลือกแห้ง น้ำยางไหล อาจมีดอกเห็ดสีส้มขอบขาวที่โคน','ขุดรากพบเส้นใยสีขาวแบนปกคลุมผิวราก แก่แล้วกลมนูนสีส้ม/เหลืองซีด','เนื้อไม้รากระยะแรกแข็งสีขาว ต่อมาฟ่าม เบา ยุ่ย'],
+ 'ระบาดเร็วช่วงฝน แพร่ทางรากที่สัมผัสกัน และสปอร์ปลิวไปตกบนตอไม้/บาดแผล',
+ ['เตรียมพื้นที่: ขุดตอไม้เก่าออกให้หมด ไถตากแดด','ต้นอายุน้อยกว่า 3 ปีที่เป็นโรค ขุดเผาทำลาย','ต้นใหญ่: ขุดคูล้อมแยกต้นเป็นโรค ราดสารกลุ่มไตรอะโซลรอบโคน (เช่น 20 มล./น้ำ 1 ล. ราด 2–4 ล./ต้น ทุก 3 เดือน 4 ครั้ง)','โดรนช่วยไม่ได้ — ต้องราดที่ดิน/โคนต้น'],
+ ['soil','cut','cult'],['hexa','propi','tebu','tricho'],'ใบเหลือง ยืนต้นตาย เส้นใยขาวที่ราก'),
+D('rb-br','rubber','โรครากน้ำตาล','Phellinus noxius','fun',['root','trunk','leaf'],
+ ['อาการทรงพุ่มคล้ายรากขาว ใบเหลือง กิ่งแห้ง ยืนต้นตาย','รากมีดินทรายเกาะเป็นก้อนแน่น ล้างออกยาก เห็นเส้นใยสีน้ำตาล','เนื้อไม้รากเป็นเส้นสีน้ำตาลร่างแหคล้ายรังผึ้ง'],
+ 'ดินชื้น ตอไม้เก่าในแปลง',
+ ['จัดการเหมือนรากขาว: ขุดคูล้อม ทำลายรากเป็นโรค ราดสารไตรอะโซลรอบโคน'],
+ ['soil','cut'],['hexa','propi','tebu'],'รากดินเกาะแน่น ร่างแหน้ำตาล'),
+D('rb-rr','rubber','โรครากแดง','Ganoderma philippii','fun',['root','trunk','leaf'],
+ ['ทรงพุ่มใบเหลือง กิ่งแห้ง ยืนต้นตาย','รากมีแผ่นเส้นใยสีแดงเข้มปกคลุม ดินเกาะไม่แน่น ล้างออกง่าย','โคนต้นอาจมีดอกเห็ดแข็งสีน้ำตาลแดง'],
+ 'ตอไม้เก่า ดินชื้น',
+ ['จัดการเหมือนรากขาว'],
+ ['soil','cut'],['hexa','propi','tebu'],'รากสีแดง เห็ดโคนต้น'),
+D('rb-salb','rubber','โรคใบไหม้อเมริกาใต้ (SALB)','Pseudocercospora ulei','q',['leaf'],
+ ['ใบอ่อนมีผงสปอร์สีเขียวมะกอกใต้ใบ ใบบิดเบี้ยว ไหม้ ร่วงซ้ำๆ จนต้นตาย'],
+ 'โรคกักกันร้ายแรง ยังไม่พบในเอเชีย',
+ ['ห้ามนำต้นพันธุ์/เมล็ด/วัสดุยางจากอเมริกาใต้เข้ามาเด็ดขาด','พบอาการสงสัยแจ้งสำนักงานเกษตร/กยท. ทันที'],
+ ['cult'],[],''),
+D('rb-termite','rubber','ปลวก','Coptotermes spp. ฯลฯ','ins',['root','trunk'],
+ ['ยางเล็กเหี่ยวเฉา ล้มตาย ขุดพบรากและโคนถูกกัดกินเป็นโพรง','ลำต้น/ตอไม้มีทางเดินดินของปลวก'],
+ 'ช่วงแล้ง พื้นที่มีตอไม้และเศษไม้มาก',
+ ['ราดสารกำจัดปลวก (เช่น ฟิโพรนิล) รอบโคนต้นยางเล็ก','กำจัดตอไม้ เศษไม้ที่เป็นแหล่งอาศัย'],
+ ['soil','cult'],['fipro','imida'],'ยางเล็กตาย รากกลวง'),
+D('rb-grub','rubber','หนอนทราย / ด้วงกินราก','ด้วงแมลงนูนหลวง ฯลฯ','ins',['root'],
+ ['ยางเล็กใบเหลือง เหี่ยว โยกแล้วหลุดง่าย','ขุดดินพบหนอนสีขาวตัวงอเป็นรูปตัว C กัดกินราก'],
+ 'ดินร่วนปนทราย ต้นฤดูฝน',
+ ['ราดสารกำจัดแมลงในดินรอบโคน หรือใช้เชื้อราเมตาไรเซียม','ไถพรวนตากดิน จับตัวหนอนทำลาย'],
+ ['soil'],['imida','fipro','metarh'],'หนอนขาวในดิน'),
+D('rb-mite','rubber','ไร / เพลี้ยไฟในยางเล็ก','ไรแดง ไรขาว เพลี้ยไฟ','ins',['leaf'],
+ ['ใบอ่อนหงิก ขอบใบไหม้ ใบซีดเป็นจุดประ','ยอดชะงักการเจริญ'],
+ 'ช่วงแล้ง อากาศร้อน',
+ ['พ่นสารกำจัดไร/เพลี้ยไฟ สลับกลุ่ม'],
+ ['drone'],['abam','propar','imida','spineto'],'ใบหงิก ใบซีด'),
+/* ---------------- ทุเรียน ---------------- */
+D('du-prr','durian','โรครากเน่าโคนเน่า','Phytophthora palmivora','oom',['root','trunk','leaf'],
+ ['ใบซีดเหลือง ไม่เป็นมัน ใบร่วง กิ่งแห้งจากปลาย ทรงพุ่มโทรม','โคน/ลำต้นมีแผลเปลือกช้ำเปียก มีน้ำเยิ้มสีน้ำตาลแดงไหลออกมา (ยางไหล)','ถากเปลือกดูเนื้อใต้แผลเน่าสีน้ำตาล มีขอบชัด','รากฝอยเน่าเปื่อย ดึงแล้วเปลือกรากหลุด'],
+ 'ฝนชุก น้ำขัง ดินระบายน้ำไม่ดี แพร่ทางน้ำและดิน',
+ ['ถากแผลถึงเนื้อดี ทาเมทาแลกซิล หรือฟอสอีทิล-อะลูมิเนียม','ฉีดสารฟอสโฟนิก (โพแทสเซียมฟอสโฟเนต) เข้าลำต้น','ราดดินรอบทรงพุ่มด้วยสารกลุ่มเดียวกัน หรือเชื้อราไตรโคเดอร์มา','ยกร่อง ระบายน้ำ ไม่ให้น้ำขังโคน · โดรนใช้พ่นป้องกันทรงพุ่ม/ผลเท่านั้น'],
+ ['paint','inject','soil','drone','cult'],['metal','fosetyl','phosac','dimeth','mandi','fluopi','tricho'],'ยางไหล โคนเน่า ใบเหลือง'),
+D('du-fr','durian','โรคผลเน่า','Phytophthora palmivora (ก่อนเก็บ), Lasiodiplodia (หลังเก็บ)','oom',['fruit'],
+ ['ผลใกล้แก่มีจุดฉ่ำน้ำสีน้ำตาลเข้ม ขยายเป็นแผลเน่า มีเส้นใยขาวที่แผล','ผลร่วงก่อนเก็บ','หลังเก็บ: ขั้ว/ก้นผลเน่าดำ ลามเข้าเนื้อ'],
+ 'ฝนตกช่วง ~1 เดือนก่อนเก็บเกี่ยว ผลสัมผัสดิน',
+ ['พ่นสารป้องกันไฟทอปธอราที่ผลก่อนเก็บ ตามระยะปลอดภัยบนฉลาก','ไม่วางผลบนพื้นดิน เก็บผลเน่าออกนอกแปลง','จุ่ม/พ่นผลหลังเก็บตามคำแนะนำผู้ส่งออก'],
+ ['drone','cult'],['fosetyl','dimeth','azodif','prochl','metal'],'ผลเน่า แผลฉ่ำน้ำ'),
+D('du-rh','durian','โรคใบติด','Rhizoctonia solani','fun',['leaf','branch'],
+ ['ใบอ่อนมีแผลช้ำน้ำ แล้วแห้งเป็นสีน้ำตาล','ใบที่เป็นโรคติดกันเป็นกระจุกด้วยเส้นใยราสีน้ำตาลอ่อน ค้างบนกิ่ง','ลามทำให้กิ่งย่อยแห้ง'],
+ 'ฝนชุก ความชื้นสูง ทรงพุ่มทึบ',
+ ['ตัดแต่งกิ่งให้โปร่ง เก็บใบติดทำลาย','พ่นเฮกซะโคนาโซล อะซอกซีสโตรบิน หรือคอปเปอร์ ช่วงแตกใบอ่อนในหน้าฝน'],
+ ['drone','cut'],['hexa','azoxy','thioph','copoh','valida'],'ใบติดกัน ใบแห้งค้าง'),
+D('du-an','durian','โรคแอนแทรคโนส / ใบไหม้','Colletotrichum gloeosporioides','fun',['leaf','flower','fruit'],
+ ['ใบเป็นจุด/แผลสีน้ำตาลไม่แน่นอน ขอบเหลือง ใบไหม้จากปลายหรือขอบใบ','ดอก/ช่อดอกแห้งดำ ร่วง','ผลอ่อนมีแผลสีดำ'],
+ 'ฝนชุก ความชื้นสูงช่วงใบอ่อนและก่อนดอกบาน',
+ ['พ่นโพรคลอราซ ไดฟีโนโคนาโซล อะซอกซีสโตรบิน หรือแมนโคเซบ ช่วงใบอ่อนและก่อนดอกบาน','สลับกลุ่มสาร (FRAC) ป้องกันดื้อยา'],
+ ['drone'],['prochl','difen','azoxy','manco','carben'],'ใบไหม้ ขอบใบ ดอกดำ'),
+D('du-pho','durian','โรคใบจุด (โฟมอปซิส)','Phomopsis durionis','fun',['leaf'],
+ ['จุดเล็กสีน้ำตาลแดงจำนวนมากกระจายบนใบ ขอบมีวงเหลือง','จุดรวมกันเป็นแผลใหญ่ ใบเหลือง ร่วง'],
+ 'ความชื้นสูง ต้นอ่อนแอ',
+ ['พ่นไดฟีโนโคนาโซล อะซอกซีสโตรบิน หรือแมนโคเซบ'],
+ ['drone'],['difen','azoxy','manco','carben'],'จุดน้ำตาลแดงบนใบ'),
+D('du-alg','durian','โรคจุดสาหร่าย','Cephaleuros virescens','alg',['leaf','branch'],
+ ['จุดกลมนูนคล้ายกำมะหยี่สีเขียวอมเทา ต่อมาเป็นสีส้ม/สนิมบนใบแก่','บนกิ่งทำให้เปลือกแตก กิ่งแห้ง'],
+ 'ความชื้นสูง สวนทึบ แสงน้อย',
+ ['พ่นสารคอปเปอร์ (คอปเปอร์ไฮดรอกไซด์/ออกซีคลอไรด์) 2–3 ครั้ง ห่างกัน 10–15 วัน','ตัดแต่งให้โปร่ง'],
+ ['drone','cut'],['copoh','copox'],'จุดสนิม กำมะหยี่ จุดส้ม'),
+D('du-pink','durian','โรคราสีชมพู','Erythricium salmonicolor','fun',['branch'],
+ ['ง่ามกิ่ง/กิ่งในทรงพุ่มมีเส้นใยสีขาว แล้วเป็นแผ่นสีชมพู','เปลือกแตก กิ่งแห้ง ใบเหี่ยวแห้งค้างกิ่ง'],
+ 'ฝนชุก ทรงพุ่มทึบ',
+ ['ตัดกิ่งเป็นโรคเผาทำลาย ทาแผลด้วยคอปเปอร์','ระยะแรกถากแล้วทาเฮกซะโคนาโซล/เทบูโคนาโซล'],
+ ['paint','cut','drone'],['copox','hexa','tebu'],'ชมพู ง่ามกิ่ง'),
+D('du-die','durian','โรคกิ่งแห้ง','Lasiodiplodia theobromae','fun',['branch'],
+ ['กิ่งแห้งจากปลายเข้าหาโคน เปลือกเป็นสีน้ำตาลดำ แตก','ใบเหลืองแห้งติดกิ่ง'],
+ 'ต้นเครียด หลังติดผลมาก มีบาดแผลจากการตัดแต่ง',
+ ['ตัดกิ่งแห้งลึกถึงเนื้อดี ทาแผลด้วยสารป้องกันเชื้อรา','บำรุงต้นหลังเก็บเกี่ยว'],
+ ['cut','paint'],['carben','copox','thioph'],'กิ่งแห้ง'),
+D('du-flr','durian','โรคดอกเน่า / ดอกร่วง','Phytophthora palmivora, Colletotrichum','oom',['flower'],
+ ['ดอกและก้านดอกเน่าเป็นสีน้ำตาลดำ ร่วงมากหลังฝนตก','ช่อดอกแห้ง ติดผลน้อย'],
+ 'ฝนตกช่วงออกดอก–ดอกบาน',
+ ['พ่นป้องกันก่อนดอกบาน (ระยะหัวกำไล) ด้วยสารกลุ่มไฟทอปธอรา/แอนแทรคโนส','ช่วงดอกบานบินสูงเหนือยอด 8–10 ม. ลดแรงลมใบพัด'],
+ ['drone'],['metal','fosetyl','prochl','azoxy'],'ดอกเน่า ดอกร่วง'),
+D('du-soot','durian','ราดำ','Capnodium spp. และราดำอื่นๆ','fun',['leaf','fruit','branch'],
+ ['คราบสีดำคล้ายเขม่าเคลือบผิวใบ ผล หรือกิ่ง ใช้นิ้วถูหรือเช็ดออกได้','มักพบคู่กับเพลี้ยแป้ง เพลี้ยหอย เพลี้ยไก่แจ้ และมด','ใบสังเคราะห์แสงได้น้อย ผลสกปรกด้อยคุณภาพ'],
+ 'เกิดจากน้ำหวาน (มูลน้ำหวาน) ที่แมลงปากดูดขับถ่ายไว้ — ราไม่ได้เข้าทำลายเนื้อใบโดยตรง',
+ ['กำจัดแมลงต้นเหตุ (เพลี้ยแป้ง เพลี้ยหอย เพลี้ยไก่แจ้) และมดที่พาเพลี้ย','พ่นปิโตรเลียมสเปรย์ออยล์ช่วยให้คราบหลุด หรือคอปเปอร์','ราดำจะหายเองเมื่อไม่มีน้ำหวาน'],
+ ['drone'],['petoil','copox','dino','spirotet','bupro'],'คราบดำ เขม่า ราดำ'),
+D('du-wet','durian','อาการไส้ซึม / เต่าเผา','ความผิดปกติทางสรีรวิทยา','phys',['fruit'],
+ ['ไส้ซึม: เนื้อบางส่วนฉ่ำน้ำ แข็ง ไม่สุก สีเข้มกว่าปกติ','เต่าเผา: เนื้อเป็นแผลสีน้ำตาล/ดำเป็นจุด'],
+ 'ฝนตกหนักช่วงใกล้เก็บเกี่ยว ต้นได้น้ำมากเกิน ขาดแคลเซียม/โบรอน',
+ ['งดน้ำช่วงก่อนเก็บ ~1 เดือน ทำร่องระบายน้ำ','ให้แคลเซียม-โบรอนทางใบช่วงขยายผล','ไม่ใช่โรค — พ่นยาฆ่าเชื้อไม่ช่วย'],
+ ['cult','drone'],[],'ไส้ซึม เนื้อแข็ง'),
+D('du-thr','durian','เพลี้ยไฟ','Scirtothrips dorsalis ฯลฯ','ins',['leaf','flower','fruit'],
+ ['ใบอ่อนหงิกงอ ม้วนขึ้น ขอบใบไหม้ แห้ง','ดอกแห้ง ร่วง','ผลอ่อนผิวกร้าน หนามแห้งปลายไหม้สีน้ำตาล (หนามจีบ)'],
+ 'แล้ง ร้อน ลมแรง ธ.ค.–พ.ค. ตรงช่วงออกดอก–ติดผล',
+ ['สำรวจยอด ดอก ผลอ่อน ก่อนพ่น','สลับกลุ่มสาร (IRAC) ทุก 1–2 ครั้ง'],
+ ['drone'],['spineto','imida','fipro','cyant','abam'],'ใบหงิก หนามไหม้'),
+D('du-mite','durian','ไรแดงแอฟริกัน','Eutetranychus africanus','ins',['leaf'],
+ ['ใบซีดเป็นจุดประสีขาวเทา ด้านบนใบมีคราบฝุ่นสีขาว (คราบไข่/คราบลอกคราบ)','ใบไม่เป็นมัน ร่วงก่อนกำหนด'],
+ 'แล้ง ลมแรง',
+ ['พ่นสารฆ่าไรให้ทั่วทั้งบนและใต้ใบ สลับกลุ่มทุกครั้ง','บินช้า ให้ลมใบพัดพลิกใบ'],
+ ['drone'],['abam','propar','hexy','fenpyr','spirodic','cyflu','etox'],'ใบซีด ฝุ่นขาว'),
+D('du-psy','durian','เพลี้ยไก่แจ้','Allocaridara malayensis','ins',['leaf'],
+ ['ใบอ่อนหงิก ม้วน มีปุยขาวคล้ายสำลีและหยดน้ำหวาน','ใบอ่อนแห้ง ร่วง ยอดชะงัก มีราดำตามมา'],
+ 'ช่วงแตกใบอ่อน (หางปลา–ใบดาบ) ในหน้าฝน',
+ ['พ่นเมื่อใบอ่อนเริ่มคลี่ ให้ทันใบอ่อนแต่ละชุด'],
+ ['drone'],['imida','thiam','lambda','carbo','cyant','bupro'],'ใบอ่อนม้วน ปุยขาว'),
+D('du-fb','durian','หนอนเจาะผล','Conogethes punctiferalis','ins',['fruit'],
+ ['ผลมีขุยและมูลหนอนสีน้ำตาลตามร่องหนาม โดยเฉพาะผลที่ชิดกัน','เนื้อผลเน่าบริเวณที่หนอนเจาะ'],
+ 'ผลอายุ ~2 เดือนขึ้นไป',
+ ['ตรวจขุยที่ผล ปลิดผลที่ชิดกันออก/คั่นผล','พ่นสารกลุ่ม 28 หรือ 6 สลับกัน'],
+ ['drone','bag'],['chlorant','emam','indox','lufen','lambda','bt'],'ขุยที่ผล'),
+D('du-sb','durian','หนอนเจาะเมล็ด','Mudaria luteileprosa','ins',['fruit'],
+ ['ภายนอกผลแทบไม่เห็นอาการ หนอนเจาะเข้าไปกินเมล็ด','ผลแก่มีรูเจาะออกและขุย — ส่งออกไม่ได้'],
+ 'ผีเสื้อวางไข่ช่วงผลเล็ก',
+ ['พ่นป้องกันช่วงผลเล็ก (อายุ ~4–8 สัปดาห์) ตามคำแนะนำในพื้นที่','ห่อผล · เก็บผลร่วงทำลาย'],
+ ['drone','bag'],['chlorant','cyant','emam','lambda','indox'],'รูเจาะ เมล็ด'),
+D('du-mb','durian','เพลี้ยแป้ง','Planococcus spp.','ins',['fruit','branch'],
+ ['ปุยสีขาวคล้ายแป้งที่ขั้วผลและร่องหนาม','มีมดเดินขึ้นลง มีราดำตามมา'],
+ 'แล้ง ร้อน',
+ ['กำจัดมดที่พาเพลี้ยขึ้นต้น','พ่นสารดูดซึมหรือไวท์ออยล์ เน้นขั้วผล'],
+ ['drone'],['dino','spirotet','bupro','carbo','petoil'],'ปุยขาวที่ขั้ว'),
+D('du-sc','durian','เพลี้ยหอย','Coccidae / Diaspididae','ins',['leaf','branch','fruit'],
+ ['ตุ่มนูนแข็งคล้ายเกล็ด/ฝาหอยเกาะตามใบ กิ่ง ผล','ใบเหลือง กิ่งแห้ง มีราดำ'],
+ 'ทรงพุ่มทึบ แล้ง',
+ ['พ่นปิโตรเลียมสเปรย์ออยล์ หรือสารดูดซึม'],
+ ['drone','cut'],['petoil','spirotet','dino','bupro'],'ตุ่มเกล็ด'),
+D('du-lhb','durian','ด้วงหนวดยาวเจาะลำต้น','Batocera rufomaculata','ins',['trunk','branch'],
+ ['ลำต้น/กิ่งใหญ่มีรูเจาะ มีขุยไม้และน้ำยางไหล','เปลือกบวม แตก กิ่งเหนือรอยเจาะแห้งตาย'],
+ 'ต้นอ่อนแอ มีบาดแผล',
+ ['ใช้ลวดแทงตัวหนอนในรู หรือฉีดสารเข้ารูแล้วอุดด้วยดินเหนียว','จับตัวเต็มวัยทำลาย'],
+ ['inject','cut'],['fipro','imida'],'รูเจาะ ขุยไม้'),
+D('du-amb','durian','มอดเจาะลำต้น','Xyleborus spp. ฯลฯ','ins',['trunk'],
+ ['รูเล็กจำนวนมากบนลำต้น มีขุยละเอียดคล้ายผงแป้งหรือเส้นขุยยื่นออกมา','มักตามหลังต้นที่เป็นโรครากเน่าโคนเน่า/อ่อนแอ'],
+ 'ต้นเครียด ป่วยจากไฟทอปธอรา',
+ ['รักษาโรครากเน่าโคนเน่าที่เป็นต้นเหตุ','พ่น/ทาสารกำจัดแมลงที่ลำต้นจุดที่พบ'],
+ ['paint','cult'],['fipro','lambda'],'รูเล็ก ขุยแป้ง'),
+];
+const DZ_SYM={rubber:['หน้ากรีดมีราสีขาวเทา','เส้นดำใต้เปลือกเหนือรอยกรีด','น้ำยางไม่ไหล','ใบเหลืองร่วง จุดกลม','สะบัดใบแล้วใบย่อยหลุด','ผงขาวบนใบอ่อน','ก้างปลาบนใบ','ง่ามกิ่งสีชมพู','ยืนต้นตาย เส้นใยขาวที่ราก','ยอดแห้ง'],
+ durian:['ยางไหลที่โคนต้น','ใบเหลืองไม่เป็นมัน','ใบอ่อนหงิกม้วน','คราบดำบนใบ','ใบติดกันเป็นกระจุก','ใบซีดมีฝุ่นขาว','ดอกเน่าร่วง','ขุยที่ผล','ผลเน่า','จุดสนิมบนใบ','กิ่งแห้ง','รูเจาะลำต้น']};
+UI.dz={crop:'rubber',part:'',q:'',open:''};
+function dzRank(list,q,max=40){
+ const nq=nrm2(q).replace(/\s+/g,'');if(!nq)return list;
+ const grams=new Set();const n=nq.length<4?2:3;for(let i=0;i<=nq.length-n;i++)grams.add(nq.slice(i,i+n));if(!grams.size)grams.add(nq);
+ const sc=list.map(d=>{const nm=nrm2(d.n+' '+d.kw).replace(/\s+/g,'');const tx=nrm2(dzFields(d).join(' ')).replace(/\s+/g,'');let hit=0,hn=0;grams.forEach(g=>{if(tx.includes(g))hit++;if(nm.includes(g))hn++});
+  let s=hit/grams.size+0.35*hn/grams.size;if(tx.includes(nq))s+=0.6;if(nm.includes(nq))s+=0.6;if(nrm2(d.n).replace(/\s+/g,'').includes(nq))s+=0.5;return [d,s]}).filter(x=>x[1]>=0.45).sort((a,b)=>b[1]-a[1]);
+ return sc.slice(0,max).map(x=>x[0])}
+function dzFields(d){return [d.n,d.sci,d.sym.join(' '),d.kw,d.cond,(d.parts||[]).map(p=>DZ_PART[p]).join(' ')]}
+function dzCard(d,open){const cat=DZ_CAT[d.cat]||DZ_CAT.fun;const q=UI.dz.q;
+ const chems=(d.sol||[]).map(id=>CHEMMAP[id]).filter(Boolean);
+ return `<div class="dz card ${open?'open':''}" id="dz-${d.id}"><div class="dz-h" data-act="dzOpen" data-id="${d.id}"><span class="dz-i c-${d.cat}">${cat[1]}</span><div class="dz-t"><b>${q?hl(d.n,q):esc(d.n)}</b><span><i>${esc(d.sci)}</i></span><div class="dz-tags">${d.parts.map(p=>`<span class="tg lt">${DZ_PART[p]}</span>`).join('')}${d.m.map(m=>`<span class="tg m-${m}">${DZ_M[m][0]} ${DZ_M[m][1]}</span>`).join('')}</div></div><span class="dz-x">${open?'−':'+'}</span></div>
+ ${open?`<div class="dz-b"><div class="dz-s"><h4>🔎 อาการ</h4><ul>${d.sym.map(s=>`<li>${q?hl(s,q):esc(s)}</li>`).join('')}</ul></div>
+ <div class="dz-s"><h4>🌦️ สาเหตุ/สภาวะที่ระบาด</h4><p>${esc(d.cond)}</p><div class="tiny muted">${esc(cat[0])}</div></div>
+ <div class="dz-s"><h4>🛠️ การจัดการ</h4><ul>${d.ctrl.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>
+ ${chems.length?`<div class="dz-s"><h4>🧪 สารที่ใช้ (ดูฉลากก่อนใช้)</h4><div class="row" style="gap:5px">${chems.map(c=>`<span class="badge b-${c.cat}" data-act="dzChem" data-n="${esc(c.th)}" style="cursor:pointer">${esc(c.th)}${c.g?' · '+esc(gLabel(c.cat,c.g)):''}</span>`).join('')}</div></div>`:''}
+ ${d.m.includes('drone')?'':'<div class="note warn small">🚁 โดรนช่วยไม่ได้โดยตรง — ต้องจัดการที่จุดเกิดโรค (ทา/ราด/ฉีด/ตัดแต่ง)</div>'}</div>`:''}</div>`}
+function viewDiseases(){
+ const z=UI.dz;const crops=[...new Set(DZ.map(d=>d.crop))];
+ let list=DZ.filter(d=>d.crop===z.crop&&(!z.part||d.parts.includes(z.part)));
+ if(z.q.trim())list=dzRank(list,z.q,40);
+ const parts=Object.keys(DZ_PART).filter(p=>DZ.some(d=>d.crop===z.crop&&d.parts.includes(p)));
+ const grp=k=>list.filter(d=>k==='ins'?d.cat==='ins':k==='other'?['phys','q'].includes(d.cat):!['ins','phys','q'].includes(d.cat));
+ const sec=(k,t)=>{const L=grp(k);return L.length?`<div class="dz-sec">${t} <span>${L.length}</span></div>${L.map(d=>dzCard(d,z.open===d.id||(z.q.trim()&&L.length<=2))).join('')}`:''};
+ return `<div class="ph"><div><h1>โรคและศัตรูพืช</h1><div class="sub">ดูอาการ สาเหตุ วิธีจัดการ และสารที่ใช้ · บอกด้วยว่าโรคไหนใช้โดรนได้</div></div></div>
+ <div class="ftabs">${crops.map(c=>`<button class="${z.crop===c?'on':''}" data-act="dzCrop" data-c="${c}">${CROPS[c]?.ic||''} ${esc(CROPS[c]?.n||c)}</button>`).join('')}</div>
+ <div class="card" style="padding:12px"><div class="field" style="margin:0"><label>🔍 พิมพ์อาการที่เห็น (เช่น “ราสีขาวที่หน้ากรีด”, “ใบเหลืองร่วง”)</label><input id="dz-q" value="${esc(z.q)}" data-in="dzQ" placeholder="พิมพ์อาการ ชื่อโรค หรือชื่อแมลง" autocomplete="off"></div>
+  <div class="dz-chips">${(DZ_SYM[z.crop]||[]).map(s=>`<button data-act="dzSym" data-s="${esc(s)}">${esc(s)}</button>`).join('')}</div>
+  <div class="fchips" style="margin-top:8px;padding-bottom:0"><button class="fchip ${!z.part?'on':''}" data-act="dzPart" data-p="">ทุกส่วน</button>${parts.map(p=>`<button class="fchip ${z.part===p?'on':''}" data-act="dzPart" data-p="${p}">${DZ_PART[p]}</button>`).join('')}</div></div>
+ ${list.length?sec('dis','🍄 โรค')+sec('ins','🐛 แมลงและไร')+sec('other','⚠️ อาการผิดปกติ / โรคกักกัน'):`<div class="card">${emptyState('ไม่พบรายการที่ตรงกับอาการ','ลองพิมพ์คำอื่น หรือเลือกส่วนของพืช','<button class="btn" data-act="dzSym" data-s="">ล้างคำค้น</button>')}</div>`}
+ <div class="note info small">ข้อมูลอ้างอิงจากกรมวิชาการเกษตร การยางแห่งประเทศไทย และ FAO — ใช้เป็นแนวทางเบื้องต้น อาการบางโรคคล้ายกัน ถ้าไม่แน่ใจให้ส่งตัวอย่างตรวจที่ศูนย์วิจัยหรือสำนักงานเกษตร และอ่านฉลากสารทุกครั้ง</div>`}
+Object.assign(ACT,{
+ dzCrop:a=>{UI.dz.crop=a.dataset.c;UI.dz.part='';UI.dz.open='';render()},
+ dzPart:a=>{UI.dz.part=a.dataset.p;render()},
+ dzOpen:a=>{UI.dz.open=UI.dz.open===a.dataset.id?'':a.dataset.id;render();if(UI.dz.open)setTimeout(()=>$('#dz-'+UI.dz.open)?.scrollIntoView({behavior:'smooth',block:'nearest'}),30)},
+ dzSym:a=>{UI.dz.q=a.dataset.s;UI.dz.open='';render()},
+ dzChem:a=>{UI.libQ=a.dataset.n;go('library')},
+ goDz:a=>{if(a&&a.dataset&&a.dataset.c)UI.dz.crop=a.dataset.c;closeModal();go('diseases')}
+});
+IC.bug='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M12 7.5V20.5M9 5.5 10.5 7.5M15 5.5 13.5 7.5M7 11H3.5M7 15H3M7.5 18.5l-3 2M17 11h3.5M17 15h4M16.5 18.5l3 2"/></svg>';
 
 /* เริ่มทำงาน */
 if(STANDALONE&&'serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
