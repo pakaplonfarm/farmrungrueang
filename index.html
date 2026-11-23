@@ -1096,7 +1096,9 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .lg-b h1{margin:8px 0 2px}
 .gbtn{width:100%;justify-content:center;margin-top:18px;min-height:50px;font-size:16px;background:#fff!important;color:var(--ink)!important;border:1px solid #DADCE0!important;gap:10px}
 .gbtn:hover{background:#F8FAF8!important}
-.is-login .fab,.is-login #bottom,.is-login .gs{display:none!important}
+.is-login .fab,.is-login #bottom,.is-login .gs,.is-login #mbar{display:none!important}
+.ro .fab,.ro .bn-plus,.ro [data-act=newJob],.ro [data-act=newQueue],.ro [data-act=quickAdd],.ro [data-act=navIncome],.ro [data-act=navExpense],.ro [data-act=newCust],.ro [data-act=newWorker],.ro [data-act=payWorker],.ro [data-act=finPaid],.ro [data-act=saveJob],.ro [data-act=saveExp],.ro [data-act=vcOk]{display:none!important}
+.shl{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#F8FAF8}.shl-h{display:flex;flex-direction:column;margin-bottom:8px}.shl-h span{font-size:12.5px;color:var(--muted)}.shl-u{display:flex;gap:6px;flex-wrap:wrap}.shl-u input{flex:1;min-width:200px;font-size:13px;min-height:38px}
 /* ===== v4: หน้าตาแบบแอป ===== */
 .neg{color:#DC2626}.pos{color:#059669}
 /* หัวแอป (มือถือ) */
@@ -1725,7 +1727,7 @@ function mergeSettings(s){const o=clone(DEFAULTS);Object.assign(o,s||{});if(!o.b
 
 /* ---------- Firebase (เวอร์ชัน GitHub / เว็บทั่วไป) ---------- */
 let FB=null,FBMODE=false,FBERR='';
-const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม pakaplonfarm.github.io ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)'};
+const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม pakaplonfarm.github.io ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)','auth/admin-restricted-operation':'ยังไม่ได้เปิดการเข้าแบบไม่ล็อกอิน — Firebase › Authentication › Sign-in method › เพิ่ม Anonymous แล้วกด Enable'};
 const fbErrText=e=>FB_ERR[e&&e.code]||('เกิดข้อผิดพลาด: '+((e&&(e.code||e.message))||''));
 async function fbInit(){
  try{await loadScript('firebase-config.js')}catch(e){return null}
@@ -1737,18 +1739,59 @@ async function fbInit(){
  const auth=firebase.auth();
  try{await auth.getRedirectResult()}catch(e){FBERR=fbErrText(e)}
  const user=await new Promise(r=>{const un=auth.onAuthStateChanged(u=>{un();r(u)})});
- FB={app,auth,fs,user,farm:window.FARM_ID||'main'};
- auth.onAuthStateChanged(u=>{if((u&&u.uid)!==(FB.user&&FB.user.uid))location.reload()});
- if(!user){backend='login';renderLogin();return 'login'}
- FBMODE=true;const base='farms/'+FB.farm;
- return {collection:c=>fs.collection(base+'/'+c),doc:p=>fs.doc(base+'/'+p)};
+ FB={app,auth,fs,user,farm:window.FARM_ID||'main',role:'owner',member:null,joining:false};
+ auth.onAuthStateChanged(u=>{if(!FB.joining&&(u&&u.uid)!==(FB.user&&FB.user.uid))location.reload()});
+ const base='farms/'+FB.farm;FB.base=base;
+ const inv=readInvite();
+ const wrap={collection:c=>fs.collection(base+'/'+c),doc:p=>fs.doc(base+'/'+p)};
+ if(user&&!user.isAnonymous){if(inv)clearInvite();FBMODE=true;FB.role='owner';ownerSetup();return wrap}
+ if(user&&user.isAnonymous){
+  let m=null;try{const sn=await fs.doc(base+'/members/'+user.uid).get();m=sn.exists?sn.data():null}catch(e){}
+  if(m&&!(inv&&inv.role!==m.role)){if(inv)clearInvite();FBMODE=true;FB.role=m.role==='view'?'view':'edit';FB.member=m;READONLY=FB.role==='view';document.body.classList.toggle('ro',READONLY);return wrap}
+  if(!inv)FBERR='สิทธิ์ของเครื่องนี้ถูกยกเลิกแล้ว — ขอลิงก์ใหม่จากเจ้าของ หรือเจ้าของล็อกอินด้วย Google';
+ }
+ backend='login';if(inv)renderJoin(inv);else renderLogin();return 'login';
+}
+/* ---------- แชร์ด้วยลิงก์ (ไม่ต้องล็อกอิน) ---------- */
+let READONLY=false;
+function readInvite(){try{const q=new URLSearchParams(location.search).get('join');const m=/^([ev])\.([A-Za-z0-9_-]{16,})$/.exec(q||'');return m?{role:m[1]==='e'?'edit':'view',key:m[2]}:null}catch(e){return null}}
+function clearInvite(){try{history.replaceState(null,'',location.pathname+location.hash)}catch(e){}}
+const randKey=()=>{const a=new Uint8Array(18);crypto.getRandomValues(a);return Array.from(a,b=>'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789'[b%57]).join('')};
+const devLabel=()=>{const u=navigator.userAgent;const os=/Android/i.test(u)?'Android':/iPhone|iPad/i.test(u)?'iPhone/iPad':/Windows/i.test(u)?'Windows':/Mac/i.test(u)?'Mac':'อุปกรณ์';const br=/Line\//i.test(u)?'LINE':/Edg\//.test(u)?'Edge':/Chrome|CriOS/.test(u)?'Chrome':/Safari/.test(u)?'Safari':/Firefox/.test(u)?'Firefox':'';return os+(br?' · '+br:'')};
+const fbWho=()=>!FB?'':FB.role==='owner'?(FB.user.email||'เจ้าของ'):`${FB.member?.name||'เครื่องนี้'} · ${FB.role==='view'?'ดูอย่างเดียว':'แก้ไขได้'}`;
+const joinUrl=(role,key)=>location.origin+location.pathname+'?join='+(role==='edit'?'e':'v')+'.'+key;
+let SHARE={keys:null,members:[],err:''};
+function ownerSetup(){
+ const kd=FB.fs.doc(FB.base+'/private/keys');
+ kd.onSnapshot(sn=>{if(sn.exists)SHARE.keys=sn.data();else if(!sn.metadata.fromCache){const k={edit:randKey(),view:randKey(),createdAt:new Date().toISOString()};kd.set(k).catch(e=>{SHARE.err=fbErrText(e)});SHARE.keys=k}if(UI.view==='settings')scheduleRender()},e=>{SHARE.err=e&&e.code==='permission-denied'?'ยังไม่ได้อัปเดตกฎ Firestore (Rules) สำหรับลิงก์แชร์':fbErrText(e);if(UI.view==='settings')scheduleRender()});
+ FB.fs.collection(FB.base+'/members').onSnapshot(sn=>{SHARE.members=sn.docs.map(d=>d.data()).sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));if(UI.view==='settings')scheduleRender()},()=>{});
+}
+function shareCard(){
+ if(!FBMODE)return '';
+ if(FB.role!=='owner')return `<div class="row between"><div><div class="b">🔗 เข้าผ่านลิงก์แชร์: ${esc(FB.member?.name||'')}</div><div class="small muted">สิทธิ์: ${FB.role==='view'?'👁 ดูอย่างเดียว':'✏️ ดูและแก้ไขได้'} · ไม่ต้องล็อกอิน เครื่องนี้จำไว้แล้ว</div></div><div class="row"><button class="btn" data-act="fbLogin">เจ้าของ: ล็อกอิน Google</button><button class="btn" data-act="fbLogout">ออกจากฟาร์ม</button></div></div>`;
+ const k=SHARE.keys;
+ const box=(role,ic,t,sub)=>{const u=k?joinUrl(role,k[role]):'';return `<div class="shl"><div class="shl-h"><b>${ic} ${t}</b><span>${sub}</span></div>${k?`<div class="shl-u"><input readonly value="${esc(u)}" onclick="this.select()"><button class="btn sm" data-act="shCopy" data-u="${esc(u)}">คัดลอก</button><a class="btn sm" style="background:#06C755;color:#fff;border-color:#06C755" href="https://line.me/R/share?text=${encodeURIComponent((role==='edit'?'ลิงก์เข้าแอปสมุดบัญชีโดรน (แก้ไขได้): ':'ลิงก์ดูข้อมูลสมุดบัญชีโดรน: ')+u)}" target="_blank" rel="noopener">ส่ง LINE</a></div>`:'<div class="small muted">กำลังสร้างลิงก์…</div>'}</div>`};
+ return `<div class="hr"></div><h3 style="margin:4px 0 4px">🔗 ให้เครื่องอื่นเข้าโดยไม่ต้องล็อกอิน</h3><div class="small muted" style="margin-bottom:10px">ส่งลิงก์ให้เครื่องอื่นเปิด 1 ครั้ง เครื่องนั้นจะจำไว้ ครั้งต่อไปเปิดเว็บได้เลย · ใครได้ลิงก์ก็เข้าได้ ส่งให้เฉพาะคนที่ไว้ใจ</div>
+ ${SHARE.err?`<div class="note bad small">${esc(SHARE.err)}</div>`:''}
+ ${box('edit','✏️','ลิงก์ดูและแก้ไขได้','สำหรับมือถือ/แท็บเล็ตของเรา หรือทีมงานที่ช่วยจดงาน')}${box('view','👁','ลิงก์ดูอย่างเดียว','สำหรับครอบครัว หุ้นส่วน — ดูได้ แก้ไขไม่ได้')}
+ <div class="row between" style="margin:12px 0 6px"><b>เครื่องที่เข้าผ่านลิงก์ (${SHARE.members.length})</b><button class="btn sm ghost" data-act="shRotate">เปลี่ยนลิงก์ใหม่</button></div>
+ ${SHARE.members.length?SHARE.members.map(m=>`<div class="rl" style="cursor:default"><span class="rl-i ${m.role==='view'?'':'up'}" style="${m.role==='view'?'background:#DBEAFE;color:#1D4ED8':''}">${m.role==='view'?'👁':'✏️'}</span><div class="rl-m"><b>${esc(m.name||'ไม่มีชื่อ')}</b><span>${esc(m.ua||'')} · เข้าเมื่อ ${fdate((m.createdAt||'').slice(0,10))} · ${m.role==='view'?'ดูอย่างเดียว':'แก้ไขได้'}</span></div><div class="rl-r"><button class="btn sm danger" data-act="shKick" data-id="${esc(m.uid)}">ยกเลิกสิทธิ์</button></div></div>`).join(''):'<div class="small muted">ยังไม่มีเครื่องอื่นเข้าผ่านลิงก์</div>'}
+ <div class="tiny muted" style="margin-top:8px">“เปลี่ยนลิงก์ใหม่” = ลิงก์เก่าใช้กับเครื่องใหม่ไม่ได้อีก (เครื่องที่เข้าแล้วยังใช้ได้ จนกว่าจะกด “ยกเลิกสิทธิ์”)</div>`}
+function renderJoin(inv){
+ renderNav();document.body.classList.add('is-login');
+ $('#view').innerHTML=`<div class="login"><div class="lg-card">${sideArt('lg')}<div class="lg-b">${emblem('lg')}<h1>${esc(S.settings.biz||'รุ่งเรือง เรื่องไร่')}</h1><div class="sub">คุณได้รับลิงก์เข้าใช้สมุดบัญชีโดรนเกษตร</div>
+ <div class="note ${inv.role==='view'?'info':'ok'} small" style="margin-top:12px;text-align:left">${inv.role==='view'?'👁 สิทธิ์ <b>ดูอย่างเดียว</b> — ดูงาน คิว รายรับรายจ่ายได้ แต่แก้ไขไม่ได้':'✏️ สิทธิ์ <b>ดูและแก้ไขได้</b> — จดงาน คิว รายรับรายจ่ายได้'}</div>
+ ${FBERR?`<div class="note bad small" style="margin-top:8px">${esc(FBERR)}</div>`:''}
+ <div class="field" style="margin-top:12px;text-align:left"><label>ตั้งชื่อเครื่องนี้ (ให้เจ้าของรู้ว่าเป็นใคร)</label><input id="jn-name" placeholder="เช่น มือถือบอย, แท็บเล็ตที่บ้าน" value="${esc(devLabel())}"></div>
+ <button class="btn primary" style="width:100%;justify-content:center;min-height:50px;font-size:16px" data-act="fbJoin" data-r="${inv.role}" data-k="${esc(inv.key)}">เข้าใช้งานเลย</button>
+ <div class="tiny muted" style="margin-top:10px">ไม่ต้องล็อกอิน · ทำครั้งเดียว เครื่องนี้จะจำไว้</div></div></div></div>`;
 }
 function renderLogin(){
  renderNav();document.body.classList.add('is-login');
  $('#view').innerHTML=`<div class="login"><div class="lg-card">${sideArt('lg')}<div class="lg-b">${emblem('lg')}<h1>${esc(S.settings.biz||'รุ่งเรือง เรื่องไร่')}</h1><div class="sub">สมุดบัญชีโดรนเกษตร · บันทึกบนคลาวด์ ใช้ได้ทุกเครื่อง</div>
  ${FBERR?`<div class="note bad small" style="margin-top:12px">${esc(FBERR)}</div>`:''}
  <button class="btn primary gbtn" data-act="fbLogin"><svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>เข้าสู่ระบบด้วย Google</button>
- <div class="tiny muted" style="margin-top:10px">ใช้ Gmail เดียวกันทุกเครื่อง ข้อมูลจะตรงกันอัตโนมัติ</div>
+ <div class="tiny muted" style="margin-top:10px">สำหรับเจ้าของ: ล็อกอินครั้งเดียว เครื่องจะจำไว้</div><div class="note info small" style="margin-top:12px;text-align:left">🔗 <b>เครื่องอื่น/คนอื่น ไม่ต้องล็อกอิน</b> — ขอ “ลิงก์เข้าใช้” จากเจ้าของ (เมนู ตั้งค่า › บัญชีคลาวด์) แล้วเปิดลิงก์ครั้งเดียว</div>
  <button class="btn sm ghost" data-act="fbOffline" style="margin-top:14px">ใช้แบบออฟไลน์ในเครื่องนี้ไปก่อน</button></div></div></div>`;
 }
 async function initStore(){
@@ -1779,6 +1822,7 @@ async function initStore(){
 }
 let _rq=false;function scheduleRender(){if(_rq)return;_rq=true;requestAnimationFrame(()=>{_rq=false;render()})}
 async function save(coll,obj){
+ if(READONLY){toast('โหมดดูอย่างเดียว — แก้ไขข้อมูลไม่ได้');return false}
  obj=clone(obj);obj.updatedAt=new Date().toISOString();
  if(FBMODE){DB.collection(coll).doc(obj.id).set(obj).catch(e=>toast(fbErrText(e),'err'));return true}
  if(backend==='db'){
@@ -1794,11 +1838,13 @@ async function save(coll,obj){
  const arr=S[coll];const i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj);lsSet();render();return true;
 }
 async function removeDoc(coll,id){
+ if(READONLY){toast('โหมดดูอย่างเดียว — แก้ไขข้อมูลไม่ได้');return false}
  if(FBMODE){DB.collection(coll).doc(id).delete().catch(e=>toast(fbErrText(e),'err'));return true}
  if(backend==='db'){try{await DB.collection(coll).doc(id).delete();return true}catch(e){toast('ลบไม่สำเร็จ');return false}}
  S[coll]=S[coll].filter(x=>x.id!==id);lsSet();render();return true;
 }
 async function saveSettings(s){
+ if(READONLY){toast('โหมดดูอย่างเดียว — แก้ไขข้อมูลไม่ได้');return}
  S.settings=mergeSettings(s);
  if(FBMODE){DB.doc('settings/main').set(clone(S.settings)).catch(e=>toast(fbErrText(e),'err'));toast('บันทึกการตั้งค่าแล้ว','ok');return}
  if(backend==='db'){try{await DB.doc('settings/main').set(clone(S.settings));toast('บันทึกการตั้งค่าแล้ว')}catch(e){toast('บันทึกการตั้งค่าไม่สำเร็จ')}}
@@ -2207,7 +2253,7 @@ function viewSettings(){
    <div class="tiny muted" style="margin-top:6px">ค่าเริ่มต้นเป็นตัวอย่าง ปรับตามราคาตลาดในพื้นที่ (ไม้ผลใส่ 0 = ใช้ราคาพืชไร่)</div></div>
   <div class="row" style="grid-column:1/-1"><button class="btn primary" type="submit">บันทึกการตั้งค่า</button></div>
  </form>
- ${STANDALONE?`<div class="card" style="margin-top:14px"><h2>บัญชีคลาวด์ (Firebase)</h2>${FBMODE?`<div class="row between"><div><div class="b">☁️ เชื่อมต่อแล้ว: ${esc(FB.user.email||'')}</div><div class="small muted">ข้อมูลซิงก์อัตโนมัติทุกเครื่องที่ล็อกอินด้วยบัญชีนี้ · ใช้งานตอนไม่มีเน็ตได้ แล้วซิงก์เมื่อออนไลน์</div></div><button class="btn" data-act="fbLogout">ออกจากระบบ</button></div>`
+ ${STANDALONE?`<div class="card" style="margin-top:14px"><h2>บัญชีคลาวด์ (Firebase)</h2>${FBMODE&&FB.role!=='owner'?shareCard():FBMODE?`<div class="row between"><div><div class="b">☁️ เชื่อมต่อแล้ว: ${esc(FB.user.email||'')}</div><div class="small muted">เจ้าของบัญชี · ข้อมูลซิงก์อัตโนมัติทุกเครื่อง · ใช้งานตอนไม่มีเน็ตได้ แล้วซิงก์เมื่อออนไลน์</div></div><button class="btn" data-act="fbLogout">ออกจากระบบ</button></div>${shareCard()}`
  :window.FIREBASE_CONFIG?`<div class="row between"><div class="small">ตอนนี้ใช้แบบออฟไลน์ในเครื่องนี้</div><button class="btn primary" data-act="fbOnline">เปิดใช้คลาวด์</button></div>`:`<div class="small muted">ยังไม่ได้ตั้งค่า Firebase — ใส่ค่าในไฟล์ firebase-config.js เพื่อเปิดใช้คลาวด์</div>`}</div>`:''}
  <div class="card" style="margin-top:14px"><h2>สำรองและกู้คืนข้อมูล</h2>
   <div class="small muted" style="margin-bottom:8px">แนะนำให้สำรองเป็นไฟล์ทุกเดือน ไฟล์ CSV เปิดด้วย Excel/Google Sheets ได้</div>
@@ -2423,7 +2469,7 @@ function renderNav(){
  const st=S.settings;
  $('#side').innerHTML=`<div class="sb-brand">${sideArt('s')}<div class="sb-id">${emblem('s')}<div class="sb-txt"><div class="sb-name">${esc(st.biz||'โดรนเกษตร')}</div><div class="sb-tag">${esc(st.tagline||'สมุดบัญชีโดรนเกษตร')}</div></div></div></div>
  <nav class="sb-nav">${NAV.map(g=>`<div class="sb-sec">${g.sec}</div>`+g.items.map(it=>{const on=it[0]==='go'&&(UI.view===it[1]);const dq=it[1]==='queue'?queueJobs().filter(j=>j.date<=today()).length:0;return `<button class="nav-btn ${on?'on':''}" ${it[0]==='go'?`data-act="go" data-v="${it[1]}"`:`data-act="${it[1]}"`} title="${esc(it[2])}">${IC[it[3]]}<span>${it[2]}</span>${dq?`<i class="nbadge">${dq}</i>`:''}</button>`}).join('')).join('')}</nav>
- <div class="sb-foot"><div class="sb-store">${FBMODE?`☁️ ซิงก์คลาวด์ · ${esc(FB.user.email||'')}`:backend==='db'?'☁️ บันทึกบนคลาวด์':backend==='local'?'💾 บันทึกในเครื่องนี้':''}</div><button class="sb-tog" data-act="sbToggle" title="${SB_COLLAPSED?'ขยายเมนู':'ย่อเมนู'}">${IC.chev}<span>ย่อเมนู</span></button></div>`;
+ <div class="sb-foot"><div class="sb-store">${FBMODE?`☁️ ซิงก์คลาวด์ · ${esc(fbWho())}`:backend==='db'?'☁️ บันทึกบนคลาวด์':backend==='local'?'💾 บันทึกในเครื่องนี้':''}</div><button class="sb-tog" data-act="sbToggle" title="${SB_COLLAPSED?'ขยายเมนู':'ย่อเมนู'}">${IC.chev}<span>ย่อเมนู</span></button></div>`;
  const mb=$('#mbar');if(mb)mb.innerHTML=`${sideArt('m')}<div class="mb-id">${emblem('m')}<div><div class="sb-name">${esc(st.biz||'')}</div><div class="sb-tag">${esc(st.tagline||'')}</div></div></div>`;
  const mob=[['go','dashboard','ภาพรวม','dash'],['go','tx','ธุรกรรม','tx'],['go','records','งานพ่น','drone'],['go','map','แผนที่','map'],['act','more','เพิ่มเติม','more']];
  const inMore=!['dashboard','tx','records','map'].includes(UI.view);
@@ -2952,8 +2998,16 @@ const ACT={
  go:a=>go(a.dataset.v,a.closest('.side,#bottom')?{reset:true}:{}),
  back:()=>goBack(),
  fbLogin:async()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});try{await FB.auth.signInWithPopup(p)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/cancelled-popup-request','auth/web-storage-unsupported'].includes(e.code)){try{await FB.auth.signInWithRedirect(p)}catch(e2){toast(fbErrText(e2),'err')}}else toast(fbErrText(e),'err')}},
- fbLogout:async()=>{if(await confirmBox('ออกจากระบบคลาวด์บนเครื่องนี้? ข้อมูลบนคลาวด์ยังอยู่ครบ','ออกจากระบบ',false)){await FB.auth.signOut()}},
+ fbLogout:async()=>{if(await confirmBox(FB.role==='owner'?'ออกจากระบบคลาวด์บนเครื่องนี้? ข้อมูลบนคลาวด์ยังอยู่ครบ':'ออกจากฟาร์มบนเครื่องนี้? ถ้าจะเข้าอีกต้องใช้ลิงก์ใหม่','ออกจากระบบ',false)){await FB.auth.signOut()}},
  fbOffline:()=>{try{localStorage.setItem('fbOffline','1')}catch(e){}location.reload()},
+ fbJoin:async a=>{const role=a.dataset.r,key=a.dataset.k,name=($('#jn-name')?.value||'').trim()||devLabel();a.disabled=true;a.textContent='กำลังเชื่อมต่อ…';FB.joining=true;
+  try{let u=FB.auth.currentUser;if(u&&!u.isAnonymous){clearInvite();location.reload();return}if(!u)u=(await FB.auth.signInAnonymously()).user;
+   await FB.fs.doc(FB.base+'/members/'+u.uid).set({uid:u.uid,role,key,name,ua:devLabel(),createdAt:new Date().toISOString()});
+   clearInvite();location.reload()}
+  catch(e){FB.joining=false;a.disabled=false;a.textContent='เข้าใช้งานเลย';toast(e&&e.code==='permission-denied'?'ลิงก์นี้ใช้ไม่ได้แล้ว (อาจถูกเปลี่ยนใหม่) — ขอลิงก์ใหม่จากเจ้าของ':fbErrText(e),'err')}},
+ shCopy:async a=>{const u=a.dataset.u;try{await navigator.clipboard.writeText(u);toast('คัดลอกลิงก์แล้ว — ส่งให้เครื่องที่ต้องการได้เลย','ok')}catch(e){const i=a.parentElement.querySelector('input');i&&i.select();toast('กดค้างที่ลิงก์แล้วเลือกคัดลอก')}},
+ shRotate:async()=>{if(!await confirmBox('สร้างลิงก์ใหม่? ลิงก์เดิมจะใช้กับเครื่องใหม่ไม่ได้อีก (เครื่องที่เข้าแล้วยังใช้ได้)','เปลี่ยนลิงก์'))return;const k={edit:randKey(),view:randKey(),createdAt:new Date().toISOString()};SHARE.keys=k;FB.fs.doc(FB.base+'/private/keys').set(k).then(()=>toast('สร้างลิงก์ใหม่แล้ว','ok')).catch(e=>toast(fbErrText(e),'err'));render()},
+ shKick:async a=>{const m=SHARE.members.find(x=>x.uid===a.dataset.id);if(!await confirmBox(`ยกเลิกสิทธิ์ของ <b>${esc(m?.name||'เครื่องนี้')}</b>? เครื่องนั้นจะเข้าดูข้อมูลไม่ได้อีก`,'ยกเลิกสิทธิ์'))return;FB.fs.doc(FB.base+'/members/'+a.dataset.id).delete().then(()=>toast('ยกเลิกสิทธิ์แล้ว','ok')).catch(e=>toast(fbErrText(e),'err'))},
  fbOnline:()=>{try{localStorage.removeItem('fbOffline')}catch(e){}location.reload()},
  kpi:a=>{const k=a.dataset.k,P=UI.period,r=periodRange(P);
   if(k==='income')txGo({type:'in',...r});else if(k==='expense'||k==='costrai')txGo({type:'out',...r});else if(k==='unpaid')txGo({type:'in',status:'unpaid'});else if(k==='allTx'){closeModal();txGo({})}
@@ -3215,7 +3269,7 @@ function appHeader(){
  const st=S.settings,n=notifCount();const v=UI.view;
  const title=v==='home'?`สวัสดีครับ, ${esc(st.pilot||'นักบินโดรน')} 👋`:esc((VIEWS.find(x=>x[0]===v)||[,''])[1]);
  return `<div class="ah">${sideArt('m')}<div class="ah-in"><button class="ah-logo" data-act="tab" data-v="home" aria-label="หน้าหลัก">${emblem('ah')}</button>
-  <div class="ah-t"><div class="ah-hi">${title}</div><div class="ah-s">${esc(st.biz||'')}${v==='home'?' · '+fdate(today()):''}</div></div>
+  <div class="ah-t"><div class="ah-hi">${title}</div><div class="ah-s">${READONLY?'👁 ดูอย่างเดียว · ':''}${esc(st.biz||'')}${v==='home'?' · '+fdate(today()):''}</div></div>
   ${v==='home'?'':`<button class="ahb" data-act="gsToggle" aria-label="ค้นหา">${IC.search}</button>`}
   <button class="ahb" data-act="vcMic" aria-label="สั่งด้วยเสียง">${IC.mic}</button>
   <button class="ahb" data-act="bell" aria-label="แจ้งเตือน">${IC.bell}${n?`<i class="ahb-n">${n>9?'9+':n}</i>`:''}</button>
@@ -3566,7 +3620,7 @@ const MENU_GROUPS=[['งานบริการ',[['tab','home','หน้า�
  ['ความรู้และระบบ',[['tab','advisor','คำแนะนำการพ่น','adv'],['tab','library','คลังสาร','lib'],['tab','voice','ผู้ช่วยเสียง','mic'],['tab','settings','ตั้งค่าระบบ','set']]]];
 function openMenu(){openModal(`<div class="sh-h"><div class="row" style="gap:10px;flex-wrap:nowrap;align-items:center;min-width:0">${emblem('mn')}<div><b>${esc(S.settings.biz||'เมนู')}</b><div class="tiny muted">${esc(S.settings.phone||'')} ${esc(S.settings.area||'')}</div></div></div><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
  ${MENU_GROUPS.map(g=>`<div class="mg-t">${g[0]}</div><div class="mg">${g[1].map(x=>`<button class="mi ${x[0]==='tab'&&UI.view===x[1]?'on':''}" data-act="${x[0]==='tab'?'goClose':x[0]}" ${x[1]?`data-v="${x[1]}"`:''}><span>${IC[x[3]]||''}</span>${x[2]}</button>`).join('')}</div>`).join('')}
- <div class="tiny muted" style="margin-top:12px;text-align:center">${FBMODE?'☁️ ซิงก์คลาวด์ · '+esc(FB.user.email||''):backend==='db'?'☁️ บันทึกบนคลาวด์':'💾 บันทึกในเครื่องนี้'}</div></div>`,true);
+ <div class="tiny muted" style="margin-top:12px;text-align:center">${FBMODE?'☁️ ซิงก์คลาวด์ · '+esc(fbWho()):backend==='db'?'☁️ บันทึกบนคลาวด์':'💾 บันทึกในเครื่องนี้'}</div></div>`,true);
  $('#modal .sheet')?.classList.add('menu-sh')}
 
 /* ---------- การกระทำ ---------- */
