@@ -1097,6 +1097,191 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .gbtn{width:100%;justify-content:center;margin-top:18px;min-height:50px;font-size:16px;background:#fff!important;color:var(--ink)!important;border:1px solid #DADCE0!important;gap:10px}
 .gbtn:hover{background:#F8FAF8!important}
 .is-login .fab,.is-login #bottom,.is-login .gs{display:none!important}
+/* ===== v4: หน้าตาแบบแอป ===== */
+.neg{color:#DC2626}.pos{color:#059669}
+/* หัวแอป (มือถือ) */
+.ah{position:relative;overflow:hidden;width:100%;background:linear-gradient(120deg,#0f3d22,#14532D 55%,#1a6b3a);border-radius:0 0 22px 22px;box-shadow:0 6px 18px rgba(20,83,45,.18)}
+.ah .side-art{position:absolute;inset:0;width:100%;height:100%;opacity:.35}
+.ah-in{position:relative;display:flex;align-items:center;gap:8px;padding:12px 12px 14px 14px}
+.ah-logo{border:0;background:#fff;border-radius:50%;padding:2px;flex-shrink:0;cursor:pointer;display:grid;place-items:center}
+.ah-logo .emb{width:40px;height:40px}
+.ah-t{flex:1;min-width:0;color:#fff}
+.ah-hi{font-family:Prompt,sans-serif;font-weight:600;font-size:15.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ah-s{font-size:12px;opacity:.82;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ahb{position:relative;width:34px;height:34px;border-radius:12px;border:0;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.ahb svg{width:20px;height:20px}.ahb:active{transform:scale(.94);background:rgba(255,255,255,.24)}
+.ahb-n{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:#EF4444;color:#fff;font-style:normal;font-size:10.5px;font-weight:700;display:grid;place-items:center;border:2px solid #14532D}
+@media (max-width:900px){
+ .mbar{display:block!important;background:none!important;border:0!important;margin:-14px -12px 12px!important;padding:0!important;min-height:0;position:sticky;top:0;z-index:35}
+ body:not([data-view="home"]):not(.gs-on) .gs{display:none}
+ .gs{position:static!important}
+ body.gs-on:not([data-view="home"]) .gs{position:sticky!important;top:66px;z-index:34;background:var(--bg);padding:6px 0}
+ .home-ph{display:none!important}
+ .backbar{top:74px}
+ .fab{display:none!important}
+ main{padding-bottom:120px}
+ .bottom{padding:0 6px calc(6px + env(safe-area-inset-bottom));align-items:flex-end;border-top:0;box-shadow:0 -6px 20px rgba(15,23,42,.08);border-radius:20px 20px 0 0}
+ .bottom>button{min-height:58px!important;padding-top:8px!important}
+ .bottom>button.on{color:var(--brand)!important}
+ .bottom>button.on svg{background:#DCFCE7;border-radius:10px;padding:3px;width:30px;height:28px;margin:-3px 0}
+ .bottom .bn-plus{flex:0 0 72px;position:relative;min-height:58px;display:flex;justify-content:center;background:none}
+ .bottom .bn-plus span{position:absolute;top:-24px;width:60px;height:60px;border-radius:50%;background:linear-gradient(145deg,#22C55E,#10B981 45%,#047857);color:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(16,185,129,.45);border:5px solid #fff}
+ .bottom .bn-plus svg{width:28px;height:28px}
+ .bottom .bn-plus:active span{transform:scale(.94)}
+}
+@media (min-width:901px){.bn-plus{display:none}}
+/* การ์ดสีอ่อน */
+.tgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.tgrid.t3{grid-template-columns:repeat(3,minmax(0,1fr))}.tgrid.t2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tc{border-radius:18px;padding:14px 14px 12px;border:1px solid transparent;position:relative;overflow:hidden;cursor:pointer;transition:transform .12s,box-shadow .15s;min-width:0}
+.tc:hover{box-shadow:0 6px 18px rgba(15,23,42,.08)}.tc:active{transform:scale(.98)}
+.tc:after{content:"";position:absolute;right:-22px;bottom:-22px;width:80px;height:80px;border-radius:50%;background:currentColor;opacity:.06;pointer-events:none}
+.tc-h{display:flex;align-items:center;gap:8px}
+.tc-i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.7);flex-shrink:0}.tc-i svg{width:17px;height:17px}
+.tc-l{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-v{font-family:Prompt,sans-serif;font-weight:700;font-size:24px;line-height:1.25;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0F172A}
+.tc-v small{font-size:14px;font-weight:500;color:#475569}
+.tc-s{font-size:12px;color:#475569;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-job{background:linear-gradient(135deg,#14532D,#166534 60%,#15803D);color:#fff}
+.c-job .tc-v,.c-job .tc-v small,.c-job .tc-s{color:#fff}.c-job .tc-s{opacity:.85}.c-job .tc-i{background:rgba(255,255,255,.16);color:#BBF7D0}.c-job:after{opacity:.12;background:#4ADE80}
+.c-inc{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-color:#A7F3D0;color:#047857}.c-inc .tc-i{color:#059669}
+.c-exp{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-color:#FECACA;color:#B91C1C}.c-exp .tc-i{color:#DC2626}
+.c-pro{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-color:#BFDBFE;color:#1D4ED8}.c-pro .tc-i{color:#2563EB}
+.dl{font-weight:600}.dl.good{color:#059669}.dl.bad{color:#DC2626}.dl.flat{color:#64748B;font-weight:500}
+.c-job .dl{color:#fff}
+/* แถบเดือน */
+.mstrip{display:grid;grid-template-columns:1.6fr 1fr .7fr .8fr;gap:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;cursor:pointer}
+.mstrip>div{display:flex;flex-direction:column;min-width:0}.mstrip>div+div{border-left:1px solid var(--line);padding-left:10px}
+.mstrip span{font-size:11.5px;color:var(--muted)}.mstrip b{font-family:Prompt,sans-serif;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mstrip em{font-style:normal;font-size:11.5px;color:var(--muted)}
+/* ปุ่มลัด */
+.qtiles{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.qt{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;transition:all .15s;font-family:inherit;color:var(--ink)}
+.qt:hover{border-color:var(--em);box-shadow:0 4px 14px rgba(16,185,129,.12)}.qt:active{transform:scale(.96)}
+.qt-i{width:44px;height:44px;border-radius:14px;display:grid;place-items:center}.qt-i svg{width:22px;height:22px}
+.qt-l{font-size:12.5px;font-weight:600;line-height:1.25;text-align:center}
+.t1 .qt-i{background:#DCFCE7;color:#15803D}.t2 .qt-i{background:linear-gradient(145deg,#22C55E,#059669);color:#fff}.t3 .qt-i{background:#DBEAFE;color:#1D4ED8}.t4 .qt-i{background:#FEF3C7;color:#B45309}
+.t5 .qt-i{background:#EDE9FE;color:#6D28D9}.t6 .qt-i{background:#CFFAFE;color:#0E7490}.t7 .qt-i{background:#ECFCCB;color:#4D7C0F}.t8 .qt-i{background:#FFE4E6;color:#BE123C}
+@media (max-width:900px){.qtiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.qt{padding:10px 2px 8px}.qt-l{font-size:11.5px}}
+/* การ์ดคิว */
+.qlist{display:flex;flex-direction:column;gap:10px}
+.qc{display:flex;align-items:stretch;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;position:relative;transition:box-shadow .15s,transform .1s}
+.qc:hover{box-shadow:0 6px 16px rgba(15,23,42,.07)}.qc:active{transform:scale(.99)}
+.qc:before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:#F59E0B}
+.qc.k-doing:before{background:#3B82F6}.qc.k-done:before{background:#10B981}.qc.k-cancel:before{background:#CBD5E1}.qc.k-cancel{opacity:.62}
+.qc-time{width:50px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:4px;line-height:1.2}
+.qc-time b{font-family:Prompt,sans-serif;font-size:15.5px;color:#0F172A}.qc-time b.na{color:#CBD5E1}.qc-time span{font-size:12px;color:var(--muted)}
+.qc-time em{font-style:normal;font-size:11px;font-weight:700;color:var(--brand);background:#DCFCE7;border-radius:6px;padding:1px 5px;margin-bottom:3px;white-space:nowrap}
+.qc-ic{width:46px;height:46px;border-radius:14px;flex-shrink:0;display:grid;place-items:center;align-self:center}.qc-ic svg{width:28px;height:28px}
+.s-spray{background:#DCFCE7;color:#15803D}.s-foliar{background:#E0F2FE;color:#0369A1}.s-herb{background:#ECFCCB;color:#4D7C0F}.s-fert{background:#FEF3C7;color:#B45309}.s-seed{background:#FFEDD5;color:#C2410C}.s-other{background:#F1F5F9;color:#475569}
+.qc-m{flex:1;min-width:0}
+.qc-n{font-family:Prompt,sans-serif;font-weight:600;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.tg{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:7px;background:#F1F5F9;color:#334155;white-space:nowrap}
+.tg.lt{background:transparent;border:1px solid var(--line);font-weight:500;color:#64748B}
+.qc-loc{display:flex;align-items:center;gap:4px;font-size:12.5px;color:var(--muted);margin-top:4px;min-width:0}.qc-loc svg{width:13px;height:13px;flex-shrink:0}.qc-loc span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qc-r{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:6px;flex-shrink:0}
+.qpill{font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;white-space:nowrap}
+.qpill.pend{background:#FEF3C7;color:#B45309}.qpill.doing{background:#DBEAFE;color:#1D4ED8}.qpill.done{background:#DCFCE7;color:#15803D}.qpill.cancel{background:#F1F5F9;color:#64748B}.qpill.late{background:#FEE2E2;color:#B91C1C}
+.av{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;border:2px solid #fff;font-family:Prompt,sans-serif}
+.av.xs{width:22px;height:22px;font-size:9.5px;border-width:1.5px}.av.lg{width:46px;height:46px;font-size:16px}
+.avs{display:flex}.avs .av+.av{margin-left:-7px}
+.qempty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 10px;color:var(--muted);text-align:center}.qempty>svg{width:40px;height:40px;color:#A7F3D0}
+@media (max-width:420px){.qc{gap:9px;padding:11px 10px}.qc-time{width:42px}.qc-ic{width:40px;height:40px}.qc-ic svg{width:24px;height:24px}.qc-n{font-size:14.5px}}
+.fu{display:flex;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px solid var(--line);cursor:pointer}.fu:last-child{border-bottom:0}.fu .main{flex:1;min-width:0}
+.vcta{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,#1E293B,#334155);color:#fff;border-radius:18px;padding:14px 16px;cursor:pointer;margin-top:14px}
+.vcta-i{width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#34D399,#059669);display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 0 6px rgba(52,211,153,.18)}.vcta-i svg{width:22px;height:22px}
+.vcta b{display:block;font-family:Prompt,sans-serif;font-weight:600}.vcta span{font-size:12.5px;opacity:.8}.vcta>div{flex:1;min-width:0}.vcta-go{font-size:26px;opacity:.6}
+/* คิวงาน */
+.qlate{background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;border-radius:12px;padding:10px 14px;font-weight:600;font-size:14px;margin-bottom:12px;cursor:pointer}
+.wk{padding:12px!important;margin-bottom:12px}
+.wk-h{display:flex;align-items:center;gap:8px;margin-bottom:10px}.wk-h b{flex:1;text-align:center;font-family:Prompt,sans-serif;font-size:15.5px}
+.wk-h .ib{margin:0;font-size:20px;font-weight:700;color:var(--brand)}
+.wk-d{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.wk-d button{border:1px solid transparent;background:#F8FAF8;border-radius:14px;padding:7px 0 4px;display:flex;flex-direction:column;align-items:center;cursor:pointer;font-family:inherit;color:var(--ink)}
+.wk-d button span{font-size:11.5px;color:var(--muted)}.wk-d button b{font-family:Prompt,sans-serif;font-size:17px;line-height:1.3}
+.wk-d button i{font-style:normal;color:#10B981;font-size:12px;line-height:.8;height:9px;letter-spacing:1px}
+.wk-d button.td{border-color:#10B981}
+.wk-d button.on{background:linear-gradient(160deg,#16A34A,#047857);color:#fff;box-shadow:0 6px 14px rgba(5,150,105,.3)}.wk-d button.on span,.wk-d button.on i{color:#D1FAE5}
+.fchips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;margin-bottom:2px}.fchips::-webkit-scrollbar{display:none}
+.fchip{flex-shrink:0;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px;font-family:inherit;font-size:13.5px;font-weight:600;color:#475569;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.fchip b{font-size:11.5px;background:#F1F5F9;border-radius:99px;padding:0 7px;min-width:20px;text-align:center}
+.fchip.on{background:#14532D;border-color:#14532D;color:#fff}.fchip.on b{background:rgba(255,255,255,.2);color:#fff}
+.dh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:4px 2px 10px}.dh b{font-family:Prompt,sans-serif;font-size:15px}.dh span{font-size:13px;color:var(--muted);white-space:nowrap}
+.qstats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:16px;margin-top:14px;padding:12px 4px}
+.qstats>div{display:flex;flex-direction:column;align-items:center}.qstats>div+div{border-left:1px solid var(--line)}
+.qstats b{font-family:Prompt,sans-serif;font-size:19px;color:var(--brand)}.qstats span{font-size:12px;color:var(--muted)}
+@media (max-width:900px){.qstats{position:sticky;bottom:84px;z-index:20;box-shadow:0 6px 20px rgba(15,23,42,.1)}}
+.qs-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+.qacts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qa{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;text-decoration:none;min-height:48px}
+.qa span{font-size:17px}.qa:hover{border-color:var(--em)}
+.qa.go{background:#EFF6FF;border-color:#BFDBFE;color:#1D4ED8}.qa.ok{background:#ECFDF5;border-color:#A7F3D0;color:#047857}.qa.bad{color:#B91C1C}
+/* การเงิน */
+.ftabs{display:flex;background:#EEF2EF;border-radius:14px;padding:4px;margin-bottom:12px;gap:4px}
+.ftabs button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 6px;font-family:Prompt,sans-serif;font-weight:600;font-size:14px;color:#64748B;cursor:pointer}
+.ftabs button.on{background:#fff;color:var(--brand);box-shadow:0 2px 8px rgba(15,23,42,.08)}
+.mnav{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:12px}
+.mnav>div{flex:1;text-align:center;display:flex;flex-direction:column}.mnav b{font-family:Prompt,sans-serif;font-size:15.5px}.mnav span{font-size:12px;color:var(--muted)}
+.mnav .ib{margin:0;font-size:20px;font-weight:700;color:var(--brand)}.mnav .ib[disabled]{opacity:.35;cursor:default}
+.dn{display:flex;align-items:center;gap:16px}
+.dn-c{position:relative;width:170px;height:170px;flex-shrink:0}.dn-c .chart-box{height:170px!important;width:170px}
+.dn-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}.dn-t b{font-family:Prompt,sans-serif;font-size:15px}.dn-t span{font-size:11.5px;color:var(--muted)}
+.dn-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.dn-l>div{display:flex;align-items:center;gap:8px;font-size:13px}.dn-l i{width:10px;height:10px;border-radius:3px;flex-shrink:0}.dn-l span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dn-l b{font-size:13px}
+@media (max-width:420px){.dn{flex-direction:column;align-items:stretch}.dn-c{margin:0 auto}}
+.fsum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fsum>div{background:#F8FAF8;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.fsum span{font-size:12.5px;color:var(--muted)}.fsum b{font-family:Prompt,sans-serif;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rl{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}.rl:last-of-type{border-bottom:0}
+.rl-i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}.rl-i svg{width:18px;height:18px}
+.rl-i.up{background:#DCFCE7;color:#15803D}.rl-i.dn2{background:#FEE2E2;color:#DC2626}
+.rl-m{flex:1;min-width:0;display:flex;flex-direction:column}.rl-m b{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rl-m span{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rl-m em{font-style:normal}
+.rl-r{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}.rl-r b{font-family:Prompt,sans-serif;font-size:15px}
+/* ทีมงาน */
+.wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:12px}
+.wc{padding:14px!important;margin:0!important}.wc.off{opacity:.6}
+.wc-h{display:flex;align-items:center;gap:12px;cursor:pointer}.wc-m{flex:1;min-width:0;display:flex;flex-direction:column}.wc-m b{font-family:Prompt,sans-serif;font-size:16px}.wc-m span{font-size:12.5px;color:var(--muted)}
+.wpill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}.w-rai{background:#DCFCE7;color:#15803D}.w-day{background:#DBEAFE;color:#1D4ED8}.w-mon{background:#EDE9FE;color:#6D28D9}
+.wc-s{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0;background:#F8FAF8;border-radius:12px;padding:10px 4px}
+.wc-s>div{display:flex;flex-direction:column;align-items:center;min-width:0}.wc-s b{font-family:Prompt,sans-serif;font-size:14.5px;white-space:nowrap}.wc-s span{font-size:11px;color:var(--muted);text-align:center}
+.wc-f{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.wc-f .btn svg{width:15px;height:15px}
+.tpick{display:flex;flex-wrap:wrap;gap:8px}
+.tp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px 5px 5px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.tp small{font-weight:500;color:var(--muted);font-size:11.5px}.tp.on{background:#ECFDF5;border-color:#10B981;box-shadow:0 0 0 2px rgba(16,185,129,.18)}
+.qsseg{margin-top:8px}.qsseg button{font-size:13px!important;min-height:38px!important}
+/* ผู้ช่วยเสียง */
+.vc-hero{text-align:center;padding:22px 16px!important;background:radial-gradient(120% 90% at 50% 0%,#ECFDF5,#fff 70%)!important}
+.vc-t{font-family:Prompt,sans-serif;font-weight:700;font-size:19px;color:var(--brand)}.vc-s{font-size:13.5px;color:var(--muted);margin-top:2px}
+.vc-mic{position:relative;width:112px;height:112px;border-radius:50%;border:0;margin:22px auto 14px;display:grid;place-items:center;background:linear-gradient(145deg,#34D399,#059669 55%,#065F46);color:#fff;cursor:pointer;box-shadow:0 14px 30px rgba(5,150,105,.38)}
+.vc-mic svg{width:46px;height:46px;position:relative;z-index:1}
+.vc-p{position:absolute;inset:0;border-radius:50%;background:#34D399;opacity:0}
+.vc-mic.on{background:linear-gradient(145deg,#F87171,#DC2626)}.vc-mic.on .vc-p{background:#F87171;animation:vcp 1.6s ease-out infinite}.vc-mic.on .vc-p.d2{animation-delay:.8s}
+@keyframes vcp{from{transform:scale(1);opacity:.5}to{transform:scale(1.7);opacity:0}}
+.vc-st{font-weight:600;color:#334155}.vc-live{min-height:24px;font-family:Prompt,sans-serif;font-size:17px;color:var(--brand);margin:6px 0 12px}
+.vc-in{display:flex;gap:8px;max-width:560px;margin:0 auto}.vc-in input{flex:1;min-height:46px;font-size:15.5px}
+.vc-res{border-width:2px!important}.vc-res.confirm{border-color:#A7F3D0!important}.vc-res.err{border-color:#FECACA!important}.vc-res.ok{border-color:#10B981!important;background:#F0FDF4!important}
+.vc-q{font-size:13px;color:var(--muted);margin-bottom:8px}.vc-h2{font-family:Prompt,sans-serif;font-weight:700;font-size:17px;margin-bottom:6px}
+.vc-big{font-family:Prompt,sans-serif;font-weight:700;font-size:30px;color:var(--brand);line-height:1.3}
+.vr{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.vr span{color:var(--muted)}.vr b{text-align:right}
+.vc-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}
+.vc-ex{display:flex;flex-wrap:wrap;gap:8px}.vc-ex button{border:1px solid var(--line);background:#F8FAF8;border-radius:99px;padding:8px 14px;font-family:inherit;font-size:13.5px;cursor:pointer;color:#334155;text-align:left}
+.vc-ex button:hover{border-color:var(--em);background:#ECFDF5}
+.vc-h{display:block;width:100%;text-align:left;border:0;background:none;padding:9px 2px;border-bottom:1px solid var(--line);font-family:inherit;font-size:14px;cursor:pointer;color:#334155}
+/* แจ้งเตือน + เมนู */
+.nt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 12px;margin-bottom:8px;font-family:inherit;cursor:pointer;color:var(--ink)}
+.nt>div{flex:1;min-width:0;display:flex;flex-direction:column}.nt b{font-weight:600;font-size:14px}.nt span{font-size:12.5px;color:var(--muted)}.nt i{font-style:normal;color:#CBD5E1;font-size:20px}
+.nt-i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:18px;flex-shrink:0;background:#F1F5F9}
+.nt.bad .nt-i{background:#FEE2E2}.nt.warn .nt-i{background:#FEF3C7}.nt.info .nt-i{background:#DBEAFE}
+.menu-sh .sh-h .emb{width:40px;height:40px}
+.mg-t{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 2px 8px}
+.mg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mi{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 4px;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink);text-align:center;line-height:1.25}
+.mi span{width:38px;height:38px;border-radius:12px;background:var(--brand-l);color:var(--brand);display:grid;place-items:center}.mi span svg{width:20px;height:20px}
+.mi.on{border-color:var(--em);background:#F0FDF4}
+@media (max-width:1100px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.tgrid,.tgrid.t3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.tgrid.t3 .tc:last-child{grid-column:1/-1}.tc-v{font-size:21px}.tc{padding:12px}}
+@media (max-width:380px){.tc-v{font-size:19px}.mstrip b{font-size:14.5px}}
+@media (max-width:900px){.home .card.hq{padding:14px}.mstrip{padding:9px 10px}.mstrip>div+div{padding-left:7px}}
 </style>
 </head>
 <body>
@@ -1530,12 +1715,12 @@ function stageFromPlot(plot,dateIso){
    ========================================================= */
 const DEFAULTS={biz:'รุ่งเรือง เรื่องไร่',tagline:'เกษตรก้าวไกล ด้วยเทคโนโลยีโดรน',slogan:'บินด้วยเทคโนโลยี ดูแลพืชผล สร้างความมั่งคั่ง',area:'อำเภอคำชะอี และใกล้เคียง จังหวัดมุกดาหาร',pilot:'',phone:'099-978-9187',region:'northeast',tank:50,droneCost:0,startDate:'',
  prices:{spray:70,foliar:70,herb:70,fert:50,seed:50,other:0},orchard:{spray:100,foliar:100,herb:80,fert:70,seed:0,other:0}};
-const COLLS=['jobs','expenses','customers','plots','products'];
-const S={jobs:[],expenses:[],customers:[],plots:[],products:[],settings:clone(DEFAULTS)};
+const COLLS=['jobs','expenses','customers','plots','products','team'];
+const S={jobs:[],expenses:[],customers:[],plots:[],products:[],team:[],settings:clone(DEFAULTS)};
 let backend='loading', DB=null, dbNote='', readOnly=false, localHasData=false;
 const LS_KEY='droneLedger.v1';
 function lsGet(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'null')}catch(e){return null}}
-function lsSet(){try{localStorage.setItem(LS_KEY,JSON.stringify({jobs:S.jobs,expenses:S.expenses,customers:S.customers,plots:S.plots,products:S.products,settings:S.settings}))}catch(e){}}
+function lsSet(){try{localStorage.setItem(LS_KEY,JSON.stringify({jobs:S.jobs,expenses:S.expenses,customers:S.customers,plots:S.plots,products:S.products,team:S.team,settings:S.settings}))}catch(e){}}
 function mergeSettings(s){const o=clone(DEFAULTS);Object.assign(o,s||{});if(!o.biz||o.biz==='โดรนเกษตรรับจ้าง'){o.biz=DEFAULTS.biz;if(!s?.phone)o.phone=DEFAULTS.phone;if(!s||s.region==='east')o.region=DEFAULTS.region}['tagline','slogan','area'].forEach(k=>{if(o[k]==null)o[k]=DEFAULTS[k]});o.prices={...DEFAULTS.prices,...(s?.prices||{})};o.orchard={...DEFAULTS.orchard,...(s?.orchard||{})};return o}
 
 /* ---------- Firebase (เวอร์ชัน GitHub / เว็บทั่วไป) ---------- */
@@ -1631,7 +1816,7 @@ function jobChemCost(j){return (j.chems||[]).reduce((a,c)=>a+(c.supplier==='us'?
 function jobTotal(j){if(j.own)return 0;return Math.max(0,num(j.area)*num(j.pricePerRai)+num(j.extraFee)-num(j.discount)+jobChemCharge(j))}
 function jobPaid(j){if(j.own)return 0;const t=jobTotal(j);return j.payStatus==='paid'?t:j.payStatus==='part'?Math.min(t,num(j.paidAmount)):0}
 function priceFor(svc,crop){const orch=CROPS[crop]?.orchard;const p=orch?num(S.settings.orchard?.[svc]):0;return p||num(S.settings.prices?.[svc])}
-function inPeriod(iso,P){if(!iso)return false;if(P.mode==='all')return true;if(P.mode==='year')return iso.slice(0,4)===P.ym.slice(0,4);return iso.slice(0,7)===P.ym}
+function inPeriod(iso,P){if(!iso)return false;if(P.mode==='all')return true;if(P.mode==='day')return iso===P.d;if(P.mode==='year')return iso.slice(0,4)===P.ym.slice(0,4);return iso.slice(0,7)===P.ym}
 function periodLabel(P){const [y,m]=P.ym.split('-').map(Number);if(P.mode==='all')return 'ทั้งหมด';if(P.mode==='year')return 'ปี '+(y+543);return MONTHS_FULL[m-1]+' '+(y+543)}
 function summarize(P){
  const jobs=S.jobs.filter(j=>!isQ(j)&&inPeriod(j.date,P)), exps=S.expenses.filter(e=>inPeriod(e.date,P));
@@ -1771,7 +1956,7 @@ const IC={
  set:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',
  more:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'
 };
-const VIEWS=[['dashboard','Dashboard ภาพรวม','dash'],['tx','รายการธุรกรรม','tx'],['reports','รายงานและสถิติ','rep'],['records','งานบริการฉีดพ่น','drone'],['customers','ลูกค้า','cust'],['map','แผนที่งาน','map'],['advisor','คำแนะนำการพ่น','adv'],['library','คลังสาร','lib'],['settings','ตั้งค่าระบบ','set']];
+const VIEWS=[['home','หน้าหลัก','home'],['queue','คิวงาน','queue'],['finance','การเงิน','fin'],['dashboard','Dashboard ภาพรวม','dash'],['tx','รายการธุรกรรม','tx'],['reports','รายงานและสถิติ','rep'],['records','งานบริการฉีดพ่น','drone'],['customers','ลูกค้า','cust'],['team','ทีมงาน','team'],['map','แผนที่งาน','map'],['advisor','คำแนะนำการพ่น','adv'],['library','คลังสาร','lib'],['voice','ผู้ช่วยเสียง','mic'],['settings','ตั้งค่าระบบ','set']];
 const UI={tx:{q:'',from:'',to:'',type:'',cat:'',status:'',limit:50},view:'dashboard',period:{mode:'month',ym:today().slice(0,7)},rec:{tab:'jobs',q:'',ym:'',svc:''},custQ:'',custId:null,adv:null,libCat:'ins',libQ:'',mapFocus:null,mapSel:null};
 UI.stack=[];
 function pushNav(){const cur={view:UI.view,custId:UI.custId,y:window.scrollY};const top=UI.stack[UI.stack.length-1];if(!top||top.view!==cur.view||top.custId!==cur.custId)UI.stack.push(cur);if(UI.stack.length>25)UI.stack.shift()}
@@ -1803,9 +1988,9 @@ function banner(){
 }
 function render(){
  if(backend==='loading'||backend==='login') return;
- renderNav();
+ renderNav();renderAppChrome();
  const v=UI.view;
- const html=v==='dashboard'?viewDashboard():v==='tx'?viewTx():v==='reports'?viewReports():v==='records'?viewRecords():v==='customers'?(UI.custId?viewCustomer(UI.custId):viewCustomers()):v==='map'?viewMap():v==='advisor'?viewAdvisor():v==='library'?viewLibrary():viewSettings();
+ const html=v==='home'?viewHome():v==='queue'?viewQueue():v==='finance'?viewFinance():v==='team'?viewTeam():v==='voice'?viewVoice():v==='dashboard'?viewDashboard():v==='tx'?viewTx():v==='reports'?viewReports():v==='records'?viewRecords():v==='customers'?(UI.custId?viewCustomer(UI.custId):viewCustomers()):v==='map'?viewMap():v==='advisor'?viewAdvisor():v==='library'?viewLibrary():viewSettings();
  const ae=document.activeElement;const keepId=ae&&ae.id&&$('#view').contains(ae)?ae.id:null;const sel=keepId&&ae.selectionStart!=null?[ae.selectionStart,ae.selectionEnd]:null;
  if(CBS&&$('#view').contains(CBS.inp))CBS=null;
  killCharts();
@@ -2004,7 +2189,7 @@ function viewLibrary(){
 /* ---------- ตั้งค่า ---------- */
 function viewSettings(){
  const s=S.settings;
- const cnt=COLLS.map(c=>`${({jobs:'งาน',expenses:'รายจ่าย',customers:'ลูกค้า',plots:'แปลง',products:'ชื่อการค้า'})[c]} ${S[c].length}`).join(' · ');
+ const cnt=COLLS.map(c=>`${({jobs:'งาน',expenses:'รายจ่าย',customers:'ลูกค้า',plots:'แปลง',products:'ชื่อการค้า',team:'ทีมงาน'})[c]} ${S[c].length}`).join(' · ');
  return `<div class="ph"><div><h1>ตั้งค่าระบบ</h1><div class="sub">${backend==='db'?'☁️ ข้อมูลเก็บบนคลาวด์ของหน้านี้ เปิดจากมือถือหรือคอมก็เห็นข้อมูลเดียวกัน':'💾 ข้อมูลเก็บในเบราว์เซอร์เครื่องนี้ — ใช้ปุ่มสำรอง/กู้คืนเพื่อย้ายข้อมูลระหว่างมือถือกับคอม'} · ${cnt}${S.settings.lastBackup?' · สำรองล่าสุด '+fdate(S.settings.lastBackup):''}</div></div></div>
  <form id="set-form" class="grid g2">
   <div class="card"><h2>ข้อมูลกิจการ</h2><div class="grid">
@@ -2228,16 +2413,16 @@ Object.assign(IC,{
  del:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>'
 });
 const NAV=[
- {sec:'ภาพรวม',items:[['go','dashboard','Dashboard','dash']]},
- {sec:'บัญชี',items:[['act','navIncome','บันทึกรายรับ','inc'],['act','navExpense','บันทึกรายจ่าย','exp'],['go','tx','รายการธุรกรรม','tx'],['go','reports','รายงานและสถิติ','rep']]},
- {sec:'งานบริการ',items:[['go','records','งานบริการฉีดพ่น','drone'],['go','customers','ลูกค้า','cust'],['go','map','แผนที่งาน','map'],['go','advisor','คำแนะนำการพ่น','adv'],['go','library','คลังสาร','lib']]},
- {sec:'ระบบ',items:[['go','settings','ตั้งค่าระบบ','set']]}];
+ {sec:'ภาพรวม',items:[['go','home','หน้าหลัก','home'],['go','dashboard','Dashboard','dash']]},
+ {sec:'งานบริการ',items:[['go','queue','คิวงาน','queue'],['go','records','งานบริการฉีดพ่น','drone'],['go','customers','ลูกค้า','cust'],['go','team','ทีมงาน','team'],['go','map','แผนที่งาน','map'],['go','advisor','คำแนะนำการพ่น','adv'],['go','library','คลังสาร','lib']]},
+ {sec:'บัญชี',items:[['go','finance','การเงิน','fin'],['act','navIncome','บันทึกรายรับ','inc'],['act','navExpense','บันทึกรายจ่าย','exp'],['go','tx','รายการธุรกรรม','tx'],['go','reports','รายงานและสถิติ','rep']]},
+ {sec:'ระบบ',items:[['go','voice','ผู้ช่วยเสียง','mic'],['go','settings','ตั้งค่าระบบ','set']]}];
 let SB_COLLAPSED=false;try{SB_COLLAPSED=localStorage.getItem('sbCollapsed')==='1'}catch(e){}
 function renderNav(){
  $('.app').classList.toggle('collapsed',SB_COLLAPSED);
  const st=S.settings;
  $('#side').innerHTML=`<div class="sb-brand">${sideArt('s')}<div class="sb-id">${emblem('s')}<div class="sb-txt"><div class="sb-name">${esc(st.biz||'โดรนเกษตร')}</div><div class="sb-tag">${esc(st.tagline||'สมุดบัญชีโดรนเกษตร')}</div></div></div></div>
- <nav class="sb-nav">${NAV.map(g=>`<div class="sb-sec">${g.sec}</div>`+g.items.map(it=>{const on=it[0]==='go'&&(UI.view===it[1]);const dq=it[1]==='records'?queueJobs().filter(j=>j.date<=today()).length:0;return `<button class="nav-btn ${on?'on':''}" ${it[0]==='go'?`data-act="go" data-v="${it[1]}"`:`data-act="${it[1]}"`} title="${esc(it[2])}">${IC[it[3]]}<span>${it[2]}</span>${dq?`<i class="nbadge">${dq}</i>`:''}</button>`}).join('')).join('')}</nav>
+ <nav class="sb-nav">${NAV.map(g=>`<div class="sb-sec">${g.sec}</div>`+g.items.map(it=>{const on=it[0]==='go'&&(UI.view===it[1]);const dq=it[1]==='queue'?queueJobs().filter(j=>j.date<=today()).length:0;return `<button class="nav-btn ${on?'on':''}" ${it[0]==='go'?`data-act="go" data-v="${it[1]}"`:`data-act="${it[1]}"`} title="${esc(it[2])}">${IC[it[3]]}<span>${it[2]}</span>${dq?`<i class="nbadge">${dq}</i>`:''}</button>`}).join('')).join('')}</nav>
  <div class="sb-foot"><div class="sb-store">${FBMODE?`☁️ ซิงก์คลาวด์ · ${esc(FB.user.email||'')}`:backend==='db'?'☁️ บันทึกบนคลาวด์':backend==='local'?'💾 บันทึกในเครื่องนี้':''}</div><button class="sb-tog" data-act="sbToggle" title="${SB_COLLAPSED?'ขยายเมนู':'ย่อเมนู'}">${IC.chev}<span>ย่อเมนู</span></button></div>`;
  const mb=$('#mbar');if(mb)mb.innerHTML=`${sideArt('m')}<div class="mb-id">${emblem('m')}<div><div class="sb-name">${esc(st.biz||'')}</div><div class="sb-tag">${esc(st.tagline||'')}</div></div></div>`;
  const mob=[['go','dashboard','ภาพรวม','dash'],['go','tx','ธุรกรรม','tx'],['go','records','งานพ่น','drone'],['go','map','แผนที่','map'],['act','more','เพิ่มเติม','more']];
@@ -2398,7 +2583,7 @@ function viewReports(){
    ========================================================= */
 function periodRange(P){if(P.mode==='all')return {from:'',to:''};if(P.mode==='year'){const y=P.ym.slice(0,4);return {from:y+'-01-01',to:y+'-12-31'}}const [y,m]=P.ym.split('-').map(Number);const last=new Date(y,m,0).getDate();return {from:P.ym+'-01',to:P.ym+'-'+String(last).padStart(2,'0')}}
 function txGo(f){UI.tx={q:'',from:'',to:'',type:'',cat:'',status:'',limit:50,more:false,...f};go('tx')}
-const queueJobs=()=>S.jobs.filter(isQ).sort((a,b)=>((a.date||'')+(a.startTime||'')).localeCompare((b.date||'')+(b.startTime||'')));
+const queueJobs=()=>S.jobs.filter(j=>isQ(j)&&j.qstate!=='cancelled').sort((a,b)=>((a.date||'')+(a.startTime||'')).localeCompare((b.date||'')+(b.startTime||'')));
 function followUps(){const q=queueJobs();return S.jobs.filter(j=>!isQ(j)&&j.nextDate&&daysAgo(j.nextDate)>=-45&&!q.some(x=>x.plotId&&x.plotId===j.plotId&&x.date>=j.date)).sort((a,b)=>a.nextDate.localeCompare(b.nextDate))}
 function dueTxt(d){const n=-daysAgo(d);return n<0?['เลยนัด '+(-n)+' วัน','bad']:n===0?['วันนี้','warn']:n===1?['พรุ่งนี้','ok']:['อีก '+n+' วัน','info']}
 function queueBox(limit=6){
@@ -2506,7 +2691,7 @@ CBP.prod={items:(inp,q)=>{const i=+inp.dataset.cbi;const mine=S.products.map(p=>
 function renderJobForm(){
  const j=F;const cdef=CROPS[cropOf(j)];
  $('#jf').innerHTML=`
- <div class="sec jstat"><div class="seg wide"><button class="${!isQ(j)?'on':''}" data-act="jfStatus" data-s="done">✅ งานที่ทำแล้ว</button><button class="${isQ(j)?'on':''}" data-act="jfStatus" data-s="queued">📅 จองคิว / นัดหมาย</button></div>
+ <div class="sec jstat"><div class="seg wide"><button class="${!isQ(j)?'on':''}" data-act="jfStatus" data-s="done">✅ งานที่ทำแล้ว</button><button class="${isQ(j)?'on':''}" data-act="jfStatus" data-s="queued">📅 จองคิว / นัดหมาย</button></div>${isQ(j)?`<div class="seg wide qsseg">${[['pending','⏳ รอดำเนินการ'],['doing','🔄 กำลังดำเนินการ'],['cancelled','✕ ยกเลิก']].map(x=>`<button class="${(j.qstate||'pending')===x[0]?'on':''}" data-act="jfQs" data-s="${x[0]}">${x[1]}</button>`).join('')}</div>`:''}
   ${isQ(j)?'<div class="tiny muted" style="margin-top:6px">คิวจะยังไม่นับเป็นรายรับ เมื่อทำงานเสร็จกด “✓ เสร็จ” ที่กล่องคิวงาน หรือสลับเป็น “งานที่ทำแล้ว” แล้วบันทึก</div>':''}
   <div class="field" style="margin-top:10px"><label>📄 คัดลอกจากงานเดิม (สาร อัตรา ราคา ประเภทงาน) — ไม่ต้องกรอกใหม่</label>${cbHTML('copyfrom','','🔍 พิมพ์ชื่อลูกค้า แปลง หรือชื่อสาร ของงานที่เคยทำ')}</div></div>
  <div class="sec"><div class="row between" style="margin-bottom:8px"><h3 style="margin:0;color:var(--brand-d)">📋 ข้อมูลงาน</h3><span class="chip ${j.own?'on':''}" data-act="toggleOwn">🏡 งานสวนตัวเอง (ไม่คิดเงิน)</span></div><div class="grid g2">
@@ -2541,7 +2726,7 @@ function renderJobForm(){
   <div class="tiny muted" style="margin-bottom:8px">พิมพ์ชื่อสาร ชื่อการค้า หรือชื่อแมลง/โรค (เช่น “เพลี้ยไฟ”) แล้วเลือกจากรายการ — ระบบรู้กลุ่ม IRAC/FRAC และเตือนเมื่อใช้กลุ่มเดิมกับแปลงนี้</div>
   <div id="jf-chems"></div>
   <div class="row"><button class="btn sm" data-act="addLine" data-c="ins">+ ยาแมลง</button><button class="btn sm" data-act="addLine" data-c="fun">+ ยารา</button><button class="btn sm" data-act="addLine" data-c="her">+ ยาหญ้า</button><button class="btn sm" data-act="addLine" data-c="fer">+ ปุ๋ย</button><button class="btn sm" data-act="addLine" data-c="pgr">+ ฮอร์โมน</button><button class="btn sm" data-act="addLine" data-c="adj">+ สารจับใบ</button></div>
-  <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>
+  <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>${teamPicker(j)}
   <div id="jf-tank" class="small" style="margin-top:8px"></div>
  </div>
 
@@ -2654,7 +2839,7 @@ function openExp(e,draft){
  <div class="sh-b"><div class="seg"><button class="${F.kind!=='in'?'on':''}" data-act="expKind" data-k="out">รายจ่าย</button><button class="${F.kind==='in'?'on':''}" data-act="expKind" data-k="in">รายรับ</button></div>${F.kind==='in'?'<div class="note info small">รายรับจากงานบริการที่มีข้อมูลลูกค้า แปลง และสาร แนะนำให้บันทึกผ่าน “บันทึกงานพ่น” เพื่อเก็บประวัติครบ ช่องนี้เหมาะกับรายรับด่วนหรือรายได้อื่น ๆ</div>':''}
  <div class="grid g2"><div class="field"><label>วันที่</label><input type="date" data-e="date" value="${esc(F.date)}"></div><div class="field"><label>จำนวนเงิน (บาท)</label><input data-e="amount" inputmode="decimal" value="${esc(F.amount)}"></div></div>
  <div class="grid g2"><div class="field"><label>หมวดหมู่</label><select data-e="cat">${cats.map(c=>`<option ${F.cat===c?'selected':''}>${esc(c)}</option>`).join('')}</select></div><div class="field"><label>วิธีชำระเงิน</label><select data-e="payMethod">${PAYM.map(p=>`<option ${(F.payMethod||PAYM[0])===p?'selected':''}>${p}</option>`).join('')}</select></div></div>
- ${F.kind!=='in'?`<div class="field"><label>เป็นค่าใช้จ่ายของ</label><select data-e="scope"><option value="biz" ${F.scope!=='own'?'selected':''}>ธุรกิจรับจ้าง</option><option value="own" ${F.scope==='own'?'selected':''}>สวนตัวเอง</option></select></div>`:''}
+ ${F.kind!=='in'?`<div class="field"><label>เป็นค่าใช้จ่ายของ</label><select data-e="scope"><option value="biz" ${F.scope!=='own'?'selected':''}>ธุรกิจรับจ้าง</option><option value="own" ${F.scope==='own'?'selected':''}>สวนตัวเอง</option></select></div>`:''}${F.kind!=='in'&&S.team.length?`<div class="field"><label>👷 จ่ายค่าแรงให้ทีมงาน (ถ้ามี)</label><select data-e="workerId"><option value="">— ไม่ใช่ค่าแรงทีมงาน —</option>${S.team.map(w=>`<option value="${w.id}" ${F.workerId===w.id?'selected':''}>${esc(w.name)} · ค้าง ${baht(wageOwed(w))}</option>`).join('')}</select></div>`:''}
  <div class="field"><label>รายละเอียด</label><textarea data-e="note" placeholder="เช่น เติมน้ำมันปั่นไฟ 20 ลิตร, เปลี่ยนใบพัด 1 คู่">${esc(F.note)}</textarea></div></div>
  <div class="sh-f">${e?'<button class="btn danger" data-act="delExp" style="margin-right:auto">ลบ</button>':''}<button class="btn" data-act="close">ยกเลิก</button><button class="btn primary" data-act="saveExp">บันทึก</button></div>`,true);
 }
@@ -2779,7 +2964,7 @@ const ACT={
  goQueue:()=>{UI.rec.tab='queue';go('records')},
  queueFrom:a=>{const j=S.jobs.find(x=>x.id===a.dataset.id);if(j)copyJobAsNew(j,{queue:true,date:j.nextDate&&j.nextDate>=today()?j.nextDate:today(),msg:'สร้างคิวจากงานครั้งก่อนแล้ว — ปรับวันนัด/สาร แล้วกดบันทึก'})},
  qDone:(a,e)=>{e&&e.stopPropagation();const j=S.jobs.find(x=>x.id===a.dataset.id);if(!j)return;openJob(j);F.status='done';if(F.date>today())F.date=today();renderJobForm();$('#jf-title').textContent='ยืนยันงานเสร็จ';toast('ตรวจพื้นที่ ราคา สถานะการชำระ แล้วกดบันทึก','ok')},
- jfStatus:a=>{F.status=a.dataset.s;renderJobForm()},
+ jfStatus:a=>{F.status=a.dataset.s;if(F.status==='queued'&&!F.qstate)F.qstate='pending';renderJobForm()},
  jobCopy:(a,e)=>{e&&e.stopPropagation();const j=S.jobs.find(x=>x.id===a.dataset.id);if(j)copyJobAsNew(j)},
  txCopy:(a,e)=>{e&&e.stopPropagation();const [k,id]=a.dataset.id.split(':');if(k==='e'){const x=S.expenses.find(y=>y.id===id);if(x){const d=clone(x);d.id=uid();d.date=today();d.createdAt=new Date().toISOString();delete d.updatedAt;openExp(null,d);toast('คัดลอกแล้ว — แก้ไขแล้วกดบันทึก','ok')}}else{const j=S.jobs.find(y=>y.id===id);if(j)copyJobAsNew(j)}},
  navIncome:()=>{openModal(`<div class="sh-h"><b>บันทึกรายรับ</b><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
@@ -2807,7 +2992,8 @@ const ACT={
   <button class="choice" data-act="newQueue"><span class="ci" style="background:#EFF6FF;color:#2563EB">📅</span><div><b>จองคิว / นัดหมายงาน</b><span>ลูกค้าโทรนัด — ยังไม่นับเป็นรายรับจนกว่าจะทำเสร็จ</span></div></button>
   <button class="choice" data-act="quickIncome"><span class="ci" style="background:#ECFDF5;color:#059669">${IC.inc}</span><div><b>รายรับด่วน / รายได้อื่น ๆ</b><span>ขายสาร เงินอุดหนุน มัดจำ</span></div></button>
   <button class="choice" data-act="navExpense"><span class="ci" style="background:#FEF2F2;color:#DC2626">${IC.exp}</span><div><b>รายจ่าย</b><span>น้ำมัน สารเคมี ซ่อมบำรุง แบตเตอรี่ ค่าแรง ค่าเดินทาง</span></div></button>
-  <button class="choice" data-act="newCust"><span class="ci" style="background:var(--soft);color:#475569">${IC.cust}</span><div><b>เพิ่มลูกค้า</b><span>ชื่อ เบอร์ ที่อยู่</span></div></button></div>`,true)},
+  <button class="choice" data-act="newCust"><span class="ci" style="background:var(--soft);color:#475569">${IC.cust}</span><div><b>เพิ่มลูกค้า</b><span>ชื่อ เบอร์ ที่อยู่</span></div></button>
+  <button class="choice" data-act="vcMic"><span class="ci" style="background:#FFE4E6;color:#BE123C">${IC.mic}</span><div><b>สั่งด้วยเสียง</b><span>“เพิ่มคิวพี่โอ พรุ่งนี้บ่ายฉีดยา 30 ไร่”</span></div></button></div>`,true)},
  period:a=>{UI.period.mode=a.dataset.m;render()},
  newJob:a=>{closeModal();openJob(null,{cid:a.dataset.cid})},
  newJobPlot:a=>openJob(null,{pid:a.dataset.id}),
@@ -2939,9 +3125,502 @@ document.addEventListener('submit',e=>{if(e.target.id!=='set-form')return;e.prev
  SERVICES.forEach(v=>{s.prices[v[0]]=num(fd.get('p_'+v[0]));s.orchard[v[0]]=num(fd.get('o_'+v[0]))});saveSettings(s)});
 window.addEventListener('resize',()=>{if(MAP&&UI.view==='map')MAP.invalidateSize()});
 
+/* =========================================================
+   ส่วนที่ 9: หน้าตาแบบแอป (หน้าหลัก คิวงาน การเงิน ทีมงาน ผู้ช่วยเสียง)
+   ========================================================= */
+Object.assign(IC,{
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>',
+ queue:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m8.5 15 2.2 2.2 4.8-4.7"/></svg>',
+ fin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1V7z"/><path d="M4 7l11-3v3"/><circle cx="16" cy="13.5" r="1.4" fill="currentColor"/></svg>',
+ team:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c0-3.6 2.9-5.8 6.5-5.8s6.5 2.2 6.5 5.8"/><circle cx="4.8" cy="10" r="2.2"/><circle cx="19.2" cy="10" r="2.2"/><path d="M1.5 18c.2-2 1.3-3.3 3-3.7M22.5 18c-.2-2-1.3-3.3-3-3.7"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
+ bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></svg>',
+ menu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+ search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>',
+ plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>',
+ down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7 7 17M15 17H7V9"/></svg>',
+ pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>',
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+ phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+ nav:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-8-8 18-2-8z"/></svg>'
+});
+/* ไอคอนประเภทงาน (กล่องสี) */
+const SVC_IC={
+ spray:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13h12M9 10l-3-2M23 10l3-2M9 16l-3 2M23 16l3 2"/><rect x="13" y="11" width="6" height="5" rx="1.5" fill="currentColor"/><ellipse cx="5" cy="8" rx="3.4" ry="1" fill="currentColor" stroke="none"/><ellipse cx="27" cy="8" rx="3.4" ry="1" fill="currentColor" stroke="none"/><path d="M13 21l-1 3M16 21v4M19 21l1 3" stroke-width="1.8"/></svg>',
+ foliar:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M16 4c5 6 8 10 8 14a8 8 0 0 1-16 0c0-4 3-8 8-14z" fill="currentColor" fill-opacity=".18"/><path d="M12 19a4 4 0 0 0 4 4" stroke-linecap="round"/></svg>',
+ herb:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 27h20"/><path d="M10 27c0-6-3-10-5-12M14 27c0-8 1-13 3-17M18 27c0-5 3-9 7-11M22 27c0-3 1-5 3-6"/></svg>',
+ fert:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 7h14l2 5v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V12z" fill="currentColor" fill-opacity=".16"/><path d="M7 12h18"/><circle cx="13" cy="18" r="1.4" fill="currentColor"/><circle cx="18" cy="21" r="1.4" fill="currentColor"/><circle cx="19" cy="16" r="1.4" fill="currentColor"/></svg>',
+ seed:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 27V15"/><path d="M16 17c-5 0-8-3-8-8 5 0 8 3 8 8zM16 15c0-5 3-8 8-8 0 5-3 8-8 8z" fill="currentColor" fill-opacity=".18"/></svg>',
+ other:'<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 10 16 5l11 5v12l-11 5-11-5z" fill="currentColor" fill-opacity=".14"/><path d="M5 10l11 5 11-5M16 15v12"/></svg>'
+};
+const SVC_SHORT={spray:'ฉีดยา',foliar:'ปุ๋ยน้ำ/ฮอร์โมน',herb:'ยาหญ้า',fert:'หว่านปุ๋ย',seed:'หว่านเมล็ด',other:'งานอื่น'};
+
+/* ---------- สถานะคิว ---------- */
+const QST={pending:['รอดำเนินการ','pend'],doing:['กำลังดำเนินการ','doing'],done:['เสร็จแล้ว','done'],cancel:['ยกเลิก','cancel']};
+const qKey=j=>!isQ(j)?'done':j.qstate==='cancelled'?'cancel':j.qstate==='doing'?'doing':'pending';
+const isCancelled=j=>isQ(j)&&j.qstate==='cancelled';
+const pill=j=>{const k=qKey(j);const late=k==='pending'&&j.date<today();return `<span class="qpill ${late?'late':QST[k][1]}">${late?'เลยนัด':QST[k][0]}</span>`};
+const WD=['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],WDF=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const D0=iso=>new Date(iso+'T00:00:00');
+const isoOf=d=>{const x=new Date(d);x.setMinutes(x.getMinutes()-x.getTimezoneOffset());return x.toISOString().slice(0,10)};
+const addD=(iso,n)=>{const d=D0(iso);d.setDate(d.getDate()+n);return isoOf(d)};
+const thLong=iso=>{const d=D0(iso);return `วัน${WDF[d.getDay()]}ที่ ${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()+543}`};
+const thShort=iso=>{const n=-daysAgo(iso);return n===0?'วันนี้':n===1?'พรุ่งนี้':n===-1?'เมื่อวาน':`${WD[D0(iso).getDay()]} ${D0(iso).getDate()} ${MONTHS[D0(iso).getMonth()]}`};
+const ymPrev=ym=>{let [y,m]=ym.split('-').map(Number);m--;if(!m){m=12;y--}return `${y}-${String(m).padStart(2,'0')}`};
+const ymNext=ym=>{let [y,m]=ym.split('-').map(Number);m++;if(m>12){m=1;y++}return `${y}-${String(m).padStart(2,'0')}`};
+const ymLabel=(ym,short)=>{const [y,m]=ym.split('-').map(Number);return (short?MONTHS[m-1]:MONTHS_FULL[m-1])+' '+(short?String(y+543).slice(2):y+543)};
+const hm2min=t=>{const m=/^(\d{1,2}):(\d{2})/.exec(t||'');return m?+m[1]*60+ +m[2]:null};
+const jobHours=j=>{const a=hm2min(j.startTime),b=hm2min(j.endTime);return a!=null&&b!=null&&b>a?(b-a)/60:0};
+const jobLoc=j=>{const p=plotById(j.plotId);return p?.location||p?.name||custById(j.customerId)?.address||''};
+const navUrl=j=>{const p=plotById(j.plotId);const o=hasLL(j)?j:hasLL(p)?p:null;if(o)return `https://www.google.com/maps/dir/?api=1&destination=${o.lat},${o.lng}`;const l=jobLoc(j);return l?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l)}`:''};
+const pct=(a,b)=>b?((a-b)/Math.abs(b))*100:null;
+const dlt=(a,b,lab,inv)=>{const p=pct(a,b);if(!a&&!b)return `<span class="dl flat">ยังไม่มีรายการ</span>`;if(p==null)return `<span class="dl flat">${a?'ใหม่ ':''}${lab?'— ไม่มีข้อมูล'+lab:''}</span>`;const up=p>=0;const good=inv?!up:up;return `<span class="dl ${Math.abs(p)<0.5?'flat':good?'good':'bad'}">${up?'▲':'▼'} ${fmt(Math.abs(p),0)}% ${lab||''}</span>`};
+function dayJobs(iso,incCancel){return S.jobs.filter(j=>j.date===iso&&(incCancel||!isCancelled(j))).sort((a,b)=>(a.startTime||'99').localeCompare(b.startTime||'99'))}
+function upcomingQueue(){const t=today();return queueJobs().filter(j=>j.date>=addD(t,-30))}
+/* ---------- ทีมงาน ---------- */
+const WAGE={rai:['ต่อไร่','w-rai'],day:['ต่อวัน','w-day'],month:['รายเดือน','w-mon']};
+const workerById=id=>S.team.find(w=>w.id===id);
+const initials=n=>{const s=String(n||'?').trim().replace(/^(นางสาว|นาย|นาง|คุณ|พี่|น้อง|ลุง|ป้า|น้า|อา|ตา|ยาย)\s*/,'');return s.slice(0,/^[เแโใไ]/.test(s)?2:2)||'?'};
+const AVC=['#10B981','#0EA5E9','#F59E0B','#8B5CF6','#EF4444','#14B8A6','#F97316','#64748B'];
+const avColor=id=>{let h=0;for(const c of String(id))h=(h*31+c.charCodeAt(0))>>>0;return AVC[h%AVC.length]};
+const avatar=(w,sz='')=>`<span class="av ${sz}" style="background:${avColor(w.id)}" title="${esc(w.name)}">${esc(initials(w.name))}</span>`;
+function teamAv(j){const ws=(j.team||[]).map(workerById).filter(Boolean);return ws.length?`<span class="avs">${ws.map(w=>avatar(w,'xs')).join('')}</span>`:''}
+function wJobs(w,inP){return S.jobs.filter(j=>!isQ(j)&&(j.team||[]).includes(w.id)&&(!inP||inP(j.date)))}
+function monthsBetween(a,b){const [y1,m1]=a.split('-').map(Number),[y2,m2]=b.split('-').map(Number);return Math.max(0,(y2-y1)*12+(m2-m1)+1)}
+function wageEarned(w,ym){/* ym = เดือน หรือ null = สะสมทั้งหมด */
+ const inP=ym?d=>d&&d.slice(0,7)===ym:null;const js=wJobs(w,inP);const r=num(w.rate);
+ if(w.wageType==='day')return new Set(js.map(j=>j.date)).size*r;
+ if(w.wageType==='month'){const st=(w.start||w.createdAt||today()).slice(0,7),cur=today().slice(0,7);if(ym)return ym>=st&&ym<=cur?r:0;return monthsBetween(st,cur)*r}
+ return js.reduce((a,j)=>a+num(j.area),0)*r}
+function wagePaid(w,ym){return S.expenses.filter(e=>e.kind!=='in'&&e.workerId===w.id&&(!ym||(e.date||'').slice(0,7)===ym)).reduce((a,e)=>a+num(e.amount),0)}
+const wageOwed=w=>Math.max(0,wageEarned(w,null)-wagePaid(w,null));
+/* ---------- แจ้งเตือน ---------- */
+function notifs(){
+ const t=today(),out=[];
+ queueJobs().forEach(j=>{const c=custById(j.customerId)?.name||'ไม่ระบุลูกค้า';const w=`${j.startTime?j.startTime+' น. · ':''}${SVC_SHORT[j.service]||''} ${fmt(j.area)} ไร่`;
+  if(j.date<t&&j.qstate!=='doing')out.push({lvl:'bad',ic:'⏰',t:`เลยนัด ${daysAgo(j.date)} วัน: ${c}`,s:`${fdate(j.date)} · ${w}`,id:j.id,hot:1});
+  else if(j.date===t)out.push({lvl:'warn',ic:'📅',t:`วันนี้: ${c}`,s:w,id:j.id,hot:1});
+  else if(j.date===addD(t,1))out.push({lvl:'info',ic:'🗓️',t:`พรุ่งนี้: ${c}`,s:w,id:j.id})});
+ followUps().filter(j=>-daysAgo(j.nextDate)<=3).forEach(j=>out.push({lvl:-daysAgo(j.nextDate)<=0?'warn':'info',ic:'🔁',t:`ครบรอบพ่นซ้ำ: ${custById(j.customerId)?.name||'-'}`,s:`${plotById(j.plotId)?.name||cropName(j)} · ${dueTxt(j.nextDate)[0]}`,id:j.id,hot:-daysAgo(j.nextDate)<=0}));
+ const un=S.jobs.filter(j=>!isQ(j)&&!j.own&&j.payStatus!=='paid'&&daysAgo(j.date)>=7);
+ if(un.length)out.push({lvl:'warn',ic:'💰',t:`ลูกค้าค้างชำระเกิน 7 วัน ${un.length} งาน`,s:'รวม '+baht(un.reduce((a,j)=>a+jobTotal(j)-jobPaid(j),0)),go:'finance',tab:'owe'});
+ const wo=S.team.reduce((a,w)=>a+wageOwed(w),0);if(wo>0)out.push({lvl:'info',ic:'👷',t:'ค่าแรงทีมงานค้างจ่าย',s:baht(wo),go:'team'});
+ if(backend==='local'&&backupDue())out.push({lvl:'warn',ic:'💾',t:'ถึงเวลาสำรองข้อมูล',s:'ข้อมูลเก็บในเครื่องนี้เท่านั้น',act:'exportJSON'});
+ return out}
+const notifCount=()=>notifs().filter(n=>n.hot).length;
+
+/* ---------- แถบหัวแอป + เมนูล่าง ---------- */
+function appHeader(){
+ const st=S.settings,n=notifCount();const v=UI.view;
+ const title=v==='home'?`สวัสดีครับ, ${esc(st.pilot||'นักบินโดรน')} 👋`:esc((VIEWS.find(x=>x[0]===v)||[,''])[1]);
+ return `<div class="ah">${sideArt('m')}<div class="ah-in"><button class="ah-logo" data-act="tab" data-v="home" aria-label="หน้าหลัก">${emblem('ah')}</button>
+  <div class="ah-t"><div class="ah-hi">${title}</div><div class="ah-s">${esc(st.biz||'')}${v==='home'?' · '+fdate(today()):''}</div></div>
+  ${v==='home'?'':`<button class="ahb" data-act="gsToggle" aria-label="ค้นหา">${IC.search}</button>`}
+  <button class="ahb" data-act="vcMic" aria-label="สั่งด้วยเสียง">${IC.mic}</button>
+  <button class="ahb" data-act="bell" aria-label="แจ้งเตือน">${IC.bell}${n?`<i class="ahb-n">${n>9?'9+':n}</i>`:''}</button>
+  <button class="ahb" data-act="more" aria-label="เมนู">${IC.menu}</button></div></div>`}
+function renderAppChrome(){
+ const mb=$('#mbar');if(mb)mb.innerHTML=appHeader();
+ const due=queueJobs().filter(j=>j.date<=today()).length;
+ const it=(v,lab,ic,b)=>`<button class="${UI.view===v?'on':''}" data-act="tab" data-v="${v}">${IC[ic]}${b?`<i class="nbadge">${b}</i>`:''}<span>${lab}</span></button>`;
+ $('#bottom').innerHTML=it('home','หน้าหลัก','home')+it('queue','คิวงาน','queue',due)+`<button class="bn-plus" data-act="quickAdd" aria-label="เพิ่มรายการ"><span>${IC.plus}</span></button>`+it('finance','การเงิน','fin')+it('reports','รายงาน','rep');
+ document.body.dataset.view=UI.view;
+}
+
+/* ---------- การ์ดคิว ---------- */
+function qcard(j,opt={}){
+ const c=custById(j.customerId),k=qKey(j),loc=jobLoc(j);
+ const tm=j.startTime?`<b>${esc(j.startTime)}</b>${j.endTime?`<span>${esc(j.endTime)}</span>`:''}`:`<b class="na">--:--</b><span>ไม่ระบุ</span>`;
+ return `<div class="qc k-${k}" data-act="qSheet" data-id="${j.id}">
+  <div class="qc-time">${opt.showDate?`<em>${thShort(j.date)}</em>`:''}${tm}</div>
+  <div class="qc-ic s-${j.service||'other'}">${SVC_IC[j.service]||SVC_IC.other}</div>
+  <div class="qc-m"><div class="qc-n">${esc(c?.name||'ไม่ระบุลูกค้า')}${j.own?' <span class="tiny muted">(สวนตัวเอง)</span>':''}</div>
+   <div class="qc-tags"><span class="tg s-${j.service||'other'}">${esc(SVC_SHORT[j.service]||'')}</span><span class="tg">${fmt(j.area)} ไร่</span><span class="tg lt">${esc(cropName(j))}</span></div>
+   ${loc?`<div class="qc-loc">${IC.pin}<span>${esc(loc)}</span></div>`:''}</div>
+  <div class="qc-r">${pill(j)}${teamAv(j)}</div></div>`}
+
+/* ---------- หน้าหลัก ---------- */
+function tcard(cls,ic,lab,val,sub,act){return `<div class="tc ${cls}" ${act} tabindex="0"><div class="tc-h"><span class="tc-i">${ic}</span><span class="tc-l">${lab}</span></div><div class="tc-v">${val}</div><div class="tc-s">${sub}</div></div>`}
+function viewHome(){
+ const t=today(),y=addD(t,-1);
+ const P=d=>summarize({mode:'day',ym:d.slice(0,7),d});const a=P(t),b=P(y);
+ const tj=dayJobs(t),done=tj.filter(j=>!isQ(j)).length,rai=tj.reduce((s,j)=>s+num(j.area),0);
+ const inc=a.income+a.otherIn,incY=b.income+b.otherIn;
+ const m=summarize({mode:'month',ym:t.slice(0,7)});
+ const tiles=[['tab','queue','งานและคิว','queue','t1'],['newJob','','เพิ่มงาน','plus','t2'],['tab','finance','รายรับรายจ่าย','fin','t3'],['tab','reports','รายงาน','rep','t4'],
+  ['tab','team','ทีมงาน','team','t5'],['tab','map','แผนที่งาน','map','t6'],['tab','advisor','คำแนะนำพ่น','adv','t7'],['tab','voice','สั่งด้วยเสียง','mic','t8']];
+ const nq=upcomingQueue().slice(0,5),fu=followUps().slice(0,3);
+ return `<div class="home"><div class="ph home-ph"><div><div class="ph-k">${esc(S.settings.biz||'')}</div><h1>สวัสดีครับ, ${esc(S.settings.pilot||'นักบินโดรน')} 👋</h1><div class="sub">${thLong(t)}</div></div><div class="row"><button class="btn" data-act="vcMic">${IC.mic} สั่งด้วยเสียง</button><button class="btn" data-act="bell">${IC.bell} แจ้งเตือน${notifCount()?` <span class="nbadge" style="margin-left:4px">${notifCount()}</span>`:''}</button><button class="btn primary" data-act="newQueue">${IC.plus} เพิ่มคิวงาน</button></div></div>
+ <div class="tgrid">
+  ${tcard('c-job',IC.drone,'งานวันนี้',`${tj.length} <small>งาน</small>`,tj.length?`${fmt(rai)} ไร่ · เสร็จ ${done}/${tj.length}`:'ยังไม่มีงานวันนี้','data-act="tab" data-v="queue"')}
+  ${tcard('c-inc',IC.up,'รายรับวันนี้',baht(inc),dlt(inc,incY,'จากเมื่อวาน'),'data-act="finTab" data-t="in"')}
+  ${tcard('c-exp',IC.down,'ค่าจ่ายวันนี้',baht(a.expense),dlt(a.expense,b.expense,'จากเมื่อวาน',true),'data-act="finTab" data-t="out"')}
+  ${tcard('c-pro',IC.fin,'กำไรวันนี้',baht(a.profit),dlt(a.profit,b.profit,'จากเมื่อวาน'),'data-act="finTab" data-t="in"')}
+ </div>
+ <div class="mstrip" data-act="tab" data-v="finance"><div><span>เดือน${MONTHS_FULL[+t.slice(5,7)-1]}</span><b>${baht(m.income+m.otherIn)}</b><em>รายรับ</em></div><div><b class="${m.profit<0?'neg':''}">${baht(m.profit)}</b><em>กำไร</em></div><div><b>${m.biz.length}</b><em>งาน</em></div><div><b>${fmt(m.rai+m.ownRai)}</b><em>ไร่</em></div></div>
+ <div class="qtiles">${tiles.map(x=>`<button class="qt ${x[4]}" data-act="${x[0]}" ${x[1]?`data-v="${x[1]}"`:''}><span class="qt-i">${IC[x[3]]}</span><span class="qt-l">${x[2]}</span></button>`).join('')}</div>
+ <div class="card hq"><div class="ch"><div><h2>คิวงานถัดไป</h2><div class="sub">${queueJobs().length?`จองไว้ ${queueJobs().length} คิว`:'ยังไม่มีคิว'}</div></div><button class="btn sm ghost" data-act="tab" data-v="queue">ดูทั้งหมด →</button></div>
+  ${nq.length?`<div class="qlist">${nq.map(j=>qcard(j,{showDate:true})).join('')}</div>`:`<div class="qempty">${IC.queue}<div>ยังไม่มีคิวงาน</div><button class="btn sm primary" data-act="newQueue">+ เพิ่มคิวงาน</button></div>`}
+  ${fu.length?`<div class="hr"></div><h3 style="margin:0 0 6px">🔁 ครบรอบพ่นซ้ำ</h3>${fu.map(j=>{const [tt,cc]=dueTxt(j.nextDate);return `<div class="fu" data-act="queueFrom" data-id="${j.id}"><div class="main"><b>${esc(custById(j.customerId)?.name||'-')}</b> <span class="small muted">· ${esc(plotById(j.plotId)?.name||cropName(j))}</span><div class="tiny muted">พ่นล่าสุด ${fdate(j.date)} · ${esc(SVC_SHORT[j.service]||'')}</div></div><span class="st ${cc}">${tt}</span><span class="btn sm">จองคิว</span></div>`}).join('')}`:''}
+ </div>
+ <div class="vcta" data-act="vcMic"><span class="vcta-i">${IC.mic}</span><div><b>ผู้ช่วยสั่งงานด้วยเสียง</b><span>“พรุ่งนี้มีงานกี่ไร่” · “จดรายจ่ายค่าน้ำมัน 500 บาท”</span></div><span class="vcta-go">›</span></div>
+ </div>`}
+
+/* ---------- หน้าคิวงาน ---------- */
+UI.q={date:today(),st:'all'};
+function viewQueue(){
+ const sel=UI.q.date,t=today();const d=D0(sel);const mon=addD(sel,-((d.getDay()+6)%7));
+ const days=[...Array(7)].map((_,i)=>addD(mon,i));
+ const all=dayJobs(sel,true);
+ const cnt={all:all.length,doing:0,pending:0,done:0,cancel:0};all.forEach(j=>cnt[qKey(j)]++);
+ const list=UI.q.st==='all'?all:all.filter(j=>qKey(j)===UI.q.st);
+ const act=all.filter(j=>!isCancelled(j));
+ const hrs=act.reduce((a,j)=>a+jobHours(j),0),rai=act.reduce((a,j)=>a+num(j.area),0),cus=new Set(act.map(j=>j.customerId).filter(Boolean)).size;
+ const late=queueJobs().filter(j=>j.date<t&&j.qstate!=='doing');
+ const chip=(k,l)=>`<button class="fchip ${UI.q.st===k?'on':''} f-${k}" data-act="qSt" data-s="${k}">${l}<b>${cnt[k]}</b></button>`;
+ return `<div class="ph"><div><h1>คิวงาน</h1><div class="sub">${ymLabel(sel.slice(0,7))}</div></div><button class="btn primary" data-act="newQueue">${IC.plus} เพิ่มคิวงาน</button></div>
+ ${late.length?`<div class="qlate" data-act="qGo" data-d="${late[0].date}">⏰ มีคิวเลยนัดยังไม่ปิด ${late.length} งาน — แตะเพื่อไปดู</div>`:''}
+ <div class="wk card"><div class="wk-h"><button class="ib" data-act="qWeek" data-n="-7" aria-label="สัปดาห์ก่อน">‹</button><b>${d.getDate()} ${MONTHS_FULL[d.getMonth()]} ${d.getFullYear()+543}</b>${sel!==t?'<button class="btn sm ghost" data-act="qGo" data-d="'+t+'">วันนี้</button>':''}<button class="ib" data-act="qWeek" data-n="7" aria-label="สัปดาห์ถัดไป">›</button></div>
+  <div class="wk-d">${days.map(x=>{const n=dayJobs(x).length;const xd=D0(x);return `<button class="${x===sel?'on':''} ${x===t?'td':''}" data-act="qGo" data-d="${x}"><span>${WD[xd.getDay()]}</span><b>${xd.getDate()}</b><i>${n?'•'.repeat(Math.min(3,n)):''}</i></button>`}).join('')}</div></div>
+ <div class="fchips">${chip('all','ทั้งหมด')}${chip('doing','กำลังดำเนินการ')}${chip('pending','รอดำเนินการ')}${chip('done','เสร็จแล้ว')}${chip('cancel','ยกเลิก')}</div>
+ <div class="dh"><b>${thLong(sel)}</b><span>${act.length} งาน</span></div>
+ ${list.length?`<div class="qlist">${list.map(j=>qcard(j)).join('')}</div>`:`<div class="card qempty">${IC.queue}<div>${all.length?'ไม่มีงานในสถานะนี้':'ไม่มีงานในวันนี้'}</div><button class="btn sm primary" data-act="newQueue">+ เพิ่มคิวงาน${sel!==t?' วันที่ '+fdate(sel):''}</button></div>`}
+ <div class="qstats"><div><b>${act.length}</b><span>งาน${sel===t?'วันนี้':''}</span></div><div><b>${fmt(hrs,1)}</b><span>ชั่วโมง</span></div><div><b>${fmt(rai)}</b><span>ไร่</span></div><div><b>${cus}</b><span>ลูกค้า</span></div></div>`}
+function qSheet(id){
+ const j=S.jobs.find(x=>x.id===id);if(!j)return;const c=custById(j.customerId),k=qKey(j),u=navUrl(j);
+ const b=(act,ic,l,cls='')=>`<button class="qa ${cls}" data-act="${act}" data-id="${j.id}"><span>${ic}</span>${l}</button>`;
+ const a=[];
+ if(k==='pending'){a.push(b('qState','▶️','เริ่มงาน','go" data-s="doing'));a.push(b('qDone','✅','ทำเสร็จ / บันทึกผล','ok'))}
+ if(k==='doing'){a.push(b('qDone','✅','ทำเสร็จ / บันทึกผล','ok'));a.push(b('qState','⏸️','กลับเป็นรอดำเนินการ','" data-s="pending'))}
+ if(k==='cancel')a.push(b('qState','↩️','กู้คืนคิวนี้','go" data-s="pending'));
+ a.push(b('qEdit','✏️',k==='done'?'ดู / แก้ไขงาน':'แก้ไขคิว / ทีมงาน'));
+ a.push(b('qCopy','📄','คัดลอกเป็นคิวใหม่'));
+ if(u)a.push(`<a class="qa" href="${esc(u)}" target="_blank" rel="noopener"><span>🧭</span>นำทาง</a>`);
+ if(c?.phone)a.push(`<a class="qa" href="tel:${esc(c.phone.replace(/[^\d+]/g,''))}"><span>📞</span>โทร ${esc(c.phone)}</a>`);
+ if(k==='pending'||k==='doing')a.push(b('qState','✕','ยกเลิกคิว','bad" data-s="cancelled'));
+ openModal(`<div class="sh-h"><b>${esc(c?.name||'ไม่ระบุลูกค้า')}</b><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
+  <div class="qs-top"><div class="qc-ic s-${j.service||'other'}">${SVC_IC[j.service]||SVC_IC.other}</div><div><div><b>${esc(SVC[j.service]?.n||'')}</b> · ${fmt(j.area)} ไร่ · ${esc(cropName(j))}</div>
+  <div class="small muted">${thLong(j.date)}${j.startTime?' · '+esc(j.startTime)+(j.endTime?'–'+esc(j.endTime):'')+' น.':''}</div>${jobLoc(j)?`<div class="small muted">📍 ${esc(jobLoc(j))}</div>`:''}
+  <div class="row" style="gap:6px;margin-top:6px">${pill(j)}${j.own?'':`<span class="badge b-${j.payStatus==='paid'?'paid':j.payStatus==='part'?'part':'unpaid'}">${baht(jobTotal(j))}</span>`}${(j.team||[]).map(workerById).filter(Boolean).map(w=>`<span class="tg">${avatar(w,'xs')} ${esc(w.name)}</span>`).join('')}</div>
+  ${chemBadges(j,4)?`<div class="row" style="gap:4px;margin-top:6px">${chemBadges(j,4)}</div>`:''}</div></div>
+  <div class="qacts">${a.join('')}</div></div>`,true)}
+
+/* ---------- หน้าการเงิน ---------- */
+UI.fin={tab:'in',ym:today().slice(0,7)};
+function finByType(s){const m={};s.biz.forEach(j=>{const k=`${SVC_SHORT[j.service]||'งาน'} · ${cropName(j)}`;m[k]=(m[k]||0)+jobTotal(j)});if(s.otherIn)m['รายรับอื่น ๆ']=s.otherIn;return Object.entries(m).sort((a,b)=>b[1]-a[1])}
+function expByCat(s){const m={};s.exps.filter(e=>e.kind!=='in'&&e.scope!=='own').forEach(e=>{const k=e.cat||'อื่น ๆ';m[k]=(m[k]||0)+num(e.amount)});if(s.chemCost)m['ค่าสารที่จัดหาให้งาน']=(m['ค่าสารที่จัดหาให้งาน']||0)+s.chemCost;return Object.entries(m).sort((a,b)=>b[1]-a[1])}
+function donut(id,entries){
+ if(!entries.length)return `<div class="empty small" style="padding:30px 0;text-align:center">ยังไม่มีข้อมูลเดือนนี้</div>`;
+ let e=entries;if(e.length>6){const rest=e.slice(5).reduce((a,x)=>a+x[1],0);e=[...e.slice(0,5),['อื่น ๆ',rest]]}
+ const tot=e.reduce((a,x)=>a+x[1],0);const col=CC.pal;
+ return `<div class="dn"><div class="dn-c">${qChart(id,{type:'doughnut',data:{labels:e.map(x=>x[0]),datasets:[{data:e.map(x=>Math.round(x[1])),backgroundColor:e.map((_,i)=>col[i%col.length]),borderWidth:2,borderColor:'#fff',hoverOffset:6}]},options:{cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.label}: ${baht(c.parsed)} (${fmt(c.parsed/tot*100,0)}%)`}}}}})}<div class="dn-t"><b>${baht(tot)}</b><span>รวม</span></div></div>
+  <div class="dn-l">${e.map((x,i)=>`<div><i style="background:${col[i%col.length]}"></i><span>${esc(x[0])}</span><b>${fmt(x[1]/tot*100,0)}%</b></div>`).join('')}</div></div>`}
+function viewFinance(){
+ const F_=UI.fin,ym=F_.ym,pv=ymPrev(ym);const s=summarize({mode:'month',ym}),p=summarize({mode:'month',ym:pv});
+ const inc=s.income+s.otherIn,incP=p.income+p.otherIn,pl=' จาก '+ymLabel(pv,true);
+ const tab=(k,l)=>`<button class="${F_.tab===k?'on':''}" data-act="finTab" data-t="${k}">${l}</button>`;
+ let months=[];{let m=ym;for(let i=0;i<6;i++){months.unshift(m);m=ymPrev(m)}}
+ const ser=months.map(m=>summarize({mode:'month',ym:m}));
+ let body='';
+ if(F_.tab==='owe'){
+  const un=S.jobs.filter(j=>!isQ(j)&&!j.own&&j.payStatus!=='paid'&&jobTotal(j)-jobPaid(j)>0).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const tot=un.reduce((a,j)=>a+jobTotal(j)-jobPaid(j),0);const wo=S.team.map(w=>[w,wageOwed(w)]).filter(x=>x[1]>0);const wt=wo.reduce((a,x)=>a+x[1],0);
+  body=`<div class="tgrid t2"><div class="tc c-exp"><div class="tc-h"><span class="tc-i">${IC.cust}</span><span class="tc-l">ลูกค้าค้างจ่ายเรา</span></div><div class="tc-v">${baht(tot)}</div><div class="tc-s">${un.length} งาน</div></div>
+   <div class="tc c-pro" data-act="tab" data-v="team"><div class="tc-h"><span class="tc-i">${IC.team}</span><span class="tc-l">ค่าแรงที่เราค้างทีม</span></div><div class="tc-v">${baht(wt)}</div><div class="tc-s">${wo.length} คน</div></div></div>
+   <div class="card"><div class="ch"><h2>ลูกค้าค้างชำระ</h2></div>${un.length?un.map(j=>{const c=custById(j.customerId),o=jobTotal(j)-jobPaid(j),d=daysAgo(j.date);return `<div class="rl" data-act="editJob" data-id="${j.id}"><span class="rl-i dn2">${IC.cust}</span><div class="rl-m"><b>${esc(c?.name||'-')}</b><span>${fdate(j.date)} · ${esc(SVC_SHORT[j.service]||'')} ${fmt(j.area)} ไร่ · ${d>0?'ผ่านมา '+d+' วัน':'วันนี้'}${j.payStatus==='part'?' · จ่ายแล้วบางส่วน':''}</span></div><div class="rl-r"><b class="neg">${baht(o)}</b><button class="btn sm primary" data-act="finPaid" data-id="${j.id}">รับเงินแล้ว</button></div></div>`}).join(''):'<div class="small muted" style="padding:8px 0">🎉 ไม่มีลูกค้าค้างชำระ</div>'}</div>
+   <div class="card"><div class="ch"><h2>ค่าแรงค้างจ่ายทีมงาน</h2><button class="btn sm ghost" data-act="tab" data-v="team">ทีมงาน →</button></div>${wo.length?wo.map(([w,o])=>`<div class="rl">${avatar(w)}<div class="rl-m"><b>${esc(w.name)}</b><span>${WAGE[w.wageType]?.[0]||''} ${baht(w.rate)}</span></div><div class="rl-r"><b class="neg">${baht(o)}</b><button class="btn sm" data-act="payWorker" data-id="${w.id}">จ่ายค่าแรง</button></div></div>`).join(''):`<div class="small muted" style="padding:8px 0">${S.team.length?'จ่ายค่าแรงครบแล้ว':'ยังไม่ได้เพิ่มทีมงาน'}</div>`}</div>`;
+ } else {
+  const isIn=F_.tab==='in';
+  const rows=txRows().filter(r=>(r.date||'').slice(0,7)===ym&&r.type===(isIn?'in':'out')).slice(0,8);
+  const n=s.biz.length,rai=s.rai;
+  const fuel=s.exps.filter(e=>e.kind!=='in'&&e.scope!=='own'&&/น้ำมัน/.test(e.cat||'')).reduce((a,e)=>a+num(e.amount),0);
+  const wage=s.exps.filter(e=>e.kind!=='in'&&e.scope!=='own'&&(/แรง/.test(e.cat||'')||e.workerId)).reduce((a,e)=>a+num(e.amount),0);
+  const stats=isIn?[['รายรับเฉลี่ย/งาน',baht(n?s.income/n:0)],['จำนวนงาน',`${n} งาน · ${fmt(rai)} ไร่`],['ค่าใช้จ่ายเฉลี่ย/งาน',baht(n?s.expense/n:0)],['อัตรากำไร',inc?fmt(s.profit/inc*100,0)+'%':'—']]
+   :[['ค่าใช้จ่ายต่อไร่',baht(rai?s.expense/rai:0)],['ค่าน้ำมัน',baht(fuel)],['ค่าแรงงาน',baht(wage)],['สัดส่วนต่อรายรับ',inc?fmt(s.expense/inc*100,0)+'%':'—']];
+  const col=isIn?CC.inc:CC.exp;
+  body=`<div class="card"><div class="ch"><div><h2>${isIn?'แนวโน้มรายรับ':'แนวโน้มรายจ่าย'}</h2><div class="sub">6 เดือนล่าสุด</div></div></div>
+   ${qChart('fin-line',{type:'line',data:{labels:months.map(m=>ymLabel(m,true)),datasets:[{label:isIn?'รายรับ':'รายจ่าย',data:ser.map(x=>Math.round(isIn?x.income+x.otherIn:x.expense)),borderColor:col,backgroundColor:isIn?CC.incL:CC.expL,fill:true,tension:.38,pointRadius:4,pointBackgroundColor:'#fff',pointBorderWidth:2.5,borderWidth:3}]},options:{plugins:{legend:{display:false},tooltip:tipBaht},scales:{y:{...axBaht,beginAtZero:true},x:axPlain}}})}</div>
+   <div class="dgrid two"><div class="card"><div class="ch"><h2>${isIn?'รายรับตามประเภทงาน':'รายจ่ายตามหมวด'}</h2></div>${donut('fin-dn',isIn?finByType(s):expByCat(s))}</div>
+   <div class="card"><div class="ch"><h2>สรุปเดือนนี้</h2></div><div class="fsum">${stats.map(x=>`<div><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div></div></div>
+   <div class="card"><div class="ch"><h2>รายการล่าสุด</h2><button class="btn sm ghost" data-act="finAll">ดูทั้งหมด →</button></div>
+   ${rows.length?rows.map(r=>`<div class="rl" data-act="txEdit" data-id="${r.id}"><span class="rl-i ${r.type==='in'?'up':'dn2'}">${r.type==='in'?IC.up:IC.down}</span><div class="rl-m"><b>${esc(r.detail||r.cat)}</b><span>${fdate(r.date)} · ${esc(r.cat)}${r.status!=='paid'&&r.status!=='auto'?' · <em class="neg">'+(ST_TXT[r.status]||[''])[0]+'</em>':''}</span></div><div class="rl-r"><b class="${r.type==='in'?'pos':'neg'}">${r.type==='in'?'+':'−'}${baht(r.amount)}</b></div></div>`).join(''):`<div class="small muted" style="padding:8px 0">ยังไม่มีรายการเดือนนี้</div>`}
+   <div class="row" style="margin-top:10px"><button class="btn sm ${isIn?'primary':''}" data-act="${isIn?'navIncome':'navExpense'}">+ บันทึก${isIn?'รายรับ':'รายจ่าย'}</button></div></div>`;
+ }
+ return `<div class="ph"><div><h1>การเงินและรายงาน</h1><div class="sub">เปรียบเทียบกับเดือนก่อนหน้า</div></div></div>
+ <div class="ftabs">${tab('in','รายรับ')}${tab('out','รายจ่าย')}${tab('owe','เงินค้างจ่าย')}</div>
+ <div class="mnav"><button class="ib" data-act="finM" data-n="-1" aria-label="เดือนก่อน">‹</button><div><b>${ymLabel(ym)}</b><span>เทียบกับ ${ymLabel(pv)}</span></div><button class="ib" data-act="finM" data-n="1" aria-label="เดือนถัดไป" ${ym>=today().slice(0,7)?'disabled':''}>›</button></div>
+ ${F_.tab!=='owe'?`<div class="tgrid t3">
+  ${tcard('c-inc',IC.up,'รายรับ',baht(inc),dlt(inc,incP,pl),'data-act="finTab" data-t="in"')}
+  ${tcard('c-exp',IC.down,'รายจ่าย',baht(s.expense),dlt(s.expense,p.expense,pl,true),'data-act="finTab" data-t="out"')}
+  ${tcard('c-pro',IC.fin,'กำไรสุทธิ',baht(s.profit),dlt(s.profit,p.profit,pl),'data-act="kpi" data-k="profit"')}</div>`:''}
+ ${body}`}
+
+/* ---------- หน้าทีมงาน ---------- */
+UI.teamYm=today().slice(0,7);
+function viewTeam(){
+ const ym=UI.teamYm;const ws=S.team.slice().sort((a,b)=>(a.active===false)-(b.active===false)||(a.name||'').localeCompare(b.name||'','th'));
+ const earned=ws.reduce((a,w)=>a+wageEarned(w,ym),0),paid=ws.reduce((a,w)=>a+wagePaid(w,ym),0),owed=ws.reduce((a,w)=>a+wageOwed(w),0);
+ return `<div class="ph"><div><h1>ทีมงาน</h1><div class="sub">นักบิน ผู้ช่วย คนผสมยา — คิดค่าแรงอัตโนมัติจากงานที่มอบหมาย</div></div><button class="btn primary" data-act="newWorker">${IC.plus} เพิ่มทีมงาน</button></div>
+ <div class="mnav"><button class="ib" data-act="teamM" data-n="-1">‹</button><div><b>สรุปค่าแรง ${ymLabel(ym)}</b><span>ค้างจ่ายนับสะสมทุกเดือน</span></div><button class="ib" data-act="teamM" data-n="1" ${ym>=today().slice(0,7)?'disabled':''}>›</button></div>
+ <div class="tgrid t3">${tcard('c-inc',IC.team,'ค่าแรงรวม',baht(earned),'เดือนนี้','')}${tcard('c-pro',IC.fin,'เบิกแล้ว',baht(paid),'เดือนนี้','')}${tcard('c-exp',IC.clock,'ค้างจ่าย',baht(owed),'สะสมทั้งหมด','')}</div>
+ ${ws.length?`<div class="wlist">${ws.map(w=>{const js=wJobs(w,d=>d&&d.slice(0,7)===ym);const r=js.reduce((a,j)=>a+num(j.area),0);const o=wageOwed(w);
+  return `<div class="wc card ${w.active===false?'off':''}"><div class="wc-h" data-act="editWorker" data-id="${w.id}">${avatar(w,'lg')}<div class="wc-m"><b>${esc(w.name)}</b><span>${esc(w.role||'ทีมงาน')}${w.phone?' · '+esc(w.phone):''}${w.active===false?' · พักงาน':''}</span></div><span class="wpill ${WAGE[w.wageType]?.[1]||''}">${WAGE[w.wageType]?.[0]||''} ${baht(w.rate)}</span></div>
+   <div class="wc-s"><div><b>${js.length}</b><span>งาน</span></div><div><b>${fmt(r)}</b><span>ไร่</span></div><div><b>${baht(wageEarned(w,ym))}</b><span>ค่าแรงเดือนนี้</span></div><div><b class="${o>0?'neg':''}">${baht(o)}</b><span>ค้างจ่าย</span></div></div>
+   <div class="wc-f">${w.phone?`<a class="btn sm" href="tel:${esc(w.phone.replace(/[^\d+]/g,''))}">${IC.phone} โทร</a>`:''}<button class="btn sm" data-act="editWorker" data-id="${w.id}">${IC.edit} แก้ไข</button><button class="btn sm primary" data-act="payWorker" data-id="${w.id}">จ่ายค่าแรง${o>0?' '+baht(o):''}</button></div></div>`}).join('')}</div>`
+ :`<div class="card">${emptyState('ยังไม่มีทีมงาน','เพิ่มนักบินหรือผู้ช่วย กำหนดค่าแรง ต่อไร่ / ต่อวัน / รายเดือน แล้วเลือกคนในแต่ละงาน ระบบจะคำนวณค่าแรงและยอดค้างจ่ายให้','<button class="btn primary" data-act="newWorker">+ เพิ่มทีมงาน</button>')}</div>`}
+ <div class="note info small">💡 เลือกทีมงาน 1–3 คนได้ในฟอร์มงาน/คิว · เมื่อกด “จ่ายค่าแรง” ระบบจะบันทึกเป็นรายจ่ายหมวด “ค่าแรงงาน” ให้อัตโนมัติ</div>`}
+function openWorker(w){
+ F=w?clone(w):{id:uid(),name:'',phone:'',role:'ผู้ช่วยนักบิน',wageType:'rai',rate:'',start:today(),active:true,note:'',createdAt:new Date().toISOString()};
+ openModal(`<div class="sh-h"><b>${w?'แก้ไขทีมงาน':'เพิ่มทีมงาน'}</b><button class="btn ghost" data-act="close">✕</button></div>
+ <div class="sh-b"><div class="grid g2"><div class="field"><label>ชื่อ *</label><input data-e="name" value="${esc(F.name)}" placeholder="เช่น บอย"></div><div class="field"><label>เบอร์โทร</label><input data-e="phone" inputmode="tel" value="${esc(F.phone)}"></div></div>
+ <div class="field"><label>หน้าที่</label><select data-e="role">${['นักบินโดรน','ผู้ช่วยนักบิน','คนผสมยา/เติมน้ำ','คนขับรถ','อื่น ๆ'].map(r=>`<option ${F.role===r?'selected':''}>${r}</option>`).join('')}</select></div>
+ <div class="field"><label>รูปแบบค่าแรง</label><div class="seg wide" id="wt">${Object.entries(WAGE).map(([k,v])=>`<button class="${F.wageType===k?'on':''}" data-act="wType" data-k="${k}">${v[0]}</button>`).join('')}</div></div>
+ <div class="grid g2"><div class="field"><label id="wr-l">อัตรา (บาท${F.wageType==='rai'?'/ไร่':F.wageType==='day'?'/วัน':'/เดือน'})</label><input data-e="rate" inputmode="decimal" value="${esc(F.rate)}"></div><div class="field"><label>เริ่มงานวันที่</label><input type="date" data-e="start" value="${esc(F.start||'')}"></div></div>
+ <label class="row" style="gap:8px;margin:4px 0 10px"><input type="checkbox" data-e="activeCb" ${F.active!==false?'checked':''} style="width:20px;height:20px"> ยังทำงานอยู่ (แสดงให้เลือกในฟอร์มงาน)</label>
+ <div class="field"><label>หมายเหตุ</label><textarea data-e="note">${esc(F.note||'')}</textarea></div></div>
+ <div class="sh-f">${w?'<button class="btn danger" data-act="delWorker" style="margin-right:auto">ลบ</button>':''}<button class="btn" data-act="close">ยกเลิก</button><button class="btn primary" data-act="saveWorker">บันทึก</button></div>`,true)}
+function teamPicker(j){
+ const act=S.team.filter(w=>w.active!==false||(j.team||[]).includes(w.id));
+ return `<div class="field" style="margin-top:10px"><label>👷 ทีมงานในงานนี้ (เลือก 1–3 คน)</label>${act.length?`<div class="tpick">${act.map(w=>{const on=(j.team||[]).includes(w.id);return `<button class="tp ${on?'on':''}" data-act="jfTeam" data-id="${w.id}">${avatar(w,'xs')}${esc(w.name)}<small>${WAGE[w.wageType]?.[0]||''} ${baht(w.rate)}</small></button>`}).join('')}</div>`:`<div class="tiny muted">ยังไม่มีทีมงาน — <a href="#" data-act="goTeamNew">+ เพิ่มทีมงาน</a></div>`}</div>`}
+
+/* ---------- ผู้ช่วยเสียง ---------- */
+UI.voice={res:null,hist:[],live:''};
+const VC_EX=['พรุ่งนี้มีงานกี่ไร่','เพิ่มคิวพี่โอ พรุ่งนี้บ่ายฉีดยา 30 ไร่','จดรายจ่ายค่าน้ำมัน 500 บาท','วันนี้รายรับเท่าไหร่','เดือนนี้กำไรเท่าไหร่','ใครค้างจ่ายบ้าง','คิวถัดไปคือใคร','สัปดาห์นี้มีงานกี่งาน'];
+function viewVoice(){
+ const v=UI.voice,sup=!!(window.SpeechRecognition||window.webkitSpeechRecognition);
+ return `<div class="vc"><div class="vc-hero card"><div class="vc-t">ผู้ช่วย AI สั่งงานด้วยเสียง</div><div class="vc-s">ถามยอดงาน จองคิว จดรายจ่าย ได้ด้วยประโยคภาษาไทย</div>
+  <button class="vc-mic ${REC?'on':''}" data-act="vcStart" aria-label="เริ่มฟัง"><span class="vc-p"></span><span class="vc-p d2"></span>${IC.mic}</button>
+  <div class="vc-st" id="vc-st">${REC?'กำลังฟัง… พูดได้เลย':sup?'แตะปุ่มแล้วพูดได้เลย':'เบราว์เซอร์นี้ไม่รองรับการฟังเสียง — พิมพ์คำสั่งด้านล่างแทนได้'}</div>
+  <div class="vc-live" id="vc-live">${esc(v.live||'')}</div>
+  <div class="vc-in"><input id="vc-in" placeholder="หรือพิมพ์คำสั่ง เช่น “พรุ่งนี้มีงานกี่ไร่”" autocomplete="off"><button class="btn primary" data-act="vcSend">ส่ง</button></div></div>
+ ${v.res?`<div class="card vc-res ${v.res.kind}"><div class="vc-q">“${esc(v.res.q)}”</div>${v.res.html}</div>`:''}
+ <div class="card"><div class="ch"><h2>ตัวอย่างคำสั่ง</h2></div><div class="vc-ex">${VC_EX.map(t=>`<button data-act="vcEx" data-t="${esc(t)}">“${esc(t)}”</button>`).join('')}</div>
+  <div class="tiny muted" style="margin-top:10px">รองรับ: วันนี้ / พรุ่งนี้ / มะรืน / วันจันทร์… / วันที่ 25 · เวลา เช้า บ่าย บ่ายสอง 9 โมง 13:30 · งาน ฉีดยา ปุ๋ยน้ำ ยาหญ้า หว่านปุ๋ย · หมวดรายจ่าย น้ำมัน ค่าแรง ซ่อม แบต ฯลฯ · ระบบจะให้ยืนยันก่อนบันทึกทุกครั้ง</div></div>
+ ${v.hist.length?`<div class="card"><div class="ch"><h2>คำสั่งล่าสุด</h2></div>${v.hist.slice(0,6).map(h=>`<button class="vc-h" data-act="vcEx" data-t="${esc(h)}">🕘 ${esc(h)}</button>`).join('')}</div>`:''}
+ </div>`}
+let REC=null;
+function vcStatus(t){const e=$('#vc-st');if(e)e.textContent=t}
+function vcStart(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){toast('เครื่องนี้ไม่รองรับการสั่งด้วยเสียง — พิมพ์คำสั่งแทนได้');$('#vc-in')?.focus();return}
+ if(REC){try{REC.stop()}catch(e){}return}
+ let r;try{r=new SR()}catch(e){toast('เปิดไมโครโฟนไม่ได้');return}
+ r.lang='th-TH';r.interimResults=true;r.maxAlternatives=1;r.continuous=false;let fin='';
+ r.onresult=ev=>{let it='';for(let i=ev.resultIndex;i<ev.results.length;i++){const x=ev.results[i];if(x.isFinal)fin+=x[0].transcript;else it+=x[0].transcript}UI.voice.live=fin+it;const l=$('#vc-live');if(l)l.textContent=UI.voice.live};
+ r.onerror=ev=>{const m={'not-allowed':'ไม่ได้รับอนุญาตใช้ไมโครโฟน — กดอนุญาตในเบราว์เซอร์ หรือพิมพ์แทน','service-not-allowed':'เบราว์เซอร์ไม่อนุญาตให้ฟังเสียงในหน้านี้ — พิมพ์คำสั่งแทนได้','no-speech':'ไม่ได้ยินเสียง ลองแตะแล้วพูดใหม่','network':'ต้องต่ออินเทอร์เน็ตเพื่อแปลงเสียงเป็นข้อความ','audio-capture':'ไม่พบไมโครโฟน'}[ev.error]||('ฟังเสียงไม่สำเร็จ ('+ev.error+')');toast(m);vcStatus(m)};
+ r.onend=()=>{REC=null;$('.vc-mic')?.classList.remove('on');const t=fin.trim();if(t)vcRun(t);else vcStatus('แตะปุ่มแล้วพูดได้เลย')};
+ try{r.start();REC=r;UI.voice.live='';$('.vc-mic')?.classList.add('on');vcStatus('กำลังฟัง… พูดได้เลย');const l=$('#vc-live');if(l)l.textContent=''}catch(e){REC=null;toast('เปิดไมโครโฟนไม่ได้')}
+}
+function speak(t){try{if(!t||!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/฿/g,'').replace(/(\d),(\d)/g,'$1$2')+'');u.lang='th-TH';u.rate=1.02;const v=speechSynthesis.getVoices().find(x=>/th/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+function vcRun(text){
+ text=String(text||'').trim();if(!text)return;
+ const v=UI.voice;v.live=text;v.hist=[text,...v.hist.filter(h=>h!==text)].slice(0,10);
+ let res;try{res=parseCmd(text)}catch(e){res={kind:'err',html:'<div>ประมวลผลคำสั่งไม่สำเร็จ</div>',say:'ขอโทษครับ ลองใหม่อีกครั้ง'}}
+ res.q=text;v.res=res;if(UI.view!=='voice')go('voice');else render();
+ if(res.say)speak(res.say);
+ if(res.nav){setTimeout(()=>go(res.nav),700);return}
+ setTimeout(()=>{$('.vc-res')?.scrollIntoView({behavior:'smooth',block:'nearest'})},60);
+}
+/* ตัวแปลงตัวเลขไทย */
+const THD={'ศูนย์':0,'หนึ่ง':1,'เอ็ด':1,'สอง':2,'สาม':3,'สี่':4,'ห้า':5,'หก':6,'เจ็ด':7,'แปด':8,'เก้า':9};
+const THU={'สิบ':10,'ร้อย':100,'พัน':1000,'หมื่น':1e4,'แสน':1e5,'ล้าน':1e6};
+const TH_RUN=/(?:ศูนย์|หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|ยี่สิบ|สิบ)(?:ศูนย์|หนึ่ง|เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|ยี่สิบ|สิบ|ร้อย|พัน(?![ธ])|หมื่น|แสน|ล้าน)*/g;
+function thWordNum(s){const tk=s.match(/ศูนย์|หนึ่ง|เอ็ด|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|ยี่สิบ|สิบ|ร้อย|พัน|หมื่น|แสน|ล้าน/g)||[];let tot=0,acc=0,d=null;
+ for(const t of tk){if(t==='ยี่สิบ'){acc+=20;d=null;continue}if(t in THD){d=THD[t];continue}const u=THU[t];if(u===1e6){tot=(tot+acc+(d||0))*1e6;acc=0;d=null;continue}acc+=(d==null?1:d)*u;d=null}
+ return tot+acc+(d||0)}
+function normCmd(t){
+ return String(t).replace(/[๐-๙]/g,c=>String(c.charCodeAt(0)-0x0E50)).replace(/(\d),(\d{3})/g,'$1$2').replace(/(\d)\s*k\b/gi,'$1000')
+  .replace(TH_RUN,m=>' '+thWordNum(m)+' ').replace(/\s+/g,' ').trim()}
+function parseDateTh(t){
+ const td=today();
+ if(/มะรืน/.test(t))return addD(td,2);
+ if(/พรุ่งนี้/.test(t))return addD(td,1);
+ if(/เมื่อวานซืน/.test(t))return addD(td,-2);
+ if(/เมื่อวาน/.test(t))return addD(td,-1);
+ const wd=/วัน\s*(อาทิตย์|จันทร์|อังคาร|พุธ|พฤหัส(?:บดี)?|ศุกร์|เสาร์)\s*(หน้า)?/.exec(t);
+ if(wd){const k=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัส','ศุกร์','เสาร์'].findIndex(x=>wd[1].startsWith(x));let n=(k-D0(td).getDay()+7)%7;if(wd[2]&&n===0)n=7;return addD(td,n)}
+ const mm=/(?:วันที่\s*)?(\d{1,2})\s*(ม\.?ค\.?|มกรา\S*|ก\.?พ\.?|กุมภา\S*|มี\.?ค\.?|มีนา\S*|เม\.?ย\.?|เมษา\S*|พ\.?ค\.?|พฤษภา\S*|มิ\.?ย\.?|มิถุนา\S*|ก\.?ค\.?|กรกฎา\S*|ส\.?ค\.?|สิงหา\S*|ก\.?ย\.?|กันยา\S*|ต\.?ค\.?|ตุลา\S*|พ\.?ย\.?|พฤศจิกา\S*|ธ\.?ค\.?|ธันวา\S*)/.exec(t);
+ const ML=['มกรา','กุมภา','มีนา','เมษา','พฤษภา','มิถุนา','กรกฎา','สิงหา','กันยา','ตุลา','พฤศจิกา','ธันวา'];
+ if(mm){const raw=mm[2];let mi=ML.findIndex(x=>raw.startsWith(x));if(mi<0){const r=raw.replace(/\./g,'');mi=['มค','กพ','มีค','เมย','พค','มิย','กค','สค','กย','ตค','พย','ธค'].indexOf(r)}
+  if(mi>=0){let y=+td.slice(0,4);let iso=`${y}-${String(mi+1).padStart(2,'0')}-${String(+mm[1]).padStart(2,'0')}`;if(iso<addD(td,-60))iso=`${y+1}${iso.slice(4)}`;return iso}}
+ const dd=/วันที่\s*(\d{1,2})/.exec(t);
+ if(dd){const n=+dd[1];let [y,m]=td.split('-').map(Number);if(n<+td.slice(8,10)){m++;if(m>12){m=1;y++}}return `${y}-${String(m).padStart(2,'0')}-${String(n).padStart(2,'0')}`}
+ if(/วันนี้|ตอนนี้/.test(t))return td;
+ return null}
+function parseTimeTh(t){
+ const p=n=>String(n).padStart(2,'0');let m;
+ if((m=/(\d{1,2})\s*[:.]\s*(\d{2})(?!\d)\s*(?:น|โมง)?/.exec(t))&&+m[1]<24&&!/บาท|ไร่/.test(t.slice(m.index+m[0].length,m.index+m[0].length+5)))return p(+m[1])+':'+m[2];
+ const half=x=>/^\s*ครึ่ง/.test(t.slice(x))?':30':':00';
+ if((m=/บ่าย\s*(\d{1,2})?\s*(โมง)?/.exec(t))){let h=m[1]?+m[1]:1;let end=m.index+m[0].length;if(m[1]&&(h>6||(!m[2]&&/^\s*(ไร่|บาท)/.test(t.slice(end))))){h=1;end=m.index+4}return p(h===12?12:12+h)+half(end)}
+ if((m=/(\d{1,2})\s*ทุ่ม/.exec(t)))return p(18+ +m[1])+half(m.index+m[0].length);
+ if((m=/เที่ยง(?:วัน)?(?!คืน)/.exec(t)))return '12'+half(m.index+m[0].length);
+ if((m=/(\d{1,2})\s*โมง\s*(เช้า|เย็น)?/.exec(t))){let h=+m[1];if(m[2]==='เย็น'&&h<12)h+=12;else if(!m[2]&&h<=5)h+=12;return p(h)+half(m.index+m[0].length)}
+ if(/ตอนเช้า|ช่วงเช้า|เช้า/.test(t))return '08:00';
+ if(/เย็น/.test(t))return '16:00';
+ return ''}
+const SVC_KW=[['herb',/ยาหญ้า|ฆ่าหญ้า|คุมหญ้า|ยาคุม|หญ้า/],['foliar',/ปุ๋ยน้ำ|ฮอร์โมน|ทางใบ|ปุ๋ยทางใบ|ธาตุ/],['fert',/หว่านปุ๋ย|ปุ๋ยเม็ด|ใส่ปุ๋ย|ปุ๋ย/],['seed',/หว่านเมล็ด|หว่านข้าว|เมล็ด|หว่าน/],['spray',/ฉีด|พ่น|ยาแมลง|ยารา|ยาเชื้อรา|ยา/]];
+const CROP_KW=[['durian',/ทุเรียน/],['rubber',/ยางพารา|สวนยาง|ยาง(?!หญ้า)/],['corn',/ข้าวโพด/],['sugarcane',/อ้อย/],['rice',/ข้าว|นาข้าว|ทำนา|\bนา\b/],['veg',/ผัก/]];
+const EXP_KW=[['ค่าน้ำมัน',/น้ำมัน|ดีเซล|เบนซิน|แก๊ส/],['ค่าแรงงาน',/ค่าแรง|ค่าจ้าง|ลูกน้อง|คนงาน|ทีมงาน|ผู้ช่วย/],['ค่าซ่อมบำรุงโดรน',/ซ่อม|อะไหล่|ใบพัด|บำรุง|เซอร์วิส/],['ค่าแบตเตอรี่และอุปกรณ์',/แบต|อุปกรณ์|ที่ชาร์จ/],['ค่าไฟฟ้า/ชาร์จแบต',/ค่าไฟ|ไฟฟ้า|ชาร์จ/],['ค่าปุ๋ยและสารเคมี',/ปุ๋ย|สารเคมี|ยา|ฮอร์โมน|สารจับใบ/],['ค่าเดินทาง',/เดินทาง|ทางด่วน|ค่ารถ|ที่พัก|ค่าข้าว|อาหาร/],['ผ่อนโดรน/ดอกเบี้ย',/ผ่อน|ดอกเบี้ย|งวด/],['ประกันภัย/ใบอนุญาต',/ประกัน|ใบอนุญาต|ทะเบียน|กสทช|กพท/]];
+function pickNum(t,unitRe){const m=new RegExp('(\\d+(?:\\.\\d+)?)\\s*(?:'+unitRe+')').exec(t);return m?+m[1]:null}
+function matchCustomer(name){
+ if(!name)return null;const n=nrm2(name);if(!n)return null;
+ const ex=S.customers.find(c=>!c.isOwn&&nrm2(c.name)===n);if(ex)return ex;
+ const strip=s=>nrm2(s).replace(/^(พี่|น้อง|ลุง|ป้า|น้า|อา|ตา|ยาย|คุณ|นาย|นาง|นางสาว|ผญบ|ผู้ใหญ่|กำนัน)/,'');
+ const sn=strip(name);const cand=S.customers.filter(c=>!c.isOwn).map(c=>[c,strip(c.name)]).filter(x=>x[1]&&sn&&(x[1]===sn||(sn.length>=2&&x[1].startsWith(sn))||(x[1].length>=2&&sn.startsWith(x[1]))));
+ if(cand.length===1)return cand[0][0];
+ const r=fzRank(S.customers.filter(c=>!c.isOwn),name,c=>[c.name],1);return r.length&&fz(name,[r[0].name])>=.9?r[0]:null}
+function rangeOf(t){const td=today();
+ if(/สัปดาห์นี้|(?<!วัน)อาทิตย์นี้|(?<!วัน)อาทิตย์นี่/.test(t)){const d=D0(td);const mon=addD(td,-((d.getDay()+6)%7));return {from:mon,to:addD(mon,6),lab:'สัปดาห์นี้'}}
+ if(/สัปดาห์หน้า|(?<!วัน)อาทิตย์หน้า/.test(t)){const d=D0(td);const mon=addD(td,7-((d.getDay()+6)%7));return {from:mon,to:addD(mon,6),lab:'สัปดาห์หน้า'}}
+ if(/เดือนที่แล้ว|เดือนก่อน|เดือนแล้ว/.test(t)){const ym=ymPrev(td.slice(0,7));return {from:ym+'-01',to:ym+'-31',lab:'เดือน'+MONTHS_FULL[+ym.slice(5)-1]}}
+ if(/เดือนหน้า/.test(t)){const ym=ymNext(td.slice(0,7));return {from:ym+'-01',to:ym+'-31',lab:'เดือนหน้า'}}
+ if(/เดือนนี้|เดือนนี่/.test(t)){const ym=td.slice(0,7);return {from:ym+'-01',to:ym+'-31',lab:'เดือนนี้'}}
+ if(/ปีนี้/.test(t)){const y=td.slice(0,4);return {from:y+'-01-01',to:y+'-12-31',lab:'ปีนี้'}}
+ const d=parseDateTh(t);if(d)return {from:d,to:d,lab:d===td?'วันนี้':d===addD(td,1)?'พรุ่งนี้':d===addD(td,-1)?'เมื่อวาน':thShort(d)};
+ return null}
+const NAVW=[['queue',/คิว/],['finance',/การเงิน|รายรับรายจ่าย|บัญชี/],['reports',/รายงาน|สถิติ/],['map',/แผนที่|แมพ/],['customers',/ลูกค้า/],['team',/ทีม/],['advisor',/คำแนะนำ|แนะนำ/],['library',/คลังสาร|สารเคมี/],['settings',/ตั้งค่า/],['tx',/ธุรกรรม/],['dashboard',/แดชบอร์ด|ภาพรวม/],['home',/หน้าหลัก/]];
+function parseCmd(raw){
+ const t=normCmd(raw);const td=today();
+ const isAsk=/กี่|เท่าไร|เท่าไหร่|เท่าใด|ไหม|มั้ย|หรือยัง|อะไร|ใคร|ที่ไหน|ยังไง|บ้าง|สรุป|เช็ค|เช็ก|ดู/.test(t);
+ /* เปิดหน้า */
+ const nv=/^(?:เปิด|ไป|ไปที่|ไปหน้า|เข้า)\s*(?:หน้า)?\s*(.+)$/.exec(t);
+ if(nv){const hit=NAVW.find(x=>x[1].test(nv[1]));if(hit){return {kind:'ok',nav:hit[0],html:`<div>เปิดหน้า <b>${esc(VIEWS.find(v=>v[0]===hit[0])?.[1]||'')}</b></div>`,say:'เปิดหน้า'+(VIEWS.find(v=>v[0]===hit[0])?.[1]||'')}}}
+ /* จดรายจ่าย / รายรับ */
+ const isInc=/รายรับ|รายได้|ได้เงิน/.test(t)&&/จด|บันทึก|ลง|เพิ่ม|ได้/.test(t)&&!isAsk;
+ const isExp=!isAsk&&(/รายจ่าย|ค่าใช้จ่าย/.test(t)||(/^(?:จด|บันทึก|ลง)?\s*(?:จ่าย|ค่า)/.test(t)&&/\d/.test(t)))&&!/คิว/.test(t);
+ if(isExp||isInc){
+  const amt=pickNum(t,'บาท|บ\\.')??(()=>{const ns=[...t.matchAll(/(\d+(?:\.\d+)?)/g)].map(m=>+m[1]);return ns.length?ns[ns.length-1]:null})();
+  const date=parseDateTh(t)||td;
+  let cat=isInc?(/ฉีด|พ่น/.test(t)?'ค่าบริการฉีดพ่น':'รายได้อื่น ๆ'):((EXP_KW.find(x=>x[1].test(t))||['ค่าใช้จ่ายอื่น ๆ'])[0]);
+  const scope=/สวนตัวเอง|สวนเรา|สวนของฉัน|สวนผม/.test(t)?'own':'biz';
+  let note=raw.replace(/^(จด|บันทึก|ลง|เพิ่ม)\s*/,'').replace(/(รายจ่าย|รายรับ|ค่าใช้จ่าย)\s*/,'').trim();
+  let wk=null;if(!isInc&&cat==='ค่าแรงงาน'){wk=S.team.find(w=>t.includes(w.name))||null}
+  const d={id:uid(),kind:isInc?'in':'out',date,cat,amount:amt||'',scope,note,jobId:'',payMethod:PAYM[0],createdAt:new Date().toISOString()};if(wk)d.workerId=wk.id;
+  UI.voice.draft={type:'exp',d};
+  const row=(l,v)=>`<div class="vr"><span>${l}</span><b>${v}</b></div>`;
+  return {kind:'confirm',html:`<div class="vc-h2">${isInc?'📥 จดรายรับ':'📤 จดรายจ่าย'}</div>${row('จำนวนเงิน',amt?baht(amt):'<em class="neg">ไม่ได้ยินจำนวนเงิน</em>')}${row('หมวด',esc(cat))}${row('วันที่',thShort(date)+' ('+fdate(date)+')')}${wk?row('จ่ายให้',esc(wk.name)):''}${scope==='own'?row('ของ','สวนตัวเอง'):''}${row('รายละเอียด',esc(note))}
+   <div class="vc-btns"><button class="btn" data-act="vcCancel">ยกเลิก</button><button class="btn" data-act="vcEdit">แก้ไขก่อน</button><button class="btn primary" data-act="vcOk" ${amt?'':'disabled'}>✓ ยืนยันบันทึก</button></div>`,
+   say:amt?`${isInc?'รายรับ':'รายจ่าย'} ${cat} ${fmt(amt,0)} บาท ${thShort(date)} กดยืนยันเพื่อบันทึกครับ`:'ไม่ได้ยินจำนวนเงิน ลองพูดใหม่ครับ'}
+ }
+ /* จองคิว */
+ const qm=/(?:เพิ่ม|จอง|ลง|นัด|ใส่|สร้าง)\s*(?:คิว(?:งาน)?|งาน|นัด)?/.exec(t);
+ if(!isAsk&&(/คิว/.test(t)||/^(?:นัด|จอง)/.test(t))&&qm){
+  let rest=t.slice(qm.index+qm[0].length).replace(/^\s*(?:ให้|ของ|คุณ)\s*/,'');
+  const stop=/(วันนี้|พรุ่งนี้|มะรืน|วัน(?:ที่|จันทร์|อังคาร|พุธ|พฤหัส|ศุกร์|เสาร์|อาทิตย์)|บ่าย|เช้า|เย็น|เที่ยง|ทุ่ม|\d|ฉีด|พ่น|หว่าน|ใส่ปุ๋ย|ปุ๋ย|ยา(?!ย)|ที่(?!ม)|ไร่|เวลา|ตอน|สวน|ทำนา|แปลง|ทุเรียน|ยางพารา|ข้าว|อ้อย|ผัก)/;
+  const r2=rest.slice(2);const s2=r2.search(stop);const si=s2<0?-1:s2+2;let name=(si<0?rest:rest.slice(0,si)).trim();{const ps=name.split(/\s+/);name=(/^(พี่|น้อง|ลุง|ป้า|น้า|อา|ตา|ยาย|คุณ|นาย|นาง|นางสาว|ผู้ใหญ่|กำนัน|ผญ\.?)$/.test(ps[0])?ps.slice(0,2):ps.slice(0,1)).join(' ')}
+  const date=parseDateTh(t)||td,time=parseTimeTh(t);
+  const service=(SVC_KW.find(x=>x[1].test(t))||['spray'])[0];
+  const area=pickNum(t,'ไร่');
+  let cust=matchCustomer(name);
+  const plots=cust?S.plots.filter(p=>p.customerId===cust.id):[];
+  let plot=plots.find(p=>p.name&&nrm2(t).includes(nrm2(p.name)))||(plots.length===1?plots[0]:null);
+  let crop=(CROP_KW.find(x=>x[1].test(t))||[null])[0];if(!crop&&plot)crop=cropOf(plot);if(!crop){const last=cust&&S.jobs.filter(j=>j.customerId===cust.id).sort((a,b)=>(b.date||'').localeCompare(a.date||''))[0];crop=last?.crop||'durian'}
+  const tm=S.team.filter(w=>t.includes(w.name)).slice(0,3).map(w=>w.id);
+  UI.voice.draft={type:'queue',name,custId:cust?.id||'',plotId:plot?.id||'',date,time,service,area,crop,team:tm};
+  const row=(l,v)=>`<div class="vr"><span>${l}</span><b>${v}</b></div>`;
+  return {kind:'confirm',html:`<div class="vc-h2">📅 จองคิวงาน</div>${row('ลูกค้า',name?esc(name)+(cust?` <span class="st ok">ลูกค้าเดิม</span>`:` <span class="st info">ลูกค้าใหม่</span>`):'<em class="neg">ไม่ได้ยินชื่อลูกค้า</em>')}${plot?row('แปลง',esc(plot.name)):''}${row('วันที่',thShort(date)+' ('+fdate(date)+')')}${row('เวลา',time?time+' น.':'ไม่ระบุ')}${row('งาน',esc(SVC[service].n))}${row('พื้นที่',area?fmt(area)+' ไร่':'<em class="muted">ไม่ระบุ</em>')}${row('พืช',esc(CROPS[crop]?.n||crop))}${tm.length?row('ทีมงาน',tm.map(id=>esc(workerById(id).name)).join(', ')):''}${area?row('ราคาประมาณ',baht(area*priceFor(service,crop))):''}
+   <div class="vc-btns"><button class="btn" data-act="vcCancel">ยกเลิก</button><button class="btn" data-act="vcEdit">แก้ไขก่อน</button><button class="btn primary" data-act="vcOk" ${name?'':'disabled'}>✓ ยืนยันจองคิว</button></div>`,
+   say:name?`จองคิว ${name} ${thShort(date)}${time?' เวลา '+time.replace(/^0/,'').replace(':00',' นาฬิกา').replace(':30',' นาฬิกาครึ่ง'):''} ${SVC_SHORT[service]}${area?' '+fmt(area)+' ไร่':''} กดยืนยันได้เลยครับ`:'ไม่ได้ยินชื่อลูกค้า ลองพูดใหม่ เช่น เพิ่มคิวพี่โอ พรุ่งนี้บ่าย ฉีดยา สามสิบไร่'}
+ }
+ /* คำถาม */
+ const R=rangeOf(t);const inR=d=>R?d>=R.from&&d<=R.to:d===td;const lab=R?R.lab:'วันนี้';
+ const sumR=()=>{const js=S.jobs.filter(j=>!isQ(j)&&inR(j.date)),ex=S.expenses.filter(e=>inR(e.date));const biz=js.filter(j=>!j.own);
+  const income=biz.reduce((a,j)=>a+jobTotal(j),0)+ex.filter(e=>e.kind==='in').reduce((a,e)=>a+num(e.amount),0);
+  const expense=ex.filter(e=>e.kind!=='in'&&e.scope!=='own').reduce((a,e)=>a+num(e.amount),0)+biz.reduce((a,j)=>a+jobChemCost(j),0);return {income,expense,profit:income-expense,ex}};
+ const ans=(html,say)=>({kind:'answer',html,say});
+ if(/ค้าง(?:จ่าย|ชำระ|เงิน)|ยังไม่จ่าย|ใครค้าง|ติดเงิน|ลูกหนี้/.test(t)&&!/ค่าแรง|ทีม|ลูกน้อง/.test(t)){
+  const un=S.jobs.filter(j=>!isQ(j)&&!j.own&&j.payStatus!=='paid'&&jobTotal(j)-jobPaid(j)>0);const by={};un.forEach(j=>{const n=custById(j.customerId)?.name||'ไม่ระบุ';by[n]=(by[n]||0)+jobTotal(j)-jobPaid(j)});
+  const e=Object.entries(by).sort((a,b)=>b[1]-a[1]);const tot=e.reduce((a,x)=>a+x[1],0);
+  return ans(e.length?`<div class="vc-big">${baht(tot)}</div><div class="small muted">ลูกค้าค้างชำระ ${e.length} ราย ${un.length} งาน</div>${e.slice(0,8).map(x=>`<div class="vr"><span>${esc(x[0])}</span><b class="neg">${baht(x[1])}</b></div>`).join('')}<div class="vc-btns"><button class="btn" data-act="finTab" data-t="owe">ดูเงินค้างจ่าย →</button></div>`:'<div class="vc-big">ไม่มียอดค้าง 🎉</div>',
+   e.length?`มีลูกค้าค้างชำระ ${e.length} ราย รวม ${fmt(tot,0)} บาท มากที่สุดคือ ${e[0][0]} ${fmt(e[0][1],0)} บาท`:'ไม่มีลูกค้าค้างชำระครับ')}
+ if(/ค่าแรง|ทีมงาน|ลูกน้อง/.test(t)){const wo=S.team.map(w=>[w,wageOwed(w)]).filter(x=>x[1]>0);const tot=wo.reduce((a,x)=>a+x[1],0);
+  return ans(`<div class="vc-big">${baht(tot)}</div><div class="small muted">ค่าแรงค้างจ่ายทีมงาน</div>${wo.map(([w,o])=>`<div class="vr"><span>${esc(w.name)}</span><b>${baht(o)}</b></div>`).join('')}<div class="vc-btns"><button class="btn" data-act="tab" data-v="team">ดูทีมงาน →</button></div>`,S.team.length?`ค่าแรงค้างจ่ายรวม ${fmt(tot,0)} บาท`:'ยังไม่ได้เพิ่มทีมงานครับ')}
+ if(/คิวถัดไป|งานถัดไป|คิวต่อไป|งานต่อไป|คิวหน้า/.test(t)){const q=queueJobs().filter(j=>j.date>=td);const j=q[0];
+  return ans(j?`<div class="qlist">${q.slice(0,3).map(x=>qcard(x,{showDate:true})).join('')}</div>`:'<div>ยังไม่มีคิวที่จองไว้</div>',j?`คิวถัดไปคือ ${custById(j.customerId)?.name||'ไม่ระบุลูกค้า'} ${thShort(j.date)}${j.startTime?' เวลา '+j.startTime:''} ${SVC_SHORT[j.service]} ${fmt(j.area)} ไร่`:'ยังไม่มีคิวที่จองไว้ครับ')}
+ if(/น้ำมัน/.test(t)){const s=sumR();const f=s.ex.filter(e=>e.kind!=='in'&&/น้ำมัน/.test(e.cat||'')).reduce((a,e)=>a+num(e.amount),0);return ans(`<div class="vc-big">${baht(f)}</div><div class="small muted">ค่าน้ำมัน${lab}</div>`,`ค่าน้ำมัน${lab} ${fmt(f,0)} บาท`)}
+ if(/กำไร/.test(t)){const s=sumR();return ans(`<div class="vc-big ${s.profit<0?'neg':''}">${baht(s.profit)}</div><div class="small muted">กำไร${lab}</div><div class="vr"><span>รายรับ</span><b class="pos">${baht(s.income)}</b></div><div class="vr"><span>รายจ่าย</span><b class="neg">${baht(s.expense)}</b></div>`,`กำไร${lab} ${fmt(s.profit,0)} บาท รายรับ ${fmt(s.income,0)} รายจ่าย ${fmt(s.expense,0)} บาท`)}
+ if(/รายรับ|รายได้|ได้เงิน|ได้กี่บาท|ยอดขาย/.test(t)){const s=sumR();return ans(`<div class="vc-big pos">${baht(s.income)}</div><div class="small muted">รายรับ${lab}</div>`,`รายรับ${lab} ${fmt(s.income,0)} บาท`)}
+ if(/รายจ่าย|ค่าใช้จ่าย|จ่ายไป|จ่ายเท่า/.test(t)){const s=sumR();return ans(`<div class="vc-big neg">${baht(s.expense)}</div><div class="small muted">รายจ่าย${lab}</div>`,`รายจ่าย${lab} ${fmt(s.expense,0)} บาท`)}
+ if(/งาน|ไร่|คิว|ลูกค้า|ที่ไหน|บิน|ฉีด|พ่น/.test(t)){
+  const js=S.jobs.filter(j=>inR(j.date)&&!isCancelled(j)).sort((a,b)=>((a.date||'')+(a.startTime||'')).localeCompare((b.date||'')+(b.startTime||'')));
+  const rai=js.reduce((a,j)=>a+num(j.area),0),cs=[...new Set(js.map(j=>custById(j.customerId)?.name).filter(Boolean))];
+  const ask=/ไร่/.test(t)?'rai':'jobs';
+  return ans(`<div class="vc-big">${ask==='rai'?fmt(rai)+' ไร่':js.length+' งาน'}</div><div class="small muted">${lab} · ${js.length} งาน · ${fmt(rai)} ไร่ · ลูกค้า ${cs.length} ราย</div>${js.length?`<div class="qlist" style="margin-top:8px">${js.slice(0,6).map(j=>qcard(j,{showDate:R&&R.from!==R.to})).join('')}</div>`:''}${R&&R.from===R.to?`<div class="vc-btns"><button class="btn" data-act="qGo" data-d="${R.from}">เปิดคิว${lab} →</button></div>`:''}`,
+   js.length?`${lab}มีงาน ${js.length} งาน รวม ${fmt(rai)} ไร่ ลูกค้า ${cs.slice(0,4).join(' ')}`:`${lab}ยังไม่มีงานครับ`)}
+ return {kind:'err',html:`<div>ยังไม่เข้าใจคำสั่งนี้ ลองพูดว่า</div><div class="vc-ex">${VC_EX.slice(0,4).map(x=>`<button data-act="vcEx" data-t="${esc(x)}">“${esc(x)}”</button>`).join('')}</div>`,say:'ยังไม่เข้าใจคำสั่ง ลองพูดใหม่ครับ'}
+}
+function vcDraftToForm(dr){
+ openJob(null);F.status='queued';F.qstate='pending';F.date=dr.date;F.startTime=dr.time||'';F.service=dr.service;F.crop=dr.crop||F.crop;if(dr.area)F.area=dr.area;F.team=dr.team||[];
+ if(dr.custId){F.customerId=dr.custId;const p=plotById(dr.plotId);if(p)applyPlot(F,p)}else if(dr.name){F.customerId='__new';F._newCust={name:dr.name,phone:''}}
+ F.pricePerRai=priceFor(F.service,F.crop)||F.pricePerRai;F.chems=[emptyLine()];F.note='จองผ่านคำสั่งเสียง';}
+
+/* ---------- แจ้งเตือน ---------- */
+function openBell(){const ns=notifs();
+ openModal(`<div class="sh-h"><b>🔔 แจ้งเตือน</b><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
+ ${ns.length?ns.map(n=>`<button class="nt ${n.lvl}" ${n.id?`data-act="ntJob" data-id="${n.id}"`:n.go?`data-act="ntGo" data-v="${n.go}" data-t="${n.tab||''}"`:n.act?`data-act="${n.act}"`:''}><span class="nt-i">${n.ic}</span><div><b>${esc(n.t)}</b><span>${esc(n.s)}</span></div><i>›</i></button>`).join(''):`<div class="es"><div class="es-t">ไม่มีการแจ้งเตือน</div><div class="es-s">คิวที่ถึงกำหนด งานครบรอบพ่นซ้ำ และยอดค้างจะแสดงที่นี่</div></div>`}</div>`,true)}
+
+/* ---------- เมนูทั้งหมด ---------- */
+const MENU_GROUPS=[['งานบริการ',[['tab','home','หน้าหลัก','home'],['tab','queue','คิวงาน','queue'],['tab','records','งานบริการฉีดพ่น','drone'],['tab','customers','ลูกค้า','cust'],['tab','team','ทีมงาน','team'],['tab','map','แผนที่งาน','map']]],
+ ['บัญชี',[['tab','finance','การเงิน','fin'],['navIncome','','บันทึกรายรับ','inc'],['navExpense','','บันทึกรายจ่าย','exp'],['tab','tx','รายการธุรกรรม','tx'],['tab','reports','รายงานและสถิติ','rep'],['tab','dashboard','Dashboard','dash']]],
+ ['ความรู้และระบบ',[['tab','advisor','คำแนะนำการพ่น','adv'],['tab','library','คลังสาร','lib'],['tab','voice','ผู้ช่วยเสียง','mic'],['tab','settings','ตั้งค่าระบบ','set']]]];
+function openMenu(){openModal(`<div class="sh-h"><div class="row" style="gap:10px;flex-wrap:nowrap;align-items:center;min-width:0">${emblem('mn')}<div><b>${esc(S.settings.biz||'เมนู')}</b><div class="tiny muted">${esc(S.settings.phone||'')} ${esc(S.settings.area||'')}</div></div></div><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b">
+ ${MENU_GROUPS.map(g=>`<div class="mg-t">${g[0]}</div><div class="mg">${g[1].map(x=>`<button class="mi ${x[0]==='tab'&&UI.view===x[1]?'on':''}" data-act="${x[0]==='tab'?'goClose':x[0]}" ${x[1]?`data-v="${x[1]}"`:''}><span>${IC[x[3]]||''}</span>${x[2]}</button>`).join('')}</div>`).join('')}
+ <div class="tiny muted" style="margin-top:12px;text-align:center">${FBMODE?'☁️ ซิงก์คลาวด์ · '+esc(FB.user.email||''):backend==='db'?'☁️ บันทึกบนคลาวด์':'💾 บันทึกในเครื่องนี้'}</div></div>`,true);
+ $('#modal .sheet')?.classList.add('menu-sh')}
+
+/* ---------- การกระทำ ---------- */
+Object.assign(ACT,{
+ tab:a=>{closeModal();if(a.dataset.v==='queue'&&a.closest('.tc'))UI.q.date=today();go(a.dataset.v,{reset:true})},
+ more:()=>openMenu(),
+ bell:()=>openBell(),
+ ntJob:a=>{const j=S.jobs.find(x=>x.id===a.dataset.id);closeModal();if(!j)return;if(isQ(j)){UI.q.date=j.date;UI.q.st='all';go('queue')}else ACT.queueFrom(a)},
+ ntGo:a=>{closeModal();if(a.dataset.t)UI.fin.tab=a.dataset.t;go(a.dataset.v)},
+ gsToggle:()=>{document.body.classList.toggle('gs-on');if(document.body.classList.contains('gs-on'))setTimeout(()=>$('#gs-in')?.focus(),30)},
+ qSheet:a=>qSheet(a.dataset.id),
+ qSt:a=>{UI.q.st=a.dataset.s;render()},
+ qGo:a=>{UI.q.date=a.dataset.d;if(UI.view!=='queue')go('queue');else render()},
+ qWeek:a=>{UI.q.date=addD(UI.q.date,+a.dataset.n);render()},
+ qEdit:a=>{closeModal();ACT.editJob(a)},
+ qCopy:a=>{const j=S.jobs.find(x=>x.id===a.dataset.id);if(!j)return;copyJobAsNew(j,{queue:true,date:UI.q.date>=today()?UI.q.date:today(),msg:'คัดลอกเป็นคิวใหม่ — แก้วัน เวลา ลูกค้า แล้วกดบันทึก'});F.qstate='pending';F.team=clone(j.team||[]);renderJobForm()},
+ qState:async a=>{const j=S.jobs.find(x=>x.id===a.dataset.id);if(!j)return;const s=a.dataset.s;
+  if(s==='cancelled'&&!await confirmBox('ยกเลิกคิวนี้? (ยังเก็บไว้ในรายการ “ยกเลิก” และกู้คืนได้)','ยกเลิกคิว'))return;
+  const n=clone(j);n.qstate=s;if(s==='doing'&&!n.startTime){const d=new Date();n.startTime=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+  closeModal();if(await save('jobs',n))toast(s==='doing'?'เริ่มงานแล้ว — กด “ทำเสร็จ” เมื่อบินเสร็จ':s==='cancelled'?'ยกเลิกคิวแล้ว':'อัปเดตสถานะแล้ว','ok')},
+ newQueue:()=>{closeModal();openJob(null);F.status='queued';F.qstate='pending';F.date=UI.view==='queue'&&UI.q.date>=today()?UI.q.date:today();renderJobForm()},
+ goQueue:()=>{go('queue')},
+ jfQs:a=>{F.qstate=a.dataset.s;renderJobForm()},
+ jfTeam:a=>{const id=a.dataset.id;F.team=F.team||[];if(F.team.includes(id))F.team=F.team.filter(x=>x!==id);else{if(F.team.length>=3){toast('เลือกได้สูงสุด 3 คนต่องาน');return}F.team.push(id)}
+  const w=workerById(id);if(w&&/นักบิน/.test(w.role||'')&&!F.operator)F.operator=w.name;renderJobForm()},
+ goTeamNew:()=>{closeModal();go('team');openWorker(null)},
+ finTab:a=>{UI.fin.tab=a.dataset.t;closeModal();if(UI.view!=='finance')go('finance');else render()},
+ finM:a=>{UI.fin.ym=+a.dataset.n<0?ymPrev(UI.fin.ym):ymNext(UI.fin.ym);render()},
+ finAll:()=>{UI.tx.type=UI.fin.tab==='out'?'out':'in';UI.tx.from=UI.fin.ym+'-01';UI.tx.to=UI.fin.ym+'-31';go('tx')},
+ finPaid:async(a,e)=>{e&&e.stopPropagation();const j=S.jobs.find(x=>x.id===a.dataset.id);if(!j)return;if(!await confirmBox(`บันทึกว่า <b>${esc(custById(j.customerId)?.name||'')}</b> ชำระแล้ว ${baht(jobTotal(j)-jobPaid(j))}?`,'รับเงินแล้ว',false))return;const n=clone(j);n.payStatus='paid';n.paidAmount='';n.paidDate=today();if(await save('jobs',n))toast('บันทึกรับเงินแล้ว','ok')},
+ teamM:a=>{UI.teamYm=+a.dataset.n<0?ymPrev(UI.teamYm):ymNext(UI.teamYm);render()},
+ newWorker:()=>openWorker(null),
+ editWorker:a=>{const w=workerById(a.dataset.id);if(w)openWorker(w)},
+ wType:a=>{F.wageType=a.dataset.k;$$('#wt button').forEach(b=>b.classList.toggle('on',b.dataset.k===F.wageType));const l=$('#wr-l');if(l)l.textContent='อัตรา (บาท'+(F.wageType==='rai'?'/ไร่':F.wageType==='day'?'/วัน':'/เดือน')+')'},
+ saveWorker:async()=>{if(!String(F.name||'').trim()){toast('กรุณาใส่ชื่อ');return}const w=clone(F);w.name=w.name.trim();w.rate=num(w.rate);if('activeCb' in w){w.active=w.activeCb===true||w.activeCb==='on'||w.activeCb===undefined;delete w.activeCb}
+  const cb=$('#modal [data-e=activeCb]');if(cb)w.active=cb.checked;if(await save('team',w)){closeModal();toast('บันทึกทีมงานแล้ว','ok')}},
+ delWorker:async()=>{const id=F.id;const used=S.jobs.some(j=>(j.team||[]).includes(id));if(!await confirmBox(used?'ทีมงานนี้มีประวัติงานอยู่ แนะนำตั้งเป็น “พักงาน” แทนการลบ — ยังต้องการลบ?':'ลบทีมงานนี้?','ลบ'))return;if(await removeDoc('team',id))toast('ลบแล้ว')},
+ payWorker:a=>{const w=workerById(a.dataset.id);if(!w)return;const o=wageOwed(w);closeModal();
+  openExp(null,{id:uid(),kind:'out',date:today(),cat:'ค่าแรงงาน',amount:o?Math.round(o):'',scope:'biz',note:`ค่าแรง ${w.name}`,jobId:'',payMethod:PAYM[0],workerId:w.id,createdAt:new Date().toISOString()})},
+ vcMic:()=>{closeModal();if(UI.view!=='voice')go('voice');vcStart()},
+ vcStart:()=>vcStart(),
+ vcSend:()=>{const i=$('#vc-in');if(i&&i.value.trim()){const v=i.value;i.value='';vcRun(v)}else toast('พิมพ์คำสั่งก่อน')},
+ vcEx:a=>vcRun(a.dataset.t),
+ vcCancel:()=>{UI.voice.res=null;UI.voice.draft=null;render()},
+ vcEdit:()=>{const d=UI.voice.draft;if(!d)return;if(d.type==='exp')openExp(null,clone(d.d));else{vcDraftToForm(d);renderJobForm()}},
+ vcOk:async()=>{const d=UI.voice.draft;if(!d)return;
+  if(d.type==='exp'){const e=clone(d.d);e.amount=num(e.amount);if(!e.amount){toast('ไม่มีจำนวนเงิน');return}if(await save('expenses',e)){UI.voice.res={kind:'ok',q:UI.voice.res?.q||'',html:`<div class="vc-big">✓ บันทึกแล้ว</div><div class="small muted">${e.kind==='in'?'รายรับ':'รายจ่าย'} ${esc(e.cat)} ${baht(e.amount)} · ${fdate(e.date)}</div>`};UI.voice.draft=null;render();speak('บันทึกเรียบร้อยครับ')}}
+  else{vcDraftToForm(d);const dd=d;await saveJob();if(!$('#modal').classList.contains('hidden'))return;UI.voice.res={kind:'ok',q:UI.voice.res?.q||'',html:`<div class="vc-big">✓ จองคิวแล้ว</div><div class="small muted">${esc(dd.name)} · ${thShort(dd.date)}${dd.time?' '+dd.time+' น.':''} · ${esc(SVC_SHORT[dd.service])}${dd.area?' '+fmt(dd.area)+' ไร่':''}</div><div class="vc-btns"><button class="btn" data-act="qGo" data-d="${dd.date}">เปิดคิววันนั้น →</button></div>`};UI.voice.draft=null;F=null;render();speak('จองคิวเรียบร้อยครับ')}}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id==='vc-in'){e.preventDefault();ACT.vcSend()}});
+
 /* เริ่มทำงาน */
 if(STANDALONE&&'serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
-(function(){const h=location.hash.slice(1);if(VIEWS.some(v=>v[0]===h))UI.view=h;initStore()})();
+(function(){const h=location.hash.slice(1);if(VIEWS.some(v=>v[0]===h))UI.view=h;else if(window.innerWidth<=900)UI.view='home';initStore()})();
 
 </script>
 </body>
