@@ -1325,9 +1325,14 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fstg{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%;margin:4px 0}.fstn{background:#fff;border:1px solid #FDE68A;border-radius:10px;padding:8px 10px;margin-top:6px;font-size:13.5px}
 .fwind{margin-top:12px;border-radius:14px;padding:10px 12px;border:1px solid}.fwind ul{margin:6px 0 4px;padding-left:20px;font-size:13.5px;line-height:1.6}.fwind-h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.fwind-h span{font-size:12.5px;color:var(--muted)}
 .fwind.lv-ok{background:#F0FDF4;border-color:#A7F3D0}.fwind.lv-warn{background:#FFFBEB;border-color:#FDE68A}.fwind.lv-bad{background:#FEF2F2;border-color:#FECACA}.fwind.lv-low{background:#F0F9FF;border-color:#BAE6FD}
+.frec2,.jfly{background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:14px;padding:10px 12px;margin-bottom:12px}.jfly{margin:10px 0 0;background:#F8FFFA}
+.frec2-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.frec2-v{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-bottom:6px}.frec2-v b{font-family:Prompt,sans-serif;font-size:17px;color:var(--brand)}
+.fadj{font-size:13px;padding:5px 9px;border-radius:9px;margin-top:4px;border-left:3px solid}.fadj.ok{background:#ECFDF5;border-color:#10B981}.fadj.warn{background:#FFFBEB;border-color:#F59E0B}.fadj.bad{background:#FEF2F2;border-color:#EF4444}.fadj.info{background:#F0F9FF;border-color:#0EA5E9}
 .fnote{margin-top:12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:10px 12px}.fnote ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;line-height:1.6}
 @media (max-width:700px){.frec{grid-template-columns:1fr 1fr}.fsls{grid-template-columns:1fr}.fout{grid-template-columns:1fr 1fr}.fout>div:first-child{grid-column:1/-1}}
 /* ===== v7: คู่มือโรคและศัตรูพืช ===== */
+.dz-tabs{overflow-x:auto;scrollbar-width:none}.dz-tabs::-webkit-scrollbar{display:none}.dz-tabs button{flex:0 0 auto;padding:9px 14px}
 .dz{padding:0!important;margin-bottom:10px!important;overflow:hidden}
 .dz-h{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;cursor:pointer}
 .dz-i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0;background:#F1F5F9}
@@ -1600,8 +1605,8 @@ const CROPS={
    N(['preharvest'],'ก่อนเก็บเกี่ยว: เน้นโพแทสเซียมทางใบ (เช่น 0-0-50) ช่วยคุณภาพเนื้อ งดไนโตรเจน และเว้นระยะก่อนเก็บเกี่ยวตามฉลากสารทุกตัว',['f0050','f13046'])
   ]},
  rubber:{n:'ยางพารา',ic:'🌲',orchard:true,color:'#1f6f43',
-  stages:[ST('young1','ยางเล็ก (1-2 ปี)','young'),ST('young2','ยางก่อนเปิดกรีด (3-6 ปี)','young'),ST('winter','ผลัดใบ','winter',[1,2]),
-   ST('newleaf','แตกใบใหม่ (ใบอ่อนสีน้ำตาลแดง)','newleaf',[2,3,4]),ST('half','ใบเพสลาด','half',[3,4,5]),ST('tapping','ใบแก่/เปิดกรีด (ฤดูฝน)','tapping',[5,6,7,8,9,10,11,12])],
+  stages:[ST('young1','ยางเล็ก (1-2 ปี)','young'),ST('young2','ยางก่อนเปิดกรีด (3-6 ปี)','young'),ST('winter','ผลัดใบ (หยุดกรีด)','winter',[1,2]),
+   ST('newleaf','แตกใบใหม่ (ใบอ่อนสีน้ำตาลแดง)','newleaf',[2,3,4]),ST('half','ใบเพสลาด','half',[3,4,5]),ST('tapping','ใบแก่ / ช่วงกรีดยาง (ทั้งหน้าฝนและหน้าแล้ง)','tapping',[5,6,7,8,9,10,11,12,1])],
   threats:[
    T('โรคใบร่วงชนิดใหม่ (Colletotrichum/Pestalotiopsis)','fun',[5,6,7,8,9,10,11,12,1],['tapping','half','newleaf','young'],['wet','humid','wind'],['difprop','carben','prochl','benomyl','propin','manco','bacsub'],'แพร่ด้วยลมและน้ำฝน อาการรุนแรงหลังฝนตกหนักติดต่อกัน ≥2 วัน โดรนเหมาะกับต้นสูง พ่นให้ทั่วทรงพุ่ม'),
    T('โรคราแป้ง','fun',[1,2,3,4],['newleaf'],['cool','humid'],['sulfur','hexa','propi'],'ระบาดช่วงแตกใบใหม่ที่อากาศเย็นมีน้ำค้าง พ่นป้องกันเมื่อใบอ่อนเริ่มคลี่'),
@@ -1633,7 +1638,11 @@ const CROPS={
    T('โรคขอบใบแห้ง','fun',[7,8,9,10],['tiller','boot'],['wet','wind'],['copoh','bacsub'],'เกิดจากแบคทีเรีย ระบาดหลังพายุฝน สารเคมีได้ผลจำกัด เน้นพันธุ์ต้านทาน ลดไนโตรเจน'),
    T('โรคกาบใบแห้ง','fun',[7,8,9,10,11],['tiller','boot'],['humid','hot','wet'],['hexa','valida','thiflu','azoxy','azodif'],'พบที่กาบใบใกล้น้ำในนาแน่น พ่นให้ถึงโคนกอ'),
    T('โรคเมล็ดด่าง/ใบจุดสีน้ำตาล','fun',[2,3,8,9,10,11],['boot','heading'],['humid','wet'],['difprop','azodif','propi','tebu'],'ป้องกันช่วงตั้งท้อง-ออกรวง'),
-   T('วัชพืชในนาข้าว','her',[1,2,5,6,7,8,12],['seedling','tiller'],['wet'],['pretil','butac','bisprib','pyrazo','cyhalo','propan','d24'],'ยาคุมใช้หลังหว่านตามวันที่ฉลากกำหนด ยาฆ่าหลังงอกใช้ช่วงวัชพืชยังเล็ก ควบคุมระดับน้ำตามฉลาก')
+   T('วัชพืชในนาข้าว','her',[1,2,5,6,7,8,12],['seedling','tiller'],['wet'],['pretil','butac','bisprib','pyrazo','cyhalo','propan','d24'],'ยาคุมใช้หลังหว่านตามวันที่ฉลากกำหนด ยาฆ่าหลังงอกใช้ช่วงวัชพืชยังเล็ก ควบคุมระดับน้ำตามฉลาก'),
+   T('เพลี้ยกระโดดหลังขาว','ins',[6,7,8,9,10],['tiller','boot'],['humid','hot'],['triflu','pymet','bupro','dino'],'ระยะแตกกอ ใบเหลืองจากปลาย จัดการแบบเดียวกับเพลี้ยกระโดดสีน้ำตาล'),
+   T('เพลี้ยจักจั่นสีเขียว (พาหะโรคใบสีส้ม)','ins',[6,7,8,9,10],['seedling','tiller'],['humid'],['imida','etofen','bupro','dino'],'โรคใบสีส้มไม่มีสารรักษา ต้องคุมพาหะ ถอนต้นเป็นโรค'),
+   T('โรคดอกกระถิน (ลูกแหลม)','fun',[9,10,11],['boot'],['wet','humid'],['propi','difprop','copoh'],'พ่นป้องกันช่วงตั้งท้องก่อนออกรวง ~5–7 วัน'),
+   T('หนอนกระทู้กล้า/คอรวง','ins',[6,7,8,9,10,11],['seedling','heading','milk'],['wet'],['chlorant','flubend','emam'],'ระบาดหลังน้ำท่วมแล้วลด พ่นช่วงเย็นเมื่อหนอนยังเล็ก')
   ],
   nutri:[
    N(['seedling','tiller'],'ปุ๋ยครั้งแรกระยะแตกกอ สูตรตามชนิดดิน เช่น 16-20-0 หรือ 16-16-8 (โดรนหว่านได้) พ่นสังกะสี อะมิโน',['f16200','f16168','zinc','amino']),
@@ -1652,7 +1661,8 @@ const CROPS={
    T('เพลี้ยอ่อนสำลี/เพลี้ยแป้ง','ins',[7,8,9,10,11],['elong'],['humid'],['imida','dino','sulfox','petoil'],'พบใต้ใบช่วงชื้น สังเกตราดำ'),
    T('ด้วงหนวดยาว','ins',[4,5,6,7],['plant','tiller','elong'],['wet'],['fipro'],'ตัวหนอนอยู่ในดิน/ท่อนอ้อย โดรนพ่นทางใบไม่ได้ผล ต้องไถตากดิน จับตัวเต็มวัยหลังฝนแรก หรือใช้สารทางดิน'),
    T('โรคราสนิม/ใบจุด/ใบขีดแดง','fun',[7,8,9,10,11],['tiller','elong'],['humid','wet'],['azoxy','pyracl','tebu','propi','manco'],'ช่วงชื้นสูงต่อเนื่อง ใช้พันธุ์ต้านทาน'),
-   T('วัชพืช','her',[5,6,7,8,11,12,1],['plant','tiller'],['wet'],['ametr','atraz','diuron','metri','pendi','d24','glufo'],'ก่อนงอกใช้สารคุมดินขณะดินชื้น หลังงอกเลือกสารให้ตรงชนิดวัชพืช 2,4-ดีปลิวง่าย ห้ามบินขณะลมแรงใกล้พืชใบกว้าง')
+   T('วัชพืช','her',[5,6,7,8,11,12,1],['plant','tiller'],['wet'],['ametr','atraz','diuron','metri','pendi','d24','glufo'],'ก่อนงอกใช้สารคุมดินขณะดินชื้น หลังงอกเลือกสารให้ตรงชนิดวัชพืช 2,4-ดีปลิวง่าย ห้ามบินขณะลมแรงใกล้พืชใบกว้าง'),
+   T('โรคยอดบิด','fun',[6,7,8,9],['tiller','elong'],['wet','humid'],['carben','manco'],'ใบยอดย่นบิด ซีด มักฟื้นเอง พ่นถ้าระบาดมาก')
   ],
   nutri:[
    N(['plant'],'รองพื้นตอนปลูก/หลังตัดอ้อยตอด้วยปุ๋ยสูตรเสมอหรือตามค่าวิเคราะห์ดิน',['f151515','f161616','orgf']),
@@ -1671,7 +1681,9 @@ const CROPS={
    T('โรคราน้ำค้าง','fun',[5,6,7,8,9],['emerg','veg'],['wet','humid','cool'],['metal','dimeth','fosetyl'],'ป้องกันหลักด้วยเมล็ดคลุกสาร/พันธุ์ต้านทาน ถอนต้นเป็นโรคทิ้ง'),
    T('โรคใบไหม้แผลใหญ่','fun',[7,8,9,10,11],['veg','tassel'],['humid','cool','wet'],['azoxy','pyracl','propi','tebu','azodif','manco'],'ระบาดช่วงชื้นและกลางคืนเย็น'),
    T('โรคราสนิม','fun',[7,8,9,10,11,12],['veg','tassel'],['humid','cool'],['propi','tebu','azoxy','manco'],''),
-   T('วัชพืช','her',[4,5,6,7,8,9],['emerg','veg'],['wet'],['atraz','alach','pendi','topram','mesot','nicos'],'ก่อนงอกพ่นขณะดินชื้น หลังงอกใช้สารเลือกทำลายสำหรับข้าวโพด หลีกเลี่ยงสารไม่เลือกทำลายโดนต้น')
+   T('วัชพืช','her',[4,5,6,7,8,9],['emerg','veg'],['wet'],['atraz','alach','pendi','topram','mesot','nicos'],'ก่อนงอกพ่นขณะดินชื้น หลังงอกใช้สารเลือกทำลายสำหรับข้าวโพด หลีกเลี่ยงสารไม่เลือกทำลายโดนต้น'),
+   T('โรคใบไหม้แผลเล็ก','fun',[6,7,8,9,10],['veg','tassel'],['hot','humid'],['azoxy','propi','tebu','manco'],'แผลเล็กสี่เหลี่ยมระหว่างเส้นใบ ร้อนชื้น'),
+   T('หนอนเจาะลำต้นข้าวโพด','ins',[6,7,8,9,10],['veg','tassel'],['humid'],['chlorant','flubend','lufen','bt'],'ใบมีรูเรียงแถว ลำต้นมีรูเจาะ พ่นก่อนออกดอก ปล่อยไตรโคแกรมมาร่วม')
   ],
   nutri:[
    N(['emerg'],'รองพื้นตอนปลูกด้วยปุ๋ยสูตรตัวหน้า-กลางสูงหรือตามค่าวิเคราะห์ดิน',['f16200','f151515']),
@@ -1690,12 +1702,30 @@ const CROPS={
    T('โรคราน้ำค้าง','fun',[11,12,1,2],['seedling','vegg'],['cool','humid'],['dimeth','mandi','cymox','cyazo','metal','manco'],'ระบาดช่วงอากาศเย็นมีหมอก/น้ำค้าง'),
    T('โรคแอนแทรคโนส','fun',[5,6,7,8,9,10],['flower','fruit','harvest'],['wet','humid'],['prochl','difen','azoxy','azodif','manco'],'พริก/แตง เป็นแผลจุดยุบบนผล'),
    T('โรคใบจุด/ใบไหม้อัลเทอร์นาเรีย','fun',[6,7,8,9,10,11],['vegg','flower','fruit'],['humid','wet'],['iprod','difen','azoxy','manco','chloro'],''),
-   T('โรคเน่าเละ/ใบจุดแบคทีเรีย','fun',[5,6,7,8,9],['vegg','harvest'],['wet','hot','humid'],['copoh','kasug','bacsub'],'คอปเปอร์อาจทำให้ใบอ่อนไหม้ ใช้อัตราตามฉลาก')
+   T('โรคเน่าเละ/ใบจุดแบคทีเรีย','fun',[5,6,7,8,9],['vegg','harvest'],['wet','hot','humid'],['copoh','kasug','bacsub'],'คอปเปอร์อาจทำให้ใบอ่อนไหม้ ใช้อัตราตามฉลาก'),
+   T('โรคราแป้ง','fun',[11,12,1,2,3],['vegg','flower','fruit'],['dry','cool'],['sulfur','hexa','difen'],'ผงขาวบนใบ (แตง ถั่ว พริก)'),
+   T('หนอนแมลงวันชอนใบ','ins',[12,1,2,3,4],['vegg','flower'],['dry'],['cyant','abam','spineto'],'รอยทางคดเคี้ยวสีขาวบนใบ'),
+   T('ด้วงหมัดผัก','ins',[1,2,3,4,5],['seedling','vegg'],['dry','hot'],['cyant','lambda'],'ใบเป็นรูกลมเล็กพรุน ระยะกล้า')
   ],
   nutri:[
    N(['seedling','vegg'],'ผักใบเน้นไนโตรเจน: ปุ๋ยสูตรเสมอ/ตัวหน้าสูง อะมิโน สาหร่าย GA3 อัตราต่ำตามฉลากช่วยยืดใบ',['f212121','f46','amino','seaweed','ga3']),
    N(['flower','fruit'],'ผักผล: แคลเซียม-โบรอนและ 0-52-34 ช่วยติดดอกผล',['cab','f05234','calnit']),
    N(['harvest'],'ใกล้เก็บเกี่ยว: เว้นระยะก่อนเก็บเกี่ยว (PHI) ตามฉลากอย่างเคร่งครัด ผักบริโภคสด',['f13046'])
+  ]},
+ coconut:{n:'มะพร้าว',ic:'🥥',orchard:true,color:'#8b5a2b',
+  stages:[ST('cs1','ต้นกล้า/ต้นเล็ก (ยังไม่ให้ผล)','cyoung'),ST('cs2','ต้นใหญ่ก่อนให้ผล','cyoung'),
+   ST('cs3','ให้ผล — ออกจั่น/ดอกบาน','cflower',[],null,1),ST('cs4','ให้ผล — ติดผลอ่อน','cfruit'),ST('cs5','ให้ผล — ผลโต/ใกล้เก็บ','cfruit')],
+  threats:[
+   T('หนอนหัวดำมะพร้าว','ins',ALLM,['cyoung','cflower','cfruit'],['dry','hot'],['flubend','chlorant','spinosad','lufen','bt'],'ระบาดรุนแรงช่วงแล้ง ใบย่อยถูกแทะใต้ใบแห้งเหมือนไฟไหม้ · พ่นทางใบเฉพาะต้นไม่เกิน 12 ม. (ต้นสูงกว่านั้นฉีดเข้าลำต้นด้วยอีมาเมกติน/อะบาเมกติน) · สปินโนแสดพิษต่อผึ้ง ลูเฟนนูรอนพิษต่อกุ้ง'),
+   T('ไรสี่ขามะพร้าว','ins',[12,1,2,3,4,5],['cfruit'],['dry','hot'],['abam','sulfur'],'แผลใต้กลีบขั้วผล ผลตกสะเก็ดลายไม้ เน้นพ่นที่ทะลาย'),
+   T('เพลี้ยหอย/เพลี้ยแป้งมะพร้าว','ins',[1,2,3,4,5],['cyoung','cfruit'],['dry'],['petoil','spirotet','dino'],'ตุ่มเกล็ดใต้ใบ มีราดำ'),
+   T('หนอนร่าน','ins',[9,10,11,12],['cyoung','cfruit'],['dry'],['bt','lufen','chlorant'],'ใบถูกกินเหลือแต่ก้าน'),
+   T('โรคผลร่วง/ยอดเน่า (ไฟทอปธอรา)','fun',[6,7,8,9,10,11],['cflower','cfruit','cyoung'],['wet','humid'],['metal','fosetyl','phosac'],'เก็บผลร่วงทำลาย พ่นทะลายและยอด ต้นสูงใช้ฉีดฟอสโฟนิกเข้าลำต้น'),
+   T('โรคใบจุด/ใบไหม้','fun',[6,7,8,9,10],['cyoung'],['wet','humid'],['manco','copox','carben'],'พบมากในต้นกล้า/ต้นขาดโพแทสเซียม')
+  ],
+  nutri:[
+   N(['cyoung'],'ต้นเล็ก: ปุ๋ยสูตรเสมอ เช่น 15-15-15 แบ่งใส่ต้น-ปลายฝน ร่วมกับปุ๋ยอินทรีย์',['f151515','orgf']),
+   N(['cflower','cfruit'],'ให้ผล: มะพร้าวต้องการโพแทสเซียมสูง — ปุ๋ยตัวท้ายสูงหรือเสริม 0-0-60 ร่วมกับแมกนีเซียมและโบรอน (ขาดโบรอนใบรัด ผลร่วง)',['f0060','f13046','mg','cab','orgf'])
   ]},
  other:{n:'อื่นๆ',ic:'🌿',color:'#6b7280',
   stages:[ST('leaf1','แตกใบอ่อน','early'),ST('leaf2','ใบเพสลาด','vegg'),ST('leaf3','ใบแก่/สะสมอาหาร','vegg'),ST('flower','ออกดอก','flower',[],null,1),ST('fruitset','ติดผลเล็ก','fruit'),ST('fruit','ผลโต/ใกล้เก็บเกี่ยว','fruit')],
@@ -2858,8 +2888,8 @@ function renderJobForm(){
   <div id="jf-chems"></div>
   <div class="row"><button class="btn sm" data-act="addLine" data-c="ins">+ ยาแมลง</button><button class="btn sm" data-act="addLine" data-c="fun">+ ยารา</button><button class="btn sm" data-act="addLine" data-c="her">+ ยาหญ้า</button><button class="btn sm" data-act="addLine" data-c="fer">+ ปุ๋ย</button><button class="btn sm" data-act="addLine" data-c="pgr">+ ฮอร์โมน</button><button class="btn sm" data-act="addLine" data-c="adj">+ สารจับใบ</button></div>
   <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>
-  <div class="grid g3" style="margin-top:8px"><div class="field"><label>สูงจากยอดพืช (ม.)</label><input data-f="flyH" inputmode="decimal" value="${esc(j.flyH??'')}" placeholder="เช่น 2.5"></div><div class="field"><label>ระยะร่อง (ม.)</label><input data-f="swath" inputmode="decimal" value="${esc(j.swath??'')}" placeholder="เช่น 6"></div><div class="field"><label>ความเร็ว (ม./วิ.)</label><input data-f="speed" inputmode="decimal" value="${esc(j.speed??'')}" placeholder="เช่น 5"></div></div>
-  <div class="row" style="gap:6px;margin-top:4px"><button class="btn sm" data-act="jfFly">✈️ ใช้ค่าแนะนำตามพืช</button><span class="tiny muted">ดูตัวช่วยเต็มได้ที่ คำแนะนำการพ่น › ตั้งค่าการบิน</span></div>${teamPicker(j)}
+  <div class="grid g3" style="margin-top:8px"><div class="field"><label>สูงจากยอดพืช (ม.)</label><input data-f="flyH" inputmode="decimal" value="${esc(j.flyH??'')}" placeholder="เช่น 2.5"></div><div class="field"><label>ระยะร่อง (ม.)</label><input data-f="swath" inputmode="decimal" value="${esc(j.swath??'')}" placeholder="เช่น 6"></div><div class="field"><label>ความเร็ว ${speedUnitSeg()}</label><input data-spd="1" inputmode="decimal" value="${esc(spdShow(j.speed??''))}" placeholder="${SU()==='kmh'?'เช่น 18':'เช่น 5'}"></div></div>
+  <div class="row" style="gap:6px;margin-top:4px"><button class="btn sm" data-act="jfFly">✈️ ใช้ค่าแนะนำตามพืช</button><span class="tiny muted">ดูตัวช่วยเต็มได้ที่ คำแนะนำการพ่น › ตั้งค่าการบิน</span></div><div id="jf-fly"></div>${teamPicker(j)}
   <div id="jf-tank" class="small" style="margin-top:8px"></div>
  </div>
 
@@ -2931,7 +2961,17 @@ function updateLineInfo(i){
  el.innerHTML=msgs.join(' ');
  const qtyEl=$(`[data-l="${i}"][data-k="qty"]`);if(qtyEl&&!l.qty&&rate&&num(F.area))qtyEl.placeholder=fmt(rate*num(F.area),1)+' '+l.unit;
 }
+function jfFlyLive(){const el=$('#jf-fly');if(!el||!F)return;const cr=FLY[F.crop]?F.crop:'other';const stg=stageGroup(cr,F.stage);const wx=F.wx||{};
+ const a=flyAdj(cr,F.service||'spray','m',stg,{temp:wx.temp,rh:wx.rh,wind:wx.wind});
+ if(a.S.spread){el.innerHTML=`<div class="jfly"><b>✈️ แนะนำ (${esc(a.S.n)})</b><div class="small">ระบบหว่าน T55: บินสูงจากยอด ~3 ม. · ร่อง 5–7 ม. · 5–7 ม./วิ. · ทดสอบหว่านลงถาดก่อนตั้งร่องจริง</div></div>`;return}
+ const hv=num(F.flyH),sv=num(F.swath),vv=num(F.speed),wv=num(F.waterRate);const c=hv&&sv&&vv&&wv?flyCalc(hv,sv,vv,wv,cr,stg):null;
+ el.innerHTML=spTxt(`<div class="jfly"><div class="frec2-h"><b>✈️ ค่าแนะนำ: ${esc(a.P.n)}${F.stage?' · '+esc(stageName(cr,F.stage)):''} · ${esc(FLY_SVC[F.service]?.n||'')}</b><button class="btn sm primary" data-act="jfFly">ใช้ค่านี้</button></div>
+ <div class="frec2-v"><span>สูง <b>${fmt(a.h,1)}</b> ม.</span><span>ร่อง <b>${fmt(a.sw,1)}</b> ม.</span><span>เร็ว <b>${spdN(a.v)}</b> ${SU_LAB()}</span><span>น้ำ <b>${fmt(a.w,1)}</b> ล./ไร่</span><span>ละออง <b>${a.drop}</b> µm</span></div>
+ ${(()=>{const d=djiScene(cr,stg);return `<div class="fadj info">📱 โหมดในแอป DJI: <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
+ ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น ลม ในส่วน “สภาพอากาศขณะพ่น” ค่าแนะนำจะปรับตามอากาศทันที</div>'}
+ ${c?`<div class="tiny" style="margin-top:6px">ค่าที่กรอก: ปั๊มต้องจ่าย <b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)}</b> / ${c.fm} ล./นาที · ~${fmt(c.raiHr,0)} ไร่/ชม. · 1 ถัง ${fmt(c.perTank,1)} ไร่</div>${c.warn.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}`:''}</div>`)}
 function updateJobComputed(){
+ jfFlyLive();
  const j=F;const base=num(j.area)*num(j.pricePerRai),cc=jobChemCharge(j),cost=jobChemCost(j),t=jobTotal(j);
  $('#jf-tot').innerHTML=j.own?`<div class="note info small">งานสวนตัวเอง: ไม่คิดรายรับ ต้นทุนสารที่ "เราจัดหา" จะนับเป็นต้นทุนสวนตัวเอง (${baht(cost)}) · มูลค่าเทียบค่าจ้าง ~${baht(num(j.area)*priceFor(j.service,j.crop))}</div>`:
  `<div class="tot"><span>ค่าบริการ ${fmt(j.area)} ไร่ × ${baht(j.pricePerRai)}</span><span>${baht(base)}</span></div>${cc?`<div class="tot"><span>ค่าสารที่เราจัดหา</span><span>${baht(cc)}</span></div>`:''}${num(j.extraFee)?`<div class="tot"><span>ค่าเดินทาง/อื่นๆ</span><span>${baht(j.extraFee)}</span></div>`:''}${num(j.discount)?`<div class="tot"><span>ส่วนลด</span><span>-${baht(j.discount)}</span></div>`:''}<div class="tot big"><span>ยอดรวม</span><span>${baht(t)}</span></div>${cost?`<div class="tiny muted">ต้นทุนสาร ${baht(cost)} (นับเป็นรายจ่ายอัตโนมัติ) · กำไรงานนี้ก่อนค่าใช้จ่ายอื่น ${baht(t-cost)}</div>`:''}`;
@@ -3773,6 +3813,14 @@ const r1=x=>Math.round(x*10)/10;
 const windShow=ms=>ms===''||ms==null?'':(WU()==='kmh'?String(r1(num(ms)*3.6)):String(ms));
 const windStore=v=>{v=String(v??'').replace(',','.').trim();if(v==='')return '';const n=parseFloat(v);if(isNaN(n))return '';return WU()==='kmh'?String(Math.round(n/3.6*100)/100):v};
 const windTxt=ms=>{const n=num(ms);return WU()==='kmh'?`${fmt(r1(n*3.6),1)} กม./ชม. (${fmt(r1(n),1)} ม./วิ.)`:`${fmt(r1(n),1)} ม./วิ. (${fmt(r1(n*3.6),1)} กม./ชม.)`};
+const SU=()=>{try{return localStorage.getItem('speedUnit')==='ms'?'ms':'kmh'}catch(e){return 'kmh'}};
+const SU_LAB=()=>SU()==='kmh'?'กม./ชม.':'ม./วิ.';
+const spdN=v=>SU()==='kmh'?fmt(Math.round(num(v)*3.6),0):fmt(r1(num(v)),1);
+const spd=v=>spdN(v)+' '+SU_LAB();
+const spdShow=v=>v===''||v==null?'':(SU()==='kmh'?String(Math.round(num(v)*3.6)):String(v));
+const spdStore=v=>{v=String(v??'').replace(',','.').trim();if(v==='')return '';const n=parseFloat(v);if(isNaN(n))return '';return SU()==='kmh'?String(Math.round(n/3.6*100)/100):v};
+function spTxt(h){if(SU()!=='kmh')return h;return String(h).replace(/(?<![(\d.])(\d+(?:\.\d+)?)(?:\s*[–-]\s*(\d+(?:\.\d+)?))?\s*ม\.\/วิ\.(?!\s*\()/g,(m,a,b)=>Math.round(+a*3.6)+(b!=null?'–'+Math.round(+b*3.6):'')+' กม./ชม.')}
+const speedUnitSeg=()=>`<span class="wuseg">${[['kmh','กม./ชม.'],['ms','ม./วิ.']].map(u=>`<button type="button" class="${SU()===u[0]?'on':''}" data-act="speedUnit" data-u="${u[0]}">${u[1]}</button>`).join('')}</span>`;
 const windUnitSeg=()=>`<span class="wuseg">${['ms','kmh'].map(u=>`<button type="button" class="${WU()===u?'on':''}" data-act="windUnit" data-u="${u}">${WU_LAB[u]}</button>`).join('')}</span>`;
 
 /* Delta T (สูตรกระเปาะเปียกของ Stull 2011) */
@@ -3843,8 +3891,9 @@ function dtLive(){const A=UI.adv;if(!A)return;const g=id=>{const e=document.getE
  const t=g('adv-temp'),r=g('adv-rh'),w=g('adv-wind');if(t!=null)A.temp=t;if(r!=null)A.rh=r;if(w!=null){A.wind=windStore(w);A.windIn={u:WU(),v:w}}
  const sy=(id,v)=>{const e=document.getElementById(id);if(e&&e!==document.activeElement&&v!=null)e.value=v};sy('dt-temp',t);sy('dt-rh',r);sy('dt-wind',w);
  const el=$('#dt-live');if(el)el.innerHTML=dtCard(A.temp,A.rh,A.wind,{fetch:true});
- if(UI.fly&&!UI.fly.touched&&A.wind!==''){UI.fly.wind=num(A.wind)}
+ flyWindSync();
  advChecksLive()}
+function flyWindSync(){const A=UI.adv,f=UI.fly;if(!A||!f)return;if(A.wind!==''&&A.wind!=null){f.wind=Math.min(8,num(A.wind));const sl=document.querySelector('[data-fly="wind"]');if(sl)sl.value=f.wind;const l=$('#fsl-wind');if(l)l.textContent=windTxt(f.wind)}flyRefresh()}
 function advChecksLive(){const A=UI.adv;const el=$('#adv-checks');if(!A||!el)return;let cond=A.wx;if(!cond.length){try{cond=seasonInfo(+A.month,S.settings.region).wx||[]}catch(e){cond=[]}}
  el.innerHTML=sprayCheck({cond,temp:A.temp,rh:A.rh,wind:A.wind},A.stage,A.crop).map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}
 function advDtHTML(){const A=UI.adv;return `<div class="card dt-card" id="dt-card"><div class="ch"><div><h2>🌡️ เช็คอากาศก่อนบิน (Delta T)</h2><div class="sub">คำนวณใหม่ทันทีที่แก้อุณหภูมิ ความชื้น หรือลม · 2–8 = เหมาะพ่น · ต่ำกว่า 2 ชื้นจัด · เกิน 10 ร้อนแห้งเกิน</div></div><div class="row" style="gap:6px"><button class="btn" data-act="dtRecalc">🔄 คำนวณใหม่</button><button class="btn primary" data-act="wxFetch">📍 ดึงอากาศตอนนี้</button></div></div>
@@ -3855,10 +3904,11 @@ function advDtHTML(){const A=UI.adv;return `<div class="card dt-card" id="dt-car
  if(k==='wind'){A.wind=windStore(t.value);A.windIn={u:WU(),v:t.value}}else A[k]=t.value;
  const top=document.getElementById(k==='temp'?'adv-temp':k==='rh'?'adv-rh':'adv-wind');if(top&&top!==t)top.value=t.value;
  const el=$('#dt-live');if(el)el.innerHTML=dtCard(A.temp,A.rh,A.wind,{fetch:true});
- advChecksLive()}));
+ flyWindSync();advChecksLive()}));
 Object.assign(ACT,{
  windUnit:a=>{try{localStorage.setItem('windUnit',a.dataset.u)}catch(e){}if(!$('#modal').classList.contains('hidden')&&F&&F.wx&&$('#jf-safe')){renderJobForm()}else render()},
  wxFetch:()=>wxFetch(),
+ speedUnit:a=>{try{localStorage.setItem('speedUnit',a.dataset.u)}catch(e){}if(!$('#modal').classList.contains('hidden')&&F&&$('#jf-fly'))renderJobForm();else render()},
  dtRecalc:()=>{dtLive();const A=UI.adv;['temp','rh'].forEach(k=>{const e=document.getElementById('dt-'+k);if(e&&e.value!==A[k])A[k]=e.value});render();toast('คำนวณใหม่แล้ว','ok')},
  wxHour:a=>{const h=UI.wxLive?.hours?.find(x=>x.t===a.dataset.t);if(!h)return;const A=UI.adv;A.windIn=null;A.temp=String(r1(h.temp));A.rh=String(Math.round(h.rh));A.wind=String(r1(h.wind));render();toast(`ใช้ค่าอากาศเวลา ${h.t.slice(11,16)} น.`)},
  goDt:()=>{closeModal();go('advisor');setTimeout(()=>$('#dt-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
@@ -3903,39 +3953,75 @@ function flyPreset(crop,svc,can,stg){
  const mid=(a,f=.5)=>a[0]+(a[1]-a[0])*f;
  const h=Math.max(1.5,mid(P.h)+(S_.dh||0)),sw=mid(P.sw),v=mid(P.v,C[2]),w=Math.round(mid(P.w)*C[1]*2)/2;
  return {P,S:S_,C,h:r1(h),sw:r1(sw),v:r1(v),w,drop:S_.drop||P.drop}}
+function flyWx(){const A=UI.adv||{};const f=UI.fly;return {temp:A.temp,rh:A.rh,wind:f&&f.wind!=null?f.wind:(A.wind===''||A.wind==null?null:num(A.wind))}}
+function flyAdj(crop,svc,can,stg,wx){
+ const p=flyPreset(crop,svc,can,stg);const P=p.P;let {h,sw,v,w}=p;let drop=p.drop;const adj=[];
+ if(p.S.spread)return {...p,adj,dt:null};
+ const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));
+ const dt=has(wx.temp)&&has(wx.rh)?deltaT(num(wx.temp),num(wx.rh)):null;const wind=has(wx.wind)?num(wx.wind):null;
+ const fine=()=>/^1/.test(drop);
+ if(dt!=null){
+  if(dt>10){w*=1.3;v-=1;h-=0.5;drop='350–450';adj.push(['bad',`Delta T ${fmt(dt,1)} ร้อนแห้งมาก → น้ำ +30% · ช้าลง 1 ม./วิ. · ต่ำลง 0.5 ม. · ละอองหยาบ — ควรเลื่อนไปช่วงเช้า/เย็น`])}
+  else if(dt>8){w*=1.2;v-=0.5;h-=0.5;drop='250–350';adj.push(['warn',`Delta T ${fmt(dt,1)} เริ่มร้อนแห้ง → น้ำ +20% · ช้าลง 0.5 ม./วิ. · ต่ำลง 0.5 ม. · ละอองใหญ่ขึ้น`])}
+  else if(dt<2){w*=0.9;if(fine())drop='250–350';adj.push(['info',`Delta T ${fmt(dt,1)} ชื้นจัด → น้ำ −10% กันไหลทิ้ง · ละอองกลาง–ใหญ่`])}
+  else adj.push(['ok',`Delta T ${fmt(dt,1)} เหมาะสม → ใช้ค่าปกติ`])}
+ if(wind!=null){
+  if(wind>5)adj.push(['bad',`ลม ${windTxt(wind)} แรงเกิน → ไม่ควรบินพ่น`]);
+  else if(wind>3){sw-=1.5;v-=1;h-=0.5;if(fine()||drop==='150–250')drop='250–350';adj.push(['warn',`ลม ${windTxt(wind)} → แคบร่อง 1.5 ม. · ช้าลง 1 ม./วิ. · ต่ำลง 0.5 ม. · ละอองใหญ่ขึ้น`])}
+  else if(wind<0.5){if(fine())drop='200–300';adj.push(['info',`ลมนิ่ง ${windTxt(wind)} → ระวังอากาศผกผัน ใช้ละอองกลาง–ใหญ่`])}
+  else adj.push(['ok',`ลม ${windTxt(wind)} → ปกติ`])}
+ const hMin=P.orchard?P.h[0]:Math.max(1.5,P.h[0]-0.5);
+ h=Math.max(hMin,h);v=Math.max(1,P.v[0]-1,v);sw=Math.max(3,sw);w=Math.round(w*2)/2;
+ return {...p,h:r1(h),sw:r1(sw),v:r1(v),w,drop,adj,dt,wind}}
+function djiScene(crop,stg){const P=FLY[crop]||FLY.other;
+ if(P.orchard)return ['🌳 สวนผลไม้/เนินเขา','ทรงพุ่มสูงไม่เท่ากัน ให้โดรนติดตามความสูงทรงพุ่มได้ไวขึ้น'];
+ if(crop==='rice'&&stg==='seedling')return ['🌊 เหนือน้ำ (ถ้านามีน้ำขัง ต้นข้าวยังไม่คลุมผิวน้ำ)','เรดาร์วัดความสูงเหนือผิวน้ำคลาดเคลื่อน ตั้งความสูงไม่ต่ำกว่า 2 ม. · ถ้านาแห้ง/ข้าวคลุมแล้วใช้พื้นที่ราบ'];
+ return ['🟩 พื้นที่ราบ','ถ้าแปลงเป็นเนินหรือลาดชัน เปลี่ยนเป็นสวนผลไม้/เนินเขา และบินช้าลง']}
+function flyRecHTML(){return spTxt(flyRecHTML0())}
+function flyRecHTML0(){const f=flyState();const a=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx());if(a.S.spread)return '';
+ return `<div class="frec2"><div class="frec2-h"><b>🎯 ค่าแนะนำตามอากาศตอนนี้</b>${f.manual?'<button class="btn sm primary" data-act="flyReset">ใช้ค่านี้</button>':'<span class="tiny muted">แถบเลื่อนปรับตามให้อัตโนมัติ</span>'}</div>
+ <div class="frec2-v"><span>สูง <b>${fmt(a.h,1)}</b> ม.</span><span>ร่อง <b>${fmt(a.sw,1)}</b> ม.</span><span>เร็ว <b>${spdN(a.v)}</b> ${SU_LAB()}</span><span>น้ำ <b>${fmt(a.w,1)}</b> ล./ไร่</span><span>ละออง <b>${a.drop}</b> µm</span></div>
+ ${(()=>{const d=djiScene(f.crop,f.stg);return `<div class="fadj info">📱 โหมดในแอป DJI (จำลองสถานการณ์): <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
+ ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น และลม (การ์ด Delta T ด้านบน) เพื่อให้ค่าปรับตามอากาศ</div>'}</div>`}
+function flyRefresh(){const f=UI.fly;if(!f)return;
+ if(!f.manual){const a=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx());if(!a.S.spread)['h','sw','v','w'].forEach(k=>{f[k]=a[k];const sl=document.querySelector(`[data-fly="${k}"]`);if(sl)sl.value=k==='v'&&SU()==='kmh'?Math.round(a[k]*3.6):a[k];const l=$('#fsl-'+k);if(l)l.textContent=k==='v'?spd(a[k]):fmt(a[k],1)+' '+FLY_U[k]})}
+ const r=$('#fly-rec');if(r)r.innerHTML=flyRecHTML();const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()}
 function flyCalc(h,sw,v,w,crop,stg){
  h=num(h);sw=num(sw);v=num(v);w=num(w);const P=flyRange(crop,stg);const fm=FLOWMAX();
  const raiMin=v*60*sw/1600,need=w*raiMin,maxV=w&&sw?fm*1600/(60*w*sw):0,effV=Math.min(v,maxV||v);
  const raiHr=effV*sw*3600/1600,perTank=w?TANK/w:0,passes=sw?Math.ceil(100/sw):0;
  const warn=[];
- if(need>fm)warn.push(['bad',`ต้องใช้น้ำ ${fmt(need,1)} ล./นาที เกินปั๊ม ${fm} ล./นาที — โดรนจะลดความเร็วเองเหลือ ~${fmt(maxV,1)} ม./วิ. (หรือแคบร่อง/ลดน้ำต่อไร่)`]);
+ if(need>fm)warn.push(['bad',`ต้องใช้น้ำ ${fmt(need,1)} ล./นาที เกินปั๊ม ${fm} ล./นาที — โดรนจะลดความเร็วเองเหลือ ~${spd(maxV)} (หรือแคบร่อง/ลดน้ำต่อไร่)`]);
  if(h&&sw>h*3.5)warn.push(['warn',`ร่อง ${sw} ม. กว้างเกินความสูง ${h} ม. — ขอบร่องละอองบาง เกิดแถบลาย ให้เพิ่มความสูงหรือแคบร่อง (ประมาณร่องไม่เกิน 3–3.5 เท่าของความสูง)`]);
  if(h&&sw<h*1.5)warn.push(['info',`ร่องแคบเมื่อเทียบกับความสูง — ซ้อนทับมาก ใช้ยาเท่าเดิมแต่เสียเวลาเลี้ยว/บินหลายรอบ`]);
- if(v>P.v[1]+0.5)warn.push(['warn',`ความเร็ว ${v} ม./วิ. เร็วเกินสำหรับ${P.n} — ลมใบพัดกดลงทรงพุ่มไม่พอ ละอองติดแต่ยอด`]);
+ if(v>P.v[1]+0.5)warn.push(['warn',`ความเร็ว ${spd(v)} เร็วเกินสำหรับ${P.n} — ลมใบพัดกดลงทรงพุ่มไม่พอ ละอองติดแต่ยอด`]);
  if(h>P.h[1]+0.5)warn.push(['warn',`บินสูง ${h} ม. เกินช่วงแนะนำ — ละอองปลิวง่าย ลมใบพัดอ่อนลงก่อนถึงพืช`]);
  if(h&&h<P.h[0]-0.3)warn.push(['warn',`บินต่ำ ${h} ม. — ร่องจะแคบลง ละอองไม่สม่ำเสมอ/เป็นแถบ และเสี่ยงชนสิ่งกีดขวาง`]);
  if(w&&w<P.w[0]*0.8)warn.push(['warn',`น้ำ ${w} ล./ไร่ น้อยไปสำหรับ${P.n} — ละอองไม่พอคลุมใบ`]);
  return {need,maxV,effV,raiHr,perTank,passes,warn,fm}}
 UI.fly=null;
-function flyState(){const A=UI.adv||{};if(!UI.fly||UI.fly.crop!==(A.crop||'durian')&&!UI.fly.touched){const crop=A.crop||'durian';const stg=stageGroup(crop,A.stage);const p=flyPreset(crop,'spray','m',stg);UI.fly={crop,svc:'spray',can:'m',stg,h:p.h,sw:p.sw,v:p.v,w:p.w,wind:A.wind!==''&&A.wind!=null?num(A.wind):1.5,touched:false}}return UI.fly}
-function flyCardHTML(){
+function flyState(){const A=UI.adv||{};if(!UI.fly||UI.fly.crop!==(A.crop||'durian')&&!UI.fly.touched){const crop=A.crop||'durian';const stg=stageGroup(crop,A.stage);const wind=A.wind!==''&&A.wind!=null?num(A.wind):1.5;const p=flyAdj(crop,'spray','m',stg,{temp:A.temp,rh:A.rh,wind});UI.fly={crop,svc:'spray',can:'m',stg,h:p.h,sw:p.sw,v:p.v,w:p.w,wind,touched:false,manual:false}}return UI.fly}
+function flyCardHTML(){return spTxt(flyCardHTML0())}
+function flyCardHTML0(){
  const f=flyState();const p=flyPreset(f.crop,f.svc,f.can,f.stg);const P=p.P;
  if(p.S.spread){return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการบินตามพืช</h2><div class="sub">${esc(P.n)} · ${esc(p.S.n)}</div></div></div>${flyTabs(f)}
   <div class="note info small">หว่านเม็ด (ปุ๋ย/เมล็ด) ใช้ระบบหว่าน T55: ร่องหว่าน 3–10 ม. · ทั่วไปบินสูงจากยอด ~3 ม. ร่อง 5–7 ม. ความเร็ว 5–7 ม./วิ. · เม็ดใหญ่/หนักหว่านได้กว้างกว่าเม็ดเล็ก · ทดสอบหว่านลงถาดเก็บตัวอย่างหลายจุดตามแนวขวางร่อง ดูความสม่ำเสมอก่อนตั้งร่องจริง</div></div>`}
- const sl=(k,l,min,max,st,u)=>`<div class="fsl"><div class="fsl-h"><span>${l}</span><b id="fsl-${k}">${fmt(f[k],1)} ${u}</b></div><input type="range" min="${min}" max="${max}" step="${st}" value="${f[k]}" data-fly="${k}"></div>`;
+ const sl=(k,l,min,max,st,u)=>k==='v'?`<div class="fsl"><div class="fsl-h"><span>${l} ${speedUnitSeg()}</span><b id="fsl-v">${spd(f.v)}</b></div><input type="range" ${SU()==='kmh'?'min="4" max="36" step="1" value="'+Math.round(f.v*3.6)+'"':'min="1" max="10" step="0.5" value="'+f.v+'"'} data-fly="v"></div>`:`<div class="fsl"><div class="fsl-h"><span>${l}</span><b id="fsl-${k}">${fmt(f[k],1)} ${u}</b></div><input type="range" min="${min}" max="${max}" step="${st}" value="${f[k]}" data-fly="${k}"></div>`;
  const rng=(a,u)=>`${fmt(a[0],1)}–${fmt(a[1],1)} ${u}`;
  return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการบินตามพืช</h2><div class="sub">ความสูง · ระยะร่อง · ความเร็ว · น้ำต่อไร่ — ค่าตั้งต้นสำหรับ DJI T55</div></div><button class="btn sm ghost" data-act="flyReset">↺ ค่าแนะนำ</button></div>
  ${flyTabs(f)}
  <div class="frec"><div><span>พืช/ความสูงพืช</span><b>${esc(P.n)} · ${esc(P.tall)}</b></div><div><span>สูงจากยอดพืช</span><b>${rng(P.h,'ม.')}</b></div><div><span>ระยะร่อง</span><b>${rng(P.sw,'ม.')}</b></div><div><span>ความเร็ว</span><b>${rng(P.v,'ม./วิ.')}</b></div><div><span>น้ำ</span><b>${rng(P.w,'ล./ไร่')}</b></div><div><span>ขนาดละออง</span><b>${p.drop} µm</b></div></div>
+ <div id="fly-rec">${flyRecHTML()}</div>
  <div class="fsls">${sl('h','ความสูงจากยอดพืช',1.5,12,0.5,'ม.')}${sl('sw','ระยะร่อง (Spray width)',3,11,0.5,'ม.')}${sl('v','ความเร็วบิน',1,10,0.5,'ม./วิ.')}${sl('w','น้ำต่อไร่',1,30,0.5,'ล.')}<div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" min="0" max="8" step="0.1" value="${f.wind}" data-fly="wind"></div></div>
  <div id="fly-out">${flyOutHTML()}</div>
  <div class="fnote"><b>📌 ข้อแนะนำสำหรับ${esc(P.n)}</b>${P.stageNote&&f.stg&&P.stageNote[f.stg]?`<div class="fstn">ระยะนี้: ${esc(P.stageNote[f.stg])} → แนะนำสูงจากยอด <b>${fmt(P.h[0],0)}–${fmt(P.h[1],0)} ม.</b></div>`:''}<ul>${P.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul></div>
  <div class="row" style="gap:8px;margin-top:8px;align-items:center"><span class="small muted">หัวพ่น:</span><span class="wuseg">${[['cen','เหวี่ยง 2 หัว (40 ล./นาที)'],['mist','พ่นหมอก 4 หัว (50 ล./นาที)']].map(x=>`<button class="${(FLOWMAX()===50?'mist':'cen')===x[0]?'on':''}" data-act="flyNoz" data-n="${x[0]}">${x[1]}</button>`).join('')}</span></div>
  <div class="tiny muted" style="margin-top:8px">ทดสอบด้วยกระดาษไวน้ำ วางบน–กลาง–ล่างทรงพุ่ม · เป้าหมายโดยประมาณ: ยาแมลง ≥20–30 จุด/ตร.ซม. · ยาเชื้อรา ≥50–70 · ยาหญ้า ≥20–40 · ถ้าไม่ถึงให้ลดความเร็ว/ร่อง หรือเพิ่มน้ำ</div></div>`}
-function flyOutHTML(){const f=flyState();const P=flyRange(f.crop,f.stg);const c=flyCalc(f.h,f.sw,f.v,f.w,f.crop,f.stg);
+function flyOutHTML(){return spTxt(flyOutHTML0())}
+function flyOutHTML0(){const f=flyState();const P=flyRange(f.crop,f.stg);const c=flyCalc(f.h,f.sw,f.v,f.w,f.crop,f.stg);
  const lo=flyCalc(P.h[0],Math.min(P.sw[0],P.h[0]*3),P.v[1],f.w,f.crop,f.stg),hi=flyCalc(P.h[1],Math.min(P.sw[1],P.h[1]*3.5),(P.v[0]+P.v[1])/2,f.w,f.crop,f.stg);
  return `<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
-  <div><span>ความเร็วที่ทำได้จริง</span><b>${fmt(c.effV,1)} <small>ม./วิ.</small></b></div><div><span>พ่นได้ (เฉพาะเวลาบิน)</span><b>${fmt(c.raiHr,0)} <small>ไร่/ชม.</small></b></div><div><span>1 ถัง (${TANK} ล.)</span><b>${fmt(c.perTank,1)} <small>ไร่</small></b></div><div><span>แปลงกว้าง 100 ม.</span><b>${c.passes} <small>รอบ</small></b></div></div>
+  <div><span>ความเร็วที่ทำได้จริง</span><b>${spdN(c.effV)} <small>${SU_LAB()}</small></b></div><div><span>พ่นได้ (เฉพาะเวลาบิน)</span><b>${fmt(c.raiHr,0)} <small>ไร่/ชม.</small></b></div><div><span>1 ถัง (${TANK} ล.)</span><b>${fmt(c.perTank,1)} <small>ไร่</small></b></div><div><span>แปลงกว้าง 100 ม.</span><b>${c.passes} <small>รอบ</small></b></div></div>
  ${c.warn.length?c.warn.map(x=>`<div class="note ${x[0]} small" style="margin-top:6px">${esc(x[1])}</div>`).join(''):`<div class="note ok small" style="margin-top:6px">✅ ค่าอยู่ในช่วงเหมาะสมสำหรับ${esc(P.n)}</div>`}
  ${windDirHTML(f)}
  <div class="fcmp"><div class="fcmp-h">เทียบ 2 แบบ (น้ำ ${fmt(f.w,1)} ล./ไร่ เท่ากัน)</div>
@@ -3958,8 +4044,8 @@ function windDirHTML(f){
  if(herb&&w<=5)items.push('ยาหญ้าปลิวไปโดนพืชข้างเคียงเสียหายหนัก — เว้นกันชนเป็น 2 เท่า');
  return `<div class="fwind lv-${lv}"><div class="fwind-h"><b>🧭 ทิศทางบิน: ${t}</b><span>ลม ${windTxt(w)}</span></div><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="tiny muted">ระยะเลื่อน/กันชนเป็นค่าประมาณ — ตรวจด้วยกระดาษไวน้ำวางขวางแนวบิน</div></div>`}
 function flyTabs(f){return `<div class="ftabs" style="margin-bottom:8px">${Object.entries(FLY).map(([k,v])=>`<button class="${f.crop===k?'on':''}" data-act="flyCrop" data-c="${k}">${esc(v.n)}</button>`).join('')}</div>
- <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(FLY[f.crop]||{}).stageH?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${[...new Map((CROPS[f.crop]?.stages||[]).map(s=>[s.g,s])).values()].filter(s=>FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}</div>`}
-function flyApply(k){const f=UI.fly;const p=flyPreset(f.crop,f.svc,f.can,f.stg);Object.assign(f,{h:p.h,sw:p.sw,v:p.v,w:p.w})}
+ <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(FLY[f.crop]||{}).stageH?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${(CROPS[f.crop]?.stages||[]).filter((s,i,a)=>a.findIndex(x=>x.g===s.g)===i).filter(s=>FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}</div>`}
+function flyApply(k){const f=UI.fly;const p=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx());f.manual=false;Object.assign(f,{h:p.h,sw:p.sw,v:p.v,w:p.w})}
 Object.assign(ACT,{
  flyCrop:a=>{const f=flyState();f.crop=a.dataset.c;f.touched=true;flyApply();render()},
  flySvc:a=>{const f=flyState();f.svc=a.dataset.s;f.touched=true;flyApply();render()},
@@ -3968,10 +4054,10 @@ Object.assign(ACT,{
  flyReset:()=>{flyApply();render()},
  flyNoz:a=>{try{localStorage.setItem('nozzle',a.dataset.n)}catch(e){}render()},
  goFly:()=>{closeModal();go('advisor');setTimeout(()=>$('#fly-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
- jfFly:()=>{const cr=FLY[F.crop]?F.crop:'other';const p=flyPreset(cr,F.service||'spray','m',stageGroup(cr,F.stage));if(p.S.spread){F.flyH=3;F.swath=6;F.speed=6}else{F.flyH=p.h;F.swath=p.sw;F.speed=p.v;if(!num(F.waterRate))F.waterRate=p.w}renderJobForm();toast('ใส่ค่าแนะนำสำหรับ'+p.P.n+'แล้ว — ปรับตามหน้างานได้','ok')}
+ jfFly:()=>{const cr=FLY[F.crop]?F.crop:'other';const wx=F.wx||{};const p=flyAdj(cr,F.service||'spray','m',stageGroup(cr,F.stage),{temp:wx.temp,rh:wx.rh,wind:wx.wind});if(p.S.spread){F.flyH=3;F.swath=6;F.speed=6}else{F.flyH=p.h;F.swath=p.sw;F.speed=p.v;if(!num(F.waterRate))F.waterRate=p.w}renderJobForm();toast('ใส่ค่าแนะนำสำหรับ'+p.P.n+'แล้ว — ปรับตามหน้างานได้','ok')}
 });
 const FLY_U={h:'ม.',sw:'ม.',v:'ม./วิ.',w:'ล.',wind:''};
-document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){const k=t.dataset.fly;UI.fly[k]=+t.value;UI.fly.touched=true;const l=$('#fsl-'+k);if(l)l.textContent=k==='wind'?windTxt(+t.value):fmt(+t.value,1)+' '+FLY_U[k];const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()}});
+document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){const k=t.dataset.fly;UI.fly[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:+t.value;UI.fly.touched=true;if(k!=='wind')UI.fly.manual=true;const l=$('#fsl-'+k);if(l)l.textContent=k==='wind'?windTxt(+t.value):k==='v'?spd(UI.fly.v):fmt(+t.value,1)+' '+FLY_U[k];if(k==='wind')flyRefresh();else{const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML();const r=$('#fly-rec');if(r)r.innerHTML=flyRecHTML()}}});
 
 /* =========================================================
    ส่วนที่ 12: คู่มือโรคและศัตรูพืช (อาการ · สาเหตุ · การจัดการ) — ยางพารา + ทุเรียน
@@ -4195,10 +4281,11 @@ function dzCard(d,open){const cat=DZ_CAT[d.cat]||DZ_CAT.fun;const q=UI.dz.q;
  return `<div class="dz card ${open?'open':''}" id="dz-${d.id}"><div class="dz-h" data-act="dzOpen" data-id="${d.id}"><span class="dz-i c-${d.cat}">${cat[1]}</span><div class="dz-t"><b>${q?hl(d.n,q):esc(d.n)}</b><span><i>${esc(d.sci)}</i></span><div class="dz-tags">${d.parts.map(p=>`<span class="tg lt">${DZ_PART[p]}</span>`).join('')}${d.m.map(m=>`<span class="tg m-${m}">${DZ_M[m][0]} ${DZ_M[m][1]}</span>`).join('')}</div></div><span class="dz-x">${open?'−':'+'}</span></div>
  ${open?`<div class="dz-b"><div class="dz-s"><h4>🔎 อาการ</h4><ul>${d.sym.map(s=>`<li>${q?hl(s,q):esc(s)}</li>`).join('')}</ul></div>
  <div class="dz-s"><h4>🌦️ สาเหตุ/สภาวะที่ระบาด</h4><p>${esc(d.cond)}</p><div class="tiny muted">${esc(cat[0])}</div></div>
- <div class="dz-s"><h4>🛠️ การจัดการ</h4><ul>${d.ctrl.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>
+ <div class="dz-s"><h4>🛠️ การจัดการ</h4><ul>${d.ctrl.map(s=>`<li>${spTxt(esc(s))}</li>`).join('')}</ul></div>
  ${chems.length?`<div class="dz-s"><h4>🧪 สารที่ใช้ (ดูฉลากก่อนใช้)</h4><div class="row" style="gap:5px">${chems.map(c=>`<span class="badge b-${c.cat}" data-act="dzChem" data-n="${esc(c.th)}" style="cursor:pointer">${esc(c.th)}${c.g?' · '+esc(gLabel(c.cat,c.g)):''}</span>`).join('')}</div></div>`:''}
  ${d.m.includes('drone')?'':'<div class="note warn small">🚁 โดรนช่วยไม่ได้โดยตรง — ต้องจัดการที่จุดเกิดโรค (ทา/ราด/ฉีด/ตัดแต่ง)</div>'}</div>`:''}</div>`}
 function viewDiseases(){
+ setTimeout(()=>{const b=document.querySelector('.dz-tabs .on');if(b&&b.parentElement)b.parentElement.scrollLeft=b.offsetLeft-b.parentElement.offsetWidth/2+b.offsetWidth/2},0);
  const z=UI.dz;const crops=[...new Set(DZ.map(d=>d.crop))];
  let list=DZ.filter(d=>d.crop===z.crop&&(!z.part||d.parts.includes(z.part)));
  if(z.q.trim())list=dzRank(list,z.q,40);
@@ -4206,7 +4293,7 @@ function viewDiseases(){
  const grp=k=>list.filter(d=>k==='ins'?d.cat==='ins':k==='other'?['phys','q'].includes(d.cat):!['ins','phys','q'].includes(d.cat));
  const sec=(k,t)=>{const L=grp(k);return L.length?`<div class="dz-sec">${t} <span>${L.length}</span></div>${L.map(d=>dzCard(d,z.open===d.id||(z.q.trim()&&L.length<=2))).join('')}`:''};
  return `<div class="ph"><div><h1>โรคและศัตรูพืช</h1><div class="sub">ดูอาการ สาเหตุ วิธีจัดการ และสารที่ใช้ · บอกด้วยว่าโรคไหนใช้โดรนได้</div></div></div>
- <div class="ftabs">${crops.map(c=>`<button class="${z.crop===c?'on':''}" data-act="dzCrop" data-c="${c}">${CROPS[c]?.ic||''} ${esc(CROPS[c]?.n||c)}</button>`).join('')}</div>
+ <div class="ftabs dz-tabs">${crops.map(c=>`<button class="${z.crop===c?'on':''}" data-act="dzCrop" data-c="${c}">${CROPS[c]?.ic||''} ${esc(CROPS[c]?.n||c)}</button>`).join('')}</div>
  <div class="card" style="padding:12px"><div class="field" style="margin:0"><label>🔍 พิมพ์อาการที่เห็น (เช่น “ราสีขาวที่หน้ากรีด”, “ใบเหลืองร่วง”)</label><input id="dz-q" value="${esc(z.q)}" data-in="dzQ" placeholder="พิมพ์อาการ ชื่อโรค หรือชื่อแมลง" autocomplete="off"></div>
   <div class="dz-chips">${(DZ_SYM[z.crop]||[]).map(s=>`<button data-act="dzSym" data-s="${esc(s)}">${esc(s)}</button>`).join('')}</div>
   <div class="fchips" style="margin-top:8px;padding-bottom:0"><button class="fchip ${!z.part?'on':''}" data-act="dzPart" data-p="">ทุกส่วน</button>${parts.map(p=>`<button class="fchip ${z.part===p?'on':''}" data-act="dzPart" data-p="${p}">${DZ_PART[p]}</button>`).join('')}</div></div>
@@ -4222,6 +4309,414 @@ Object.assign(ACT,{
 });
 IC.bug='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="14" rx="5" ry="6.5"/><path d="M12 7.5V20.5M9 5.5 10.5 7.5M15 5.5 13.5 7.5M7 11H3.5M7 15H3M7.5 18.5l-3 2M17 11h3.5M17 15h4M16.5 18.5l3 2"/></svg>';
 
+/* =========================================================
+   ส่วนที่ 13: คู่มือโรค/ศัตรูพืช ข้าว ข้าวโพด อ้อย ผัก มะพร้าว + ตั้งค่าการบินมะพร้าว
+   ========================================================= */
+Object.assign(DZ_CAT,{bac:['โรคจากแบคทีเรีย','🦠'],vir:['โรคจากไวรัส/ไฟโตพลาสมา (มีแมลงพาหะ)','🧬'],nem:['ไส้เดือนฝอย','🪱'],rod:['สัตว์ศัตรูพืช','🐀']});
+Object.assign(DZ_M,{crown:['🌴','ราดยอด/คอมะพร้าว'],seed:['🌱','คลุก/แช่เมล็ด-ท่อนพันธุ์'],vector:['🦟','คุมแมลงพาหะ']});
+Object.assign(DZ_PART,{seed:'เมล็ด/รวง',stem:'ลำต้น/ลำ'});
+DZ.push(
+/* ---------------- ข้าว ---------------- */
+D('ri-blast','rice','โรคไหม้','Pyricularia oryzae','fun',['leaf','seed','stem'],
+ ['ใบมีแผลรูปตา/รูปเพชร กลางแผลสีเทาขาว ขอบสีน้ำตาลแดง แผลรวมกันใบแห้งทั้งใบ','ระยะกล้าเป็นมากจะแห้งตายเป็นหย่อม (ไหม้ทั้งกล้า)','ระยะออกรวง: คอรวงเป็นแผลสีน้ำตาลดำ รวงหักพับ เมล็ดลีบ (ไหม้คอรวง)'],
+ 'กลางคืนอากาศเย็น มีน้ำค้าง ความชื้นสูง ใส่ไนโตรเจนมาก ปลูกหนาแน่น',
+ ['ใช้พันธุ์ต้านทาน ลดปุ๋ยไนโตรเจนในแปลงที่เคยระบาด','พ่นไตรไซคลาโซล ไอโซโปรไทโอเลน อะซอกซีสโตรบิน หรือคาซูกะมัยซิน เมื่อพบแผลบนใบ','ป้องกันไหม้คอรวง: พ่นช่วงข้าวตั้งท้องปลาย–เริ่มออกรวง'],
+ ['drone','cult'],['tricy','isopro','azoxy','kasug','azodif'],'แผลรูปตา คอรวงหัก'),
+D('ri-blb','rice','โรคขอบใบแห้ง','Xanthomonas oryzae pv. oryzae','bac',['leaf'],
+ ['ขอบใบมีรอยขีดช้ำน้ำ ขยายเป็นทางยาวสีเหลือง แล้วแห้งเป็นสีเทาขาว ขอบแผลหยักเป็นคลื่น','เช้ามืดพบหยดน้ำเชื้อสีเหลืองที่แผล','กล้าอายุน้อยอาจเหี่ยวทั้งต้น (ครีเสก)'],
+ 'หลังพายุฝน ลมแรง น้ำท่วม ใบมีบาดแผล ใส่ไนโตรเจนมาก',
+ ['ใช้พันธุ์ต้านทาน ลดไนโตรเจน ไม่ระบายน้ำจากแปลงเป็นโรคไปแปลงอื่น','สารเคมีได้ผลจำกัด — คอปเปอร์หรือบาซิลลัส ซับทิลิส ช่วยลดการลุกลาม'],
+ ['cult','drone'],['copoh','bacsub'],'ขอบใบแห้ง ขีดเหลือง'),
+D('ri-bls','rice','โรคใบขีดโปร่งแสง','Xanthomonas oryzae pv. oryzicola','bac',['leaf'],
+ ['ใบมีขีดช้ำน้ำโปร่งแสงเล็กๆ ระหว่างเส้นใบ ส่องกับแสงเห็นชัด','ต่อมาขีดเป็นสีน้ำตาลแดง มีหยดเชื้อสีเหลืองอำพัน'],
+ 'ฝนชุก ลมแรง ความชื้นสูง',
+ ['จัดการเหมือนโรคขอบใบแห้ง: พันธุ์ต้านทาน ลดไนโตรเจน'],
+ ['cult'],['copoh','bacsub'],'ขีดโปร่งแสง'),
+D('ri-sb','rice','โรคกาบใบแห้ง','Rhizoctonia solani','fun',['stem','leaf'],
+ ['กาบใบระดับน้ำมีแผลวงรีสีเขียวเทา ขอบสีน้ำตาล ขยายขึ้นไปถึงใบ','พบเม็ดสเคลอโรเทียมกลมสีน้ำตาลเกาะที่แผล','ใบแห้งจากล่างขึ้นบน เมล็ดลีบ'],
+ 'นาหว่านหนาแน่น ร้อนชื้น ใส่ไนโตรเจนมาก',
+ ['ลดอัตราเมล็ด/ไนโตรเจน','พ่นเฮกซะโคนาโซล วาลิดามัยซิน ไทฟลูซาไมด์ หรืออะซอกซีสโตรบิน+ไดฟีโนโคนาโซล เน้นโคนกอ — โดรนบินช้า ใช้น้ำมากขึ้น'],
+ ['drone','cult'],['hexa','valida','thiflu','azoxy','azodif'],'กาบใบ แผลวงรี'),
+D('ri-bs','rice','โรคใบจุดสีน้ำตาล','Bipolaris oryzae','fun',['leaf','seed'],
+ ['จุดกลม/รีสีน้ำตาล ขนาดประมาณเมล็ดงา กลางแผลสีเทา','เมล็ดเป็นจุดสีน้ำตาล'],
+ 'ดินเสื่อม ขาดธาตุอาหาร (โพแทสเซียม ซิลิกอน) ความชื้นสูง',
+ ['ปรับปรุงดิน ใส่ปุ๋ยให้สมดุล','พ่นสารกลุ่มไตรอะโซลช่วงตั้งท้อง–ออกรวง ถ้าระบาดมาก'],
+ ['drone','cult'],['difprop','propi','tebu','azodif'],'จุดน้ำตาล เมล็ดงา'),
+D('ri-dirty','rice','โรคเมล็ดด่าง','เชื้อราหลายชนิด (Bipolaris, Curvularia, Fusarium ฯลฯ)','fun',['seed'],
+ ['เปลือกเมล็ดมีจุดหรือรอยด่างสีน้ำตาล/ดำ','เมล็ดลีบ ข้าวสารหักง่าย คุณภาพต่ำ'],
+ 'ฝนตกช่วงออกรวง ความชื้นสูง',
+ ['พ่นป้องกันช่วงข้าวตั้งท้องปลาย–ออกรวง 1–2 ครั้ง','งดพ่นช่วงดอกบาน ~9–11 โมง'],
+ ['drone'],['difprop','azodif','propi','tebu'],'เมล็ดด่าง'),
+D('ri-bakanae','rice','โรคถอดฝักดาบ','Fusarium fujikuroi','fun',['leaf','stem'],
+ ['ต้นกล้าสูงชะลูดผิดปกติ สีเหลืองซีด ใบตั้งชัน','ข้อล่างมีรากงอกออกมา ต้นแห้งตายก่อนออกรวง'],
+ 'เชื้อติดมากับเมล็ดพันธุ์',
+ ['ใช้เมล็ดพันธุ์สะอาด แช่/คลุกเมล็ดด้วยสารป้องกันเชื้อราก่อนปลูก','ถอนต้นเป็นโรคทำลาย'],
+ ['seed','cut'],['carben','prochl'],'ต้นสูงชะลูด'),
+D('ri-fsmut','rice','โรคดอกกระถิน (ลูกแหลม)','Ustilaginoidea virens','fun',['seed'],
+ ['เมล็ดบางเมล็ดกลายเป็นก้อนกลมสีเหลืองส้ม ต่อมาเป็นสีเขียวเข้มคล้ายกำมะหยี่'],
+ 'ฝนตก ความชื้นสูงช่วงข้าวตั้งท้อง–ออกรวง ใส่ไนโตรเจนมาก',
+ ['พ่นป้องกันช่วงข้าวตั้งท้อง (ก่อนออกรวง ~5–7 วัน) ด้วยสารไตรอะโซล หรือคอปเปอร์'],
+ ['drone'],['propi','difprop','copoh'],'ลูกแหลม ก้อนเหลืองเขียวบนรวง'),
+D('ri-orange','rice','โรคใบสีส้ม','ไฟโตพลาสมา/ไวรัส — พาหะ: เพลี้ยจักจั่นสีเขียว','vir',['leaf'],
+ ['ใบเป็นสีเหลืองส้มจากปลายใบลงมา ใบม้วนเข้า','ต้นเตี้ย แตกกอน้อย แห้งตายเป็นหย่อม'],
+ 'มีเพลี้ยจักจั่นสีเขียวมาก',
+ ['ไม่มีสารรักษาโรค — คุมเพลี้ยจักจั่นสีเขียว','ถอนต้นเป็นโรค ไถกลบตอซัง ใช้พันธุ์ต้านทาน'],
+ ['vector','cut'],['imida','etofen','bupro','dino'],'ใบส้ม ใบเหลือง'),
+D('ri-gsv','rice','โรคเขียวเตี้ย / โรคใบหงิก (จู๋)','ไวรัส — พาหะ: เพลี้ยกระโดดสีน้ำตาล','vir',['leaf'],
+ ['เขียวเตี้ย: ต้นเตี้ยมาก แตกกอฝอย ใบแคบเล็กตั้งตรงสีเขียวซีด','ใบหงิก: ใบสั้น ขอบใบแหว่งวิ่น ปลายใบบิดเป็นเกลียว เส้นใบบวมโป่ง ออกรวงไม่สุด'],
+ 'นาที่มีเพลี้ยกระโดดสีน้ำตาลระบาด',
+ ['คุมเพลี้ยกระโดดสีน้ำตาล ใช้พันธุ์ต้านทาน','ถอนต้นเป็นโรค เว้นช่วงปลูกตัดวงจรเพลี้ย'],
+ ['vector','cut'],['triflu','pymet','bupro','dino'],'ต้นแคระ ใบหงิก'),
+D('ri-bph','rice','เพลี้ยกระโดดสีน้ำตาล','Nilaparvata lugens','ins',['stem'],
+ ['โคนกอมีเพลี้ยตัวสีน้ำตาลจำนวนมาก','ต้นข้าวเหลืองแห้งเป็นวงกลม/หย่อม คล้ายไฟไหม้ (hopperburn)','เป็นพาหะโรคเขียวเตี้ยและใบหงิก'],
+ 'ร้อนชื้น ใส่ไนโตรเจนมาก ปลูกหนาแน่น ใช้ไพรีทรอยด์บ่อย (ฆ่าศัตรูธรรมชาติ)',
+ ['สำรวจโคนกอ พ่นเมื่อพบ ~10 ตัว/กอ ขึ้นไป','โดรน: บินต่ำ ช้า เพิ่มน้ำ 5–6 ล./ไร่ ให้ลงถึงโคนกอ','หลีกเลี่ยงไพรีทรอยด์/ออร์กาโนฟอสเฟต'],
+ ['drone'],['triflu','pymet','bupro','dino'],'โคนกอ ไหม้เป็นวง'),
+D('ri-wbph','rice','เพลี้ยกระโดดหลังขาว','Sogatella furcifera','ins',['stem','leaf'],
+ ['ตัวมีแถบขาวกลางหลัง พบที่กาบใบ','ใบเหลืองซีด แห้งจากปลายใบ'],
+ 'ระยะแตกกอ ร้อนชื้น',
+ ['จัดการเหมือนเพลี้ยกระโดดสีน้ำตาล'],
+ ['drone'],['triflu','pymet','bupro','dino'],'หลังขาว'),
+D('ri-glh','rice','เพลี้ยจักจั่นสีเขียว','Nephotettix spp.','ins',['leaf'],
+ ['แมลงตัวสีเขียวกระโดด/บินตามใบ','ดูดน้ำเลี้ยงใบเหลือง และเป็นพาหะโรคใบสีส้ม'],
+ 'ระยะกล้า–แตกกอ',
+ ['พ่นสารเมื่อพบมาก โดยเฉพาะแปลงที่เคยเป็นโรคใบสีส้ม'],
+ ['drone'],['imida','etofen','bupro','dino'],'แมลงเขียวบนใบ'),
+D('ri-lf','rice','หนอนห่อใบข้าว','Cnaphalocrocis medinalis','ins',['leaf'],
+ ['ใบถูกพับเข้าหากันเป็นหลอด','ภายในหลอดผิวใบถูกแทะเป็นทางสีขาว เหลือแต่เยื่อใบ'],
+ 'ร้อนชื้น ใส่ไนโตรเจนมาก ระยะแตกกอ–ตั้งท้อง',
+ ['พ่นเมื่อใบธงหรือใบรองถูกทำลายมาก (ใบล่างเสียหายเล็กน้อยไม่กระทบผลผลิต)'],
+ ['drone'],['chlorant','flubend','indox','cartap','emam'],'ใบม้วนหลอด ทางขาว'),
+D('ri-sb2','rice','หนอนกอข้าว','Scirpophaga incertulas ฯลฯ','ins',['stem','seed'],
+ ['ระยะแตกกอ: ยอดกลางเหี่ยวแห้ง ดึงหลุดง่าย (ยอดเหี่ยว)','ระยะออกรวง: รวงสีขาวตั้งตรง เมล็ดลีบทั้งรวง (ข้าวหัวหงอก)','ลำต้นมีรูเจาะ'],
+ 'มีกลุ่มไข่ผีเสื้อบนใบ',
+ ['เก็บกลุ่มไข่ทำลาย ปล่อยแตนเบียน','พ่นเมื่อพบยอดเหี่ยว/ไข่มาก'],
+ ['drone','cult'],['chlorant','flubend','cartap'],'ยอดเหี่ยว หัวหงอก'),
+D('ri-gm','rice','แมลงบั่ว','Orseolia oryzae','ins',['stem'],
+ ['ต้นข้าวเกิด “หลอดบั่ว” — ยอดกลายเป็นหลอดยาวคล้ายใบหอม','ต้นที่เป็นหลอดไม่ออกรวง แตกกอมากผิดปกติ'],
+ 'นาน้ำฝน ช่วงแตกกอ ฝนชุก (พบมากภาคเหนือ/อีสาน)',
+ ['ใช้พันธุ์ต้านทาน ปลูกพร้อมกันในพื้นที่','กำจัดข้าวป่า/วัชพืชที่เป็นพืชอาศัย','ใช้สารตามคำแนะนำกรมการข้าวช่วงแตกกอเมื่อพบระบาด'],
+ ['cult'],[],'หลอดบั่ว ใบหอม'),
+D('ri-bug','rice','แมลงสิง','Leptocorisa oratorius','ins',['seed'],
+ ['ดูดกินเมล็ดระยะน้ำนม เมล็ดลีบ มีจุดดำที่เมล็ด','ในนามีกลิ่นเหม็นเขียว'],
+ 'ระยะออกรวง–น้ำนม',
+ ['พ่นช่วงเช้า/เย็น เมื่อพบ 1 ตัวต่อ 1 ตร.ม. ขึ้นไป ระยะออกรวง'],
+ ['drone'],['etofen','lambda','malath'],'เมล็ดลีบ กลิ่นเหม็น'),
+D('ri-thr','rice','เพลี้ยไฟข้าว','Stenchaetothrips biformis','ins',['leaf'],
+ ['ใบกล้าม้วนเข้าตามยาว ปลายใบแห้งเหลือง','ต้นกล้าแคระ เป็นหย่อม'],
+ 'นาขาดน้ำ ช่วงกล้า อากาศแห้ง',
+ ['ปล่อยน้ำเข้านาให้ท่วมยอดชั่วคราวช่วยลดได้','พ่นสารเมื่อระบาดรุนแรง'],
+ ['drone','cult'],['imida','thiam','carbo'],'ใบม้วน ปลายใบแห้ง'),
+D('ri-snail','rice','หอยเชอรี่','Pomacea canaliculata','ins',['leaf','stem'],
+ ['ต้นกล้าถูกกัดกินเหลือแต่ตอ เป็นหย่อมว่าง','พบไข่สีชมพูเกาะตามต้นข้าว คันนา'],
+ 'นาหว่านน้ำตม น้ำขัง ช่วง 1–30 วันหลังหว่าน',
+ ['ระบายน้ำให้แห้งช่วงกล้า ทำร่องรวมหอยแล้วเก็บ','ใช้สารกำจัดหอยตามฉลาก (นิโคลซาไมด์) — หว่านลงน้ำ ไม่ใช่พ่นทางใบ'],
+ ['cult'],['niclo'],'กล้าหาย ไข่ชมพู'),
+D('ri-army','rice','หนอนกระทู้กล้า / หนอนกระทู้คอรวง','Spodoptera mauritia, Mythimna separata','ins',['leaf','seed'],
+ ['ใบกล้าถูกกัดกินเหลือแต่ก้าน ระบาดเป็นวงกว้างในคืนเดียว','ระยะออกรวง: คอรวงถูกกัดขาดร่วงกับพื้น'],
+ 'หลังฝนตกหนัก/น้ำท่วมแล้วลด',
+ ['พ่นช่วงเย็นเมื่อหนอนยังเล็ก'],
+ ['drone'],['chlorant','flubend','emam'],'กัดคอรวง กล้าเหลือก้าน'),
+D('ri-rat','rice','หนูนา','Bandicota, Rattus spp.','rod',['stem'],
+ ['ต้นข้าวถูกกัดขาดเป็นรอยเฉียง','ระยะตั้งท้อง–ออกรวงถูกกัดเสียหายเป็นหย่อม มีรูหนูตามคันนา'],
+ 'ช่วงข้าวตั้งท้อง–ออกรวง',
+ ['ทำความสะอาดคันนา ล้อมรั้ว กับดัก ใช้เหยื่อพิษตามคำแนะนำร่วมกันทั้งชุมชน'],
+ ['cult'],[],'ต้นถูกกัดเฉียง'),
+D('ri-zn','rice','อาการขาดสังกะสี','ความผิดปกติทางธาตุอาหาร','phys',['leaf'],
+ ['ใบกลางลำต้นมีจุด/ขีดสีน้ำตาล โคนใบซีดขาว','ต้นแคระ แตกกอน้อย ใบสั้น'],
+ 'ดินด่าง ดินขังน้ำนาน ใส่ฟอสเฟตมาก',
+ ['พ่นสังกะสีทางใบระยะกล้า–แตกกอ (โดรนพ่นได้)'],
+ ['drone'],[],'ใบจุดน้ำตาล โคนใบซีด'),
+/* ---------------- ข้าวโพด ---------------- */
+D('co-dm','corn','โรคราน้ำค้าง','Peronosclerospora sorghi','oom',['leaf'],
+ ['ใบเป็นทางยาวสีเหลืองซีดสลับเขียวตั้งแต่โคนใบ','ใต้ใบมีผงสีขาวคล้ายแป้งช่วงเช้ามืด','ต้นแคระ ไม่ติดฝักหรือฝักเล็ก'],
+ 'อากาศชื้น เย็น ช่วงข้าวโพดอายุ 1–4 สัปดาห์',
+ ['ใช้เมล็ดคลุกสารเมทาแลกซิล/พันธุ์ต้านทาน','ถอนต้นเป็นโรคทำลายเร็ว','พ่นทางใบช่วงต้นเล็กเมื่อพบระบาด'],
+ ['seed','drone','cut'],['metal','dimeth','fosetyl'],'ใบลายเหลือง ผงขาวใต้ใบ'),
+D('co-ntlb','corn','โรคใบไหม้แผลใหญ่','Exserohilum turcicum','fun',['leaf'],
+ ['แผลรูปกระสวยยาว 2.5–15 ซม. สีเทาอมเขียวถึงน้ำตาล','เริ่มจากใบล่าง ลามขึ้นบน ใบแห้งทั้งใบ'],
+ 'ชื้น กลางคืนเย็น มีน้ำค้าง',
+ ['ใช้พันธุ์ต้านทาน','พ่นอะซอกซีสโตรบิน ไพราโคลสโตรบิน หรือไตรอะโซล ช่วงก่อนออกดอกเมื่อพบแผลบนใบกลาง'],
+ ['drone'],['azoxy','pyracl','propi','tebu','azodif','manco'],'แผลกระสวยยาว'),
+D('co-slb','corn','โรคใบไหม้แผลเล็ก','Bipolaris maydis','fun',['leaf'],
+ ['แผลเล็กรูปสี่เหลี่ยมผืนผ้าอยู่ระหว่างเส้นใบ สีน้ำตาลอ่อน ขอบน้ำตาลเข้ม','แผลรวมกันใบไหม้'],
+ 'ร้อนชื้น',
+ ['พ่นสารกลุ่มเดียวกับใบไหม้แผลใหญ่'],
+ ['drone'],['azoxy','propi','tebu','manco'],'แผลสี่เหลี่ยมเล็ก'),
+D('co-rust','corn','โรคราสนิม','Puccinia polysora / P. sorghi','fun',['leaf'],
+ ['ตุ่มนูนเล็กสีส้ม/น้ำตาลแดงกระจายบนใบ','ถูด้วยนิ้วมีผงสีสนิมติดมือ'],
+ 'ชื้น อากาศเย็นถึงอบอุ่น',
+ ['พ่นไตรอะโซลหรือสโตรบิลูรินเมื่อพบระบาดก่อนออกดอก'],
+ ['drone'],['propi','tebu','azoxy','manco'],'ตุ่มสนิม'),
+D('co-stalk','corn','โรคลำต้นเน่า / ฝักเน่า','Fusarium, Diplodia, Macrophomina ฯลฯ','fun',['stem','fruit'],
+ ['ต้นเหี่ยวทั้งต้นช่วงติดฝัก ลำต้นหักล้มง่าย','ผ่าลำต้นไส้ในเปื่อยยุ่ย สีชมพูหรือมีจุดดำ (เน่าถ่าน)','ฝักเน่ามีราสีขาว/ชมพู'],
+ 'แล้งช่วงติดฝัก ต้นเครียด หนอนเจาะทำแผล ปลูกถี่',
+ ['ให้น้ำเพียงพอช่วงติดฝัก ใส่โพแทสเซียม','คุมหนอนเจาะลำต้น/ฝัก ปลูกพันธุ์ต้านทาน หมุนเวียนพืช'],
+ ['cult'],[],'ต้นล้ม ไส้ในเปื่อย'),
+D('co-mosaic','corn','โรคใบด่างแคระ','ไวรัส (SCMV/MDMV) — พาหะ: เพลี้ยอ่อน','vir',['leaf'],
+ ['ใบด่างเป็นขีดสีเขียวอ่อนสลับเขียวเข้ม','ต้นแคระ ฝักเล็ก'],
+ 'เพลี้ยอ่อนมาก มีอ้อย/หญ้าเป็นแหล่งเชื้อใกล้แปลง',
+ ['ใช้พันธุ์ต้านทาน กำจัดวัชพืชพืชอาศัย คุมเพลี้ยอ่อน'],
+ ['vector','cult'],['imida','sulfox','flonic'],'ใบด่างขีด'),
+D('co-faw','corn','หนอนกระทู้ข้าวโพดลายจุด','Spodoptera frugiperda','ins',['leaf','fruit'],
+ ['ใบอ่อนเป็นรูขาดวิ่น ในกรวยยอดมีมูลหนอนคล้ายขี้เลื่อยเปียก','หัวหนอนมีรอยรูป Y กลับหัว ปลายท้องมี 4 จุดเรียงเป็นสี่เหลี่ยม','ระยะหลังเจาะฝักและช่อดอก'],
+ 'ระบาดได้ทั้งปี รุนแรงช่วงแล้ง ต้นอายุ 2–5 สัปดาห์',
+ ['สำรวจกรวยยอดทุกสัปดาห์','พ่นช่วงเย็นให้ลงกรวยยอด — โดรนบินช้า 3–4 ม./วิ.','สลับกลุ่มสารแบบช่วงเวลา (window) ~30 วัน'],
+ ['drone'],['spineto','emam','chlorfen','lufen','methoxy','indox','chlorant','bt'],'กรวยยอด ขี้เลื่อย Y กลับหัว'),
+D('co-acb','corn','หนอนเจาะลำต้นข้าวโพด','Ostrinia furnacalis','ins',['stem','leaf'],
+ ['ใบที่คลี่ออกมามีรูเรียงเป็นแถว','ลำต้นมีรูเจาะ มีขุยออกมา ช่อดอกตัวผู้หักพับ'],
+ 'ระยะก่อนออกดอก',
+ ['พ่นเมื่อพบรูบนใบมากช่วงก่อนออกดอก','ปล่อยแตนเบียนไข่ไตรโคแกรมมา'],
+ ['drone'],['chlorant','flubend','lufen','bt'],'รูเรียงแถว ลำต้นมีรู'),
+D('co-ew','corn','หนอนเจาะฝักข้าวโพด','Helicoverpa armigera','ins',['fruit'],
+ ['กัดกินไหมและปลายฝัก มีมูลหนอนที่ปลายฝัก','เมล็ดปลายฝักเสียหาย เชื้อราเข้าซ้ำ'],
+ 'ช่วงออกไหม แล้ง',
+ ['พ่นช่วงออกไหม 1–2 ครั้ง'],
+ ['drone'],['chlorant','flubend','emam','indox','lufen'],'ปลายฝักถูกกิน'),
+D('co-aphid','corn','เพลี้ยอ่อนข้าวโพด','Rhopalosiphum maidis','ins',['leaf','flower'],
+ ['กลุ่มเพลี้ยสีเขียวเข้ม/ดำเกาะยอดและช่อดอกตัวผู้','มีราดำ ช่อดอกไม่บาน ผสมเกสรไม่ดี'],
+ 'แล้ง ต้นขาดน้ำ',
+ ['พ่นเมื่อพบเพลี้ยหนาแน่นก่อนออกดอก'],
+ ['drone'],['imida','acet','sulfox','flonic'],'ช่อดอกมีเพลี้ย ราดำ'),
+D('co-thr','corn','เพลี้ยไฟ / ไรแดงข้าวโพด','Thrips, Tetranychus spp.','ins',['leaf'],
+ ['ใบมีรอยขีดสีขาวเงินเป็นทาง หรือจุดประสีเหลือง','ใบแห้งจากปลาย ช่วงแล้ง'],
+ 'แล้ง ร้อน ต้นขาดน้ำ',
+ ['ให้น้ำ ลดความเครียด','พ่นสารเมื่อระบาด'],
+ ['drone'],['imida','abam','propar','spineto'],'ขีดเงิน ใบแห้ง'),
+/* ---------------- อ้อย ---------------- */
+D('sc-wl','sugarcane','โรคใบขาว','ไฟโตพลาสมา — พาหะ: เพลี้ยจักจั่นปีกลายหยัก','vir',['leaf'],
+ ['ใบเป็นสีขาวทั้งใบ หรือเป็นแถบขาวขนานเส้นกลางใบ','แตกกอมากเป็นกอฝอย ใบเล็ก ต้นแคระ ไม่เป็นลำ','อ้อยตอเป็นหนักกว่าอ้อยปลูก'],
+ 'ท่อนพันธุ์ติดเชื้อ และเพลี้ยจักจั่นพาหะระบาดช่วงฝน',
+ ['ไม่มีสารรักษา — ใช้ท่อนพันธุ์ปลอดโรค (แปลงพันธุ์สะอาด/แช่น้ำร้อน)','ถอนกอเป็นโรคทำลายทันที ไม่ไว้ตอในแปลงที่เป็นมาก','คุมเพลี้ยจักจั่นพาหะ'],
+ ['seed','cut','vector'],['dino','imida','thiam','etofen','bupro'],'ใบขาว กอฝอย'),
+D('sc-smut','sugarcane','โรคแส้ดำ','Sporisorium scitamineum','fun',['stem'],
+ ['ยอดอ้อยมี “แส้” สีดำโค้งยาวหุ้มด้วยเยื่อสีเงิน เยื่อแตกปล่อยผงสปอร์ดำ','แตกกอมาก ลำเล็กผอม ใบแคบตั้ง'],
+ 'แล้ง อ้อยตอ ท่อนพันธุ์ติดเชื้อ',
+ ['ใช้พันธุ์ต้านทาน/ท่อนพันธุ์สะอาด แช่ท่อนพันธุ์ด้วยสารป้องกันเชื้อราก่อนปลูก','ใช้ถุงคลุมแส้ก่อนถอนกอทำลาย (กันสปอร์ฟุ้ง)'],
+ ['seed','cut'],['propi','tebu'],'แส้ดำที่ยอด'),
+D('sc-rr','sugarcane','โรคเหี่ยวเน่าแดง','Colletotrichum falcatum','fun',['stem','leaf'],
+ ['ใบเหลืองเหี่ยวจากยอดลงมา','ผ่าลำตามยาวเนื้อในเป็นสีแดง มีแถบสีขาวขวางลำ กลิ่นเปรี้ยว','เส้นกลางใบมีแผลสีแดงยาว'],
+ 'ฝนชุก น้ำขัง ลำมีบาดแผลจากหนอนกอ',
+ ['ใช้พันธุ์ต้านทาน ท่อนพันธุ์สะอาด ระบายน้ำ','ไม่ไว้ตอในแปลงที่เป็นโรค หมุนเวียนพืช'],
+ ['seed','cult'],[],'เนื้อในแดง แถบขาว'),
+D('sc-pb','sugarcane','โรคยอดบิด','Fusarium spp.','fun',['leaf'],
+ ['ใบยอดย่น บิดเบี้ยว ซีดเหลือง ฉีกขาดเป็นริ้ว','รุนแรงยอดเน่า ข้อสั้นเป็นรอยมีด'],
+ 'ช่วงฝนชุกหลังแล้ง อ้อยอายุ 3–7 เดือน เติบโตเร็ว',
+ ['ส่วนใหญ่ฟื้นได้เอง ถ้าระบาดมากพ่นคาร์เบนดาซิม หรือแมนโคเซบ'],
+ ['drone'],['carben','manco'],'ยอดบิด ใบย่น'),
+D('sc-mosaic','sugarcane','โรคใบด่าง','ไวรัส (SCMV) — พาหะ: เพลี้ยอ่อน','vir',['leaf'],
+ ['ใบมีขีดสั้นๆ สีเขียวอ่อนสลับเขียวเข้มเป็นลายด่าง','ต้นเตี้ย ลำเล็ก'],
+ 'ท่อนพันธุ์ติดเชื้อ เพลี้ยอ่อน',
+ ['ใช้ท่อนพันธุ์ปลอดโรค พันธุ์ต้านทาน'],
+ ['seed','vector'],[],'ใบด่างขีด'),
+D('sc-rs','sugarcane','โรคใบขีดแดง / ยอดเน่า','Acidovorax avenae','bac',['leaf'],
+ ['ใบมีขีดเล็กยาวสีแดงเข้มขนานเส้นใบ','รุนแรงยอดเน่ามีกลิ่นเหม็น'],
+ 'ฝนชุก ใส่ไนโตรเจนมาก',
+ ['ใช้พันธุ์ต้านทาน ไม่ใส่ไนโตรเจนมากเกิน'],
+ ['cult'],[],'ขีดแดง'),
+D('sc-rust','sugarcane','โรคราสนิม / ใบจุด','Puccinia spp., Cercospora ฯลฯ','fun',['leaf'],
+ ['ใบมีตุ่มเล็กสีน้ำตาลส้ม/จุดสีน้ำตาลแดงยาว','ใบแห้งก่อนกำหนด'],
+ 'ชื้นสูงต่อเนื่อง',
+ ['ใช้พันธุ์ต้านทาน พ่นสโตรบิลูริน/ไตรอะโซลถ้าระบาด'],
+ ['drone'],['azoxy','pyracl','tebu','propi','manco'],'ตุ่มสนิม'),
+D('sc-pine','sugarcane','โรคท่อนพันธุ์เน่า (สับปะรด)','Ceratocystis paradoxa','fun',['stem'],
+ ['ท่อนพันธุ์ไม่งอก ผ่าดูข้างในเน่าเป็นสีดำ','มีกลิ่นหอมคล้ายสับปะรด'],
+ 'ดินชื้นแฉะหรือแล้งจัดหลังปลูก ท่อนพันธุ์มีแผล',
+ ['แช่ท่อนพันธุ์ด้วยสารป้องกันเชื้อราก่อนปลูก ปลูกเมื่อดินมีความชื้นพอดี'],
+ ['seed'],['carben','propi'],'ท่อนพันธุ์ไม่งอก กลิ่นสับปะรด'),
+D('sc-borer','sugarcane','หนอนกออ้อย','หนอนกอลายจุดเล็ก ลายใหญ่ สีชมพู สีขาว','ins',['stem','leaf'],
+ ['อ้อยเล็ก: ยอดกลางเหี่ยวแห้ง ดึงหลุดง่าย (ยอดตาย)','อ้อยโต: ลำมีรูเจาะตามข้อ มีขุย ลำหักง่าย น้ำหนักและความหวานลด'],
+ 'แล้งถึงต้นฝน อ้อยอายุ 1–4 เดือน',
+ ['ปล่อยแตนเบียนไข่ไตรโคแกรมมา','ตัดหน่อยอดตายทิ้ง','พ่นสารเมื่อพบยอดตายเกิน ~10%'],
+ ['drone','cult'],['chlorant','flubend','fipro','cartap'],'ยอดตาย รูเจาะลำ'),
+D('sc-wg','sugarcane','หนอนด้วงขาว / ด้วงหนวดยาวอ้อย','Dorysthenes buqueti, Lepidiota spp.','ins',['root','stem'],
+ ['อ้อยเหลืองแห้งตายเป็นหย่อม ลำโยกล้มง่าย','ขุดพบหนอนตัวใหญ่สีขาวกัดกินเหง้าและโคนลำ'],
+ 'ดินทราย อ้อยตอหลายปี ตัวเต็มวัยออกหลังฝนแรก',
+ ['ไถตากดิน จับหนอน จับตัวเต็มวัยหลังฝนแรก','ใช้สาร/เชื้อราเมตาไรเซียมทางดิน — โดรนพ่นทางใบไม่ได้ผล'],
+ ['soil','cult'],['fipro','metarh'],'อ้อยตายเป็นหย่อม หนอนในดิน'),
+D('sc-leafhop','sugarcane','เพลี้ยจักจั่นปีกลายหยัก','Matsumuratettix hiroglyphicus','ins',['leaf'],
+ ['ตัวเล็กสีน้ำตาลอ่อน ปีกมีลายหยัก','ไม่ทำลายโดยตรงมาก แต่เป็นพาหะโรคใบขาว'],
+ 'ฤดูฝน ออกหากินกลางคืน',
+ ['พ่นคุมประชากรในแปลงที่มีโรคใบขาว'],
+ ['drone','vector'],['dino','imida','thiam','etofen','bupro'],'พาหะใบขาว'),
+D('sc-woolly','sugarcane','เพลี้ยอ่อนสำลี / เพลี้ยแป้งอ้อย','Ceratovacuna lanigera, Saccharicoccus sacchari','ins',['leaf','stem'],
+ ['ใต้ใบมีปุยขาวคล้ายสำลี (เพลี้ยอ่อนสำลี)','ข้อและกาบใบมีเพลี้ยแป้งสีชมพู/ขาว','มีราดำเคลือบใบ'],
+ 'ชื้นสูง ช่วงย่างปล้อง',
+ ['พ่นสารเมื่อระบาด เน้นใต้ใบ'],
+ ['drone'],['imida','dino','sulfox','petoil'],'ปุยขาวใต้ใบ ราดำ'),
+/* ---------------- ผัก ---------------- */
+D('vg-damp','veg','โรคเน่าคอดิน (กล้าเน่า)','Pythium, Rhizoctonia','oom',['stem','root'],
+ ['ต้นกล้าเน่าช้ำน้ำที่โคนระดับดิน แล้วหักพับล้ม','ตายเป็นหย่อมในแปลงเพาะ'],
+ 'ดินชื้นแฉะ เพาะหนาแน่น อากาศอบ',
+ ['ใช้วัสดุเพาะสะอาด ไม่ให้น้ำมาก','ราดเมทาแลกซิล/เชื้อราไตรโคเดอร์มาที่แปลงกล้า'],
+ ['soil','cult'],['metal','tricho'],'กล้าล้ม โคนเน่า'),
+D('vg-dm','veg','โรคราน้ำค้าง','Peronospora / Pseudoperonospora','oom',['leaf'],
+ ['ด้านบนใบเป็นจุด/ปื้นสีเหลือง ขอบเหลี่ยมตามเส้นใบ (แตง)','ใต้ใบมีราสีเทาม่วงหรือขาว','ใบแห้งกรอบ'],
+ 'อากาศเย็น มีหมอก/น้ำค้าง',
+ ['พ่นไดเมโทมอร์ฟ แมนดิโพรพามิด ไซม็อกซานิล หรือแมนโคเซบ สลับกลุ่ม'],
+ ['drone'],['dimeth','mandi','cymox','cyazo','metal','manco'],'ใต้ใบราเทา ปื้นเหลือง'),
+D('vg-pm','veg','โรคราแป้ง','Erysiphe, Podosphaera ฯลฯ','fun',['leaf'],
+ ['ผงสีขาวคล้ายแป้งบนใบและก้าน (แตง ถั่ว พริก)','ใบเหลือง แห้ง'],
+ 'อากาศแห้งกลางวัน ชื้นกลางคืน',
+ ['พ่นกำมะถัน หรือไตรอะโซล'],
+ ['drone'],['sulfur','hexa','difen'],'ผงขาวบนใบ'),
+D('vg-anth','veg','โรคแอนแทรคโนส (กุ้งแห้ง)','Colletotrichum spp.','fun',['fruit','leaf'],
+ ['ผลพริก/แตงเป็นแผลยุบ วงซ้อนกัน สีส้มถึงดำ','ผลเหี่ยวแห้งคล้ายกุ้งแห้ง'],
+ 'ฝนชุก ความชื้นสูง',
+ ['เก็บผลเป็นโรคทำลาย','พ่นโพรคลอราซ ไดฟีโนโคนาโซล หรืออะซอกซีสโตรบิน ช่วงติดผล'],
+ ['drone','cut'],['prochl','difen','azoxy','azodif','manco'],'ผลแผลยุบ กุ้งแห้ง'),
+D('vg-alt','veg','โรคใบจุดวงซ้อน (อัลเทอร์นาเรีย)','Alternaria spp.','fun',['leaf','fruit'],
+ ['จุดกลมสีน้ำตาลมีวงซ้อนคล้ายเป้า (คะน้า กะหล่ำ มะเขือเทศ)','ใบเหลืองร่วง'],
+ 'ชื้น ฝนตก',
+ ['พ่นไอโปรไดโอน ไดฟีโนโคนาโซล แมนโคเซบ หรือคลอโรทาโลนิล'],
+ ['drone'],['iprod','difen','azoxy','manco','chloro'],'จุดวงซ้อน'),
+D('vg-soft','veg','โรคเน่าเละ','Pectobacterium (Erwinia)','bac',['leaf','stem'],
+ ['เนื้อเยื่อเน่าเละเป็นน้ำ มีกลิ่นเหม็นมาก (กะหล่ำ ผักกาด)','ลามเร็วหลังฝน'],
+ 'ร้อนชื้น มีบาดแผลจากแมลง/เครื่องมือ',
+ ['ถอนต้นเป็นโรคออก ลดความชื้นในแปลง','คอปเปอร์/คาซูกะมัยซินช่วยป้องกัน (ระวังใบอ่อนไหม้)'],
+ ['cut','drone'],['copoh','kasug','bacsub'],'เน่าเละ กลิ่นเหม็น'),
+D('vg-wilt','veg','โรคเหี่ยวเขียว (แบคทีเรีย)','Ralstonia solanacearum','bac',['stem','root'],
+ ['ต้นเหี่ยวทั้งต้นทั้งที่ใบยังเขียว (มะเขือเทศ พริก มะเขือ)','ตัดโคนต้นแช่น้ำ มีเมือกขาวขุ่นไหลออกมา'],
+ 'ดินร้อนชื้น ปลูกพืชตระกูลมะเขือซ้ำที่เดิม',
+ ['ไม่มีสารรักษา — ถอนทำลาย ปลูกพืชหมุนเวียน ใช้ต้นตอทาบ/พันธุ์ต้านทาน'],
+ ['cut','cult'],[],'เหี่ยวทั้งที่เขียว เมือกขาว'),
+D('vg-virus','veg','โรคใบหงิกเหลือง / ใบด่าง (ไวรัส)','ไวรัส — พาหะ: แมลงหวี่ขาว เพลี้ยไฟ เพลี้ยอ่อน','vir',['leaf'],
+ ['ใบหงิก ม้วน ด่างเหลือง ต้นแคระ','ติดผลน้อย ผลบิดเบี้ยว'],
+ 'แมลงพาหะระบาดช่วงแล้ง',
+ ['ไม่มีสารรักษา — คุมแมลงพาหะ ถอนต้นเป็นโรคทิ้ง ใช้ตาข่ายกันแมลงในแปลงกล้า'],
+ ['vector','cut'],['dino','sulfox','spiromes','pyripx','flonic'],'ใบหงิกเหลือง'),
+D('vg-nema','veg','ไส้เดือนฝอยรากปม','Meloidogyne spp.','nem',['root'],
+ ['รากเป็นปมพองหลายขนาด','ต้นแคระ ใบเหลือง เหี่ยวช่วงกลางวัน'],
+ 'ดินทราย ปลูกพืชซ้ำ',
+ ['ปลูกพืชหมุนเวียน ใส่อินทรียวัตถุ ไถตากดิน','โดรนช่วยไม่ได้'],
+ ['soil','cult'],[],'รากปม'),
+D('vg-dbm','veg','หนอนใยผัก','Plutella xylostella','ins',['leaf'],
+ ['ใบเป็นรูพรุน หรือเหลือแต่เยื่อใบบางใส','หนอนเล็กสีเขียว ดิ้นแรงแล้วทิ้งตัวห้อยด้วยใย'],
+ 'อากาศเย็น แห้ง (ผักตระกูลกะหล่ำ)',
+ ['ดื้อยาง่ายมาก สลับกลุ่มทุก 1–2 ครั้ง','บีทีพ่นช่วงเย็น'],
+ ['drone'],['bt','spineto','emam','chlorfen','indox','chlorant','lufen'],'ใบพรุน หนอนทิ้งตัวมีใย'),
+D('vg-army','veg','หนอนกระทู้หอม / หนอนกระทู้ผัก','Spodoptera exigua / S. litura','ins',['leaf','fruit'],
+ ['หนอนวัยเล็กรวมกลุ่มกัดกินผิวใบ','วัยโตกัดกินทั้งใบ ผล ต้นหอมเป็นรูโปร่ง'],
+ 'ร้อน แล้ง',
+ ['พ่นเมื่อหนอนยังเล็ก ช่วงเย็น'],
+ ['drone'],['emam','chlorfen','lufen','methoxy','indox','chlorant','spineto'],'หนอนรวมกลุ่ม'),
+D('vg-lm','veg','หนอนแมลงวันชอนใบ','Liriomyza spp.','ins',['leaf'],
+ ['ใบมีรอยทางคดเคี้ยวสีขาวเงิน','ใบแห้งเมื่อทำลายมาก'],
+ 'แล้ง',
+ ['พ่นไซแอนทรานิลิโพรล อะบาเมกติน หรือสไปนีโทแรม'],
+ ['drone'],['cyant','abam','spineto'],'รอยทางคดเคี้ยว'),
+D('vg-flea','veg','ด้วงหมัดผัก','Phyllotreta spp.','ins',['leaf','root'],
+ ['ใบเป็นรูกลมเล็กพรุนทั่วใบ ตัวเต็มวัยกระโดดได้','หนอนกินรากผักกาด'],
+ 'แล้ง ระยะกล้า',
+ ['ไถตากดิน ปลูกพืชหมุนเวียน','พ่นสารเมื่อระบาดในระยะกล้า'],
+ ['drone','cult'],['cyant','lambda'],'รูกลมเล็ก'),
+D('vg-wf','veg','แมลงหวี่ขาว','Bemisia tabaci','ins',['leaf'],
+ ['ใต้ใบมีแมลงตัวเล็กสีขาว เขย่าแล้วบินขึ้น','ใบเหลือง มีราดำ เป็นพาหะไวรัสใบหงิกเหลือง'],
+ 'แล้ง ร้อน',
+ ['พ่นใต้ใบให้ทั่ว สลับกลุ่ม — โดรนบินช้าให้ลมพลิกใบ'],
+ ['drone'],['dino','sulfox','spiromes','pyripx','flonic','petoil'],'แมลงขาวใต้ใบ'),
+D('vg-thr','veg','เพลี้ยไฟพริก','Scirtothrips dorsalis','ins',['leaf','flower'],
+ ['ใบอ่อนหงิกม้วนขึ้น ใต้ใบเป็นสีเงิน/น้ำตาล','ดอกร่วง ผลบิดเบี้ยว'],
+ 'แล้ง ร้อน',
+ ['พ่นสลับกลุ่ม ทุก 5–7 วันช่วงระบาด'],
+ ['drone'],['spineto','imida','fipro','cyant','abam'],'ใบหงิกขึ้น'),
+D('vg-mite','veg','ไรขาวพริก','Polyphagotarsonemus latus','ins',['leaf'],
+ ['ใบหงิกม้วนลง ขอบใบงุ้มลง ใบเรียวเล็กหนา','ยอดชะงัก ดอกร่วง'],
+ 'แล้ง ร้อน',
+ ['พ่นสารกำจัดไร กำมะถัน สลับกลุ่ม'],
+ ['drone'],['abam','spiromes','propar','fenpyr','sulfur'],'ใบหงิกลง'),
+D('vg-ff','veg','แมลงวันผลไม้ (แตง พริก มะระ)','Bactrocera spp.','ins',['fruit'],
+ ['ผลมีรอยเจาะเล็ก ต่อมาเน่า ภายในมีหนอนแมลงวัน'],
+ 'ช่วงติดผล',
+ ['ห่อผล ใช้กับดัก/เหยื่อโปรตีนผสมสาร เก็บผลร่วงทำลาย'],
+ ['bag','cult'],[],'ผลมีหนอน'),
+/* ---------------- มะพร้าว ---------------- */
+D('cn-bhc','coconut','หนอนหัวดำมะพร้าว','Opisina arenosella','ins',['leaf'],
+ ['หนอนแทะผิวใบย่อยด้านล่าง เหลือแต่เส้นใบ ใบเป็นสีน้ำตาลแห้ง','ใต้ใบมีอุโมงค์จากใยและมูลหนอน','ทางใบล่างแห้งก่อน มองไกลเหมือนไฟไหม้ ระบาดรุนแรงต้นโทรมไม่ติดผล'],
+ 'แล้งยาวนาน แพร่ไปกับต้นพันธุ์/ทางใบ',
+ ['ต้นไม่เกิน 12 ม.: พ่นทางใบด้วยฟลูเบนไดอะไมด์ 20% WG 5 ก./น้ำ 20 ล. หรือคลอแรนทรานิลิโพรล 5.17% SC 20 มล./น้ำ 20 ล. (หรือสปินโนแสด — พิษสูงต่อผึ้ง, ลูเฟนนูรอน — พิษสูงต่อกุ้ง) 1–2 ครั้ง ให้ทั่วทรงพุ่ม','ต้นสูงเกิน 12 ม.: ฉีดเข้าลำต้นด้วยอีมาเมกติน เบนโซเอต 1.92% EC 10 มล./ต้น หรืออะบาเมกติน 1.8% EC 30 มล./ต้น (เจาะเอียง 45° 1–2 รู) — ใช้เฉพาะต้นสูงเกิน 4 ม.','ตัดทางใบที่มีหนอนเผาทำลาย · ถ้าจะปล่อยแตนเบียน ให้พ่นสารก่อน ~2 สัปดาห์'],
+ ['drone','inject','cut'],['flubend','chlorant','spinosad','lufen','emam','abam','bt'],'ใบแห้งเหมือนไฟไหม้ อุโมงค์ใต้ใบ'),
+D('cn-brontispa','coconut','แมลงดำหนามมะพร้าว','Brontispa longissima','ins',['leaf'],
+ ['ทางใบยอดที่ยังไม่คลี่ถูกแทะเป็นทางยาวสีน้ำตาล','ใบที่คลี่ออกมาแห้งหงิกเป็นสีน้ำตาลคล้ายไฟไหม้ (ยอดหงิก)','พบตัวด้วงแบนสีดำ-ส้มซ่อนในใบยอด'],
+ 'แล้ง มะพร้าวต้นเล็ก–กลาง และมะพร้าวน้ำหอม',
+ ['ปล่อยแตนเบียน (Asecodes) ซึ่งกรมวิชาการเกษตรรับรองความปลอดภัย','ราดสารตามคำแนะนำ (เช่น ไดอะซินอน) ที่คอมะพร้าวตั้งแต่โคนยอดอ่อนลงมา 1–1.5 ล./ต้น ทุก 15–20 วัน ช่วงระบาด','ใบยอดพับซ้อนกัน การพ่นทางอากาศเข้าถึงได้น้อย'],
+ ['crown','cult'],[],'ยอดหงิก ใบยอดแห้ง'),
+D('cn-rhino','coconut','ด้วงแรดมะพร้าว','Oryctes rhinoceros','ins',['leaf','trunk'],
+ ['ทางใบที่คลี่ออกมาถูกตัดเป็นรอยรูปสามเหลี่ยม/รูปพัด','โคนทางใบยอดมีรูเจาะ มีขุย ยอดอาจหักตาย','แผลเปิดทางให้ด้วงงวงและโรคยอดเน่า'],
+ 'มีกองปุ๋ยคอก ขยะ ซากต้นมะพร้าว/ปาล์มเป็นแหล่งขยายพันธุ์',
+ ['กำจัดแหล่งขยายพันธุ์ (กองมูลสัตว์ ซากต้น)','ใส่เชื้อราเมตาไรเซียมในกองวัสดุ ทำลายด้วงได้ทุกระยะ','วางกับดักฟีโรโมนห่างแปลง 3–5 ม. ทางต้นลม'],
+ ['cult','bag'],['metarh'],'ทางใบขาดรูปพัด'),
+D('cn-rpw','coconut','ด้วงงวงมะพร้าว','Rhynchophorus ferrugineus / R. vulneratus','ins',['trunk'],
+ ['ลำต้นหรือคอมะพร้าวมีรูเจาะ มีน้ำเยิ้มสีน้ำตาลกลิ่นเหม็นเปรี้ยว และขุย','ใบยอดเหี่ยวเหลือง ยอดหักพับ ต้นตายทั้งต้น'],
+ 'ต้นที่มีแผลจากด้วงแรดหรือการตัดแต่ง',
+ ['ป้องกันแผล (คุมด้วงแรด) ทาแผลหลังตัดแต่ง','กับดักฟีโรโมน · ต้นที่ตายโค่นผ่าเผาทำลาย','ฉีดสารเข้ารูเจาะแล้วอุด'],
+ ['inject','cut','bag'],[],'รูเจาะลำต้น น้ำเยิ้มเหม็น'),
+D('cn-mite','coconut','ไรสี่ขามะพร้าว','Aceria guerreronis','ins',['fruit'],
+ ['ใต้กลีบขั้วผลมีแผลสีเหลืองรูปสามเหลี่ยม','ลุกลามเป็นแผลตกสะเก็ดแตกเป็นริ้วคล้ายลายไม้ ทุกผลในทะลาย','ผลเล็ก บิดเบี้ยว ร่วง'],
+ 'แล้ง',
+ ['เก็บผลร่วง/ผลเป็นโรคทำลาย','พ่นสารกำจัดไรตามคำแนะนำ เน้นที่ขั้วผลและทะลาย'],
+ ['drone','cut'],['abam','sulfur'],'ขั้วผลเป็นแผล ลายไม้'),
+D('cn-scale','coconut','เพลี้ยหอย / เพลี้ยแป้งมะพร้าว','Aspidiotus destructor ฯลฯ','ins',['leaf','fruit'],
+ ['ใต้ใบมีตุ่มเกล็ดเล็กๆ เกาะหนาแน่น ใบเหลืองซีด','มีราดำ มดขึ้น'],
+ 'แล้ง',
+ ['พ่นปิโตรเลียมสเปรย์ออยล์ หรือสารดูดซึม เน้นใต้ใบ'],
+ ['drone'],['petoil','spirotet','dino'],'เกล็ดใต้ใบ'),
+D('cn-slug','coconut','หนอนร่านมะพร้าว','Parasa lepida ฯลฯ','ins',['leaf'],
+ ['ใบถูกกินเหลือแต่ก้านใบย่อย','หนอนมีหนามพิษ สัมผัสแล้วปวดแสบ'],
+ 'ปลายฝน–ต้นแล้ง',
+ ['พ่นบีทีหรือลูเฟนนูรอน (ระวังบ่อกุ้ง)'],
+ ['drone'],['bt','lufen','chlorant'],'ใบเหลือแต่ก้าน'),
+D('cn-budrot','coconut','โรคผลร่วง / ยอดเน่า','Phytophthora palmivora','oom',['fruit','leaf'],
+ ['ขั้วผลเกิดแผลสีน้ำตาลแห้ง ลุกลามบนผล ผลร่วง','ผลอายุน้อยกว่า 5 เดือนเน่าตั้งแต่เปลือกและกะลาอ่อน','รุนแรง: ยอดอ่อนเน่าลุกลามถึงตา ยืนต้นตาย'],
+ 'ฝนชุก ความชื้นสูง',
+ ['เก็บผลร่วงทำลาย','พ่นเมทาแลกซิลหรือฟอสอีทิล-อะลูมิเนียมที่ทะลายและยอด','ฉีดสารฟอสโฟนิกเข้าลำต้นในต้นสูง · ระบายน้ำในสวน'],
+ ['drone','inject','cut'],['metal','fosetyl','phosac'],'ผลร่วง ขั้วผลเน่า ยอดเน่า'),
+D('cn-bleed','coconut','โรคลำต้นเน่ายางไหล','Thielaviopsis paradoxa','fun',['trunk'],
+ ['ลำต้นมีรอยแตก น้ำยางสีน้ำตาลแดงไหลแล้วแห้งเป็นคราบดำ','เนื้อเยื่อใต้เปลือกเน่าสีเหลือง–น้ำตาล','ใบเหลือง ผลร่วง'],
+ 'ลำต้นมีแผล ดินแฉะ ขาดธาตุอาหาร',
+ ['ถากเนื้อเน่าออก ทาแผลด้วยสารป้องกันเชื้อรา แล้วทาปิดด้วยน้ำมันดิน/สีกันน้ำ','ใส่ปุ๋ยบำรุง ระบายน้ำ'],
+ ['paint','cult'],['carben','hexa'],'ยางไหลลำต้น'),
+D('cn-leaf','coconut','โรคใบจุด / ใบไหม้','Pestalotiopsis, Bipolaris, Curvularia','fun',['leaf'],
+ ['จุดสีเหลืองบนใบย่อย ต่อมาเป็นแผลสีเทากลางขอบน้ำตาล','ใบล่างไหม้แห้ง'],
+ 'ต้นกล้า/ต้นขาดโพแทสเซียม ความชื้นสูง',
+ ['ตัดใบเป็นโรคทำลาย ใส่ปุ๋ยโพแทสเซียม','ต้นกล้า/ต้นเล็กพ่นแมนโคเซบหรือคอปเปอร์'],
+ ['drone','cut','cult'],['manco','copox','carben'],'จุดเหลือง กลางเทา'),
+D('cn-gano','coconut','โรคลำต้นเน่า (กาโนเดอร์มา)','Ganoderma spp.','fun',['trunk','root'],
+ ['ทางใบล่างเหลือง ห้อยลง ทรงพุ่มยุบ ไม่แตกยอดใหม่','โคนต้นมีดอกเห็ดแข็งสีน้ำตาลแดง ขอบขาว'],
+ 'ดินแฉะ ตอเก่าในแปลง',
+ ['ขุดคูล้อมต้นเป็นโรค ทำลายต้นที่ตาย','ใส่ไตรโคเดอร์มา ระบายน้ำ — โดรนช่วยไม่ได้'],
+ ['soil','cut'],['tricho','hexa'],'เห็ดโคนต้น ทางใบห้อย'),
+D('cn-boron','coconut','อาการขาดโบรอน','ความผิดปกติทางธาตุอาหาร','phys',['leaf','fruit'],
+ ['ใบอ่อนย่น หงิก ใบย่อยติดกันไม่คลี่ (ใบรัด) ปลายใบงอเป็นตะขอ','จั่นแห้ง ติดผลน้อย ผลร่วง ผลไม่มีเนื้อ'],
+ 'ดินทราย ฝนชะล้าง แล้งจัด',
+ ['ใส่โบแรกซ์รอบโคนต้นตามคำแนะนำ หรือพ่นโบรอนทางใบ'],
+ ['soil','drone'],[],'ใบรัด ใบติดกัน'),
+D('cn-k','coconut','อาการขาดโพแทสเซียม','ความผิดปกติทางธาตุอาหาร','phys',['leaf','fruit'],
+ ['ใบแก่ด้านล่างเหลืองส้ม มีจุดสีน้ำตาล ปลายใบแห้ง','ทางใบสั้น ผลเล็ก น้ำน้อย'],
+ 'ดินทราย ไม่ใส่ปุ๋ยโพแทสเซียม',
+ ['ใส่ปุ๋ยโพแทสเซียม (0-0-60) และปุ๋ยสูตรที่ตัวท้ายสูง'],
+ ['soil','cult'],[],'ใบล่างเหลืองส้ม')
+);
+Object.assign(DZ_SYM,{
+ rice:['ใบแผลรูปตา','คอรวงหักเน่า','ขอบใบแห้งเหลือง','กาบใบแผลวงรี','โคนกอมีเพลี้ย ไหม้เป็นวง','ใบม้วนเป็นหลอด','ยอดเหี่ยว ข้าวหัวหงอก','ใบเหลืองส้ม','ต้นเตี้ย ใบหงิก','หลอดบั่ว','เมล็ดลีบ กลิ่นเหม็น','กล้าหาย ไข่สีชมพู'],
+ corn:['ใบเป็นรู ขี้เลื่อยในยอด','ใบลายเหลือง ผงขาวใต้ใบ','แผลยาวรูปกระสวย','ตุ่มสนิมบนใบ','ต้นล้ม ไส้ในเปื่อย','รูเรียงแถวบนใบ','ปลายฝักถูกกิน','เพลี้ยที่ช่อดอก'],
+ sugarcane:['ใบขาว แตกกอฝอย','แส้ดำที่ยอด','ยอดตาย ดึงหลุด','ผ่าลำเนื้อแดง','ยอดบิด ใบย่น','อ้อยตายเป็นหย่อม','ปุยขาวใต้ใบ','ท่อนพันธุ์ไม่งอก'],
+ veg:['ใบพรุน หนอนทิ้งตัว','กล้าล้ม โคนเน่า','ใต้ใบราสีเทา','ผงขาวบนใบ','ผลแผลยุบ กุ้งแห้ง','จุดวงซ้อน','เน่าเละ กลิ่นเหม็น','เหี่ยวทั้งที่ใบเขียว','ใบหงิกเหลือง','รอยทางคดเคี้ยวบนใบ','แมลงขาวใต้ใบ','รากเป็นปม'],
+ coconut:['ใบแห้งเหมือนไฟไหม้','อุโมงค์ใยใต้ใบ','ยอดหงิก ใบยอดแห้ง','ทางใบขาดรูปพัด','รูเจาะลำต้น น้ำเยิ้ม','ขั้วผลเป็นแผล','ผลร่วง','ยางไหลลำต้น','ใบรัด ใบติดกัน','ใบล่างเหลืองส้ม']});
+/* ตั้งค่าการบิน: มะพร้าว + ความสูงตามระยะของข้าว ข้าวโพด อ้อย */
+FLY.coconut={n:'มะพร้าว',tall:'น้ำหอม 3–10 ม. / พันธุ์สูง 10–25 ม.',h:[3,5],sw:[6,8],v:[2,4],w:[10,20],drop:'150–250',orchard:true,
+ stageH:{cyoung:[2.5,4],cflower:[4,6],cfruit:[3,5]},
+ stageNote:{cyoung:'ต้นเล็ก ทางใบยังไม่สูง — บินต่ำได้ ให้ลมใบพัดพลิกใบย่อย',cflower:'ช่วงออกจั่น/ดอกบาน — บินสูงขึ้น ลดแรงลมที่จั่น และเลี่ยงสารพิษต่อผึ้ง',cfruit:'มีทะลายผล — เน้นทะลายและใต้ใบ (หนอนหัวดำ ไรสี่ขา)'},
+ notes:['เหมาะกับมะพร้าวน้ำหอม/ต้นเตี้ย — ต้นสูงเกิน 12 ม. กรมวิชาการเกษตรแนะนำฉีดสารเข้าลำต้นแทนการพ่นทางใบ (หนอนหัวดำ)','หนอนหัวดำอยู่ใต้ใบย่อยในอุโมงค์ใย — บินช้า 2–3 ม./วิ. ใช้น้ำมาก ให้ลมใบพัดพลิกใบ','บินตามแถวต้น ร่อง ≈ ระยะระหว่างแถว (6–8 ม.) ความสูงวัดจากยอดต้นสูงสุด ยอดมะพร้าวโยกตามลม เผื่อระยะปลอดภัย','สปินโนแสดพิษสูงต่อผึ้ง ลูเฟนนูรอนพิษสูงต่อกุ้ง — ระวังสวนใกล้บ่อกุ้ง/รังผึ้ง','แมลงดำหนามอยู่ในใบยอดที่พับซ้อน การพ่นทางอากาศเข้าไม่ถึง ใช้แตนเบียน/ราดยอดแทน']};
+FLY.rice.stageH={seedling:[2,2.5],tiller:[2,2.5],boot:[2.5,3],heading:[2.5,3],milk:[2.5,3],ripe:[2.5,3]};
+FLY.rice.stageNote={seedling:'ต้นกล้าเล็ก ใช้น้ำน้อยได้ (~3 ล./ไร่) ระวังยาหญ้าปลิว',tiller:'แตกกอ — ถ้าเป้าหมายคือเพลี้ยกระโดดที่โคนกอ ลดความเร็วเหลือ 4–5 ม./วิ. เพิ่มน้ำ',boot:'ตั้งท้อง — ช่วงพ่นป้องกันไหม้คอรวง/เมล็ดด่าง',heading:'ออกรวง/ดอกบาน — เลี่ยงพ่นช่วง ~9–11 โมงที่ดอกบาน พ่นเช้าตรู่หรือบ่ายแก่',milk:'ระยะน้ำนม — ระวังแมลงสิง พ่นเช้า/เย็น',ripe:'ใกล้เก็บเกี่ยว — เช็คระยะปลอดภัยของสาร (PHI)'};
+FLY.corn.stageH={emerg:[2,2.5],veg:[2.5,3],tassel:[2.5,3.5],grain:[3,3.5]};
+FLY.corn.stageNote={emerg:'ต้นเล็ก — หนอนกระทู้ลายจุดเริ่มเข้ายอด พ่นเย็นให้ลงกรวยยอด',veg:'ใบ 6–10 — ช่วงสำคัญคุมหนอนกระทู้ บินช้า 3–4 ม./วิ.',tassel:'ออกดอก/ออกไหม — ต้นสูงขึ้น เพิ่มความสูง เลี่ยงสารพิษต่อผึ้ง',grain:'ติดฝัก — ทรงพุ่มทึบ เพิ่มน้ำ'};
+FLY.sugarcane.stageH={plant:[2,2.5],tiller:[2.5,3],elong:[3,3.5],ripen:[3,3.5]};
+FLY.sugarcane.stageNote={plant:'อ้อยเล็ก/ปลูกใหม่ — ช่วงยาคุมหญ้าและหนอนกอ',tiller:'แตกกอ — ใบเริ่มชิดกัน',elong:'ย่างปล้อง — ใบหนาแน่นมาก ต้องการลมใบพัดแรง บินช้า น้ำมาก',ripen:'สะสมน้ำตาล — ส่วนใหญ่ไม่ค่อยพ่นแล้ว นอกจากสารบ่มความหวานตามโรงงานแนะนำ'};
+CROP_KW.unshift(['coconut',/มะพร้าว/]);
+
+document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.spd&&F){F.speed=spdStore(t.value);if(typeof updateJobComputed==='function')updateJobComputed()}});
 /* เริ่มทำงาน */
 if(STANDALONE&&'serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 (function(){const h=location.hash.slice(1);if(VIEWS.some(v=>v[0]===h))UI.view=h;else if(window.innerWidth<=900)UI.view='home';initStore()})();
