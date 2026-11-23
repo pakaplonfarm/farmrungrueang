@@ -3978,7 +3978,7 @@ function flyModel(o){
  const depth=T.depth!=null?T.depth:(P.orchard?0.75:0.5);
  /* ลมใบพัดช่วยกดละอองลงทรงพุ่ม: บินช้า/ต่ำ = ลงลึกกว่า (ค่า k ต่ำ) */
  const vRef=(P.v[0]+P.v[1])/2,hRef0=P.orchard?3:2.5,vv=o.v!=null&&o.v!==''?num(o.v):vRef;
- const k=Math.max(0.38,Math.min(0.75,0.5*(1+0.08*(vv-vRef)+0.06*(num(o.h||hRef0)-hRef0))));
+ const k=Math.max(0.38,Math.min(0.85,0.5*(1+0.08*(vv-vRef)+0.06*(num(o.h||hRef0)-hRef0))+0.1*Math.max(0,vv-P.v[1])));
  const a=Math.exp(-k*lai*depth);
  let eff=(P.orchard?0.5:0.6)+(isH(o.tgt)?0.05:0);const wind=o.wind,dt=o.dt,d=num(o.d)||150,h=num(o.h);
  if(wind!=null&&wind>2)eff-=0.06*(wind-2);if(dt!=null&&dt>8)eff-=0.03*(dt-8);
@@ -4006,10 +4006,9 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix){
  const dAuto=h=>Math.min(450,Math.max(100,Math.round((dW+(wind!=null&&wind>1&&h>hRef?8*(h-hRef)*Math.min(wind,4):0))/10)*10));
  /* 1) ความสูง */
  let h=F_('h'),hWhy='';
- if(h==null){h=(P.h[0]+P.h[1])/2+(p.S.dh||0);if(wind!=null&&wind>3)h-=0.5;if(dt!=null&&dt>8)h-=0.5;
-  const sw0=F_('sw'),v0=F_('v');
+ if(h==null){h=(P.h[0]+P.h[1])/2+(p.S.dh||0);/* ระยะปลิว ∝ ความสูง × ลม: ลมแรงให้บินต่ำสุดที่ปลอดภัยเสมอ ไม่ขึ้นกับความเร็ว */if(wind!=null&&wind>3){h=hMin;hWhy=`ลม ${windTxt(wind)} บินต่ำสุดที่ปลอดภัย ลดระยะปลิว`}else if(wind!=null&&wind>2)h-=0.5;if(dt!=null&&dt>8)h-=0.5;
+  const sw0=F_('sw');
   if(sw0!=null){const hs=P.orchard?Math.max(sw0/3.5,P.h[0]+(sw0-P.sw[0])/((P.sw[1]-P.sw[0])||1)*(P.h[1]-P.h[0])):sw0/2.4;if(!P.orchard||hs>h){h=hs;hWhy=`ร่อง ${fmt(sw0,1)} ม. ต้องบินสูงพอให้ละอองแผ่ถึงขอบร่อง`}}
-  if(v0!=null){const hv=P.h[0]+(P.v[1]-vPen-v0)/0.5;if(hv<h){h=hv;hWhy=`บินเร็ว ${spd(v0)} ต้องบินต่ำลงให้ลมใบพัดยังกดละอองลงทรงพุ่มได้`}}
   h=Math.max(hMin,Math.min(12,Math.round(h*2)/2))}
  /* 2) ละออง */
  let d=F_('d');const dBest=dAuto(h);if(d==null)d=dBest;
@@ -4044,7 +4043,7 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix){
  else if(sw>3.5*h)adj.push(['warn',`ล็อกร่อง ${fmt(sw,1)} ม. กว้างเกินความสูง ${fmt(h,1)} ม. — ขอบร่องบาง เป็นแถบลาย`]);
  adj.push([m.target>=T.D?'ok':'warn',`น้ำ ${fmt(w,1)} ล./ไร่ → คาดได้ ~${Math.round(m.target)} จุด/ตร.ซม. ที่${depthLbl(m.depth)} (ยอด ~${Math.round(m.top)}) · ทั่วทั้งต้นถึงเป้า ~${Math.round(m.cov*100)}%${F_('w')!=null&&m.target<T.D?` — ล็อกน้ำไว้ ต้องใช้ ~${fmt(m.wNeed,1)} ล. ถึงจะถึงเป้า`:''}`]);
  if(F_('v')==null)adj.push(['ok',`ความเร็ว ${spd(v)} — ${vWhy.length?vWhy.join(' · '):'ช่วงเร็วสุดที่ลมใบพัดยังกดลงทรงพุ่มได้ดี'}`]);
- else if(v>vCap(h)+0.4)adj.push(['warn',`ล็อกความเร็ว ${spd(v)} เร็วเกินสำหรับความสูง ${fmt(h,1)} ม. (ไม่ควรเกิน ~${spd(Math.max(vMin,vCap(h)))}) — ละอองติดแต่ยอด`]);
+ else if(v>vCap(h)+0.4)adj.push(['warn',`ล็อกความเร็ว ${spd(v)} เร็วเกินสำหรับความสูง ${fmt(h,1)} ม. (ไม่ควรเกิน ~${spd(Math.max(vMin,vCap(h)))}) — ลมใบพัดกดลงไม่ทัน ละอองค้างชั้นบน ชั้นล่างได้น้อยลง`]);else adj.push(['ok',`ล็อกความเร็ว ${spd(v)} — ยิ่งช้า ลมใบพัดยิ่งกดละอองลงชั้นล่างได้ดี (ความสูงคงตามที่เหมาะกับระยะพืช)`]);
  return {...p,h:r1(h),sw:r1(sw),v:Math.round(v*100)/100,w,d,drop:'~'+d,adj,dt,wind,tgt,model:m,stop,fix}}
 function djiScene(crop,stg){const P=FLY[crop]||FLY.other;
  if(P.orchard)return ['🌳 สวนผลไม้/เนินเขา','ทรงพุ่มสูงไม่เท่ากัน ให้โดรนติดตามความสูงทรงพุ่มได้ไวขึ้น'];
