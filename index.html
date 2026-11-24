@@ -1334,6 +1334,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fburn{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #E2E8F0;background:#fff}.fburn.ok{border-color:#86EFAC}.fburn.warn{border-color:#FCD34D;background:#FFFBEB}.fburn.bad{border-color:#FCA5A5;background:#FEF2F2}.fburn-h{font-weight:700;font-size:14px;margin-bottom:6px}.fburn-h b{font-family:Prompt,sans-serif}
 .fburn-bar{position:relative;height:8px;border-radius:6px;background:linear-gradient(90deg,#10B981 0 25%,#F59E0B 25% 50%,#F97316 50% 75%,#DC2626 75%);margin:2px 0 8px}.fburn-bar i{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:#0F172A;transform:translateX(-2px)}.fburn ul{margin:4px 0 2px;padding-left:18px}
 .wxg{display:flex;flex-direction:column;gap:6px}.wxg-r{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.wxg-l{font-size:12px;color:#64748B;min-width:100%;margin-top:2px}
+.pwf{text-align:left;margin-top:14px}.pwf .field{margin-bottom:10px}.pwf input{font-size:17px}
 .fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:Prompt,sans-serif;font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
 .fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:Prompt,sans-serif;font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
 #fly-rec.stale{opacity:.5;transition:opacity .15s}
@@ -1842,6 +1843,9 @@ function mergeSettings(s){const o=clone(DEFAULTS);Object.assign(o,s||{});if(!o.b
 /* ---------- Firebase (เวอร์ชัน GitHub / เว็บทั่วไป) ---------- */
 let FB=null,FBMODE=false,FBERR='';
 const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม pakaplonfarm.github.io ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)','auth/admin-restricted-operation':'ยังไม่ได้เปิดการเข้าแบบไม่ล็อกอิน — Firebase › Authentication › Sign-in method › เพิ่ม Anonymous แล้วกด Enable'};
+const USER_DOMAIN=()=>(window.FARM_ID||'farm')+'.farm';
+const userEmail=u=>{u=String(u||'').trim().toLowerCase();return u.includes('@')?u:u+'@'+USER_DOMAIN()};
+const userLabel=e=>String(e||'').replace('@'+USER_DOMAIN(),'');
 const fbErrText=e=>FB_ERR[e&&e.code]||('เกิดข้อผิดพลาด: '+((e&&(e.code||e.message))||''));
 async function fbInit(){
  try{await loadScript('firebase-config.js')}catch(e){return null}
@@ -1920,7 +1924,11 @@ function renderLogin(){
  renderNav();document.body.classList.add('is-login');
  $('#view').innerHTML=`<div class="login"><div class="lg-card">${sideArt('lg')}<div class="lg-b">${emblem('lg')}<h1>${esc(S.settings.biz||'รุ่งเรือง เรื่องไร่')}</h1><div class="sub">สมุดบัญชีโดรนเกษตร · บันทึกบนคลาวด์ ใช้ได้ทุกเครื่อง</div>
  ${FBERR?`<div class="note bad small" style="margin-top:12px">${esc(FBERR)}</div>`:''}
- <button class="btn primary gbtn" data-act="fbLogin"><svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>เข้าสู่ระบบด้วย Google</button>
+ <form id="pw-form" class="pwf" onsubmit="return false"><div class="field"><label>ชื่อผู้ใช้</label><input id="pw-user" autocomplete="username" inputmode="numeric" autocapitalize="off" spellcheck="false"></div>
+ <div class="field"><label>รหัสผ่าน</label><input id="pw-pass" type="password" autocomplete="current-password"></div>
+ <button class="btn primary" style="width:100%" data-act="pwLogin">🔑 เข้าสู่ระบบ</button><div id="pw-msg" class="small" style="margin-top:6px"></div></form>
+ <div class="tiny muted" style="margin:10px 0 6px">หรือ</div>
+ <button class="btn gbtn" data-act="fbLogin"><svg viewBox="0 0 48 48" width="20" height="20"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>เข้าสู่ระบบด้วย Google</button>
  <div class="tiny muted" style="margin-top:10px">สำหรับเจ้าของ: ล็อกอินครั้งเดียว เครื่องจะจำไว้</div><div class="note info small" style="margin-top:12px;text-align:left">🔗 <b>เครื่องอื่น/คนอื่น ไม่ต้องล็อกอิน</b> — ขอ “ลิงก์เข้าใช้” จากเจ้าของ (เมนู ตั้งค่า › บัญชีคลาวด์) แล้วเปิดลิงก์ครั้งเดียว</div>
  <div class="field" style="margin-top:12px;text-align:left"><label>มีลิงก์เข้าใช้แล้ว? วางที่นี่</label><div class="row" style="flex-wrap:nowrap"><input id="jl-in" placeholder="https://…?join=…" autocomplete="off"><button class="btn primary" data-act="joinPaste">เข้า</button></div></div>
  <button class="btn sm ghost" data-act="fbOffline" style="margin-top:10px">ใช้แบบออฟไลน์ในเครื่องนี้ไปก่อน</button></div></div></div>`;
@@ -2389,7 +2397,7 @@ function viewSettings(){
    <div class="tiny muted" style="margin-top:6px">ค่าเริ่มต้นเป็นตัวอย่าง ปรับตามราคาตลาดในพื้นที่ (ไม้ผลใส่ 0 = ใช้ราคาพืชไร่)</div></div>
   <div class="row" style="grid-column:1/-1"><button class="btn primary" type="submit">บันทึกการตั้งค่า</button></div>
  </form>
- ${STANDALONE?`<div class="card" style="margin-top:14px"><h2>บัญชีคลาวด์ (Firebase)</h2>${FBMODE&&FB.role!=='owner'?shareCard():FBMODE?`<div class="row between"><div><div class="b">☁️ เชื่อมต่อแล้ว: ${esc(FB.user.email||'')}</div><div class="small muted">เจ้าของบัญชี · ข้อมูลซิงก์อัตโนมัติทุกเครื่อง · ใช้งานตอนไม่มีเน็ตได้ แล้วซิงก์เมื่อออนไลน์</div></div><button class="btn" data-act="fbLogout">ออกจากระบบ</button></div>${shareCard()}`
+ ${STANDALONE?`<div class="card" style="margin-top:14px"><h2>บัญชีคลาวด์ (Firebase)</h2>${FBMODE&&FB.role!=='owner'?shareCard():FBMODE?`<div class="row between"><div><div class="b">☁️ เชื่อมต่อแล้ว: ${esc(userLabel(FB.user.email))}</div><div class="small muted">เจ้าของบัญชี · ข้อมูลซิงก์อัตโนมัติทุกเครื่อง · ใช้งานตอนไม่มีเน็ตได้ แล้วซิงก์เมื่อออนไลน์</div></div><div class="row" style="gap:6px">${(FB.user.providerData||[]).some(p=>p&&p.providerId==='password')?'<button class="btn" data-act="pwChange">🔑 เปลี่ยนรหัสผ่าน</button>':''}<button class="btn" data-act="fbLogout">ออกจากระบบ</button></div></div>${shareCard()}`
  :window.FIREBASE_CONFIG?`<div class="row between"><div class="small">ตอนนี้ใช้แบบออฟไลน์ในเครื่องนี้</div><button class="btn primary" data-act="fbOnline">เปิดใช้คลาวด์</button></div>`:`<div class="small muted">ยังไม่ได้ตั้งค่า Firebase — ใส่ค่าในไฟล์ firebase-config.js เพื่อเปิดใช้คลาวด์</div>`}</div>`:''}
  <div class="card" style="margin-top:14px"><h2>สำรองและกู้คืนข้อมูล</h2>
   <div class="small muted" style="margin-bottom:8px">แนะนำให้สำรองเป็นไฟล์ทุกเดือน ไฟล์ CSV เปิดด้วย Excel/Google Sheets ได้</div>
@@ -3149,6 +3157,25 @@ async function importData(data){
 const ACT={
  go:a=>go(a.dataset.v,a.closest('.side,#bottom')?{reset:true}:{}),
  back:()=>goBack(),
+ pwLogin:async()=>{const u=($('#pw-user')?.value||'').trim(),p=$('#pw-pass')?.value||'',msg=$('#pw-msg'),say=(t,c)=>{if(msg){msg.textContent=t;msg.className='small '+(c||'')}};
+  if(!u||!p){say('กรอกชื่อผู้ใช้และรหัสผ่าน','neg');return}if(p.length<6){say('รหัสผ่านต้องยาวอย่างน้อย 6 ตัว','neg');return}
+  const em=userEmail(u);say('⏳ กำลังเข้าสู่ระบบ…');
+  try{await FB.auth.signInWithEmailAndPassword(em,p);say('✅ เข้าสู่ระบบแล้ว','pos');return}
+  catch(e){const c=e&&e.code;
+   if(c==='auth/operation-not-allowed'){say('ยังไม่ได้เปิดการล็อกอินแบบรหัสผ่าน — Firebase › Authentication › Sign-in method › Email/Password › Enable','neg');return}
+   if(c==='auth/too-many-requests'){say('ลองผิดหลายครั้งเกินไป รอสักครู่แล้วลองใหม่','neg');return}
+   if(c==='auth/network-request-failed'){say('ไม่มีอินเทอร์เน็ต ลองใหม่อีกครั้ง','neg');return}
+   if(!['auth/user-not-found','auth/invalid-credential','auth/invalid-login-credentials','auth/wrong-password'].includes(c)){say(fbErrText(e),'neg');return}
+   if(c==='auth/wrong-password'){say('รหัสผ่านไม่ถูกต้อง','neg');return}
+   if(!await confirmBox(`ไม่พบบัญชี "${u}" หรือรหัสผ่านไม่ถูกต้อง\n\nถ้าเป็นการเข้าครั้งแรก กด "สร้างบัญชี" เพื่อสร้างบัญชีนี้ด้วยรหัสที่กรอก`,'สร้างบัญชี',false)){say('รหัสผ่านไม่ถูกต้อง หรือยังไม่มีบัญชีนี้','neg');return}
+   try{await FB.auth.createUserWithEmailAndPassword(em,p);say('✅ สร้างบัญชีและเข้าสู่ระบบแล้ว','pos')}
+   catch(e2){say(e2&&e2.code==='auth/email-already-in-use'?'รหัสผ่านไม่ถูกต้อง':e2&&e2.code==='auth/operation-not-allowed'?'ยังไม่ได้เปิดการล็อกอินแบบรหัสผ่าน — Firebase › Authentication › Sign-in method › Email/Password › Enable':fbErrText(e2),'neg')}}},
+ pwChange:async()=>{const u=FB&&FB.auth.currentUser;if(!u)return;
+  openModal(`<div class="sh-h"><b>🔑 เปลี่ยนรหัสผ่าน</b><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b"><div class="field"><label>รหัสผ่านเดิม</label><input id="pc-old" type="password" autocomplete="current-password"></div><div class="field"><label>รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label><input id="pc-new" type="password" autocomplete="new-password"></div><div class="field"><label>ยืนยันรหัสผ่านใหม่</label><input id="pc-new2" type="password" autocomplete="new-password"></div><button class="btn primary" style="width:100%" data-act="pwChangeGo">บันทึกรหัสใหม่</button><div id="pc-msg" class="small" style="margin-top:6px"></div></div>`)},
+ pwChangeGo:async()=>{const u=FB.auth.currentUser,o=$('#pc-old').value,n=$('#pc-new').value,n2=$('#pc-new2').value,m=$('#pc-msg');const say=(t,c)=>{m.textContent=t;m.className='small '+(c||'')};
+  if(n.length<6){say('รหัสใหม่ต้องยาวอย่างน้อย 6 ตัว','neg');return}if(n!==n2){say('ยืนยันรหัสใหม่ไม่ตรงกัน','neg');return}
+  try{await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email,o));await u.updatePassword(n);closeModal();toast('เปลี่ยนรหัสผ่านแล้ว','ok')}
+  catch(e){say(['auth/wrong-password','auth/invalid-credential','auth/invalid-login-credentials'].includes(e&&e.code)?'รหัสผ่านเดิมไม่ถูกต้อง':fbErrText(e),'neg')}},
  fbLogin:async()=>{const p=new firebase.auth.GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});try{await FB.auth.signInWithPopup(p)}catch(e){if(['auth/popup-blocked','auth/operation-not-supported-in-this-environment','auth/cancelled-popup-request','auth/web-storage-unsupported'].includes(e.code)){try{await FB.auth.signInWithRedirect(p)}catch(e2){toast(fbErrText(e2),'err')}}else toast(fbErrText(e),'err')}},
  fbLogout:async()=>{if(await confirmBox(FB.role==='owner'?'ออกจากระบบคลาวด์บนเครื่องนี้? ข้อมูลบนคลาวด์ยังอยู่ครบ':'ออกจากฟาร์มบนเครื่องนี้? ถ้าจะเข้าอีกต้องใช้ลิงก์ใหม่','ออกจากระบบ',false)){await FB.auth.signOut()}},
  fbOffline:()=>{try{localStorage.setItem('fbOffline','1')}catch(e){}location.reload()},
@@ -4178,6 +4205,8 @@ function burnRisk(o){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has
   if(E.drought){s+=10;why.push('พืชขาดน้ำ เครียด ไวต่อสาร')}if(E.wetLeaf)s-=5;if(E.sun<0.1)s-=5}
  if(dt!=null&&dt>6){const x=Math.round(Math.min(30,(dt-6)*6));s+=x;why.push(`Delta T ${fmt(dt,1)} ${dt>10?'แห้งเร็วมาก ยาเข้มข้นบนใบ':'หยดยาแห้งเร็ว'}`)}
  if(w){const c=((P.w[0]+P.w[1])/2)/w;if(c>1.2){s+=Math.min(20,Math.round(25*(c-1)));why.push(`น้ำ ${fmt(w,1)} ล./ไร่ น้อย → ยาเข้มข้นกว่าปกติ ~${fmt(c,1)} เท่า`);tip.push('เพิ่มน้ำต่อไร่ (ใช้ยาเท่าเดิม) ให้ความเข้มข้นต่อหยดลดลง')}}
+ /* ยาต่อพื้นที่คราบหยด ∝ ความเข้มข้น (1/น้ำ) × ขนาดละออง: หยดใหญ่+น้ำน้อย = ยากองเป็นจุดเข้มข้น → ใบไหม้เป็นจุด */
+ if(w){const dep=(((P.w[0]+P.w[1])/2)/w)*(d/200);if(dep>1.15){s+=Math.min(20,Math.round(20*(dep-1)));why.push(`ละออง ${d} µm + น้ำ ${fmt(w,1)} ล. → ยาต่อจุดคราบเข้มข้น ~${fmt(dep,1)} เท่า เสี่ยงไหม้เป็นจุด`);tip.push('ลดขนาดละอองลงมา ~170–200 µm แล้วเพิ่มน้ำ ดีกว่าใช้หยดใหญ่+น้ำน้อย')}}
  if(d<150&&dt!=null&&dt>8){s+=10;why.push(`ละอองเล็ก ${d} µm ระเหยเร็ว ทิ้งคราบยาเข้มข้น`)}
  if((BURN_SENS[o.crop]||[]).includes(o.stg)){s+=15;why.push('ระยะใบอ่อน/ดอก บอบบาง');tip.push('ใบอ่อน/ดอก: ใช้อัตราต่ำสุดตามฉลาก ไม่ผสมหลายตัวในถังเดียว')}
  if(o.tgt==='fol'){s+=10;why.push('ปุ๋ย/ฮอร์โมนมีเกลือ ระเหยแล้วเข้มข้น');tip.push('ปุ๋ยทางใบ: ไม่เกินอัตราฉลาก โดยเฉพาะยูเรีย/โพแทสเซียม')}
