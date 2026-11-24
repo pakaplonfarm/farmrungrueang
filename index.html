@@ -1550,6 +1550,13 @@ h3{font-size:16px;font-weight:700}
 #fly-card.spc .hud{margin-top:6px}
 .hud-c em{white-space:nowrap}.hud-c.long b{font-size:25px}.hud-c.txt b{font-size:18px;line-height:1.35}
 @media(min-width:900px){#fly-card .ctl2{grid-template-columns:1fr}}
+.ben-tips{margin:10px 0 6px;border-radius:14px;background:#fff;border:1px solid var(--line);padding:6px 12px}
+.bt-h{font-weight:700;font-size:14px;padding:6px 0 4px}
+.bt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px dashed var(--line);font-size:14px;line-height:1.45}
+.bt b{flex-shrink:0;font-family:var(--fd);font-size:18px;color:var(--canopy-d);white-space:nowrap}.bt b small{font-size:12px;font-weight:700;color:#fff;background:var(--canopy);border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.bt.all span{font-weight:700}.bt.all b{color:var(--ink)}
+.bt.lim{display:block;color:var(--ink-2,#3d4a42);font-size:13.5px;background:#FFF8E8;margin:6px -12px -6px;padding:9px 12px;border-top:1px solid #F1DDB0;border-radius:0 0 14px 14px}.bt.lim b{font-family:inherit;font-size:13.5px;color:#8A5A00;white-space:normal}
+.ben-tips>.bt.lim:first-child{border-top:0;border-radius:14px}
 </style>
 </head>
 <body>
@@ -4230,11 +4237,15 @@ function envOf(wx){wx=wx||{};const c=wx.cond||[];const has=x=>x!==''&&x!=null&&!
   rainNow:c.includes('rainNow'),rainSoon:c.includes('rainSoon'),drought:c.includes('dry'),cool:c.includes('cool')||(T!=null&&T<20),dust:c.includes('dust'),
   ret:(wetLeaf?0.85:1)*(c.includes('dust')?0.95:1)}}
 /* เวลาที่หยดยังเปียกบนใบ (วินาที) ∝ ขนาดละออง² ÷ VPD ที่ผิวใบ — ยาดูดซึม/ปุ๋ยทางใบเข้าได้เฉพาะตอนเปียก */
-const tDry=(env,d)=>env&&env.vpdL!=null?20*Math.pow(d/150,2)*(1.5/Math.max(0.2,env.vpdL))*(env.wetLeaf?1.5:1):null;
+/* ลมที่ผิวใบพัดผ่านหยด → ระเหยเร็วขึ้น (สหสัมพันธ์ Ranz–Marshall: Sh = 2 + 0.6·Re^½·Sc^⅓, Sc ไอน้ำในอากาศ ≈ 0.6)
+   ลมในทรงพุ่มที่ผิวใบ ≈ ครึ่งหนึ่งของลมที่วัดได้ · ค่าอ้างอิง หยด 150 µm ลม 1.5 ม./วิ. */
+const shF=(d,u)=>2+0.6*Math.sqrt(Math.max(0,u)*d*1e-6/1.5e-5)*0.843;
+const ventF=(env,d)=>shF(150,0.75)/shF(d,0.5*(env&&env.wind!=null?env.wind:1.5));
+const tDry=(env,d)=>env&&env.vpdL!=null?20*Math.pow(d/150,2)*(1.5/Math.max(0.2,env.vpdL))*ventF(env,d)*(env.wetLeaf?1.5:1):null;
 function uptakeIdx(env,d){const t=tDry(env,d);if(t==null)return null;let u=Math.min(1,Math.pow(t/30,0.4));if(env.drought)u*=0.7;if(env.cool)u*=0.85;if(env.TL!=null&&env.TL>34)u*=0.85;return {t,u}}
 /* ---------- แบบจำลองจุดละออง: จำนวนจุด/ตร.ซม. = (น้ำต่อพื้นที่ ÷ ปริมาตรละออง) × สัดส่วนที่ลงถึงพืช × การลดลงผ่านชั้นใบ ---------- */
 const FLY_LAI={rice:{seedling:1,tiller:2.5,boot:4,heading:4,milk:4,ripe:3.5,_:3},corn:{emerg:0.8,veg:2.5,tassel:4,grain:3.5,_:3},sugarcane:{plant:1,tiller:2.5,elong:4,ripen:4,_:3},veg:{seedling:1,vegg:2.5,flower:2.5,fruit:3,harvest:3,_:2.5},
- durian:{post:3.5,flush:3,half:3.5,mature:4,bud:4,flower:4,fruitset:4,flushfruit:4,fruit:4,preharvest:4,_:4},rubber:{young:1.5,winter:0.5,newleaf:1.5,half:2,tapping:2.5,_:2.5},coconut:{cyoung:1.5,cflower:2,cfruit:2,_:2},other:{_:2.5}};
+ durian:{post:3.5,flush:3,half:3.5,mature:4,bud:4,flower:4,fruitset:4,flushfruit:4,fruit:4,preharvest:4,_:4},rubber:{young:1.5,winter:0.5,newleaf:2,half:3.5,tapping:3,_:3},coconut:{cyoung:1.5,cflower:2,cfruit:2,_:2},other:{_:2.5}};
 const FLY_TGT={fun:{n:'🍄 เชื้อรา',D:50,depth:null},ins:{n:'🐛 แมลง/ไรบนใบ',D:25,depth:null},deep:{n:'🎯 ศัตรูโคนต้น/ใต้ใบ',D:25,depth:1},fol:{n:'💧 ปุ๋ยทางใบ/ฮอร์โมน',D:30,depth:0.4},herb:{n:'🌿 ยาหญ้าสัมผัส/ทั่วไป',D:30,depth:0.3},herbS:{n:'🌱 ยาหญ้าดูดซึม',D:20,depth:0.3},herbP:{n:'💧 ยาคุมหญ้า (ลงน้ำ/ดิน)',D:10,depth:1}};
 const isH=t=>/^herb/.test(t||'');
 const defTgt=svc=>svc==='herb'?'herb':svc==='foliar'?'fol':'fun';
@@ -4266,7 +4277,12 @@ function flyModel(o){
  const depth=T.depth!=null?T.depth:(P.orchard?0.75:0.5);
  /* ลมใบพัดช่วยกดละอองลงทรงพุ่ม: บินช้า/ต่ำ = ลงลึกกว่า (ค่า k ต่ำ) */
  const vRef=(P.v[0]+P.v[1])/2,hRef0=P.orchard?3:2.5,vv=o.v!=null&&o.v!==''?num(o.v):vRef;
- const k0=Math.max(0.38,Math.min(0.85,0.5*(1+0.08*(vv-vRef)+0.06*(num(o.h||hRef0)-hRef0))+0.1*Math.max(0,vv-P.v[1])));
+ /* การทะลุทรงพุ่ม (k ยิ่งต่ำ ละอองยิ่งลงลึก) คำนวณจากลมใบพัด T55 ที่ยอดพืช:
+    แรงกด S = (ลมกดที่ยอด ÷ (ลมกด+2.5)) × cos²(มุมเอียงจากความเร็วบิน+ลมธรรมชาติ) · เทียบจุดอ้างอิงของพืช (k=0.5) แบบยกกำลัง 0.33
+    → บินช้า/ต่ำ/ลมสงบ = ลมกดตั้งฉากแรง ลงลึก · บินสูงยิ่งต้องช้า เพราะลมกดอ่อน มุมเอียงเปลี่ยนไวต่อความเร็ว */
+ const mA=T55M()+T55D.pay/2,Wk=o.env&&o.env.windE!=null?o.env.windE:(o.wind==null||o.wind===''?0:num(o.wind));
+ const Sdw=(V,hh,W)=>{const x=dwAt(V,hh,mA,W);return x.wc/(x.wc+2.5)*Math.pow(Math.cos(x.chi*Math.PI/180),2)};
+ const k0=Math.max(0.38,Math.min(0.85,0.5*Math.pow(Sdw(vRef,hRef0,0)/Math.max(0.02,Sdw(vv,num(o.h||hRef0),Wk)),0.33)));
  const cal=o.noCal?null:flyCalGet(o.crop),k=cal?Math.max(0.12,Math.min(1.6,k0*cal.k)):k0;
  const a=Math.exp(-k*lai*depth);
  const env=o.env||null,wind=env?env.windE:o.wind,dt=env&&env.dtE!=null?env.dtE:o.dt,d=num(o.d)||150,hh=num(o.h)||hRef0;
@@ -4277,7 +4293,7 @@ function flyModel(o){
  const ground=(num(o.w)*1000/16e6)/dropVol(d),top=ground*eff,target=top*a,wNeed=T.D*dropVol(d)*16000/(eff*a);
  const at=z=>top*Math.exp(-k*lai*z),cov=top<T.D?0:lai<0.05?1:Math.min(1,Math.log(top/T.D)/(k*lai));
  const wFor=z=>T.D*dropVol(d)*16000/(eff*Math.exp(-k*lai*z));
- return {P,T,lai,depth,a,k,eff,ground,top,target,wNeed,wFor,d,cov,drift,evap,mid:at(0.5),bot:at(1),env,up:uptakeIdx(env,d),cal}}
+ return {P,T,lai,depth,a,k,eff,ground,top,target,wNeed,wFor,d,cov,drift,evap,mid:at(0.5),bot:at(1),env,up:uptakeIdx(env,d),cal,inp:o}}
 /* ---------- ตัวหาค่าที่ดีที่สุด: ค่าที่ผู้ใช้ล็อก (fix) เป็นเงื่อนไข ค่าที่เหลือคำนวณใหม่ทั้งหมดตามหลักฟิสิกส์ ---------- */
 const FIX_N={h:'ความสูง',sw:'ร่อง',v:'ความเร็ว',w:'น้ำต่อไร่',d:'ละออง'};
 function flyAdj(crop,svc,can,stg,wx,tgt,fix,mob){
@@ -4298,7 +4314,7 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix,mob){
  const dBase=tgt==='herbP'?300:svc==='herb'?250:svc==='foliar'?140:150;
  const dLim=isH(tgt)?0.06:0.12;/* ยอมให้ปลิวออกนอกแปลงไม่เกิน 12% (ยาหญ้า 6%) */
  const vRefA=(P.v[0]+P.v[1])/2;
- const dAuto=(h,vx)=>{const wv=Math.max(0.3,wind==null?1.5:wind);let dd=Math.max(dBase,150*Math.sqrt(0.12*(wv/3)*(h/3)*spdF(vx,vRefA)*env.dMul/dLim));if(dt!=null&&dt>4)dd=Math.max(dd,150*Math.sqrt(0.02*(dt-4)*(h/3)/0.08));if(wind!=null&&wind<0.5)dd=Math.max(dd,200);if(dt0!=null&&dt0<2&&(wind==null||wind<1))dd=Math.max(dd,180);if(env.inv)dd=Math.max(dd,220);/* ปุ๋ยทางใบ/ยาดูดซึม: แดดจ้า/VPD สูง หยดแห้งเร็วจนซึมไม่ทัน → ใช้หยดใหญ่ขึ้นให้เปียกบนใบ ≥~18 วิ. */if((tgt==='fol'||tgt==='herbS')&&env.vpdL!=null&&!env.wetLeaf)dd=Math.max(dd,Math.min(dBase+80,150*Math.sqrt(0.6*env.vpdL)));return Math.min(450,Math.max(100,Math.ceil(dd/10)*10))};
+ const dAuto=(h,vx)=>{const wv=Math.max(0.3,wind==null?1.5:wind);let dd=Math.max(dBase,150*Math.sqrt(0.12*(wv/3)*(h/3)*spdF(vx,vRefA)*env.dMul/dLim));if(dt!=null&&dt>4)dd=Math.max(dd,150*Math.sqrt(0.02*(dt-4)*(h/3)/0.08));if(wind!=null&&wind<0.5)dd=Math.max(dd,200);if(dt0!=null&&dt0<2&&(wind==null||wind<1))dd=Math.max(dd,180);if(env.inv)dd=Math.max(dd,220);/* ปุ๋ยทางใบ/ยาดูดซึม: แดดจ้า/VPD สูง หยดแห้งเร็วจนซึมไม่ทัน → ใช้หยดใหญ่ขึ้นให้เปียกบนใบ ≥~18 วิ. */if((tgt==='fol'||tgt==='herbS')&&env.vpdL!=null&&!env.wetLeaf)dd=Math.max(dd,Math.min(dBase+80,150*Math.sqrt(0.6*env.vpdL/ventF(env,150))));return Math.min(450,Math.max(100,Math.ceil(dd/10)*10))};
  /* 1) ความสูง */
  let h=F_('h'),hWhy='';
  if(h==null){/* ระยะปลิว ∝ ความสูง × ลม: ลมยิ่งแรง ยิ่งบินต่ำลงต่อเนื่อง จนถึงต่ำสุดที่ปลอดภัย (ลม ≥3.5 ม./วิ.) */
@@ -4317,13 +4333,23 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix,mob){
   sw=Math.min(P.sw[1]+(P.orchard?0:1),Math.max(P.sw[0],sw),3.5*h);{const cw=wind!=null?Math.min(2,0.75*Math.max(0,wind-1.5)):0;if(cw>=0.25){sw-=cw;swWhy=`ลม ${windTxt(wind)} พาละอองเบี่ยง → แคบร่อง ${fmt(cw,1)} ม. ให้ทับซ้อนมากขึ้น`}}sw=Math.max(4,Math.round(sw*2)/2)}
  /* 4+5) น้ำต่อไร่ + ความเร็ว: ไล่จากเร็วสุดที่ลมใบพัดยังกดได้ ลงไปทีละ ~1 กม./ชม. เลือกความเร็วที่เร็วที่สุดที่ยังได้ตามเป้าความทั่ว */
  const g=CG(),wMax=P.w[1]*1.5,wCap=g==='max'?wMax:P.w[1];let stop=false,wT=0,wC=0;const vWhy=[];
- const wPick=m0=>{const t=m0.wNeed,c=m0.wFor(0.9);return {t,c,w:Math.max(P.w[0],Math.ceil((g==='eco'?t:g==='max'?Math.max(t,c):Math.max(t,Math.min(c,P.w[1])))*2)/2)}};
- const cands=[];if(F_('v')!=null)cands.push(F_('v'));else{const top=Math.max(vMin,vCap(h));for(let x=top;x>=vMin-1e-6;x-=0.25)cands.push(x);if(!cands.length)cands.push(vMin)}
- let v=null,w=F_('w'),pick=null;
+ const wPick=m0=>{const t=m0.wNeed,c=m0.wFor(0.9);return {t,c,w:Math.max(P.w[0],Math.ceil((g==='eco'?t:g==='max'?Math.max(t,Math.min(c,wMax)):Math.max(t,Math.min(c,P.w[1])))*2)/2)}};
+ /* ความเร็วที่ลองเป็นจำนวนเต็ม กม./ชม. (ตรงกับที่ตั้งในแอป DJI) จากเพดานลมใบพัดลงมา */const cands=[];if(F_('v')!=null)cands.push(F_('v'));else{const top=Math.max(vMin,vCap(h));for(let x=Math.floor(top*3.6+1e-6);x>=Math.ceil(vMin*3.6-1e-6);x--)cands.push(x/3.6);if(!cands.length)cands.push(vMin)}
+ let v=null,w=F_('w'),pick=null;const C=[];
  for(const vc of cands){const dc=F_('d')!=null?F_('d'):dAuto(h,vc);const m0=flyModel({crop,stg,can,tgt,mob,h,sw,w:1,d:dc,wind,dt,v:vc,env});const pw=wPick(m0);const ww=w!=null?w:pw.w;
   const mm=flyModel({crop,stg,can,tgt,mob,h,sw,w:ww,d:dc,wind,dt,v:vc,env});const vP=fm*1600/(60*ww*sw);
-  const ok=(w!=null?(g==='eco'?mm.target>=T.D:mm.cov>=0.9||mm.target>=T.D&&g==='bal'&&pw.c>P.w[1]):(pw.t<=wMax&&(g==='eco'||pw.w<=wCap||pw.c>wMax)))&&vP>=vc-0.01;
-  if(!pick||ok&&!pick.ok||(!pick.ok&&!ok&&pw.t<pick.t))pick={v:vc,d:dc,t:pw.t,c:pw.c,w:ww,ok};if(ok)break}
+  C.push({v:vc,d:dc,t:pw.t,c:pw.c,w:ww,cov:mm.cov,tg:mm.target,pump:vP>=vc-0.01})}
+ /* ทำได้ = ถึงจำนวนจุดขั้นต่ำที่ชั้นเป้าหมาย (และปั๊มจ่ายทัน) · ดีที่สุด = เร็วสุดที่ทั่วต้นตามเป้าในช่วงน้ำที่กำหนด
+    ถ้าไม่มีความเร็วไหนทั่วต้นตามเป้า → เลือกความเร็วที่ทั่วต้นมากสุด (ยอมเร็วขึ้นได้ถ้าทั่วต้นลดไม่เกิน 3%) */
+ {/* เลือกความเร็วด้วยกติกาเดียว: คะแนน = ทั่วต้น (นับถึง 90%) × (ความเร็ว ÷ เร็วสุด)^β × (ถ้าใช้น้ำเกินปกติ: (น้ำปกติ ÷ น้ำที่ใช้)^0.5)
+    β สมดุล 0.2 (ทั่วต้น 1% ≈ ความเร็ว 5%) · ทั่วสุด 0.05 (เน้นความทั่ว) · ประหยัด = เร็วสุดที่ถึงจุดขั้นต่ำ */
+  const beta=g==='max'?0.05:0.2,vt=Math.max(...C.map(x=>x.v));
+  const sc=x=>Math.min(x.cov,0.9)*Math.pow(x.v/vt,beta)*(w==null&&g!=='max'&&x.w>wCap?Math.pow(wCap/x.w,0.5):1);
+  const argmax=L=>L.reduce((a,x)=>sc(x)>sc(a)+1e-9?x:a,L[0]);
+  if(w!=null){const feas=C.filter(x=>x.pump&&x.tg>=T.D);pick=feas.length?{...(g==='eco'?feas[0]:argmax(feas)),ok:true}:{...C.reduce((a,x)=>x.tg>a.tg?x:a,C[0]),ok:false}}
+  else{const feas=C.filter(x=>x.pump&&x.t<=wMax);
+   if(!feas.length)pick={...C.reduce((a,x)=>x.t<a.t?x:a,C[0]),ok:false};
+   else pick={...(g==='eco'?feas[0]:argmax(feas)),ok:true}}}
  v=pick.v;wT=pick.t;wC=pick.c;if(w==null)w=pick.w;if(F_('d')==null)d=pick.d;dBest=dAuto(h,v);
  if(F_('v')==null){const top=Math.max(vMin,vCap(h));
   if(v<top-0.1)vWhy.push(`ลดจาก ${spd(top)} — ลมใบพัดกดละอองลงชั้นล่างได้ดีขึ้น${wind!=null&&wind>2?' และปลิวน้อยลง จึงใช้ละอองเล็กลงได้':''} จนถึงเป้า${g==='eco'?'':'ความทั่ว'}`);
@@ -5313,12 +5339,16 @@ function spOpt(o){const m=MAT[o.mat]||MAT.c16168,env=o.env||envOf({}),fix=o.fix|
  if(m.note&&!seed)adj.push(['info',`ℹ️ ${m.n}: ${m.note}`]);
  if(!fd.inRange)adj.push(['warn',`⚙️ อัตราไหล ${fmt(Q,1)} กก./นาที ${fd.lo?'ต่ำกว่า':'สูงกว่า'}ช่วงแม่นยำของ${fd.n} (${fmt(fr[0],0)}–${fmt(fr[1],0)} กก./นาที) — ${fd.lo?'เกลียวหมุนช้า ปุ๋ยออกเป็นจังหวะ (CV เพิ่ม)':'ใกล้ขีดเกลียว'}`]);
  if(alt)adj.push(['info',`⚙️ ถ้าไม่มี${fd.n} (อุปกรณ์เสริม): ใช้${alt.f.n}ที่ ${spd(alt.v)}${alt.ok?'':' (นอกช่วงแม่นยำ)'}`]);
- if(fS==null&&cv>cvT+0.03)adj.unshift(['warn',`ความสม่ำเสมอ CV ${Math.round(cv*100)}% เกินเป้า ${Math.round(cvT*100)}% แม้ปรับทุกค่าแล้ว — ${W>3?`ลม ${windTxt(W)} คือตัวจำกัด ควรรอลมเบา`:'เม็ดเบา/เล็กเหวี่ยงได้ไม่ไกล'}`]);
- if(fS!=null&&cv>cvT+0.02)adj.unshift(['warn',`ร่อง ${fmt(S,1)} ม. กว้างเกินที่ ${m.n} เหวี่ยงได้สม่ำเสมอ (CV ${Math.round(cv*100)}%) — ${orch?'บินกลางแถวทุกแถว หรือ':''}ลดร่องลง/เพิ่มรอบจาน/บินสูงขึ้น`]);
+ /* CV เกินเป้า (ตามที่แสดงผลปัดเลข) → บอกตัวจำกัดจริง + ตัวเลขถ้าแก้: ตัวคำนวณลองทุกความสูง×รอบจานแล้ว จึงไม่แนะนำ "เพิ่มรอบ/บินสูง" ซ้ำ */
+ let cvAlt=null;if(Math.round(cv*100)>Math.round(cvT*100)){const lk=['h','rpm','S'].filter(k=>F(k)!=null),lkN={h:'ความสูง',rpm:'รอบจาน',S:'ร่อง'};
+  if(!o._alt&&W>2.5){const r2=spOpt({...o,env:{...env,wind:2,windE:2,gust:false},_alt:true});cvAlt={W:2,cv:r2.cv,within:r2.within,S:r2.S,h:r2.h,rpm:r2.rpm}}
+  const why=W>2.5?`ลม ${windTxt(W)} พาเม็ดเบี่ยง ~${fmt(Math.abs(th.drift),1)} ม.${cH?` (ตกจากยอดไม้ ~${fmt(cH,0)} ม.)`:''}`:fS!=null?`ร่อง ${fmt(S,1)} ม. กว้างกว่าที่ ${m.n} เหวี่ยงได้สม่ำเสมอ`:`${m.n} เม็ดเล็ก/เบา เหวี่ยงได้ไม่ไกล`;
+  const fixT=lk.length?` · ปลดล็อก${lk.map(k=>lkN[k]).join('/')}ให้ระบบเลือกเอง`:'',altT=cvAlt?` · รอลมเหลือ ~2 ม./วิ. (มักเป็นเช้าตรู่/เย็น): CV ${Math.round(cvAlt.cv*100)}% · พื้นที่ได้อัตราใกล้เป้า (±25%) ${Math.round(within*100)}% → ${Math.round(cvAlt.within*100)}%`:'';
+  adj.unshift(['warn',`ความสม่ำเสมอ CV ${Math.round(cv*100)}% เกินเป้า ${Math.round(cvT*100)}% (ลองทุกความสูง×รอบจานแล้ว) — ${why}${altT}${fixT}`])}
  if(rpm>m.rpmMax)adj.push(['warn',`รอบจาน ${rpm} rpm เกินที่ ${m.n} ทนได้ (~${m.rpmMax}) — เม็ดแตก/ผง ปลิว`]);
  const npk=m.npk?m.npk.map(x=>rate*x/100):null,seeds=tgw?625*rate/tgw:null;
  const eff=within*(1-(lossN+lossE)/4)*(1-nLoss)*(1-intc);
- return {m,mat:o.mat,rate,h,rpm,S,v,Q,fr,cv,within,th,fd,inset,rE,lossN,lossE,load,raiLoad,raiHr,tFly,nLoss,npk,seeds,plants:seeds?seeds*germ*m.est:null,hr,tgw,germ,eff,adj,stop,vWhy,orch,rowS,cvT,W,fix,cH,intc}}
+ return {m,mat:o.mat,rate,h,rpm,S,v,Q,fr,cv,cvAlt,within,th,fd,inset,rE,lossN,lossE,load,raiLoad,raiHr,tFly,nLoss,npk,seeds,plants:seeds?seeds*germ*m.est:null,hr,tgw,germ,eff,adj,stop,vWhy,orch,rowS,cvT,W,fix,cH,intc}}
 /* ---------- สถานะ + การ์ด ---------- */
 function spState(){const f=flyState();let s=UI.sp;const key=f.crop+'|'+f.stg+'|'+f.svc;
  if(!s||s.key!==key){const seed=f.svc==='seed';let mat,rate;if(seed){[mat,rate]=seedDefault[f.crop]||seedDefault.other;if(f.crop==='rice')rate=seedRate(mat,190,28,90)}else{const n=fertNow(f.crop,f.stg,s||{})[0];const it=n&&n.it[0];mat=it?it[0]:'c151515';rate=it?(n.tree?it[1]*(s&&s.trees||ORCH_TREES[f.crop]||25):it[1]):25}
@@ -5469,20 +5499,20 @@ function sprayBenefit(m,o){const T=m.T,tk=T.key||Object.keys(FLY_TGT).find(k=>FL
  const doseT=1-Math.exp(-2.3*m.target/T.D),dose=0.7*doseT+0.3*m.cov;
  const sys=tk==='fol'||tk==='herbS'||!!(bio&&bio.M&&bio.M.sys>=0.5);const up=m.up?m.up.u:0.8;
  let upt=sys?up:0.85+0.15*up,uptN=sys?'ซึมเข้าใบทัน (หยดเปียกนานพอ)':'ซึม/ติดผิวใบ';const ex=[];
- if(bio){if(tk==='fol'&&bio.fab!=null){upt=clampN(bio.fab/0.8,0,1);uptN='ซึมเข้าเซลล์ใน 72 ชม.';ex.push(['ส่งถึง'+SINK_N[bio.B.sink].split(' ')[0].split('/')[0],bio.fdel])}
+ if(bio){if(tk==='fol'&&bio.fab!=null){upt=clampN(bio.fab/0.8,0,1);uptN='ซึมเข้าเซลล์ใน 72 ชม.';ex.push(['ส่งถึง'+SINK_N[bio.B.sink].split(' ')[0].split('/')[0],bio.fdel,'del'])}
   else if(sys)upt=1-Math.pow(1-clampN(up,0,0.999),bio.B.age.cut*bio.adj);
-  if(tk!=='herbP')ex.unshift(['ละอองติดใบ',bio.ret]);
-  if((bio.M&&bio.M.sys>=1)||tk==='herbS')ex.push(['พืชกำลังโต (ยาไปทั่วต้น)',clampN(0.4+0.6*bio.act,0,1)]);
-  if(bio.B.ageK==='none'&&tk!=='herbP')ex.push(['มีใบรับสาร',0.1])}
+  if(tk!=='herbP')ex.unshift(['ละอองติดใบ',bio.ret,'ret']);
+  if((bio.M&&bio.M.sys>=1)||tk==='herbS')ex.push(['พืชกำลังโต (ยาไปทั่วต้น)',clampN(0.4+0.6*bio.act,0,1),'act']);
+  if(bio.B.ageK==='none'&&tk!=='herbP')ex.push(['มีใบรับสาร',0.1,'leaf'])}
  const mp=o.mix;let rain=1;if(E.rainSoon)rain=1-0.55*(1-(mp?mp.rain:0.5));if(E.rainNow||E.inv)rain=0;
  const br=o.burn?o.burn.s:0,burnF=1-0.45*br/100;
  let wq=1;if(o.water==='well'&&(tk.startsWith('herb')||(mp&&mp.it.some(x=>x.form==='SL'))))wq*=0.8;if(o.water==='canal'&&tk.startsWith('herb'))wq*=0.7;
  const tot=Math.max(0,dose*upt*rain*burnF*wq*ex.reduce((a,x)=>a*x[1],1));
- return {tot,parts:[['ขนาดยาถึงจุดเป้าหมาย',doseT],['ทั่วทั้งต้น',m.cov],[uptN,upt],...ex,...(rain<1?[['ไม่ถูกฝนชะ',rain]]:[]),['ใบไม่ไหม้จากสาร',burnF],...(wq<1?[['คุณภาพน้ำผสม',wq]]:[])]}}
-function benefitBox(b,title){const pc=Math.round(b.tot*100),st=pc>=75?'ok':pc>=55?'warn':'bad';
+ return {tot,doseT,cov:m.cov,parts:[[`ยาถึงจุดเป้าหมาย ${Math.round(doseT*100)}% + ทั่วต้น ${Math.round(m.cov*100)}% (รวมแบบ 70:30)`,dose,'dose'],[uptN,upt,'up'],...ex,...(rain<1?[['ไม่ถูกฝนชะ',rain,'rain']]:[]),['ใบไม่ไหม้จากสาร',burnF,'burn'],...(wq<1?[['คุณภาพน้ำผสม',wq,'wq']]:[])]}}
+function benefitBox(b,title,tips){const pc=Math.round(b.tot*100),st=pc>=75?'ok':pc>=55?'warn':'bad';
  return `<div class="fben ${st}"><div class="row between"><b>🌿 ${title||'ประโยชน์ต่อพืชโดยรวม'}</b><b class="fben-v">${pc}%</b></div><i class="fbar2"><em style="width:${pc}%"></em></i>
  <div class="fben-p">${b.parts.map(([n,v])=>`<span class="${v<0.6?'neg':v<0.8?'warnc':''}">${esc(n)} <b>${Math.round(v*100)}%</b></span>`).join('<span class="muted">×</span>')}</div>
- <div class="tiny muted">ตัวคูณทั้งหมดคำนวณจากค่าที่ตั้ง+อากาศ — ข้อที่ต่ำสุดคือจุดที่ควรแก้ก่อน</div></div>`}
+ ${tipsHTML(tips,b.tot)}<div class="tiny muted">ตัวเลขแต่ละข้อคูณกันได้ค่ารวมด้านบนพอดี — ข้อที่ต่ำสุดคือจุดที่ควรแก้ก่อน</div></div>`}
 /* ---------- อันตราย/ผลข้างเคียง ---------- */
 function sprayHazards(m,o){const E=m.env||{},H=[];const dr=Math.round(m.drift*100);
  if(dr>=8)H.push([dr>15?'bad':'warn',`💨 ยาปลิวออกนอกแปลง ~${dr}%${o.chemTxt?` (${o.chemTxt})`:''} — เว้นแนวกันชนด้านใต้ลม${dr>15?' ≥10 ม. จากบ้าน/แหล่งน้ำ/แปลงพืชอื่น':' ~5 ม.'}`]);
@@ -5515,9 +5545,9 @@ function mixPanelHTML(o){const mp=o.mix;
 function sprayPanels(f,md,wx){const env=envOf(wx),tgt=f.tgt||defTgt(f.svc);const forms=f.forms||[];const items=forms.map(k=>({form:k,name:'',cat:k==='FOL'?'fer':k==='ADJ'?'adj':''}));
  const mix=mixPlan(items,f.w,f.water||'tap',[]);const burn=burnRisk({crop:f.crop,stg:f.stg,tgt,temp:wx.temp,rh:wx.rh,w:f.w,d:f.d,env,forms});
  const bio=bioOf({crop:f.crop,stg:f.stg,env,d:f.d,tgt,mob:f.mob||(md.T&&md.T.mob),srcs:f.fsrc,hasAdj:forms.includes('ADJ')});
- const b=sprayBenefit(md,{mix,burn,water:f.water||'tap',bio});
+ const b=sprayBenefit(md,{mix,burn,water:f.water||'tap',bio});const tips=advTips(f,wx,b,bio,md);
  const H=sprayHazards(md,{tgt,flower:FLOWER_G.includes(f.stg),burn,mix,w:f.w,speedHi:f.v>((FLY[f.crop]||FLY.other).v[1]+0.4)});
- return {eff:benefitBox(b)+bioBox(bio,{crop:f.crop,stgN:stageNameG(f.crop,f.stg),d:f.d,wind:f.wind})+denBox(md,f.w,f.d)+burnBox(burn)+formAdviceHTML(env,f.crop,f.stg)+hazBox(H),mix:mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:true,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}}
+ return {eff:benefitBox(b,null,tips)+bioBox(bio,{crop:f.crop,stgN:stageNameG(f.crop,f.stg),d:f.d,wind:f.wind})+denBox(md,f.w,f.d)+burnBox(burn)+formAdviceHTML(env,f.crop,f.stg)+hazBox(H),mix:mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:true,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}}
 /* ---------- งานบริการ: ใช้สารจริงในฟอร์ม ---------- */
 function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.temp,rh:wx.rh,wind:wx.wind,cond});const cr=FLY[F.crop]?F.crop:'other',stg=stageGroup(cr,F.stage);
  const lines=(F.chems||[]).filter(l=>l.activeId||l.product||l.active);const items=lines.map(l=>({form:lineForm(l),name:(lineChem(l)?.th||l.active||l.product||'').slice(0,40),rate:l.rate,unit:l.unit,cat:l.cat,g:lineChem(l)?.g||l.g}));
@@ -5527,10 +5557,17 @@ function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.
  const fsr=lines.map(l=>{const c=lineChem(l);return c&&FER2SRC[c.id]}).filter(Boolean),aj=lines.map(l=>lineChem(l)).find(c=>c&&c.cat==='adj');
  const bio=bioOf({crop:cr,stg,env,d:num(F.drop)||a.d,tgt:a.tgt,mob:mobFromChems(F),srcs:fsr,adjId:aj&&aj.id,hasAdj:!!aj});
  const b=sprayBenefit(mj,{mix,burn,water:F.water||'tap',bio});const dr=mj.drift;
+ const calcJ=o=>{const W2={...wx,...(o.wx||{})},env2=envOf({temp:W2.temp,rh:W2.rh,wind:W2.wind,cond:W2.cond||cond}),it2=o.addAdj?[...items,{form:'ADJ',name:'',cat:'adj'}]:items,fm2=it2.map(x=>x.form).filter(Boolean),wJ=(o.f&&o.f.w)||wv;
+  const mj2=mj.inp?flyModel({...mj.inp,...(o.f||{}),env:env2,dt:env2.dtE}):mj;const mx2=mixPlan(it2,wJ,o.water||F.water||'tap',it2.map(x=>x.g||''));
+  const br2=burnRisk({crop:cr,stg,tgt:a.tgt,temp:W2.temp,rh:W2.rh,w:wJ,d:num(F.drop)||a.d,chems:F.chems,env:env2,forms:fm2});
+  const bio2=bioOf({crop:cr,stg,env:env2,d:num(F.drop)||a.d,tgt:a.tgt,mob:mobFromChems(F),srcs:o.srcs||fsr,adjId:o.addAdj?'stick':(aj&&aj.id),hasAdj:!!(o.addAdj||aj),R:o.t0!=null?rhModel(env):null,t0:o.t0});
+  return sprayBenefit(mj2,{mix:mx2,burn:br2,water:o.water||F.water||'tap',bio:bio2})};
+ const pfJ=Object.fromEntries(b.parts.map(p=>[p[2]||'',p[1]]));
+ const tipsJ=benefitTips(calcJ,b.tot,{tk:a.tgt,bio,hasAdj:!!aj,d:num(F.drop)||a.d,env,wx:{temp:wx.temp,rh:wx.rh,wind:wx.wind,cond},alt:null,burnF:pfJ.burn??1,w:wv,water:F.water||'tap'});
  const chemTxt=lines.filter(l=>num(l.rate)).map(l=>`${(lineChem(l)?.th||l.product||'').slice(0,18)} ~${fmt(num(l.rate)*dr,1)} ${l.unit}/ไร่`).join(', ');
  const H=sprayHazards(mj,{tgt:a.tgt,flower:FLOWER_G.includes(stg),bee,burn,mix,w:wv,chemTxt});
  const noForm=items.filter(x=>!x.form).length;
- return benefitBox(b)+bioBox(bio,{crop:cr,stgN:F.stage?stageName(cr,F.stage):'',d:num(F.drop)||a.d,wind:wx.wind})+denBox(mj,wv,num(F.drop)||a.d,'jf')+(burn?burnBox(burn):'')+formAdviceHTML(env,cr,stg)+hazBox(H)+mixPanelHTML({mix,forms,water:F.water||'tap',pick:false,open:true,crop:cr,stg,tgt:a.tgt,w:wv,d:num(F.drop)||a.d})
+ return benefitBox(b,null,tipsJ)+bioBox(bio,{crop:cr,stgN:F.stage?stageName(cr,F.stage):'',d:num(F.drop)||a.d,wind:wx.wind})+denBox(mj,wv,num(F.drop)||a.d,'jf')+(burn?burnBox(burn):'')+formAdviceHTML(env,cr,stg)+hazBox(H)+mixPanelHTML({mix,forms,water:F.water||'tap',pick:false,open:true,crop:cr,stg,tgt:a.tgt,w:wv,d:num(F.drop)||a.d})
   +(noForm?`<div class="tiny muted">ℹ️ ${noForm} สารยังไม่ระบุสูตร (WP/SC/EC…) — เลือกในช่อง "สูตร" ของแต่ละสาร เพื่อเรียงลำดับผสมและประเมินไหม้แม่นขึ้น</div>`:'')
   +`<div class="fstg" style="margin-top:6px"><span class="small muted">น้ำที่ใช้ผสม:</span>${Object.entries(WATER).map(([k,v])=>`<button class="fchip ${(F.water||'tap')===k?'on':''}" data-act="jfWater" data-k="${k}">${v.n}</button>`).join('')}</div>`}
 /* =========================================================
@@ -5792,9 +5829,11 @@ function stomOpen(E){if(!E||E.sun==null)return 0.6;if(E.sun<0.08)return 0.08;con
 function leafRet(B,d,adj){const base={phob:0.62,wax:0.78,mod:0.9}[B.surf.wet],pen={phob:0.25,wax:0.12,mod:0.05}[B.surf.wet];let r=base+B.age.ret-(d>200?(d-200)/300*pen:0)+(d<200&&B.surf.wet==='phob'?(200-d)/100*0.1:0);if(adj>1)r+=(0.95-r)*0.7;return clampN(r,0.3,0.97)}
 /* ความชื้นตามเวลา: พยากรณ์รายชั่วโมง (ถ้าดึงแล้ว) หรือแบบจำลองจุดน้ำค้างคงที่ (ความดันไอเท่าเดิม อุณหภูมิขึ้นลงตามวัน ±4.5°C) */
 function rhModel(E){const L=UI.wxLive,now=Date.now(),fc=L&&L.hours&&L.hours.length?L.hours.map(h=>({ts:new Date(h.t).getTime(),rh:h.rh,T:h.temp})).filter(x=>!isNaN(x.ts)):[];
- const T0=E&&E.T!=null?E.T:30,rh0=E&&E.rh!=null?E.rh:70,ea=esat(T0)*rh0/100,d0=new Date(),hn=d0.getHours()+d0.getMinutes()/60,A=4.5,Tm=T0-A*Math.cos(2*Math.PI*(hn-14)/24);
+ /* อุณหภูมิรายวันแบบไม่สมมาตร: ต่ำสุด ~06:00 (ก่อนพระอาทิตย์ขึ้น) สูงสุด ~14:30 · ช่วงต่างประมาณ 9°C · ความดันไอคงที่ (จุดน้ำค้างเท่าเดิม) */
+ const T0=E&&E.T!=null?E.T:30,rh0=E&&E.rh!=null?E.rh:70,ea=esat(T0)*rh0/100,d0=new Date(),hn=d0.getHours()+d0.getMinutes()/60,RNG=9;
+ const fD=h=>{h=((h%24)+24)%24;if(h>=6&&h<=14.5)return (1-Math.cos(Math.PI*(h-6)/8.5))/2;const e=h>14.5?h-14.5:h+9.5;return 1-(1-Math.cos(Math.PI*e/15.5))/2},Tmin=T0-RNG*fD(hn);
  return t=>{const ts=now+t*3600e3;if(fc.length){const i=fc.findIndex(x=>x.ts>ts);if(i>0){const a=fc[i-1],b=fc[i],f=(ts-a.ts)/(b.ts-a.ts);return {rh:a.rh+(b.rh-a.rh)*f,T:a.T+(b.T-a.T)*f,hr:(hn+t)%24,src:'fc'}}}
-  const hh=hn+t,T=Tm+A*Math.cos(2*Math.PI*(hh-14)/24);return {rh:Math.min(100,ea/esat(T)*100),T,hr:hh%24,src:'model'}}}
+  const hh=hn+t,T=Tmin+RNG*fD(hh);return {rh:Math.min(100,ea/esat(T)*100),T,hr:hh%24,src:'model'}}}
 /* จำลองการซึมเข้าใบ 72 ชม. ทีละ 15 นาที */
 function foliarUptake(k,o){const S=FSRC[k];if(!S)return null;const B=o.B||leafBio(o.crop,o.stg),E=o.E||{},R=o.R||rhModel(E),t0=o.t0||0;
  const td=o.tw!=null?o.tw:((tDry(E,o.d||150)||40)*(LEAF_DRY[o.crop]||1)/3600);
@@ -5805,7 +5844,9 @@ function foliarUptake(k,o){const S=FSRC[k];if(!S)return null;const B=o.B||leafBi
   for(let i=0;i<st.length;i++){if(st[i]<0)break;a+=(1-a)*(1-Math.exp(-k1*0.25*st[i]));if(t50==null&&a>=0.5)t50=(i+1)*0.25;if(i===95)a24=a}
   out[el]={a24:a24==null?a:a24,a72:a,t50,th}}
  return {k,S,B,el:out,td,kMul,stom,lh}}
-function delivery(el,sink){if(sink==='none')return 0;if(sink==='leaf'||sink==='store')return 1;const ex=MOBN[EL[el].mob][1];return clampN(ex+((sink==='flower'||sink==='fruit')?0.15:0),0,1)}
+/* ไปถึงส่วนที่พืชต้องการ = ส่วนที่ไหลออกจากใบ (ตามการเคลื่อนที่ในท่ออาหาร) + ส่วนที่ค้างในใบแต่ยังช่วยใบสร้างน้ำตาลส่งไปให้ (คิด 70%)
+   ยกเว้น Ca/B สำหรับดอก/ผล: ต้องไปถึงเนื้อเยื่อดอก/ผลเอง ค้างในใบช่วยได้น้อย (10%) + ส่วนที่พ่นโดนดอก/ผลตรงๆ (15%) */
+function delivery(el,sink){if(sink==='none')return 0;if(sink==='leaf'||sink==='store')return 1;const ex=MOBN[EL[el].mob][1],loc=(sink==='flower'||sink==='fruit')&&(el==='Ca'||el==='B');return clampN(ex+(1-ex)*(loc?0.1:0.7)+(loc?0.15:0),0,1)}
 /* สารกำจัดศัตรูพืช: การเคลื่อนที่ในพืช → เป้าจุดละออง (BASF) */
 const MOB={auto:{n:'🔄 อัตโนมัติ',s:''},con:{n:'สัมผัส',D:60,sys:0,mv:'ไม่เคลื่อนที่ ต้องโดนตัวแมลง/ทุกจุดที่เชื้ออยู่ รวมใต้ใบ'},ing:{n:'กินตาย',D:40,sys:0.2,mv:'แมลงต้องกัดกินใบที่มียา',ins:1},
  tl:{n:'ซึมผ่านใบ',D:35,sys:0.5,mv:'ซึมจากหน้าใบทะลุถึงใต้ใบของใบเดียวกัน ไม่ไปใบใหม่'},xy:{n:'ดูดซึมท่อน้ำ',D:25,sys:0.8,mv:'ไหลขึ้นตามน้ำไปปลายใบ/ใบบน ไม่ลงราก ไม่ไปใบที่แตกหลังพ่นมากนัก'},
@@ -5825,8 +5866,8 @@ function adjOf(o){if(o.adjId==='silicone')return 1.6;if(o.adjId==='mso')return 1
 function bioOf(o){/* o:{crop,stg,env,d,tgt,mob,srcs[],adjId,hasAdj,auto} */const B=leafBio(o.crop,o.stg),E=o.env||{},adj=adjOf(o),ret=leafRet(B,o.d||150,adj);
  const fol=o.tgt==='fol';let srcs=(o.srcs||[]).filter(k=>FSRC[k]);let auto=false;if(fol&&!srcs.length){srcs=suggestSrc(B.need).slice(0,3);auto=true}
  /* หลายเกลือในหยดเดียวกัน: คราบผสมดูดความชื้นจนละลายที่ความชื้นต่ำกว่าเกลือที่ต่ำสุด (ประมาณ −3%) */const mix=srcs.length>1?(()=>{const pd=srcs.map(k=>FSRC[k].pod),pe=srcs.map(k=>FSRC[k].poe);/* POE ของคราบผสม: ระหว่างค่าต่ำสุดกับค่าเฉลี่ย (อนุรักษ์นิยม) */return {pod:Math.max(30,Math.min(...pd)-3),poe:Math.round(Math.max(Math.min(...pe),pe.reduce((a,b)=>a+b,0)/pe.length-10))}})():null;
- const R=rhModel(E),rainAt=E.rainNow?0:E.rainSoon?2:null;
- const U=(fol||srcs.length)?srcs.map(k=>foliarUptake(k,{B,E,R,d:o.d,crop:o.crop,adj,rainAt,...(mix||{})})):[];
+ const R=o.R||rhModel(E),rainAt=E.rainNow?0:E.rainSoon?2:null;
+ const U=(fol||srcs.length)?srcs.map(k=>foliarUptake(k,{B,E,R,d:o.d,crop:o.crop,adj,rainAt,...(mix||{}),t0:o.t0||0})):[];
  let fab=null,fdel=null;if(U.length){let sa=0,sd=0,n=0;U.forEach(u=>Object.entries(u.el).forEach(([e,x])=>{const w=B.need.includes(e)?2:1;sa+=x.a72*w;sd+=delivery(e,B.sink)*w;n+=w}));fab=sa/n;fdel=sd/n}
  const M=MOB[o.mob]||null,act=B.age.act*(E.drought?0.6:1)*(E.cool?0.8:1);
  return {B,E,adj,ret,srcs,auto,U,fab,fdel,M,act,stom:stomOpen(E),R,mix}}
@@ -5915,6 +5956,57 @@ Object.assign(ACT,{
 });
 document.addEventListener('toggle',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.tog)return;const k={fm:'fmOpen',cal:'calOpen',tray:'trayOpen',src:'srcOpen',why:'whyOpen',man:'manOpen',cmp:'cmpOpen',note:'noteOpen'}[t.dataset.tog];if(k)UI[k]=t.open},true);
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target&&e.target.classList&&e.target.classList.contains('actx-wx')){e.preventDefault();e.target.click()}});
+
+
+/* =========================================================
+   ส่วนที่ 17: ทำอย่างไรให้ประโยชน์ต่อพืชเพิ่มขึ้น — คำนวณใหม่ทั้งชุดตามแต่ละทางแก้ แล้วบอกเป็น % จริง
+   ทางแก้ที่ลอง: สารจับใบ · เวลาพ่น (จากพยากรณ์/แบบจำลองอากาศรายชั่วโมง) · โหมดทั่วต้นสูงสุด · เพิ่มน้ำลดความเข้มข้น
+                ผสมยูเรียช่วยดูดความชื้น (ปุ๋ยทางใบ) · น้ำผสมที่ดีกว่า · เลื่อนหลังฝน
+   ========================================================= */
+/* รวมทางแก้หลายข้อเข้าด้วยกัน (ใช้คำนวณ "ทำครบทุกข้อ") */
+function tipMerge(list){const o={f:{},wx:{},addForms:[],srcs:null};list.forEach(x=>{Object.assign(o.f,x.f||{});Object.assign(o.wx,x.wx||{});o.addForms.push(...(x.addForms||[]));if(x.srcs)o.srcs=x.srcs;if(x.water)o.water=x.water;if(x.t0!=null)o.t0=x.t0;if(x.addAdj)o.addAdj=true});return o}
+/* ชั่วโมงพ่นที่น่าลอง: เช้า 6–9 น. และเย็น 15.30–18 น. ใน 24 ชม. ข้างหน้า */
+function tipHours(env,wx){const R=rhModel(env),out=[],keep=(wx.cond||[]).filter(c=>!['hot','part','cloud','night'].includes(c));
+ for(let t=1;t<=23;t++){const x=R(t),hr=x.hr;if(!((hr>=6&&hr<=9)||(hr>=15.5&&hr<=18)))continue;const sky=hr<7.5||hr>17?'cloud':'part',dew=x.rh>=95&&hr<9?['wet']:[];/* ความชื้น ≥95% ตอนเช้า = ใบมีน้ำค้าง ละอองรวมตัวไหลทิ้ง */out.push({t0:t,hr,wx:{temp:String(Math.round(x.T*10)/10),rh:String(Math.round(x.rh)),cond:[sky,...dew,...keep.filter(c=>c!=='wet')]},T:x.T,rh:x.rh,dew:!!dew.length})}return out}
+/* ข้อจำกัดเชิงชีววิทยาที่ปรับการบิน/เวลาแก้ไม่ได้: หาตัวคูณต่ำสุดหลังทำครบทุกข้อ แล้วบอกเหตุผล + ทางออกจริง */
+const ELTH={N:'ไนโตรเจน',P:'ฟอสฟอรัส',K:'โพแทสเซียม',Ca:'แคลเซียม',Mg:'แมกนีเซียม',S:'กำมะถัน',B:'โบรอน',Zn:'สังกะสี',Mn:'แมงกานีส',Fe:'เหล็ก',Cu:'ทองแดง',Cl:'คลอไรด์',Mo:'โมลิบดีนัม'};
+function tipLimit(r,bio){if(!r||!r.parts)return null;const p=r.parts.filter(x=>['del','act','leaf','up','ret'].includes(x[2])).sort((a,b)=>a[1]-b[1])[0];if(!p||p[1]>=0.6)return null;
+ const k=p[2];let why='';
+ if(k==='del'){const sk=bio&&bio.B?bio.B.sink:'',els=bio&&bio.U?[...new Set(bio.U.flatMap(u=>Object.keys(u.el)))].filter(e=>EL[e]&&delivery(e,sk)<0.5):[];
+  const sn=sk&&SINK_N[sk]?SINK_N[sk].split(' ')[0].split('/')[0]:'จุดเป้าหมาย';
+  why=`${els.length?els.map(e=>ELTH[e]||e).join('/'):'ธาตุในสูตร'}แทบไม่ไหลในท่ออาหาร ส่วนที่ซึมเข้าใบจะค้างอยู่ที่ใบนั้น ไม่ย้ายไป${sn} จึงควรเล็งให้ละอองโดน${sn}โดยตรง พ่นซ้ำตามรอบ และให้ทางดินล่วงหน้าก่อนช่วงนี้เป็นหลัก`}
+ else if(k==='up')why='ธาตุ/สารนี้ซึมผ่านผิวใบได้ช้า ส่วนใหญ่ค้างบนผิวใบแล้วแห้งเป็นคราบ — ทางใบเป็นตัวเสริม ไม่ใช่ทดแทนทางดิน: พ่นซ้ำห่าง 7–10 วัน';
+ else if(k==='ret')why='ผิวใบมัน/มีไขหรือขนมาก ละอองเด้งหลุด — สารจับใบกลุ่มซิลิโคน (ออร์กาโนซิลิโคน) ช่วยได้มากสุด';
+ else if(k==='act')why='ช่วงนี้พืชโตช้า ยาดูดซึมเคลื่อนไปทั่วต้นน้อย — ใช้ยาชนิดสัมผัส หรือรอช่วงแตกใบอ่อน/โตเร็ว';
+ else if(k==='leaf')why='ช่วงนี้แทบไม่มีใบรับสาร — เลื่อนไปพ่นเมื่อแตกใบใหม่';
+ return {k,n:p[0],v:p[1],why}}
+function benefitTips(calc,cur,ctx){const T=[],pc=x=>Math.round(x*100);
+ const add=(t,o)=>{try{const r=calc(o);if(r&&r.tot-cur>=0.01)T.push({t,o,to:r.tot,d:r.tot-cur})}catch(e){}};
+ if(!ctx.hasAdj&&ctx.bio&&ctx.bio.ret<0.9&&ctx.tk!=='herbP')add(`ใส่สารจับใบ (สารลดแรงตึงผิว) — ละอองติดใบ ${pc(ctx.bio.ret)}% → ~${pc(leafRet(ctx.bio.B,ctx.d||150,1.3))}%`,{addForms:['ADJ'],addAdj:true});
+ {let best=null;for(const h of tipHours(ctx.env,ctx.wx)){try{const r=calc({wx:h.wx,t0:h.t0});if(!best||r.tot>best.tot)best={...h,tot:r.tot}}catch(e){}}
+  if(best&&best.tot-cur>=0.01)T.push({t:`พ่นช่วง ${String(Math.floor(best.hr)).padStart(2,'0')}:00 น. (คาดอากาศ ~${Math.round(best.T)}°C ความชื้น ${Math.round(best.rh)}%${best.dew?' มีน้ำค้าง':''}) — ใบไม่ร้อน หยดเปียกนานขึ้น`,o:{wx:best.wx,t0:best.t0},to:best.tot,d:best.tot-cur})}
+ if(ctx.alt)add(`ใช้ค่าบินโหมดทั่วต้นสูงสุด (น้ำ ${fmt(ctx.alt.w,1)} ล./ไร่ · เร็ว ${spd(ctx.alt.v)} · ละออง ${ctx.alt.d} µm)`,{f:{h:ctx.alt.h,sw:ctx.alt.sw,v:ctx.alt.v,w:ctx.alt.w,d:ctx.alt.d}});
+ if(ctx.burnF<0.93&&ctx.w)add(`เพิ่มน้ำเป็น ${fmt(Math.ceil(ctx.w*1.5*2)/2,1)} ล./ไร่ (ใช้ยาเท่าเดิม เจือจางลง ไหม้ยากขึ้น)`,{f:{w:Math.ceil(ctx.w*1.5*2)/2}});
+ if(ctx.tk==='fol'&&ctx.bio&&ctx.bio.U.some(u=>u.lh<3)&&!ctx.bio.srcs.includes('urea'))add('ผสมยูเรีย 0.5–1% — ช่วยให้คราบปุ๋ยดูดความชื้น ละลายซึมได้นานขึ้น',{srcs:[...ctx.bio.srcs,'urea']});
+ if(ctx.water&&ctx.water!=='tap'&&ctx.water!=='rain')add('ใช้น้ำประปาหรือน้ำฝนผสมแทน (น้ำกระด้าง/น้ำคลองทำให้ยาเสื่อม)',{water:'tap'});
+ if(ctx.env&&ctx.env.rainSoon)add('เลื่อนไปพ่นหลังฝนหยุดและใบแห้ง',{wx:{cond:(ctx.wx.cond||[]).filter(c=>c!=='rainSoon')}});
+ T.sort((a,b)=>b.d-a.d);const top=T.slice(0,4);let all=null;
+ let fin=null;try{fin=calc(top.length?tipMerge(top.map(x=>x.o)):{})}catch(e){}
+ if(top.length>1&&fin&&fin.tot>top[0].to+0.005)all=fin.tot;
+ return {list:top,all,lim:cur<0.75?tipLimit(fin,ctx.bio):null}}
+function tipsHTML(tp,cur){if(!tp||(!tp.list.length&&!tp.lim))return '';const pc=x=>Math.round(x*100);
+ return `<div class="ben-tips">${tp.list.length?'<div class="bt-h">💡 ทำแบบนี้ ประโยชน์จะเพิ่มขึ้น</div>':''}${tp.list.map(t=>`<div class="bt"><span>${esc(t.t)}</span><b>${pc(t.to)}%<small>+${Math.max(1,pc(t.d))}</small></b></div>`).join('')}${tp.all?`<div class="bt all"><span>ทำครบทุกข้อด้านบน</span><b>${pc(tp.all)}%<small>+${pc(tp.all-cur)}</small></b></div>`:''}${tp.lim?`<div class="bt lim"><span><b>ข้อจำกัดที่ปรับการบินแก้ไม่ได้: ${esc(tp.lim.n)} ${pc(tp.lim.v)}%</b> — ${esc(tp.lim.why)}</span></div>`:''}</div>`}
+/* หน้าแนะนำ: คำนวณใหม่ทั้งชุดด้วยค่าที่เปลี่ยน */
+function benAdv(f,wx,o={}){const F2={...f,...(o.f||{})},W2={...wx,...(o.wx||{})},env=envOf(W2),tgt=F2.tgt||defTgt(F2.svc);
+ const forms=[...new Set([...(F2.forms||[]),...(o.addForms||[])])],items=forms.map(k=>({form:k,name:'',cat:k==='FOL'?'fer':k==='ADJ'?'adj':''}));
+ const _h=x=>x!==''&&x!=null&&!isNaN(parseFloat(x)),dt=_h(W2.temp)&&_h(W2.rh)?deltaT(num(W2.temp),num(W2.rh)):null,water=o.water||F2.water||'tap';
+ const md=flyModel({crop:F2.crop,stg:F2.stg,can:F2.can,tgt,mob:F2.mob,h:F2.h,sw:F2.sw,w:F2.w,d:F2.d,wind:F2.wind,dt,v:F2.v,env});
+ const mix=mixPlan(items,F2.w,water,[]),burn=burnRisk({crop:F2.crop,stg:F2.stg,tgt,temp:W2.temp,rh:W2.rh,w:F2.w,d:F2.d,env,forms});
+ const bio=bioOf({crop:F2.crop,stg:F2.stg,env,d:F2.d,tgt,mob:F2.mob||(md.T&&md.T.mob),srcs:o.srcs||F2.fsrc,hasAdj:forms.includes('ADJ'),R:o.t0!=null?rhModel(envOf(wx)):null,t0:o.t0});
+ return sprayBenefit(md,{mix,burn,water,bio})}
+function advTips(f,wx,b,bio,md){const tk=md.T.key||f.tgt||defTgt(f.svc),forms=f.forms||[],pf=Object.fromEntries(b.parts.map(p=>[p[2]||'',p[1]]));
+ let alt=null;if((pf.dose??1)<0.9&&!(f.lk||[]).length){const cg=CG();try{localStorage.setItem('covGoal','max');const a=flyAdj(f.crop,f.svc,f.can,f.stg,wx,f.tgt,{},f.mob);if(!a.S.spread&&(Math.abs(a.w-f.w)>0.4||Math.abs(a.v-f.v)>0.2))alt=a}catch(e){}finally{try{localStorage.setItem('covGoal',cg)}catch(e){}}}
+ return benefitTips(o=>benAdv(f,wx,o),b.tot,{tk,bio,hasAdj:forms.includes('ADJ'),d:f.d,env:envOf(wx),wx,alt,burnF:pf.burn??1,w:f.w,water:f.water||'tap'})}
 
 </script>
 </body>
