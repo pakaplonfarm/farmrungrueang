@@ -2513,7 +2513,7 @@ function viewAdvisor(){
  <div id="fly-mix">${flyMixHTML()}</div>
  <div class="grid g2" style="margin-top:14px">
   <div class="card"><h2>🌱 ปุ๋ยและฮอร์โมนเสริมประสิทธิภาพ</h2>${R.nutri.map(n=>`<div style="margin-bottom:10px"><div class="small">${esc(n.text)}</div><div class="row" style="gap:4px;margin-top:4px">${n.items.map(id=>CHEMMAP[id]).filter(Boolean).map(ch=>`<span class="badge b-${ch.cat}" title="${esc(ch.note)}">${esc(ch.th)}</span>`).join('')}</div></div>`).join('')||'<div class="small muted">เลือกระยะพืชเพื่อดูคำแนะนำ</div>'}
-   <div class="note info small">💧 การพ่นด้วยโดรนใช้น้ำน้อย ควรใส่ <b>สารลดการปลิว/ลดการระเหย</b> และผสมสารทีละชนิดตามลำดับ (ผง → น้ำ → น้ำมัน) ทดสอบการเข้ากันในภาชนะเล็กก่อน</div></div>
+   <div class="note info small">💧 การพ่นด้วยโดรนใช้น้ำน้อย ควรใส่ <b>สารลดการปลิว/ลดการระเหย</b> และผสมสารทีละชนิดตามลำดับ (ปรับน้ำ → ผง → ของเหลว → น้ำมัน → สารจับใบ → สารลดการปลิว) ทดสอบการเข้ากันในภาชนะเล็กก่อน</div></div>
   <div class="card"><h2>🧪 ประวัติกลุ่มสารในแปลง</h2>${plot?chemTimeline(R.hist,10):'<div class="small muted">เลือกแปลงลูกค้าด้านบน เพื่อให้ระบบตรวจกลุ่มสารที่ใช้ไปแล้วและแนะนำการสลับกลุ่ม</div>'}</div>
  </div>
  ${STANDALONE?'':`<div class="card" style="margin-top:14px" id="ai-card"><div class="row between"><h2 style="margin:0">🤖 ถามผู้ช่วย AI (วิเคราะห์ละเอียด)</h2><button class="btn accent" data-act="askAI" ${A.aiBusy?'disabled':''}>${A.aiBusy?'กำลังวิเคราะห์…':'วิเคราะห์จากข้อมูลนี้'}</button></div>
@@ -4475,7 +4475,7 @@ function dryInfo(E,d,crop){const t0=tDry(E,d);if(t0==null)return null;const t=t0
 const fmtT=x=>x<90?`${Math.round(x)} วินาที`:`${fmt(x/60,1)} นาที`;
 /* แนะนำ/หลีกเลี่ยงสูตรสาร ตามสภาพอากาศตอนนี้ + พืช */
 function formAdvice(E,crop,stg){if(!E||E.TL==null)return null;const TL=E.TL,sens=(BURN_SENS[crop]||[]).includes(stg);
- return FORM_KEYS.filter(k=>k!=='ADJ').map(k=>{const F=FORMS[k];let sc=formBurn([k],E,TL).s,why=[];
+ return FORM_KEYS.filter(k=>!NOTPROD(k)).map(k=>{const F=FORMS[k];let sc=formBurn([k],E,TL).s,why=[];
   if(F.heat>0.3&&TL>=29)why.push(`ใบ ${fmt(TL,0)}°C ตัวทำละลาย/น้ำมันกัดผิวใบ`);if(F.salt>0.3&&E.vpdL>1.6)why.push(`อากาศแห้ง (VPD ${fmt(E.vpdL,1)}) เกลือตกผลึกเร็ว`);
   if(E.rainSoon){const p=Math.round((1-F.rain)*30);sc+=p;if(p>=10)why.push(`ฝนใกล้ตก ต้องแห้ง ~${F.rainH} ชม.`)}
   if(sens&&(F.heat>0.3||F.salt>0.5)){sc+=6;why.push('ระยะใบอ่อน/ดอกบอบบาง')}
@@ -4483,7 +4483,7 @@ function formAdvice(E,crop,stg){if(!E||E.TL==null)return null;const TL=E.TL,sens
   if(k==='OIL'&&TL>=32){sc+=10}
   const lv=sc>=18?'bad':sc>=8?'warn':'ok';if(lv==='ok'&&!why.length)why.push(F.heat>0.3?'ใบยังเย็นพอ':F.salt>0.3?'ความชื้นพอ หยดไม่แห้งเร็ว':'ไหม้น้อยในสภาพนี้');return {k,F,sc,lv,why}}).sort((a,b)=>a.sc-b.sc)}
 function formAdviceHTML(E,crop,stg){const A=formAdvice(E,crop,stg);if(!A)return '<div class="fhaz"><b>🧪 สูตรสารที่เหมาะกับอากาศตอนนี้</b><div class="tiny muted">กรอกอุณหภูมิ/ความชื้นก่อน</div></div>';
- const g=lv=>A.filter(x=>x.lv===lv),row=(x)=>`<div class="fadv ${x.lv}"><b>${x.k==='FOL'?'ปุ๋ยน้ำ':x.k==='OIL'?'น้ำมัน':x.k}</b><span>${esc(x.why.join(' · '))}</span></div>`;
+ const g=lv=>A.filter(x=>x.lv===lv),row=(x)=>`<div class="fadv ${x.lv}"><b>${fLab(x.k)}</b><span>${esc(x.why.join(' · '))}</span></div>`;
  return `<div class="fhaz ${g('bad').length?'warn':'ok'}"><b>🧪 สูตรสารกับอากาศตอนนี้</b> <span class="tiny muted">(ผิวใบ ~${fmt(E.TL,0)}°C · ${E.rainSoon?'ฝนใกล้ตก':'ไม่มีฝน'})</span>
  ${g('bad').length?`<div class="small" style="margin-top:4px;color:#B91C1C"><b>⛔ หลีกเลี่ยง</b></div>${g('bad').map(row).join('')}`:''}
  ${g('warn').length?`<div class="small" style="margin-top:4px;color:#B45309"><b>⚠️ ใช้ได้ถ้าจำเป็น — พ่นเช้า/เย็น เพิ่มน้ำ</b></div>${g('warn').map(row).join('')}`:''}
@@ -5449,6 +5449,7 @@ Object.assign(ACT,{
    ========================================================= */
 /* ord=ลำดับผสม · burn=ไวต่อการไหม้ (0–1) · heat=ไหม้เพิ่มตามความร้อนผิวใบ (ตัวทำละลาย/น้ำมัน) · salt=ไหม้เพิ่มตามความแห้ง (เกลือ) · rain=ทนฝน (0–1) · rainH=ชม.ที่ต้องแห้ง · agit=ต้องกวน */
 const FORMS={
+ FOLS:{n:'ปุ๋ยเกล็ด/ผงละลายน้ำ',ord:1,burn:0.5,heat:0,salt:1,rain:0.3,rainH:4,agit:0,tip:'ละลายให้ใสหมดก่อนใส่ยาตัวแรก · ยูเรีย/โพแทสเซียมไนเตรตละลายแล้วน้ำเย็นลง ต้องกวนนานขึ้น'},
  WG:{n:'WG/WDG เม็ดกระจายตัว',ord:2,burn:0.15,heat:0,salt:0.2,rain:0.55,rainH:2,agit:1,tip:'ละลายในถังเล็ก (เกลี่ยน้ำ) จนแตกตัวหมดก่อนเท'},
  WP:{n:'WP ผงละลายน้ำ',ord:2,burn:0.2,heat:0,salt:0.2,rain:0.45,rainH:3,agit:1,tip:'ทำเป็นน้ำข้นในถังเล็กก่อน · ตกตะกอนถ้าไม่กวน · ทิ้งคราบขาวบนใบ'},
  SP:{n:'SP/SG ผง/เม็ดละลายใส',ord:3,burn:0.35,heat:0,salt:0.6,rain:0.35,rainH:4,agit:0,tip:'ละลายให้ใสก่อนเติมตัวถัดไป'},
@@ -5462,7 +5463,9 @@ const FORMS={
  OIL:{n:'น้ำมันปิโตรเลียม/ไวท์ออยล์',ord:6,burn:0.9,heat:1.2,salt:0,rain:0.8,rainH:1,agit:1,tip:'ห้ามใช้ใกล้กำมะถัน (ห่าง ≥2–3 สัปดาห์) · ใบไหม้เมื่อ >32°C'},
  SL:{n:'SL สารละลายน้ำ',ord:7,burn:0.35,heat:0.1,salt:0.6,rain:0.3,rainH:4,agit:0,tip:'เกลือของสาร (เช่น ไกลโฟเซต) เสื่อมฤทธิ์ในน้ำกระด้าง'},
  FOL:{n:'ปุ๋ยน้ำ/ธาตุอาหารทางใบ',ord:8,burn:0.5,heat:0,salt:1,rain:0.3,rainH:4,agit:0,tip:'เกลือปุ๋ยทำให้สารบางตัวตกตะกอน — ใส่ท้าย ทดสอบในขวดก่อน'},
- ADJ:{n:'สารจับใบ/สารเสริม',ord:9,burn:0.3,heat:0.4,salt:0,rain:0,rainH:0,agit:0,tip:'ใส่ท้ายสุด · ซิลิโคน/น้ำมันเพิ่มการซึม = เพิ่มทั้งผลและความเสี่ยงไหม้'}};
+ ADJ:{n:'สารจับใบ/สารเสริม',ord:9,burn:0.3,heat:0.4,salt:0,rain:0,rainH:0,agit:0,tip:'ใส่หลังเติมน้ำเกือบเต็ม · ซิลิโคน/น้ำมันเพิ่มการซึม = เพิ่มทั้งผลและความเสี่ยงไหม้'},
+ DRT:{n:'สารลดการปลิว/ลดการระเหย',ord:10,burn:0,heat:0,salt:0,rain:1,rainH:0,agit:0,tip:'ใส่หลังสุด กวนเบาๆ — ชนิดโพลิเมอร์ถ้ากวนแรง/ปั๊มวนนาน สายโพลิเมอร์ขาด ลดการปลิวได้น้อยลง'}};
+const fLab=k=>({FOL:'ปุ๋ยน้ำ',FOLS:'ปุ๋ยเกล็ด',ADJ:'สารจับใบ',DRT:'ลดการปลิว',OIL:'น้ำมัน'})[k]||k,NOTPROD=k=>k==='ADJ'||k==='DRT';
 const FORM_KEYS=Object.keys(FORMS);
 const formDetect=t=>{t=String(t||'').toUpperCase();const m=t.match(/\b(WDG|WG|DF|WP|SP|SG|SC|FS|CS|ZC|SE|EW|ME|OD|EC|SL|AS)\b/);if(!m)return '';return {WDG:'WG',DF:'WG',SG:'SP',FS:'SC',ZC:'CS',AS:'SL'}[m[1]]||m[1]};
 const lineForm=l=>l.form||formDetect(l.product)||formDetect(l.active)||(l.cat==='fer'?'FOL':l.cat==='adj'?'ADJ':'');
@@ -5470,11 +5473,12 @@ const WATER={tap:{n:'ประปา/น้ำฝน',f:1},well:{n:'บาดา
 /* ---------- ถังผสม: ลำดับ · ความเข้มข้นเทียบถังสะพาย · ทดสอบในขวด · ความเข้ากัน ---------- */
 function mixPlan(items,w,water,groups){/* items:[{form,name,rate,unit,cat,g}] */
  const it=items.filter(x=>x.form&&FORMS[x.form]).map(x=>({...x,F:FORMS[x.form]})).sort((a,b)=>a.F.ord-b.F.ord);const warn=[],ok=[];
- const has=k=>it.some(x=>x.form===k),cnt=k=>it.filter(x=>x.form===k).length,nProd=it.filter(x=>x.form!=='ADJ').length;
+ const has=k=>it.some(x=>x.form===k),cnt=k=>it.filter(x=>x.form===k).length,nProd=it.filter(x=>!NOTPROD(x.form)).length;
  const conc=w?80/w:null;/* ถังสะพาย ~80 ล./ไร่ */
  if(conc&&conc>4)warn.push(`โดรนใช้น้ำ ${fmt(w,1)} ล./ไร่ → ทุกสารเข้มข้นกว่าถังสะพาย ~${fmt(conc,0)} เท่า — สารที่เคยผสมกันได้ในถังสะพายอาจตกตะกอนในถังโดรน: ทดสอบในขวดก่อนทุกครั้ง`);
  if((has('WP')||has('WG'))&&(has('EC')||has('OIL')))warn.push('ผงแขวนลอย (WP/WG) + EC/น้ำมัน: ถ้าเท EC ก่อน ผงจะจับตัวเป็นก้อน (ข้นเหมือนโยเกิร์ต) อุดหัวพ่น — ต้องผสม WP/WG ให้แตกตัวก่อนเสมอ');
  if(has('FOL')&&(has('WP')||has('WG')||has('SC')))warn.push('ปุ๋ยทางใบ (เกลือ) + สารแขวนลอย: เกลือทำให้อนุภาคจับตัว — ใส่ปุ๋ยเป็นอันดับท้าย และใช้ภายใน 1 ชม.');
+ if(has('FOLS')&&(has('WP')||has('WG')||has('SC')||has('CS')))warn.push('ปุ๋ยเกล็ด (เกลือเข้มข้น) + สารแขวนลอย: ละลายปุ๋ยให้หมดก่อน แล้วค่อยๆ เทสารแขวนลอยที่ละลายแยกไว้ — ถ้าเห็นเป็นเกล็ด/ก้อนลอย = ไม่เข้ากัน ให้แยกพ่น · ใช้ภายใน 1 ชม.');
  if(cnt('EC')+cnt('OIL')+cnt('OD')+cnt('ME')>=2)warn.push('มีสารกลุ่มน้ำมัน/ตัวทำละลายหลายตัว — ตัวทำละลายรวมกันสูง เสี่ยงใบไหม้มากขึ้นชัดเจน');
  if(has('OD')&&it.some(x=>x.form==='ADJ'))warn.push('OD มีน้ำมันในตัวแล้ว — สารจับใบชนิดน้ำมันซ้ำเพิ่มความเสี่ยงไหม้');
  if(nProd>=4)warn.push(`ผสม ${nProd} ชนิดในถังเดียว — โอกาสไม่เข้ากัน/ใบไหม้เพิ่มขึ้น แบ่งพ่น 2 รอบจะปลอดภัยกว่า`);
@@ -5482,16 +5486,21 @@ function mixPlan(items,w,water,groups){/* items:[{form,name,rate,unit,cat,g}] */
   if((groups||[]).some(g=>/^1[AB]$|^3A$/.test(g)))warn.push('น้ำด่าง (pH>7.5): สารกลุ่ม 1A/1B/3A สลายตัวเร็ว (ไฮโดรไลซิส) — ปรับ pH 5–6.5 และพ่นให้หมดภายใน 1 ชม.')}
  if(water==='canal')warn.push('น้ำขุ่นมีตะกอนดิน: พาราควอต/ไกลโฟเซตจับดินเสื่อมฤทธิ์ ~30% และอุดหัวพ่น — กรองหรือใช้น้ำใส');
  if(it.some(x=>x.F.agit))ok.push('มีสารแขวนลอย: เปิดกวนตลอด อย่าจอดโดรนทั้งที่มีน้ำยาค้าง >15 นาที');
- ok.push('ผสมแล้วพ่นให้หมดภายใน 2–4 ชม. (น้ำด่าง/อากาศร้อน ≤1 ชม.)');
- const steps=[{t:'เติมน้ำ ½–⅔ ถัง'+(water==='well'?' + ปรับสภาพน้ำ (AMS/ปรับ pH)':''),k:''}];
- let last=0;it.forEach(x=>{steps.push({t:`${x.name?x.name+' — ':''}${x.F.n}${x.rate&&w?` · ${fmt(num(x.rate)/w,2)} ${x.unit||''}/น้ำ 1 ล.`:''}${x.F.tip?' · '+x.F.tip:''}`,k:x.form});last=x.F.ord});
- steps.push({t:'เติมน้ำจนเต็ม คนต่อเนื่อง',k:''});
- const jar=w?`ทดสอบในขวดใส 1 ลิตร: ใส่ตามลำดับเดียวกัน ในอัตราต่อน้ำ 1 ล. ข้างบน เขย่า ตั้งทิ้ง 15–30 นาที — ถ้าแยกชั้น/เป็นก้อน/ตกตะกอน/ร้อน = ห้ามผสมรวม`:'';
- return {it,steps,warn,ok,conc,jar,nProd,rainH:it.length?Math.max(...it.map(x=>x.F.rainH)):2,rain:it.length?Math.min(...it.filter(x=>x.form!=='ADJ').map(x=>x.F.rain).concat([1])):0.55}}
+ ok.push('ใส่ทีละตัว กวนให้เข้ากัน 3–5 นาที (ผง/เม็ดรอจนแตกตัวหมด) ก่อนใส่ตัวถัดไป · ผสมในถังผสมแยกที่กวนได้ แล้วค่อยเทเข้าถังโดรน');ok.push('ผสมแล้วพ่นให้หมดภายใน 2–4 ชม. (น้ำด่าง/อากาศร้อน ≤1 ชม.)');
+ const steps=[{t:`เติมน้ำสะอาด ½–¾ ของถังผสม${water==='canal'?' (น้ำขุ่น: กรองก่อน)':''} แล้วเปิดกวน — อย่าเทยาลงถังเปล่า`,k:''}];
+ const hrb=it.some(x=>x.form==='SL'||x.cat==='her');
+ steps.push({t:water==='well'?`สารปรับสภาพน้ำ ใส่ก่อนยาทุกตัว — ${hrb?'แอมโมเนียมซัลเฟต (AMS) จับแคลเซียม/แมกนีเซียมก่อนยาหญ้ากลุ่มเกลือ · ':''}ปรับ pH เฉพาะเมื่อฉลากแนะนำ · สารกันฟอง (ถ้าใช้)`:'สารปรับสภาพน้ำ/สารกันฟอง (ถ้าใช้) — ใส่ก่อนยาทุกตัว',k:''});
+ const line=x=>({k:x.F.n,t:[x.name,x.rate&&w?`${fmt(num(x.rate)/w,2)} ${x.unit||''}/น้ำ 1 ล.`:'',x.F.tip].filter(Boolean).join(' · ')});
+ it.filter(x=>!NOTPROD(x.form)).forEach(x=>steps.push(line(x)));
+ steps.push({t:'เติมน้ำจนเกือบเต็ม (ก่อนใส่สารจับใบ — ฟองน้อยลง)',k:''});
+ it.filter(x=>NOTPROD(x.form)).forEach(x=>steps.push(line(x)));
+ steps.push({t:`กวนต่อเนื่อง${has('DRT')?'แบบเบาๆ':''} เทเข้าถังโดรนผ่านตะแกรงกรองทุกครั้ง`,k:''});
+ const jar=w?`ทดสอบในขวดใส 1 ลิตร: ใส่ตามลำดับเดียวกัน ในอัตราต่อน้ำ 1 ล. ข้างบน เขย่าทุกครั้งที่เติม ตั้งทิ้ง 30 นาที — ถ้าแยกชั้น/เป็นก้อน/ตกตะกอน/ร้อน = ห้ามผสมรวม`:'';
+ return {it,steps,warn,ok,conc,jar,nProd,rainH:it.length?Math.max(...it.map(x=>x.F.rainH)):2,rain:it.length?Math.min(...it.filter(x=>!NOTPROD(x.form)).map(x=>x.F.rain).concat([1])):0.55}}
 /* ไหม้เพิ่มจากสูตรสาร: ตัวทำละลาย/น้ำมัน ↑ตามความร้อนผิวใบ · เกลือ ↑ตามความแห้ง (VPD) · จำนวนสาร */
 function formBurn(forms,E,TL){if(!forms||!forms.length)return {s:0,why:[]};let s=0;const why=[];const vpd=E&&E.vpdL!=null?E.vpdL:1.5;
- forms.forEach(k=>{const F=FORMS[k];if(!F)return;const h=F.heat*Math.max(0,TL-27)*3.2,sa=F.salt*Math.max(0,vpd-1.2)*7,x=Math.round(Math.min(25,h+sa));if(x>=3){s+=x;why.push(`${k}${h>sa?` (ตัวทำละลาย/น้ำมัน ใบ ${fmt(TL,0)}°C)`:` (เกลือเข้มข้นเมื่อแห้ง)`}`)}});
- const n=forms.filter(k=>k!=='ADJ').length;if(n>=3){s+=(n-2)*5;why.push(`ผสม ${n} ชนิด`)}
+ forms.forEach(k=>{const F=FORMS[k];if(!F)return;const h=F.heat*Math.max(0,TL-27)*3.2,sa=F.salt*Math.max(0,vpd-1.2)*7,x=Math.round(Math.min(25,h+sa));if(x>=3){s+=x;why.push(`${fLab(k)}${h>sa?` (ตัวทำละลาย/น้ำมัน ใบ ${fmt(TL,0)}°C)`:` (เกลือเข้มข้นเมื่อแห้ง)`}`)}});
+ const n=forms.filter(k=>!NOTPROD(k)).length;if(n>=3){s+=(n-2)*5;why.push(`ผสม ${n} ชนิด`)}
  return {s:Math.min(40,s),why}}
 /* ---------- ประโยชน์ต่อพืช % (การพ่น): ขนาดยาถึงเป้า × การดูดซึม × ทนฝน × ไม่ไหม้ × น้ำที่ใช้ผสม ---------- */
 const FLOWER_G=['heading','tassel','bud','flower','cflower'];
@@ -5533,16 +5542,16 @@ function hourWindowHTML(o){const L=UI.wxLive;if(!L||!L.hours||!L.hours.length)re
  const good=hrs.filter(x=>x.lv==='ok').map(x=>x.h.t.slice(11,13)+':00');
  return `<div class="small" style="margin:4px 0">${good.length?`⭐ ชั่วโมงที่ดีสำหรับสารชุดนี้: <b>${good.slice(0,6).join(', ')}</b>`:'ยังไม่มีชั่วโมงที่ดีเต็มที่ — ดูชั่วโมงสีเหลือง'}</div><div class="wxstrip">${hrs.map(x=>`<div class="wxc lv-${x.lv}"><span>${x.h.t.slice(11,16)}</span><b>🔥${x.br.s}</b><small>${fmt(x.h.temp,0)}° ${Math.round(x.h.rh)}%</small></div>`).join('')}</div><div class="tiny muted">🔥 = คะแนนใบไหม้ของสารชุดนี้ในชั่วโมงนั้น (รวมแดด อุณหภูมิผิวใบ ความชื้น สูตรสาร)</div>`}
 function mixPanelHTML(o){const mp=o.mix;
- return `<details class="fmix" ${o.open?'open':''}><summary><b>🧪 ถังผสม · สูตรสาร · ลำดับการผสม</b> <span class="tiny muted">${mp.it.length?mp.it.map(x=>x.form).join(' + '):'เลือกสูตรสารที่จะผสม'}</span></summary>
- ${o.pick?`<div class="fstg"><span class="small muted">สูตรในถัง:</span>${FORM_KEYS.map(k=>`<button class="fchip ${o.forms.includes(k)?'on':''}" data-act="flyForm" data-k="${k}" title="${esc(FORMS[k].n)}">${k==='FOL'?'ปุ๋ยน้ำ':k==='ADJ'?'สารจับใบ':k==='OIL'?'น้ำมัน':k}</button>`).join('')}</div>
+ return `<details class="fmix" ${o.open?'open':''}><summary><b>🧪 ถังผสม · สูตรสาร · ลำดับการผสม</b> <span class="tiny muted">${mp.it.length?mp.it.map(x=>fLab(x.form)).join(' + '):'เลือกสูตรสารที่จะผสม'}</span></summary>
+ ${o.pick?`<div class="fstg"><span class="small muted">สูตรในถัง:</span>${FORM_KEYS.map(k=>`<button class="fchip ${o.forms.includes(k)?'on':''}" data-act="flyForm" data-k="${k}" title="${esc(FORMS[k].n)}">${fLab(k)}</button>`).join('')}</div>
  <div class="fstg"><span class="small muted">น้ำที่ใช้ผสม:</span>${Object.entries(WATER).map(([k,v])=>`<button class="fchip ${o.water===k?'on':''}" data-act="flyWater" data-k="${k}">${v.n}</button>`).join('')}</div>`:''}
- ${mp.it.length?`<ol class="fsteps">${mp.steps.map(s=>`<li>${s.k?`<b>${s.k}</b> `:''}${esc(s.t)}</li>`).join('')}</ol>${mp.jar?`<div class="small">🧫 ${esc(mp.jar)}</div>`:''}
+ ${mp.it.length?`<ol class="fsteps">${mp.steps.map(s=>`<li>${s.k?`<b>${esc(s.k)}</b>${s.t?' · ':''}`:''}${esc(s.t)}</li>`).join('')}</ol>${mp.jar?`<div class="small">🧫 ${esc(mp.jar)}</div>`:''}
  ${mp.warn.map(t=>`<div class="note warn small" style="margin-top:6px">${esc(t)}</div>`).join('')}${mp.ok.map(t=>`<div class="tiny muted">• ${esc(t)}</div>`).join('')}
  <div class="small" style="margin-top:6px">☔ ต้องปลอดฝนหลังพ่น ~<b>${fmt(mp.rainH,1)} ชม.</b> (ตัวที่ต้องการนานสุดในถัง)</div>`:''}
  <div class="fden-h" style="margin-top:8px">🕐 ช่วงไหนพ่นดี / ช่วงไหนเสี่ยงไหม้</div>${hourWindowHTML(o)}
- <div class="tiny muted" style="margin-top:6px">ลำดับมาตรฐาน: น้ำ → ผง/เม็ดแขวนลอย (WG/WP) → ผงละลาย (SP/SG) → ของเหลวแขวนลอย (SC/CS) → อิมัลชัน (SE/EW/ME/OD) → EC/น้ำมัน → สารละลาย (SL) → ปุ๋ยน้ำ → สารจับใบ</div></details>`}
+ <div class="tiny muted" style="margin-top:6px">ลำดับมาตรฐาน (ถ้าฉลากระบุต่างจากนี้ ให้ทำตามฉลาก): น้ำ ½–¾ + กวน → สารปรับสภาพน้ำ/กันฟอง → ปุ๋ยเกล็ด (ละลายให้หมด) → ผง/เม็ด (WG/WP → SP/SG) → ของเหลวแขวนลอย (SC/CS) → อิมัลชัน (SE/EW/ME/OD) → EC/น้ำมัน → สารละลาย (SL) → ปุ๋ยน้ำ → เติมน้ำเกือบเต็ม → สารจับใบ → สารลดการปลิว (หลังสุด กวนเบา)</div></details>`}
 /* ---------- รวมแผงการพ่น (หน้าแนะนำ) ---------- */
-function sprayPanels(f,md,wx){const env=envOf(wx),tgt=f.tgt||defTgt(f.svc);const forms=f.forms||[];const items=forms.map(k=>({form:k,name:'',cat:k==='FOL'?'fer':k==='ADJ'?'adj':''}));
+function sprayPanels(f,md,wx){const env=envOf(wx),tgt=f.tgt||defTgt(f.svc);const forms=f.forms||[];const items=forms.map(k=>({form:k,name:'',cat:k==='FOL'||k==='FOLS'?'fer':k==='ADJ'?'adj':''}));
  const mix=mixPlan(items,f.w,f.water||'tap',[]);const burn=burnRisk({crop:f.crop,stg:f.stg,tgt,temp:wx.temp,rh:wx.rh,w:f.w,d:f.d,env,forms});
  const bio=bioOf({crop:f.crop,stg:f.stg,env,d:f.d,tgt,mob:f.mob||(md.T&&md.T.mob),srcs:f.fsrc,hasAdj:forms.includes('ADJ')});
  const b=sprayBenefit(md,{mix,burn,water:f.water||'tap',bio});const tips=advTips(f,wx,b,bio,md);
@@ -5998,7 +6007,7 @@ function tipsHTML(tp,cur){if(!tp||(!tp.list.length&&!tp.lim))return '';const pc=
  return `<div class="ben-tips">${tp.list.length?'<div class="bt-h">💡 ทำแบบนี้ ประโยชน์จะเพิ่มขึ้น</div>':''}${tp.list.map(t=>`<div class="bt"><span>${esc(t.t)}</span><b>${pc(t.to)}%<small>+${Math.max(1,pc(t.d))}</small></b></div>`).join('')}${tp.all?`<div class="bt all"><span>ทำครบทุกข้อด้านบน</span><b>${pc(tp.all)}%<small>+${pc(tp.all-cur)}</small></b></div>`:''}${tp.lim?`<div class="bt lim"><span><b>ข้อจำกัดที่ปรับการบินแก้ไม่ได้: ${esc(tp.lim.n)} ${pc(tp.lim.v)}%</b> — ${esc(tp.lim.why)}</span></div>`:''}</div>`}
 /* หน้าแนะนำ: คำนวณใหม่ทั้งชุดด้วยค่าที่เปลี่ยน */
 function benAdv(f,wx,o={}){const F2={...f,...(o.f||{})},W2={...wx,...(o.wx||{})},env=envOf(W2),tgt=F2.tgt||defTgt(F2.svc);
- const forms=[...new Set([...(F2.forms||[]),...(o.addForms||[])])],items=forms.map(k=>({form:k,name:'',cat:k==='FOL'?'fer':k==='ADJ'?'adj':''}));
+ const forms=[...new Set([...(F2.forms||[]),...(o.addForms||[])])],items=forms.map(k=>({form:k,name:'',cat:k==='FOL'||k==='FOLS'?'fer':k==='ADJ'?'adj':''}));
  const _h=x=>x!==''&&x!=null&&!isNaN(parseFloat(x)),dt=_h(W2.temp)&&_h(W2.rh)?deltaT(num(W2.temp),num(W2.rh)):null,water=o.water||F2.water||'tap';
  const md=flyModel({crop:F2.crop,stg:F2.stg,can:F2.can,tgt,mob:F2.mob,h:F2.h,sw:F2.sw,w:F2.w,d:F2.d,wind:F2.wind,dt,v:F2.v,env});
  const mix=mixPlan(items,F2.w,water,[]),burn=burnRisk({crop:F2.crop,stg:F2.stg,tgt,temp:W2.temp,rh:W2.rh,w:F2.w,d:F2.d,env,forms});
