@@ -10,7 +10,8 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&family=Bai+Jamjuree:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f3f5ef; --card:#ffffff; --ink:#1c2a20; --muted:#5f6d62; --line:#e2e7dd;
@@ -20,7 +21,7 @@
   --r:14px; --sh:0 1px 2px rgba(20,40,25,.06),0 4px 14px rgba(20,40,25,.05);
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Thai',system-ui,sans-serif;font-size:15px;line-height:1.5}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.5}
 button,input,select,textarea{font:inherit;color:inherit}
 a{color:var(--brand-d)}
 .app{display:flex;min-height:100vh}
@@ -828,7 +829,7 @@ details summary{cursor:pointer}
 .side{background:linear-gradient(180deg,#0f3d22 0%,#14492a 60%,#0d331d 100%);border-right:3px solid transparent;border-image:linear-gradient(180deg,#f4c02f,#c07a10 60%,transparent) 1}
 .brand{flex-direction:column;align-items:center;text-align:center;gap:6px;padding:6px 6px 16px;margin-bottom:6px;border-bottom:1px solid rgba(244,192,47,.25)}
 .brand .emb{width:74px;height:74px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
-.bname{font-family:Kanit,sans-serif;font-style:italic;font-weight:900;line-height:1.28;letter-spacing:-.3px}
+.bname{font-family:var(--fd);font-style:italic;font-weight:900;line-height:1.28;letter-spacing:-.3px}
 .bname .a,.bname .b{padding:.12em .12em 0 .04em}
 .bname .a{display:block;font-size:27px;background:linear-gradient(180deg,#d9ffcf 0%,#7fe08a 45%,#2ea44f 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .bname .b{display:block;font-size:27px;background:linear-gradient(180deg,var(--gold1) 0%,var(--gold2) 50%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -840,11 +841,11 @@ details summary{cursor:pointer}
 .hero .drone{position:absolute;right:0;top:0;height:calc(100% - 58px);width:58%;object-fit:cover;object-position:center 35%;
  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%);mask-image:linear-gradient(90deg,transparent 0%,#000 30%)}
 .hero .in{position:relative;z-index:2;padding:14px 22px 76px 64px;max-width:64%}
-.hero .t1,.hero .t2{font-family:Kanit,sans-serif;font-style:italic;font-weight:900;line-height:1.22;letter-spacing:-.5px;display:inline-block;padding:.14em .14em 0 .04em;margin-top:-.12em}
+.hero .t1,.hero .t2{font-family:var(--fd);font-style:italic;font-weight:900;line-height:1.22;letter-spacing:-.5px;display:inline-block;padding:.14em .14em 0 .04em;margin-top:-.12em}
 .hero .t1{font-size:54px;background:linear-gradient(180deg,#47c46a 0%,#1c8a3d 50%,#0b4d23 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 2px 0 #fff) drop-shadow(-2px -2px 0 #fff) drop-shadow(2px -2px 0 #fff) drop-shadow(-2px 2px 0 #fff) drop-shadow(0 6px 6px rgba(0,0,0,.25))}
 .hero .t2{font-size:54px;margin-left:34px;background:linear-gradient(180deg,#fff6c2 0%,#f7c935 45%,#d08a12 75%,#9c5e06 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 2px 0 #0f3d22) drop-shadow(-2px -2px 0 #0f3d22) drop-shadow(2px -2px 0 #0f3d22) drop-shadow(-2px 2px 0 #0f3d22) drop-shadow(0 6px 6px rgba(0,0,0,.3))}
 .hero .rice{position:absolute;left:10px;top:14px;width:58px;opacity:.95;z-index:2}
-.hero .quote{margin-top:6px;font-family:Kanit,sans-serif;font-style:italic;font-weight:700;color:#0f3d22;font-size:15px;text-shadow:0 1px 0 #fff}
+.hero .quote{margin-top:6px;font-family:var(--fd);font-style:italic;font-weight:700;color:#0f3d22;font-size:15px;text-shadow:0 1px 0 #fff}
 .hero .svc{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
 .hero .svc span{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(180deg,#1f7a3e,#0f4d26);color:#fff;border:2px solid var(--gold2);border-radius:999px;padding:3px 12px 3px 4px;font-size:13px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .hero .svc i{font-style:normal;width:24px;height:24px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:14px}
@@ -852,10 +853,10 @@ details summary{cursor:pointer}
  background:linear-gradient(90deg,#0f3d22,#14512c 60%,#0f3d22);border-top:3px solid var(--gold2);color:#fff}
 .hero .bar .area{font-size:13px;line-height:1.3;display:flex;gap:8px;align-items:center}
 .hero .bar .area b{color:var(--gold1)}
-.hero .bar .tel{display:flex;align-items:center;gap:8px;font-family:Kanit,sans-serif;font-weight:800;font-size:24px;color:#fff;text-decoration:none;letter-spacing:.5px}
+.hero .bar .tel{display:flex;align-items:center;gap:8px;font-family:var(--fd);font-weight:800;font-size:24px;color:#fff;text-decoration:none;letter-spacing:.5px}
 .hero .bar .tel i{font-style:normal;width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,var(--gold1),var(--gold2) 50%,var(--gold3));display:grid;place-items:center;font-size:17px;color:#0f3d22}
-.hero .bar .pill{margin-left:auto;background:linear-gradient(180deg,var(--gold1),var(--gold2) 45%,var(--gold3));color:#0f3d22;border-radius:12px 0 0 12px;margin-right:-18px;padding:6px 18px;font-family:Kanit,sans-serif;font-weight:800;font-style:italic;font-size:17px;line-height:1.05;text-align:right}
-.hero .bar .pill small{display:block;font-family:'IBM Plex Sans Thai';font-style:normal;font-weight:600;font-size:10.5px}
+.hero .bar .pill{margin-left:auto;background:linear-gradient(180deg,var(--gold1),var(--gold2) 45%,var(--gold3));color:#0f3d22;border-radius:12px 0 0 12px;margin-right:-18px;padding:6px 18px;font-family:var(--fd);font-weight:800;font-style:italic;font-size:17px;line-height:1.05;text-align:right}
+.hero .bar .pill small{display:block;font-family:'Anuphan';font-style:normal;font-weight:600;font-size:10.5px}
 .mbar{display:none}
 @media (max-width:900px){
  .mbar{display:flex;align-items:center;gap:10px;margin:-14px -12px 10px;padding:10px 14px;background:linear-gradient(90deg,#0f3d22,#1a5c33);border-bottom:3px solid var(--gold2)}
@@ -897,8 +898,8 @@ details summary{cursor:pointer}
  --brand:#14532D;--brand-d:#0F3F22;--brand-l:#E8F5EE;--em:#10B981;--em-l:#D1FAE5;
  --accent:#10B981;--accent-l:#ECFDF5;--red:#DC2626;--red-l:#FEF2F2;--amber:#B45309;--amber-l:#FFFBEB;--ok:#059669;--ok-l:#ECFDF5;
  --r:16px;--sh:0 1px 2px rgba(15,23,42,.04),0 2px 8px rgba(15,23,42,.04);--sh2:0 10px 30px rgba(15,23,42,.08)}
-html,body{font-family:'Sarabun',system-ui,sans-serif;font-size:15.5px;background:var(--bg);color:var(--ink)}
-h1,h2,h3,.kc-v,.ag-v,.sb-name,.btn,.seg button,.nav-btn,.tot.big,.amt,.kpi .v{font-family:'Prompt','Sarabun',sans-serif}
+html,body{font-family:var(--fb);font-size:15.5px;background:var(--bg);color:var(--ink)}
+h1,h2,h3,.kc-v,.ag-v,.sb-name,.btn,.seg button,.nav-btn,.tot.big,.amt,.kpi .v{font-family:var(--fd)}
 h1{font-size:24px;font-weight:600;letter-spacing:-.2px}h2{font-size:16px;font-weight:600}h3{font-size:14.5px;font-weight:600}
 .sub{color:var(--muted)}
 .pos{color:var(--ok)}.neg{color:var(--red)}
@@ -988,7 +989,7 @@ main{padding:20px 28px 100px;max-width:1320px}
 .fmore{display:none}
 .qd .chip{font-size:12.5px}
 .sumbar{display:flex;gap:22px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:12px;font-size:14px}
-.sumbar b{font-family:Prompt;font-weight:600;margin-left:4px}
+.sumbar b{font-family:var(--fd);font-weight:600;margin-left:4px}
 .tx-wrap{overflow-x:auto}
 table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .tx th{position:sticky;top:0;background:#F8FAF9;font-size:12px;color:var(--muted);font-weight:600;text-transform:none;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
@@ -1002,7 +1003,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .ib{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;display:inline-grid;place-items:center;cursor:pointer;color:#475569;margin-left:4px;transition:all .15s}
 .ib svg{width:16px;height:16px}.ib:hover{border-color:var(--em);color:var(--brand)}.ib.del:hover{border-color:#FCA5A5;color:var(--red);background:#FEF2F2}
 /* ---------- Empty state & toast ---------- */
-.es{text-align:center;padding:26px 12px;color:var(--muted)}.es svg{width:120px;height:80px}.es-t{font-family:Prompt;font-weight:600;color:var(--ink);margin-top:6px}.es-s{font-size:13.5px;max-width:420px;margin:4px auto 0}
+.es{text-align:center;padding:26px 12px;color:var(--muted)}.es svg{width:120px;height:80px}.es-t{font-family:var(--fd);font-weight:600;color:var(--ink);margin-top:6px}.es-s{font-size:13.5px;max-width:420px;margin:4px auto 0}
 #toast{border-radius:12px;padding:12px 18px;font-weight:500;box-shadow:var(--sh2);display:flex;gap:8px;align-items:center}
 #toast.ok{background:#064E3B}#toast.err{background:#991B1B}
 /* ---------- Drawer forms ---------- */
@@ -1014,12 +1015,12 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 }
 @keyframes drawer{from{transform:translateX(40px);opacity:.4}to{transform:none;opacity:1}}
 .sheet.narrow{animation:pop .18s ease}@keyframes pop{from{transform:scale(.97);opacity:.5}to{transform:none;opacity:1}}
-.sh-h b{font-family:Prompt;font-weight:600;font-size:16.5px}
+.sh-h b{font-family:var(--fd);font-weight:600;font-size:16.5px}
 .sec{border-radius:14px}.sec>h3{color:var(--brand)}
 .choice{display:flex;gap:14px;align-items:center;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:16px;cursor:pointer;transition:all .15s;width:100%}
 .choice:hover{border-color:var(--em);box-shadow:0 0 0 3px rgba(16,185,129,.12)}
 .choice .ci{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}.choice .ci svg{width:22px;height:22px}
-.choice b{font-family:Prompt;font-weight:600;display:block}.choice span{font-size:13px;color:var(--muted)}
+.choice b{font-family:var(--fd);font-weight:600;display:block}.choice span{font-size:13px;color:var(--muted)}
 /* ---------- Mobile header ---------- */
 .mbar{position:relative;overflow:hidden;border-bottom:0;background:#14532D;min-height:64px;padding:0}
 .mbar .side-art{position:absolute;inset:0;width:100%;height:100%;opacity:.95}
@@ -1058,7 +1059,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .qbox .qi{display:flex;gap:12px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:10px}
 .qbox .qi:hover{background:#F7FBF9}.qbox .qi:last-of-type{border-bottom:0}
 .qd{width:46px;height:50px;border-radius:12px;background:var(--brand-l);color:var(--brand);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1.1}
-.qd b{font-family:Prompt;font-size:19px}.qd span{font-size:11px}
+.qd b{font-family:var(--fd);font-size:19px}.qd span{font-size:11px}
 .qi .main{flex:1;min-width:0}.qi .t{font-weight:600}.qi .d{font-size:13px;color:var(--muted)}
 .qdone{flex-shrink:0}
 .seg.wide{display:flex;width:100%}.seg.wide button{flex:1;min-height:42px;font-size:14px}
@@ -1074,7 +1075,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 @media (max-width:560px){.kc-go{display:none}}
 
 .backbar{display:flex;align-items:center;gap:10px;margin:0 0 12px}
-.backbtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 16px 6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--brand);font-family:Prompt,sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-shadow:var(--sh);transition:all .15s}
+.backbtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 16px 6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--brand);font-family:var(--fd);font-weight:600;font-size:14px;cursor:pointer;box-shadow:var(--sh);transition:all .15s}
 .backbtn svg{width:18px;height:18px;transition:transform .15s}
 .backbtn:hover{border-color:var(--em);background:var(--brand-l)}.backbtn:hover svg{transform:translateX(-2px)}
 .backbtn:active{transform:scale(.97)}
@@ -1085,7 +1086,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 
 .llbox{background:#F8FBF9;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:4px}
 .llgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.llgrid input{font-family:Prompt,monospace;font-size:16px;letter-spacing:.3px}
+.llgrid input{font-family:var(--fd);font-size:16px;letter-spacing:.3px}
 .llbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .gpsbtn{flex:1 1 220px;justify-content:center;min-height:46px;font-size:15px}
 
@@ -1109,7 +1110,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .ah-logo{border:0;background:#fff;border-radius:50%;padding:2px;flex-shrink:0;cursor:pointer;display:grid;place-items:center}
 .ah-logo .emb{width:40px;height:40px}
 .ah-t{flex:1;min-width:0;color:#fff}
-.ah-hi{font-family:Prompt,sans-serif;font-weight:600;font-size:15.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ah-hi{font-family:var(--fd);font-weight:600;font-size:15.5px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ah-s{font-size:12px;opacity:.82;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ahb{position:relative;width:34px;height:34px;border-radius:12px;border:0;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer;flex-shrink:0}
 .ahb svg{width:20px;height:20px}.ahb:active{transform:scale(.94);background:rgba(255,255,255,.24)}
@@ -1142,7 +1143,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .tc-h{display:flex;align-items:center;gap:8px}
 .tc-i{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.7);flex-shrink:0}.tc-i svg{width:17px;height:17px}
 .tc-l{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tc-v{font-family:Prompt,sans-serif;font-weight:700;font-size:24px;line-height:1.25;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0F172A}
+.tc-v{font-family:var(--fd);font-weight:700;font-size:24px;line-height:1.25;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#0F172A}
 .tc-v small{font-size:14px;font-weight:500;color:#475569}
 .tc-s{font-size:12px;color:#475569;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .c-job{background:linear-gradient(135deg,#14532D,#166534 60%,#15803D);color:#fff}
@@ -1155,7 +1156,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 /* แถบเดือน */
 .mstrip{display:grid;grid-template-columns:1.6fr 1fr .7fr .8fr;gap:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 14px;margin-bottom:14px;cursor:pointer}
 .mstrip>div{display:flex;flex-direction:column;min-width:0}.mstrip>div+div{border-left:1px solid var(--line);padding-left:10px}
-.mstrip span{font-size:11.5px;color:var(--muted)}.mstrip b{font-family:Prompt,sans-serif;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mstrip em{font-style:normal;font-size:11.5px;color:var(--muted)}
+.mstrip span{font-size:11.5px;color:var(--muted)}.mstrip b{font-family:var(--fd);font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mstrip em{font-style:normal;font-size:11.5px;color:var(--muted)}
 /* ปุ่มลัด */
 .qtiles{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px;margin-bottom:14px}
 .qt{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;transition:all .15s;font-family:inherit;color:var(--ink)}
@@ -1172,12 +1173,12 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .qc:before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:#F59E0B}
 .qc.k-doing:before{background:#3B82F6}.qc.k-done:before{background:#10B981}.qc.k-cancel:before{background:#CBD5E1}.qc.k-cancel{opacity:.62}
 .qc-time{width:50px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:4px;line-height:1.2}
-.qc-time b{font-family:Prompt,sans-serif;font-size:15.5px;color:#0F172A}.qc-time b.na{color:#CBD5E1}.qc-time span{font-size:12px;color:var(--muted)}
+.qc-time b{font-family:var(--fd);font-size:15.5px;color:#0F172A}.qc-time b.na{color:#CBD5E1}.qc-time span{font-size:12px;color:var(--muted)}
 .qc-time em{font-style:normal;font-size:11px;font-weight:700;color:var(--brand);background:#DCFCE7;border-radius:6px;padding:1px 5px;margin-bottom:3px;white-space:nowrap}
 .qc-ic{width:46px;height:46px;border-radius:14px;flex-shrink:0;display:grid;place-items:center;align-self:center}.qc-ic svg{width:28px;height:28px}
 .s-spray{background:#DCFCE7;color:#15803D}.s-foliar{background:#E0F2FE;color:#0369A1}.s-herb{background:#ECFCCB;color:#4D7C0F}.s-fert{background:#FEF3C7;color:#B45309}.s-seed{background:#FFEDD5;color:#C2410C}.s-other{background:#F1F5F9;color:#475569}
 .qc-m{flex:1;min-width:0}
-.qc-n{font-family:Prompt,sans-serif;font-weight:600;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qc-n{font-family:var(--fd);font-weight:600;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
 .tg{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:7px;background:#F1F5F9;color:#334155;white-space:nowrap}
 .tg.lt{background:transparent;border:1px solid var(--line);font-weight:500;color:#64748B}
@@ -1185,7 +1186,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .qc-r{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:6px;flex-shrink:0}
 .qpill{font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:99px;white-space:nowrap}
 .qpill.pend{background:#FEF3C7;color:#B45309}.qpill.doing{background:#DBEAFE;color:#1D4ED8}.qpill.done{background:#DCFCE7;color:#15803D}.qpill.cancel{background:#F1F5F9;color:#64748B}.qpill.late{background:#FEE2E2;color:#B91C1C}
-.av{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;border:2px solid #fff;font-family:Prompt,sans-serif}
+.av{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;border:2px solid #fff;font-family:var(--fd)}
 .av.xs{width:22px;height:22px;font-size:9.5px;border-width:1.5px}.av.lg{width:46px;height:46px;font-size:16px}
 .avs{display:flex}.avs .av+.av{margin-left:-7px}
 .qempty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:22px 10px;color:var(--muted);text-align:center}.qempty>svg{width:40px;height:40px;color:#A7F3D0}
@@ -1193,15 +1194,15 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fu{display:flex;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px solid var(--line);cursor:pointer}.fu:last-child{border-bottom:0}.fu .main{flex:1;min-width:0}
 .vcta{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,#1E293B,#334155);color:#fff;border-radius:18px;padding:14px 16px;cursor:pointer;margin-top:14px}
 .vcta-i{width:44px;height:44px;border-radius:50%;background:linear-gradient(145deg,#34D399,#059669);display:grid;place-items:center;flex-shrink:0;box-shadow:0 0 0 6px rgba(52,211,153,.18)}.vcta-i svg{width:22px;height:22px}
-.vcta b{display:block;font-family:Prompt,sans-serif;font-weight:600}.vcta span{font-size:12.5px;opacity:.8}.vcta>div{flex:1;min-width:0}.vcta-go{font-size:26px;opacity:.6}
+.vcta b{display:block;font-family:var(--fd);font-weight:600}.vcta span{font-size:12.5px;opacity:.8}.vcta>div{flex:1;min-width:0}.vcta-go{font-size:26px;opacity:.6}
 /* คิวงาน */
 .qlate{background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;border-radius:12px;padding:10px 14px;font-weight:600;font-size:14px;margin-bottom:12px;cursor:pointer}
 .wk{padding:12px!important;margin-bottom:12px}
-.wk-h{display:flex;align-items:center;gap:8px;margin-bottom:10px}.wk-h b{flex:1;text-align:center;font-family:Prompt,sans-serif;font-size:15.5px}
+.wk-h{display:flex;align-items:center;gap:8px;margin-bottom:10px}.wk-h b{flex:1;text-align:center;font-family:var(--fd);font-size:15.5px}
 .wk-h .ib{margin:0;font-size:20px;font-weight:700;color:var(--brand)}
 .wk-d{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
 .wk-d button{border:1px solid transparent;background:#F8FAF8;border-radius:14px;padding:7px 0 4px;display:flex;flex-direction:column;align-items:center;cursor:pointer;font-family:inherit;color:var(--ink)}
-.wk-d button span{font-size:11.5px;color:var(--muted)}.wk-d button b{font-family:Prompt,sans-serif;font-size:17px;line-height:1.3}
+.wk-d button span{font-size:11.5px;color:var(--muted)}.wk-d button b{font-family:var(--fd);font-size:17px;line-height:1.3}
 .wk-d button i{font-style:normal;color:#10B981;font-size:12px;line-height:.8;height:9px;letter-spacing:1px}
 .wk-d button.td{border-color:#10B981}
 .wk-d button.on{background:linear-gradient(160deg,#16A34A,#047857);color:#fff;box-shadow:0 6px 14px rgba(5,150,105,.3)}.wk-d button.on span,.wk-d button.on i{color:#D1FAE5}
@@ -1209,10 +1210,10 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fchip{flex-shrink:0;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px;font-family:inherit;font-size:13.5px;font-weight:600;color:#475569;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
 .fchip b{font-size:11.5px;background:#F1F5F9;border-radius:99px;padding:0 7px;min-width:20px;text-align:center}
 .fchip.on{background:#14532D;border-color:#14532D;color:#fff}.fchip.on b{background:rgba(255,255,255,.2);color:#fff}
-.dh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:4px 2px 10px}.dh b{font-family:Prompt,sans-serif;font-size:15px}.dh span{font-size:13px;color:var(--muted);white-space:nowrap}
+.dh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:4px 2px 10px}.dh b{font-family:var(--fd);font-size:15px}.dh span{font-size:13px;color:var(--muted);white-space:nowrap}
 .qstats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--line);border-radius:16px;margin-top:14px;padding:12px 4px}
 .qstats>div{display:flex;flex-direction:column;align-items:center}.qstats>div+div{border-left:1px solid var(--line)}
-.qstats b{font-family:Prompt,sans-serif;font-size:19px;color:var(--brand)}.qstats span{font-size:12px;color:var(--muted)}
+.qstats b{font-family:var(--fd);font-size:19px;color:var(--brand)}.qstats span{font-size:12px;color:var(--muted)}
 @media (max-width:900px){.qstats{position:sticky;bottom:84px;z-index:20;box-shadow:0 6px 20px rgba(15,23,42,.1)}}
 .qs-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
 .qacts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -1221,32 +1222,32 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .qa.go{background:#EFF6FF;border-color:#BFDBFE;color:#1D4ED8}.qa.ok{background:#ECFDF5;border-color:#A7F3D0;color:#047857}.qa.bad{color:#B91C1C}
 /* การเงิน */
 .ftabs{display:flex;background:#EEF2EF;border-radius:14px;padding:4px;margin-bottom:12px;gap:4px}
-.ftabs button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 6px;font-family:Prompt,sans-serif;font-weight:600;font-size:14px;color:#64748B;cursor:pointer}
+.ftabs button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 6px;font-family:var(--fd);font-weight:600;font-size:14px;color:#64748B;cursor:pointer}
 .ftabs button.on{background:#fff;color:var(--brand);box-shadow:0 2px 8px rgba(15,23,42,.08)}
 .mnav{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:12px}
-.mnav>div{flex:1;text-align:center;display:flex;flex-direction:column}.mnav b{font-family:Prompt,sans-serif;font-size:15.5px}.mnav span{font-size:12px;color:var(--muted)}
+.mnav>div{flex:1;text-align:center;display:flex;flex-direction:column}.mnav b{font-family:var(--fd);font-size:15.5px}.mnav span{font-size:12px;color:var(--muted)}
 .mnav .ib{margin:0;font-size:20px;font-weight:700;color:var(--brand)}.mnav .ib[disabled]{opacity:.35;cursor:default}
 .dn{display:flex;align-items:center;gap:16px}
 .dn-c{position:relative;width:170px;height:170px;flex-shrink:0}.dn-c .chart-box{height:170px!important;width:170px}
-.dn-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}.dn-t b{font-family:Prompt,sans-serif;font-size:15px}.dn-t span{font-size:11.5px;color:var(--muted)}
+.dn-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}.dn-t b{font-family:var(--fd);font-size:15px}.dn-t span{font-size:11.5px;color:var(--muted)}
 .dn-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
 .dn-l>div{display:flex;align-items:center;gap:8px;font-size:13px}.dn-l i{width:10px;height:10px;border-radius:3px;flex-shrink:0}.dn-l span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dn-l b{font-size:13px}
 @media (max-width:420px){.dn{flex-direction:column;align-items:stretch}.dn-c{margin:0 auto}}
 .fsum{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fsum>div{background:#F8FAF8;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px;min-width:0}
-.fsum span{font-size:12.5px;color:var(--muted)}.fsum b{font-family:Prompt,sans-serif;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fsum span{font-size:12.5px;color:var(--muted)}.fsum b{font-family:var(--fd);font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rl{display:flex;align-items:center;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line);cursor:pointer}.rl:last-of-type{border-bottom:0}
 .rl-i{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0}.rl-i svg{width:18px;height:18px}
 .rl-i.up{background:#DCFCE7;color:#15803D}.rl-i.dn2{background:#FEE2E2;color:#DC2626}
 .rl-m{flex:1;min-width:0;display:flex;flex-direction:column}.rl-m b{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rl-m span{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rl-m em{font-style:normal}
-.rl-r{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}.rl-r b{font-family:Prompt,sans-serif;font-size:15px}
+.rl-r{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}.rl-r b{font-family:var(--fd);font-size:15px}
 /* ทีมงาน */
 .wlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-bottom:12px}
 .wc{padding:14px!important;margin:0!important}.wc.off{opacity:.6}
-.wc-h{display:flex;align-items:center;gap:12px;cursor:pointer}.wc-m{flex:1;min-width:0;display:flex;flex-direction:column}.wc-m b{font-family:Prompt,sans-serif;font-size:16px}.wc-m span{font-size:12.5px;color:var(--muted)}
+.wc-h{display:flex;align-items:center;gap:12px;cursor:pointer}.wc-m{flex:1;min-width:0;display:flex;flex-direction:column}.wc-m b{font-family:var(--fd);font-size:16px}.wc-m span{font-size:12.5px;color:var(--muted)}
 .wpill{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}.w-rai{background:#DCFCE7;color:#15803D}.w-day{background:#DBEAFE;color:#1D4ED8}.w-mon{background:#EDE9FE;color:#6D28D9}
 .wc-s{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0;background:#F8FAF8;border-radius:12px;padding:10px 4px}
-.wc-s>div{display:flex;flex-direction:column;align-items:center;min-width:0}.wc-s b{font-family:Prompt,sans-serif;font-size:14.5px;white-space:nowrap}.wc-s span{font-size:11px;color:var(--muted);text-align:center}
+.wc-s>div{display:flex;flex-direction:column;align-items:center;min-width:0}.wc-s b{font-family:var(--fd);font-size:14.5px;white-space:nowrap}.wc-s span{font-size:11px;color:var(--muted);text-align:center}
 .wc-f{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.wc-f .btn svg{width:15px;height:15px}
 .tpick{display:flex;flex-wrap:wrap;gap:8px}
 .tp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px 5px 5px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
@@ -1254,17 +1255,17 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .qsseg{margin-top:8px}.qsseg button{font-size:13px!important;min-height:38px!important}
 /* ผู้ช่วยเสียง */
 .vc-hero{text-align:center;padding:22px 16px!important;background:radial-gradient(120% 90% at 50% 0%,#ECFDF5,#fff 70%)!important}
-.vc-t{font-family:Prompt,sans-serif;font-weight:700;font-size:19px;color:var(--brand)}.vc-s{font-size:13.5px;color:var(--muted);margin-top:2px}
+.vc-t{font-family:var(--fd);font-weight:700;font-size:19px;color:var(--brand)}.vc-s{font-size:13.5px;color:var(--muted);margin-top:2px}
 .vc-mic{position:relative;width:112px;height:112px;border-radius:50%;border:0;margin:22px auto 14px;display:grid;place-items:center;background:linear-gradient(145deg,#34D399,#059669 55%,#065F46);color:#fff;cursor:pointer;box-shadow:0 14px 30px rgba(5,150,105,.38)}
 .vc-mic svg{width:46px;height:46px;position:relative;z-index:1}
 .vc-p{position:absolute;inset:0;border-radius:50%;background:#34D399;opacity:0}
 .vc-mic.on{background:linear-gradient(145deg,#F87171,#DC2626)}.vc-mic.on .vc-p{background:#F87171;animation:vcp 1.6s ease-out infinite}.vc-mic.on .vc-p.d2{animation-delay:.8s}
 @keyframes vcp{from{transform:scale(1);opacity:.5}to{transform:scale(1.7);opacity:0}}
-.vc-st{font-weight:600;color:#334155}.vc-live{min-height:24px;font-family:Prompt,sans-serif;font-size:17px;color:var(--brand);margin:6px 0 12px}
+.vc-st{font-weight:600;color:#334155}.vc-live{min-height:24px;font-family:var(--fd);font-size:17px;color:var(--brand);margin:6px 0 12px}
 .vc-in{display:flex;gap:8px;max-width:560px;margin:0 auto}.vc-in input{flex:1;min-height:46px;font-size:15.5px}
 .vc-res{border-width:2px!important}.vc-res.confirm{border-color:#A7F3D0!important}.vc-res.err{border-color:#FECACA!important}.vc-res.ok{border-color:#10B981!important;background:#F0FDF4!important}
-.vc-q{font-size:13px;color:var(--muted);margin-bottom:8px}.vc-h2{font-family:Prompt,sans-serif;font-weight:700;font-size:17px;margin-bottom:6px}
-.vc-big{font-family:Prompt,sans-serif;font-weight:700;font-size:30px;color:var(--brand);line-height:1.3}
+.vc-q{font-size:13px;color:var(--muted);margin-bottom:8px}.vc-h2{font-family:var(--fd);font-weight:700;font-size:17px;margin-bottom:6px}
+.vc-big{font-family:var(--fd);font-weight:700;font-size:30px;color:var(--brand);line-height:1.3}
 .vr{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14.5px}.vr span{color:var(--muted)}.vr b{text-align:right}
 .vc-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:12px}
 .vc-ex{display:flex;flex-wrap:wrap;gap:8px}.vc-ex button{border:1px solid var(--line);background:#F8FAF8;border-radius:99px;padding:8px 14px;font-family:inherit;font-size:13.5px;cursor:pointer;color:#334155;text-align:left}
@@ -1294,7 +1295,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .dtc.empty{background:#F8FAF8}.dtc-h{font-weight:700;margin-bottom:4px}
 .dtc.lv-ok{border-color:#A7F3D0;background:linear-gradient(180deg,#F0FDF4,#fff 60%)}.dtc.lv-warn,.dtc.lv-low{border-color:#FDE68A;background:linear-gradient(180deg,#FFFBEB,#fff 60%)}.dtc.lv-bad{border-color:#FECACA;background:linear-gradient(180deg,#FEF2F2,#fff 60%)}
 .dtc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.dtc-v{display:flex;align-items:baseline;gap:8px}.dtc-v span{font-size:13px;color:var(--muted);font-weight:600}.dtc-v b{font-family:Prompt,sans-serif;font-size:34px;line-height:1.1}.dtc-v em{font-style:normal;font-weight:600;color:#334155}
+.dtc-v{display:flex;align-items:baseline;gap:8px}.dtc-v span{font-size:13px;color:var(--muted);font-weight:600}.dtc-v b{font-family:var(--fd);font-size:34px;line-height:1.1}.dtc-v em{font-style:normal;font-weight:600;color:#334155}
 .dtc-st{color:#fff;font-weight:700;font-size:13.5px;padding:6px 12px;border-radius:99px}
 .dtbar{position:relative;height:12px;border-radius:99px;margin:14px 0 4px;background:linear-gradient(90deg,#0EA5E9 0%,#0EA5E9 14.3%,#10B981 14.3%,#10B981 57.1%,#F59E0B 57.1%,#F59E0B 71.4%,#EF4444 71.4%,#EF4444 100%)}
 .dtbar i{position:absolute;top:-5px;width:6px;height:22px;margin-left:-3px;border-radius:4px;background:#0F172A;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
@@ -1306,7 +1307,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .wxbest{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;border-radius:12px;padding:8px 12px;font-size:13.5px;margin-bottom:10px;line-height:1.7}.wxbest.bad{background:#FFFBEB;border-color:#FDE68A;color:#92400E}
 .wxstrip{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
 .wxc{flex:0 0 62px;border:0;border-radius:12px;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:1px;font-family:inherit;cursor:pointer;color:#0F172A;border-top:4px solid}
-.wxc span{font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center}.wxc span em{font-style:normal;font-size:9.5px;color:var(--brand)}.wxc b{font-family:Prompt,sans-serif;font-size:17px}.wxc small{font-size:10.5px;color:#475569}.wxc .pp{color:#1D4ED8}
+.wxc span{font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center}.wxc span em{font-style:normal;font-size:9.5px;color:var(--brand)}.wxc b{font-family:var(--fd);font-size:17px}.wxc small{font-size:10.5px;color:#475569}.wxc .pp{color:#1D4ED8}
 .wxc.lv-ok{background:#ECFDF5;border-color:#10B981}.wxc.lv-low{background:#E0F2FE;border-color:#0EA5E9}.wxc.lv-warn{background:#FFFBEB;border-color:#F59E0B}.wxc.lv-bad{background:#FEF2F2;border-color:#EF4444}
 .wxleg{display:flex;flex-wrap:wrap;gap:10px;font-size:11.5px;margin-top:6px}.wxleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
 @media (max-width:600px){.dtg b{font-size:12.5px}.dt-card .ch{flex-wrap:wrap}}
@@ -1315,10 +1316,10 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .frec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
 .frec>div{background:#F0FDF4;border:1px solid #D1FAE5;border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0}.frec span{font-size:11.5px;color:var(--muted)}.frec b{font-size:14px}
 .fsls{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-bottom:12px}
-.fsl-h{display:flex;justify-content:space-between;font-size:13px}.fsl-h b{font-family:Prompt,sans-serif;color:var(--brand)}
+.fsl-h{display:flex;justify-content:space-between;font-size:13px}.fsl-h b{font-family:var(--fd);color:var(--brand)}
 .fsl input[type=range]{width:100%;accent-color:#10B981;height:28px}
 .fout{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.fout>div{border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0;background:#fff}.fout span{font-size:11.5px;color:var(--muted)}.fout b{font-family:Prompt,sans-serif;font-size:18px}.fout small{font-size:11px;font-weight:500;color:var(--muted)}
+.fout>div{border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;min-width:0;background:#fff}.fout span{font-size:11.5px;color:var(--muted)}.fout b{font-family:var(--fd);font-size:18px}.fout small{font-size:11px;font-weight:500;color:var(--muted)}
 .fbar{display:block;height:6px;background:#F1F5F9;border-radius:9px;margin-top:4px;overflow:hidden}.fbar em{display:block;height:100%;border-radius:9px}
 .fcmp{margin-top:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden}.fcmp-h{background:#F8FAF8;padding:8px 12px;font-weight:700;font-size:13.5px}
 .fcmp table{width:100%;border-collapse:collapse;font-size:13px}.fcmp td,.fcmp th{padding:7px 10px;border-top:1px solid var(--line);text-align:left}.fcmp th{font-size:12px;color:var(--muted);font-weight:600}.fcmp td:first-child{color:var(--muted);width:34%}
@@ -1327,29 +1328,29 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fwind.lv-ok{background:#F0FDF4;border-color:#A7F3D0}.fwind.lv-warn{background:#FFFBEB;border-color:#FDE68A}.fwind.lv-bad{background:#FEF2F2;border-color:#FECACA}.fwind.lv-low{background:#F0F9FF;border-color:#BAE6FD}
 .frec2,.jfly{background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:14px;padding:10px 12px;margin-bottom:12px}.jfly{margin:10px 0 0;background:#F8FFFA}
 .frec2-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
-.frec2-v{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-bottom:6px}.frec2-v b{font-family:Prompt,sans-serif;font-size:17px;color:var(--brand)}
+.frec2-v{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-bottom:6px}.frec2-v b{font-family:var(--fd);font-size:17px;color:var(--brand)}
 .fadj{font-size:13px;padding:5px 9px;border-radius:9px;margin-top:4px;border-left:3px solid}.fadj.ok{background:#ECFDF5;border-color:#10B981}.fadj.warn{background:#FFFBEB;border-color:#F59E0B}.fadj.bad{background:#FEF2F2;border-color:#EF4444}.fadj.info{background:#F0F9FF;border-color:#0EA5E9}
 .flk{border:0;background:none;padding:0 4px 0 0;font-size:13px;cursor:pointer;opacity:.35}.flk::before{content:'🔓'}.flk.on{opacity:1}.flk.on::before{content:'🔒'}
 .fdrift{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;margin-top:6px}.fdrift .neg{color:#DC2626;font-weight:700}.fdrift .warnc{color:#B45309;font-weight:700}
-.fburn{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #E2E8F0;background:#fff}.fburn.ok{border-color:#86EFAC}.fburn.warn{border-color:#FCD34D;background:#FFFBEB}.fburn.bad{border-color:#FCA5A5;background:#FEF2F2}.fburn-h{font-weight:700;font-size:14px;margin-bottom:6px}.fburn-h b{font-family:Prompt,sans-serif}
+.fburn{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #E2E8F0;background:#fff}.fburn.ok{border-color:#86EFAC}.fburn.warn{border-color:#FCD34D;background:#FFFBEB}.fburn.bad{border-color:#FCA5A5;background:#FEF2F2}.fburn-h{font-weight:700;font-size:14px;margin-bottom:6px}.fburn-h b{font-family:var(--fd)}
 .fburn-bar{position:relative;height:8px;border-radius:6px;background:linear-gradient(90deg,#10B981 0 25%,#F59E0B 25% 50%,#F97316 50% 75%,#DC2626 75%);margin:2px 0 8px}.fburn-bar i{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:#0F172A;transform:translateX(-2px)}.fburn ul{margin:4px 0 2px;padding-left:18px}
 .wxg{display:flex;flex-direction:column;gap:6px}.wxg-r{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.wxg-l{font-size:12px;color:#64748B;min-width:100%;margin-top:2px}
 .pwf{text-align:left;margin-top:14px}.pwf .field{margin-bottom:10px}.pwf input{font-size:17px}
 .spprog{background:#F8FAF5;border:1px solid #E2E8F0;border-radius:14px;padding:10px 12px;margin:8px 0}.sprow{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;padding:5px 0;border-top:1px dashed #E2E8F0}.sprow.on{background:#ECFDF5;margin:0 -8px;padding:5px 8px;border-radius:10px}.sprow-t{font-size:13px;min-width:180px;flex:1}.sprow.on .sprow-t{font-weight:700}.sprow-i{display:flex;flex-wrap:wrap;gap:4px}
 .spnum{width:64px;padding:4px 6px;border:1px solid #CBD5E1;border-radius:8px;font-size:15px}.sppat{width:100%;height:auto;display:block;margin:6px 0 2px}
-.spgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0}.spm{background:#fff;border-radius:10px;padding:6px 8px}.spm span{display:block;font-size:11.5px;color:#64748B}.spm b{font-family:Prompt,sans-serif;font-size:15px}.spm.ok b{color:#047857}.spm.warn b{color:#B45309}.spm.bad b{color:#DC2626}
+.spgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0}.spm{background:#fff;border-radius:10px;padding:6px 8px}.spm span{display:block;font-size:11.5px;color:#64748B}.spm b{font-family:var(--fd);font-size:15px}.spm.ok b{color:#047857}.spm.warn b{color:#B45309}.spm.bad b{color:#DC2626}
 .spedge{background:#fff;border-radius:10px;padding:8px 10px;margin-top:4px}@media(max-width:420px){.spgrid{grid-template-columns:repeat(2,1fr)}}
-.fben{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:2px solid #86EFAC;background:#F0FDF4}.fben.warn{border-color:#FCD34D;background:#FFFBEB}.fben.bad{border-color:#FCA5A5;background:#FEF2F2}.fben-v{font-family:Prompt,sans-serif;font-size:28px;color:var(--brand)}.fben.warn .fben-v{color:#B45309}.fben.bad .fben-v{color:#DC2626}
+.fben{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:2px solid #86EFAC;background:#F0FDF4}.fben.warn{border-color:#FCD34D;background:#FFFBEB}.fben.bad{border-color:#FCA5A5;background:#FEF2F2}.fben-v{font-family:var(--fd);font-size:28px;color:var(--brand)}.fben.warn .fben-v{color:#B45309}.fben.bad .fben-v{color:#DC2626}
 .fbar2{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0 6px}.fbar2 em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}.fben-p{display:flex;flex-wrap:wrap;gap:3px 6px;font-size:12.5px;align-items:baseline}.fben-p .neg{color:#DC2626}.fben-p .warnc{color:#B45309}
 .fhaz{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #86EFAC;background:#fff}.fhaz.warn{border-color:#FCD34D}.fhaz.bad{border-color:#FCA5A5}.fhaz ul{margin:4px 0 0;padding-left:18px;font-size:13px}.fhaz li.bad{color:#B91C1C}
 .fmix{border:1.5px solid #CBD5E1;border-radius:14px;padding:8px 12px;margin-bottom:10px;background:#F8FAFC}.fmix summary{cursor:pointer;padding:4px 0}.fsteps{margin:6px 0;padding-left:20px;font-size:13px}.fsteps li{margin:3px 0}
 table.nut{width:100%;font-size:13px;border-collapse:collapse;margin:4px 0}table.nut th,table.nut td{padding:3px 4px;border-bottom:1px solid #EEF2F7;text-align:right}table.nut th:first-child,table.nut td:first-child{text-align:left}
-.fadv{display:flex;gap:8px;font-size:12.5px;padding:3px 0;border-top:1px dashed #E5E7EB}.fadv b{min-width:56px;font-family:Prompt,sans-serif}.fadv.bad b{color:#B91C1C}.fadv.warn b{color:#B45309}.fadv.ok b{color:#047857}.fdry{background:#fff;border-radius:10px;padding:6px 8px;margin:6px 0}
-.fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:Prompt,sans-serif;font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
-.fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:Prompt,sans-serif;font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
+.fadv{display:flex;gap:8px;font-size:12.5px;padding:3px 0;border-top:1px dashed #E5E7EB}.fadv b{min-width:56px;font-family:var(--fd)}.fadv.bad b{color:#B91C1C}.fadv.warn b{color:#B45309}.fadv.ok b{color:#047857}.fdry{background:#fff;border-radius:10px;padding:6px 8px;margin:6px 0}
+.fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:var(--fd);font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
+.fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:var(--fd);font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
 #fly-rec.stale{opacity:.5;transition:opacity .15s}
 .fden{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid}.fden.ok{background:#F0FDF4;border-color:#86EFAC}.fden.warn{background:#FFFBEB;border-color:#FCD34D}.fden.bad{background:#FEF2F2;border-color:#FCA5A5}.fden.jf{margin-top:8px;margin-bottom:0}
-.fden-h{font-weight:700;font-size:14px;margin-bottom:4px}.fden-v{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font-size:13.5px}.fden-v b{font-family:Prompt,sans-serif;font-size:20px;color:var(--brand)}.fden.bad .fden-v b,.fden.warn .fden-v b{color:#B45309}
+.fden-h{font-weight:700;font-size:14px;margin-bottom:4px}.fden-v{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font-size:13.5px}.fden-v b{font-family:var(--fd);font-size:20px;color:var(--brand)}.fden.bad .fden-v b,.fden.warn .fden-v b{color:#B45309}
 .fnote{margin-top:12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:10px 12px}.fnote ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;line-height:1.6}
 @media (max-width:700px){.frec{grid-template-columns:1fr 1fr}.fsls{grid-template-columns:1fr}.fout{grid-template-columns:1fr 1fr}.fout>div:first-child{grid-column:1/-1}}
 /* ===== v7: คู่มือโรคและศัตรูพืช ===== */
@@ -1358,7 +1359,7 @@ table.nut{width:100%;font-size:13px;border-collapse:collapse;margin:4px 0}table.
 .dz-h{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;cursor:pointer}
 .dz-i{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0;background:#F1F5F9}
 .dz-i.c-fun{background:#FEF3C7}.dz-i.c-oom{background:#DBEAFE}.dz-i.c-alg{background:#DCFCE7}.dz-i.c-ins{background:#FFE4E6}.dz-i.c-phys{background:#F1F5F9}.dz-i.c-q{background:#FEE2E2}
-.dz-t{flex:1;min-width:0;display:flex;flex-direction:column}.dz-t b{font-family:Prompt,sans-serif;font-size:15.5px}.dz-t>span{font-size:12px;color:var(--muted)}
+.dz-t{flex:1;min-width:0;display:flex;flex-direction:column}.dz-t b{font-family:var(--fd);font-size:15.5px}.dz-t>span{font-size:12px;color:var(--muted)}
 .dz-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.dz-tags .tg{font-size:11px;padding:1px 7px}
 .tg.m-drone{background:#DCFCE7;color:#15803D}.tg.m-paint{background:#FEF3C7;color:#92400E}.tg.m-inject{background:#EDE9FE;color:#6D28D9}.tg.m-soil{background:#E0F2FE;color:#0369A1}.tg.m-cut,.tg.m-cult,.tg.m-bag{background:#F1F5F9;color:#475569}
 .dz-x{font-size:22px;color:var(--muted);line-height:1;padding:4px}
@@ -1366,8 +1367,189 @@ table.nut{width:100%;font-size:13px;border-collapse:collapse;margin:4px 0}table.
 .dz-s{margin-top:10px}.dz-s h4{margin:0 0 4px;font-size:14px}.dz-s ul{margin:0;padding-left:20px;font-size:14px;line-height:1.65}.dz-s p{margin:0;font-size:14px;line-height:1.6}
 .dz.open{border-color:#A7F3D0!important;box-shadow:0 6px 18px rgba(16,185,129,.1)}
 .dz-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.dz-chips button{border:1px solid var(--line);background:#F8FAF8;border-radius:99px;padding:5px 11px;font-family:inherit;font-size:12.5px;cursor:pointer;color:#334155}.dz-chips button:hover{border-color:var(--em);background:#ECFDF5}
-.dz-sec{font-family:Prompt,sans-serif;font-weight:700;font-size:15px;margin:16px 2px 8px;display:flex;gap:8px;align-items:center}.dz-sec span{font-size:12px;background:#EEF2EF;border-radius:99px;padding:1px 8px;color:#475569;font-family:inherit}
+.dz-sec{font-family:var(--fd);font-weight:700;font-size:15px;margin:16px 2px 8px;display:flex;gap:8px;align-items:center}.dz-sec span{font-size:12px;background:#EEF2EF;border-radius:99px;padding:1px 8px;color:#475569;font-family:inherit}
 mark{background:#FEF08A;padding:0 1px;border-radius:3px}
+
+/* =====================================================================
+   DESIGN v2 — "Field HUD"  (ชั้นสุดท้าย ทับสไตล์เดิม)
+   สี: กลางคืนนา #0F2A1D · ทรงพุ่ม #1E7A4C · ใบอ่อน #DDF3E5 · ฟางข้าว #E5A62E · ฟ้า #2B78B6 · ดิน #C2452D
+   ตัวอักษร: Anuphan (เนื้อหา/ปุ่ม) · Bai Jamjuree (หัวข้อ/ตัวเลข)
+   ===================================================================== */
+:root{
+ --fb:'Anuphan',system-ui,-apple-system,'Segoe UI',sans-serif;
+ --fd:'Bai Jamjuree','Anuphan',system-ui,sans-serif;
+ --night:#0F2A1D;--night2:#183A29;--canopy:#1E7A4C;--canopy-d:#145A37;--sprout:#DDF3E5;--sprout2:#F0F8F2;
+ --straw:#E5A62E;--straw-d:#9A6508;--straw-l:#FBF1DA;--sky:#2B78B6;--sky-l:#E5EFF8;--soil:#C2452D;--soil-l:#FBE8E3;
+ --bg:#EFF3EE;--card:#fff;--ink:#13261B;--muted:#56685C;--line:#D8E1D6;--soft:#E6ECE4;
+ --brand:#1E7A4C;--brand-d:#145A37;--brand-l:#DDF3E5;--accent:#E5A62E;--ok:#1E7A4C;--ok-l:#DDF3E5;
+ --r:18px;--sh:0 1px 0 rgba(15,42,29,.04),0 8px 22px -12px rgba(15,42,29,.18)
+}
+html,body{font-family:var(--fb);font-size:16px;line-height:1.55;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,.ah-hi,.tc-v,.hud-c b,.pane-h h2{font-family:var(--fd)}
+h1{font-size:25px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
+h2{font-size:18px;font-weight:700;line-height:1.3}
+h3{font-size:16px;font-weight:700}
+.sub{color:var(--muted);font-size:14px}
+.small{font-size:14px}.tiny{font-size:12.5px}
+:focus-visible{outline:3px solid rgba(43,120,182,.55);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* ---------- พื้นฐาน ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:16px}
+.card>h2:first-child{margin:0 0 10px}
+.btn{min-height:44px;border-radius:12px;font-weight:600;font-size:15px;padding:9px 16px;border:1px solid var(--line);background:#fff;color:var(--ink);gap:8px}
+.btn.sm{min-height:36px;font-size:14px;padding:6px 12px;border-radius:10px}
+.btn.primary{background:var(--canopy);border-color:var(--canopy);color:#fff}
+.btn.primary:hover{background:var(--canopy-d);border-color:var(--canopy-d)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--canopy-d)}
+.btn.accent{background:var(--straw);border-color:var(--straw);color:#3A2702}
+.field label{display:block;font-size:13.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.field input:not([type=range]):not([type=checkbox]):not([type=radio]),.field select,.field textarea,input.search,.sel{min-height:48px;border:1.5px solid var(--line);border-radius:12px;background:#fff;padding:10px 12px;font-size:16px;color:var(--ink);width:100%}
+.sel.sm{min-height:42px;font-size:15px;padding:6px 10px}
+.field input:focus,.field select:focus,.field textarea:focus,input.search:focus,.sel:focus{outline:none;border-color:var(--canopy);box-shadow:0 0 0 3px rgba(30,122,76,.16)}
+.seg{background:var(--soft);border-radius:12px;padding:3px;gap:3px}
+.seg button{min-height:38px;border-radius:9px;font-weight:600;color:var(--muted);font-size:14px}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(15,42,29,.16)}
+.fchip{min-height:36px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-size:14px;font-weight:600;color:var(--ink)}
+.fchip.on{background:var(--night);border-color:var(--night);color:#fff}
+.note{border:0;border-radius:12px;padding:10px 12px;font-size:14px}
+.note.warn{background:var(--straw-l);color:#5E4106}.note.bad{background:var(--soil-l);color:#7A2414}.note.ok{background:var(--sprout);color:#0F4A2C}.note.info{background:var(--sky-l);color:#174A73}
+.note.banner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 12px;font-size:13.5px;line-height:1.45;margin-bottom:10px}
+.note.banner .btn{min-height:32px;padding:4px 12px;font-size:13px}
+.backbar{position:static;top:auto;gap:8px;margin:0 0 8px;padding:0;background:none}
+.backbtn{min-height:36px;padding:4px 14px 4px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:14px;box-shadow:none}
+.backto{font-size:13px;color:var(--muted)}
+.ah{background:var(--night);border-radius:0 0 22px 22px;box-shadow:0 8px 20px -10px rgba(15,42,29,.5)}
+
+/* ---------- กล่องพับ ---------- */
+.fold,.fmath,.fcal,.fmix{border:1px solid var(--line);border-radius:16px;background:#fff;margin:10px 0;padding:0 14px}
+.fold>summary,.fmath>summary,.fcal>summary,.fmix>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;cursor:pointer;font-weight:700;font-size:15px}
+.fold>summary::-webkit-details-marker,.fmath>summary::-webkit-details-marker,.fcal>summary::-webkit-details-marker,.fmix>summary::-webkit-details-marker{display:none}
+.fold>summary em{font-style:normal;font-weight:500;font-size:13px;color:var(--muted);text-align:right;margin-left:auto}
+.fold>summary::after,.fmath>summary::after,.fcal>summary::after,.fmix>summary::after{content:'';flex-shrink:0;width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s;margin-left:6px}
+.fold[open]>summary::after,.fmath[open]>summary::after,.fcal[open]>summary::after,.fmix[open]>summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.fold[open],.fmath[open],.fcal[open],.fmix[open]{padding-bottom:14px}
+
+/* ---------- หน้าคำแนะนำ: บริบท ---------- */
+.adv-top{margin:2px 0 12px}.adv-top h1{margin:0}
+.actx{display:grid;gap:12px;padding:14px;overflow:hidden}
+.actx-r{display:flex;gap:8px;align-items:center}.actx-plot{flex:1;min-width:0}
+.actx-r .sel{width:auto;flex-shrink:0}
+.ctiles,.stl{display:flex;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:0 14px;scroll-snap-type:x proximity}
+.ctiles::-webkit-scrollbar,.stl::-webkit-scrollbar{display:none}
+.ctiles{gap:8px;padding-bottom:2px}
+.ctiles button{flex:0 0 auto;width:76px;scroll-snap-align:start;border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:9px 4px 7px;display:grid;justify-items:center;gap:3px;cursor:pointer;color:var(--ink)}
+.ctiles button i{font-style:normal;font-size:27px;line-height:1.1}
+.ctiles button span{font-size:13.5px;font-weight:600;line-height:1.2}
+.ctiles button.on{background:var(--night);border-color:var(--night);color:#fff}
+.ctiles button:disabled{opacity:.3}
+.stl-h{display:flex;align-items:baseline;gap:10px;margin-bottom:-4px}
+.stl-h span{font-size:13.5px;font-weight:600;color:var(--muted)}.stl-h em{font-style:normal;font-size:13.5px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stl{padding-top:2px}
+.stl button{flex:0 0 92px;position:relative;border:0;background:none;padding:26px 4px 2px;cursor:pointer;scroll-snap-align:center;color:var(--muted);font-size:12.5px;line-height:1.3;text-align:center}
+.stl button span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.stl button::before{content:'';position:absolute;top:12px;left:0;right:0;height:2px;background:var(--line)}
+.stl button:first-child::before{left:50%}.stl button:last-child::before{right:50%}
+.stl button::after{content:'';position:absolute;top:5px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:#fff;border:2px solid #AEBDAD;box-sizing:border-box}
+.stl button.inf::after{border:2px dashed var(--straw)}
+.stl button.on{color:var(--ink);font-weight:700}
+.stl button.on::after{width:20px;height:20px;top:3px;margin-left:-10px;background:var(--straw);border:3px solid #fff;box-shadow:0 0 0 2px var(--straw)}
+.actx-wx{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--sky-l);color:#174A73;font-size:14px;cursor:pointer}
+.actx-wx b{font-family:var(--fd);font-weight:700}
+.actx-wx .wxg-ok b{color:var(--canopy-d)}.actx-wx .wxg-warn b{color:var(--straw-d)}.actx-wx .wxg-bad b{color:var(--soil)}
+.actx-edit{margin-left:auto;font-weight:600;color:var(--sky)}
+
+/* ---------- แท็บ ---------- */
+.atabs{position:sticky;top:calc(var(--ahH,70px) - 2px);z-index:25;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 0;margin:6px 0 8px;background:rgba(239,243,238,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.atabs button{position:relative;border:0;background:transparent;border-radius:14px;min-height:54px;padding:6px 2px;display:grid;justify-items:center;align-content:center;gap:1px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:600}
+.atabs button i{font-style:normal;font-size:19px;line-height:1.15}
+.atabs button.on{background:#fff;color:var(--ink);box-shadow:var(--sh)}
+.atabs button.on::after{content:'';position:absolute;bottom:5px;left:50%;width:18px;height:3px;margin-left:-9px;border-radius:3px;background:var(--canopy)}
+.atabs button b{position:absolute;top:4px;left:calc(50% + 8px);min-width:18px;padding:0 5px;border-radius:999px;background:var(--soil);color:#fff;font-size:11px;line-height:18px}
+.apane{display:none}.apane.on{display:block}
+.apane>.card,.apane>div>.card{margin-bottom:12px}
+.pane-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:4px 2px 10px}.pane-h h2{margin:0}.pane-h span{font-size:13.5px;color:var(--muted)}
+
+/* ---------- การ์ดบิน: ตัวเลือก ---------- */
+.card.fly{padding:14px}
+.fctl{display:grid;gap:14px;margin-bottom:14px}
+.ctl{display:grid;gap:6px;min-width:0}
+.ctl2{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.ctl2{grid-template-columns:1fr 1fr}}
+.ctl-l{font-size:13.5px;font-weight:600;color:var(--muted)}.ctl-l small{font-weight:500}
+.svcg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.svcg button{border:1.5px solid var(--line);background:#fff;border-radius:14px;min-height:66px;padding:8px 2px 6px;display:grid;justify-items:center;align-content:center;gap:3px;cursor:pointer;color:var(--ink)}
+.svcg button i{font-style:normal;font-size:23px;line-height:1.1}
+.svcg button b{font-size:12.5px;font-weight:600;line-height:1.2}
+.svcg button.on{background:var(--sprout);border-color:var(--canopy);box-shadow:inset 0 0 0 1px var(--canopy);color:var(--canopy-d)}
+.sg{display:flex;background:var(--soft);border-radius:12px;padding:3px;gap:3px}
+.sg button{flex:1 1 0;min-width:0;border:0;background:transparent;border-radius:9px;min-height:42px;padding:4px 6px;font-size:14px;font-weight:600;line-height:1.2;color:var(--muted);cursor:pointer}
+.sg button small{display:block;font-size:11.5px;font-weight:500;opacity:.8}
+.sg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(15,42,29,.16)}
+.mslist{display:grid}
+.mslist button{display:flex;align-items:center;gap:12px;border:0;border-bottom:1px solid var(--soft);background:none;padding:10px 2px;text-align:left;cursor:pointer;color:var(--ink);min-height:48px}
+.mslist button:last-child{border-bottom:0}
+.mslist .ck{width:22px;height:22px;border-radius:7px;border:2px solid #AEBDAD;flex-shrink:0;display:grid;place-items:center}
+.mslist button.on .ck{background:var(--canopy);border-color:var(--canopy)}
+.mslist button.on .ck::after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.ms-n{flex:1;font-size:15px}.ms-tag{font-size:12px;font-weight:700;color:var(--straw-d);background:var(--straw-l);border-radius:999px;padding:2px 8px;white-space:nowrap}
+
+/* ---------- แผงค่าบิน (HUD) — จุดเด่นเดียวของหน้า ---------- */
+.hud{background:var(--night);color:#E6F1E9;border-radius:22px;padding:14px 14px 12px;margin:2px 0 10px;box-shadow:0 14px 30px -16px rgba(15,42,29,.7)}
+.hud-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;font-size:14px;font-weight:600;color:#A7C6B2}
+.hud-x{border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.hud-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hud-c{border-radius:14px;padding:8px 10px 9px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.08);min-width:0}
+.hud-c span{display:block;font-size:12.5px;color:#9EBEA9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud-c b{font-size:31px;font-weight:700;line-height:1.05;color:#FFD47E;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.hud-c em{font-style:normal;font-size:12.5px;color:#C6DACC;margin-left:3px}
+.hud-c.lk{border-color:var(--straw);background:rgba(229,166,46,.12)}
+.hud-c.cov b{color:#9FE3B8}
+.hud-f{margin-top:10px;font-size:14px;color:#C6DACC}.hud-f b{color:#fff}
+.hud.stop{background:#3A130C}.hud.stop .hud-h{color:#F7B9A9}
+#fly-rec.stale .hud{opacity:.6}
+.fadj{border-radius:12px;padding:9px 12px;margin:6px 0;font-size:14px;line-height:1.5;border:0;background:var(--sprout2)}
+.fadj.ok{background:var(--sprout2);color:#0F4A2C}.fadj.info{background:var(--sky-l);color:#174A73}.fadj.warn{background:var(--straw-l);color:#5E4106}.fadj.bad{background:var(--soil-l);color:#7A2414;font-weight:600}
+.fold.why .fadj{margin:6px 0 0}
+.fsls{display:grid;gap:4px}
+.fsl-h{font-size:14px}.fsl-h b{font-family:var(--fd)}
+.fout{border-radius:16px}
+.empty-cta{display:grid;gap:8px;justify-items:start}
+
+/* ---------- ผลต่อพืช / ยา ---------- */
+.fben,.fden{border-radius:18px}
+.threat{border:1px solid var(--line);border-left:5px solid #AEBDAD;border-radius:16px;padding:12px 14px;background:#fff;box-shadow:var(--sh)}
+.threat.high{border-left-color:var(--soil)}.threat.mid{border-left-color:var(--straw)}.threat.low{border-left-color:var(--canopy)}
+.threat>.row.between b{font-size:16px}
+.sol{padding:9px 0;font-size:14px}
+.apane .grid.g2{gap:12px}
+
+/* ---------- ฟอร์มบันทึกงาน ---------- */
+#jf{counter-reset:js}
+.jnav{position:sticky;top:0;z-index:6;flex-shrink:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 10px;padding:8px 16px;background:rgba(239,243,238,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.jnav::-webkit-scrollbar{display:none}
+.jnav button{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;min-height:36px;padding:4px 12px 4px 5px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer}
+.jnav button i{font-style:normal;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--night);color:#FFD47E;font-family:var(--fd);font-size:12.5px}
+#jf .sec{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 14px;margin:0 0 12px;box-shadow:var(--sh);scroll-margin-top:60px}
+#jf .sec.jstat{background:transparent;border:0;box-shadow:none;padding:0 0 4px}
+#jf .sec:not(.jstat){counter-increment:js}
+#jf .sec:not(.jstat) h3{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--ink)!important;margin:0 0 12px}
+#jf .sec:not(.jstat) .row.between h3{margin:0}
+#jf .sec:not(.jstat) h3::before{content:counter(js);display:inline-grid;place-items:center;flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--night);color:#FFD47E;font-family:var(--fd);font-size:14px;font-weight:700}
+#jf .grid.g2,#jf .grid.g3,#jf .grid.g4{gap:12px}
+
+@media(min-width:900px){
+ #fly-card:not(.spc){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:18px;align-items:start}
+ #fly-card>*{grid-column:1/-1}
+ #fly-card>.fctl{grid-column:1;grid-row:1;margin-bottom:0}
+ #fly-card>#fly-rec{grid-column:2;grid-row:1;position:sticky;top:96px}
+ .apane[data-pane=eff] #fly-eff{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}
+ .apane[data-pane=eff] #fly-eff>*{margin:0!important}
+}
+.hud-c.txt b{font-size:21px;line-height:1.5;font-family:var(--fb)}
+#fly-card.spc .hud{margin-top:6px}
+.hud-c em{white-space:nowrap}.hud-c.long b{font-size:25px}.hud-c.txt b{font-size:18px;line-height:1.35}
+@media(min-width:900px){#fly-card .ctl2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2182,7 +2364,7 @@ function backupDue(){if(!COLLS.some(c=>S[c].length))return false;const lb=S.sett
 function banner(){
  let h='';
  if(backend==='local'&&!STANDALONE) h+=`<div class="note warn banner">💾 ตอนนี้บันทึกข้อมูลไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น (เปิดหน้านี้จาก claude.ai ขณะลงชื่อเข้าใช้เพื่อบันทึกบนคลาวด์) — กด <b>ตั้งค่า › สำรองข้อมูล</b> เป็นระยะ</div>`;
- if(backend==='local'&&STANDALONE&&backupDue()) h+=`<div class="note warn banner row between"><span>💾 ข้อมูลเก็บในเครื่องนี้ ${S.settings.lastBackup?'สำรองล่าสุด '+fdate(S.settings.lastBackup):'ยังไม่เคยสำรองข้อมูล'} — ควรสำรองไฟล์ทุกสัปดาห์ (ถ้าล้างเบราว์เซอร์หรือเปลี่ยนเครื่องข้อมูลจะหาย)</span><button class="btn sm primary" data-act="exportJSON">สำรองเลย</button></div>`;
+ if(backend==='local'&&STANDALONE&&backupDue()) h+=`<div class="note warn banner row between"><span>💾 ${S.settings.lastBackup?'สำรองข้อมูลล่าสุด '+fdate(S.settings.lastBackup):'ยังไม่เคยสำรองข้อมูล'} — ควรสำรองทุกสัปดาห์ ข้อมูลอยู่ในเครื่องนี้เท่านั้น</span><button class="btn sm primary" data-act="exportJSON">สำรองเลย</button></div>`;
  if(dbNote) h+=`<div class="note warn banner">⚠️ ${esc(dbNote)}</div>`;
  if(backend==='db'&&localHasData&&!S.jobs.length&&!S.customers.length) h+=`<div class="note info banner row between"><span>พบข้อมูลเก่าที่บันทึกไว้ในเครื่องนี้ ต้องการนำขึ้นคลาวด์หรือไม่?</span><button class="btn sm primary" data-act="migrateLocal">นำข้อมูลขึ้นคลาวด์</button></div>`;
  return h;
@@ -2197,6 +2379,7 @@ function render(){
  killCharts();
  $('#view').innerHTML=backBar()+banner()+html;
  flushCharts();
+ if(v==='advisor')advCenterSel();
  if(keepId){const el=document.getElementById(keepId);if(el){el.focus({preventScroll:true});if(sel&&el.setSelectionRange)try{el.setSelectionRange(sel[0],sel[1])}catch(e){}}}
  if(v==='advisor'&&UI.adv&&UI.adv.aiText){const o=$('#ai-out');if(o)o.innerHTML=mdLite(UI.adv.aiText)}
  $('#mapwrap').classList.toggle('hidden',v!=='map');
@@ -2301,34 +2484,26 @@ function viewAdvisor(){
  const A=UI.adv;const plot=plotById(A.plotId);
  if(plot){A.crop=cropOf(plot);if(!A.stage&&!A._stageTouched){const s=stageFromPlot(plot);if(s)A.stage=s}}
  const crop=A.crop;const cdef=CROPS[crop];
+ advSyncFly();
  const R=analyze({crop,month:+A.month,stage:A.stage,wx:A.wx,plotId:A.plotId,customerId:plot?.customerId});
  const checks=sprayCheck({cond:A.wx.length?A.wx:R.season.wx,temp:A.temp,rh:A.rh,wind:A.wind},A.stage,crop);
  const lvlTxt={high:'เสี่ยงสูง',mid:'เฝ้าระวัง',low:'ต่ำ'};
- return `<div class="top"><div><h1>คำแนะนำการพ่น</h1><div class="sub">อิงเดือน · ฤดูกาลภูมิภาค · สภาพอากาศ · ระยะพืช · ประวัติศัตรูพืชและกลุ่มสารในแปลง</div></div></div>
- <div class="card"><div class="grid g4">
-  <div class="field"><label>แปลงลูกค้า (พิมพ์ค้นหาได้)</label>${cbHTML('advplot',plot?`${custById(plot.customerId)?.name||''} — ${plot.name}`:'','🔍 ชื่อลูกค้า/แปลง/ตำบล','id="adv-plot"')}</div>
-  <div class="field"><label>พืช</label><select id="adv-crop" data-chg="advCrop" ${plot?'disabled':''}>${Object.entries(CROPS).map(([k,v])=>`<option value="${k}" ${crop===k?'selected':''}>${v.ic} ${v.n}</option>`).join('')}</select></div>
-  <div class="field"><label>เดือน</label><select id="adv-month" data-chg="advMonth">${MONTHS_FULL.map((m,i)=>`<option value="${i+1}" ${+A.month===i+1?'selected':''}>${m}</option>`).join('')}</select></div>
-  <div class="field"><label>ระยะพืช</label><select id="adv-stage" data-chg="advStage">${stageOptions(crop,A.stage).replace('— ไม่ระบุ —','— อนุมานจากเดือน —')}</select></div>
- </div>
- <div style="margin-top:10px"><div class="small muted" style="margin-bottom:4px">สภาพอากาศวันนี้ (ไม่เลือก = ใช้ค่าตามฤดูกาลของ${esc(REGIONS.find(r=>r[0]===S.settings.region)?.[1]||'')})</div>
-  ${wxChips(A.wx,'advWx')}
-  <div class="grid g4" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input id="adv-temp" inputmode="decimal" value="${esc(A.temp)}" data-in="advTemp"></div><div class="field"><label>ความชื้น (%)</label><input id="adv-rh" inputmode="decimal" value="${esc(A.rh)}" data-in="advRh"></div><div class="field"><label>ความเร็วลม ${windUnitSeg()}</label><input id="adv-wind" inputmode="decimal" value="${esc(A.windIn&&A.windIn.u===WU()?A.windIn.v:windShow(A.wind))}" data-in="advWind"></div>
-  <div class="field"><label>ดูพยากรณ์อากาศ</label><div class="row small"><a href="https://www.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุฯ</a> · <a href="https://www.windy.com/" target="_blank" rel="noopener">Windy (ลม)</a></div></div></div>
- </div></div>${advDtHTML()}${flyCardHTML()}
- <div class="grid g2" style="margin-top:14px">
-  <div class="card"><h2>🗓️ ฤดูกาล: ${MONTHS_FULL[A.month-1]}</h2><div class="small">${esc(R.season.text)}</div>
+ const tab=UI.advTab||'fly',nHigh=R.threats.filter(t=>t.level==='high').length;
+ const wxPane=`${advDtHTML()}
+ <div class="card"><h2>สภาพที่เห็นตอนนี้</h2><div class="sub" style="margin:-4px 0 10px">ไม่เลือก = ใช้ค่าตามฤดูกาลของ${esc(REGIONS.find(r=>r[0]===S.settings.region)?.[1]||'ภูมิภาค')}</div>${wxChips(A.wx,'advWx')}
+  <div class="row small" style="margin-top:12px;gap:14px"><span class="muted">ดูพยากรณ์</span><a href="https://www.tmd.go.th/" target="_blank" rel="noopener">กรมอุตุฯ</a><a href="https://www.windy.com/" target="_blank" rel="noopener">Windy (ลม)</a></div></div>
+ <div class="card"><h2>🚁 ความพร้อมการบินพ่น</h2><div id="adv-checks">${checks.map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}</div></div>
+ <div class="card"><h2>🗓️ ฤดูกาล: ${MONTHS_FULL[A.month-1]}</h2><div class="small">${esc(R.season.text)}</div>
    ${!A.stage&&R.inferred.length?`<div class="small muted" style="margin-top:6px">ระยะพืชที่น่าจะเป็น: ${R.inferredNames.map(esc).join(', ')}${cdef.shiftSouth&&String(S.settings.region).startsWith('south')?' (ปรับตามฤดูทุเรียนภาคใต้)':''}</div>`:''}
-   ${!A.stage&&!R.inferred.length?`<div class="small muted" style="margin-top:6px">พืชนี้ขึ้นกับวันปลูก — เลือกระยะพืชหรือใส่วันปลูกในแปลงเพื่อคำแนะนำที่แม่นขึ้น</div>`:''}</div>
-  <div class="card"><h2>🚁 ความพร้อมการบินพ่น</h2><div id="adv-checks">${checks.map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}</div></div>
- </div>
- <h2 style="margin:18px 0 10px">⚠️ ศัตรูพืชที่ควรระวัง และสารที่แนะนำ</h2>
+   ${!A.stage&&!R.inferred.length?`<div class="small muted" style="margin-top:6px">พืชนี้ขึ้นกับวันปลูก — เลือกระยะพืชหรือใส่วันปลูกในแปลงเพื่อคำแนะนำที่แม่นขึ้น</div>`:''}</div>`;
+ const chemPane=`<div class="pane-h"><h2>ศัตรูพืชที่ควรระวัง</h2><span>${R.threats.length?R.threats.length+' รายการ · '+(nHigh?nHigh+' เสี่ยงสูง':'ไม่มีเสี่ยงสูง'):''}</span></div>
  ${R.threats.length?`<div class="grid g2">${R.threats.map(t=>`<div class="threat ${t.level}">
   <div class="row between"><b>${CATS[t.cat].ic} ${esc(t.n)}</b><span class="lvl ${t.level}">${lvlTxt[t.level]}</span></div>
   <div class="row" style="gap:4px;margin:6px 0">${t.why.map(w=>`<span class="badge b-adj">${esc(w)}</span>`).join('')}</div>
   ${t.note?`<div class="small muted" style="margin-bottom:6px">${esc(t.note)}</div>`:''}
   ${t.sols.map(s=>`<div class="sol"><div><b>${esc(s.ch.th)}</b> <span class="badge b-${s.ch.cat}">${esc(gLabel(s.ch.cat,s.ch.g)||CATS[s.ch.cat].s)}</span><div class="tiny muted">${esc(gName(s.ch.cat,s.ch.g))}${TN[s.ch.id]?' · เช่น '+esc(TN[s.ch.id].split(' ')[0]):''}${s.ch.note?' · '+esc(s.ch.note):''}${isFlowerStage(crop,A.stage)&&splitG(s.ch.g).some(x=>BEE_TOXIC.includes(x))&&s.ch.cat==='ins'?' · <b style="color:var(--red)">🐝 ระวังผึ้งช่วงดอกบาน</b>':''}</div></div>${s.st?`<span class="st ${s.st.lvl}" title="${esc(s.st.text)}">${s.st.lvl==='bad'?'เลี่ยง':s.st.lvl==='warn'?'ใช้ไม่นาน':s.st.lvl==='info'?'เสี่ยงดื้อต่ำ':'แนะนำ'}</span>`:''}</div>${s.st&&s.st.lvl!=='ok'&&s.st.lvl!=='info'?`<div class="tiny" style="color:${s.st.lvl==='bad'?'var(--red)':'var(--amber)'};margin:-2px 0 4px">${esc(s.st.text)}</div>`:''}`).join('')}
  </div>`).join('')}</div>`:'<div class="card empty">ไม่พบความเสี่ยงเด่นจากข้อมูลที่เลือก — ลองเลือกระยะพืชหรือสภาพอากาศ</div>'}
+ <div id="fly-mix">${flyMixHTML()}</div>
  <div class="grid g2" style="margin-top:14px">
   <div class="card"><h2>🌱 ปุ๋ยและฮอร์โมนเสริมประสิทธิภาพ</h2>${R.nutri.map(n=>`<div style="margin-bottom:10px"><div class="small">${esc(n.text)}</div><div class="row" style="gap:4px;margin-top:4px">${n.items.map(id=>CHEMMAP[id]).filter(Boolean).map(ch=>`<span class="badge b-${ch.cat}" title="${esc(ch.note)}">${esc(ch.th)}</span>`).join('')}</div></div>`).join('')||'<div class="small muted">เลือกระยะพืชเพื่อดูคำแนะนำ</div>'}
    <div class="note info small">💧 การพ่นด้วยโดรนใช้น้ำน้อย ควรใส่ <b>สารลดการปลิว/ลดการระเหย</b> และผสมสารทีละชนิดตามลำดับ (ผง → น้ำ → น้ำมัน) ทดสอบการเข้ากันในภาชนะเล็กก่อน</div></div>
@@ -2338,6 +2513,12 @@ function viewAdvisor(){
   <div class="tiny muted" style="margin-top:4px">ส่งข้อมูลพืช เดือน อากาศ และประวัติแปลง (ไม่รวมชื่อ/เบอร์ลูกค้า) ให้ Claude ช่วยวิเคราะห์เพิ่ม</div>
   <div id="ai-out" class="ai-out" style="margin-top:10px"></div></div>`}
  <div class="note warn small" style="margin-top:14px">⚖️ คำแนะนำนี้เป็นแนวทางทั่วไปตามหลัก IRAC/FRAC และเอกสารกรมวิชาการเกษตร ไม่ใช่ใบสั่งใช้ ต้องเลือกผลิตภัณฑ์ที่ขึ้นทะเบียนกับพืชนั้น ใช้อัตรา วิธีใช้ และระยะเก็บเกี่ยว (PHI) ตามฉลากเสมอ ห้ามใช้สารต้องห้าม (เช่น พาราควอต คลอร์ไพริฟอส)</div>`;
+ return `<div class="adv2"><div class="adv-top"><h1>คำแนะนำการพ่น</h1><div class="sub">เลือกพืชและระยะ แล้วดูค่าบิน ผลต่อพืช และยาที่ควรใช้</div></div>
+ ${advCtxHTML(A,plot,crop)}${advTabsHTML(tab,nHigh)}
+ <div class="apane ${tab==='wx'?'on':''}" data-pane="wx">${wxPane}</div>
+ <div class="apane ${tab==='fly'?'on':''}" data-pane="fly">${flyCardHTML()}</div>
+ <div class="apane ${tab==='eff'?'on':''}" data-pane="eff"><div id="fly-eff">${flyEffHTML()}</div></div>
+ <div class="apane ${tab==='chem'?'on':''}" data-pane="chem">${chemPane}</div></div>`;
 }
 function mdLite(t){
  let h=esc(t);
@@ -2638,8 +2819,8 @@ async function ensureChart(){if(window.Chart)return true;try{await loadScript('c
 function killCharts(){CHARTS.forEach(c=>{try{c.destroy()}catch(e){}});CHARTS=[]}
 function qChart(id,cfg){CHART_Q.push({id,cfg});return `<div class="chart-box"><canvas id="${id}"></canvas><div class="chart-load">กำลังโหลดกราฟ…</div></div>`}
 async function flushCharts(){const q=CHART_Q;CHART_Q=[];if(!q.length)return;if(!await ensureChart()){q.forEach(x=>{const b=document.getElementById(x.id)?.parentElement;if(b)b.innerHTML='<div class="empty small">โหลดกราฟไม่สำเร็จ</div>'});return}
- const D=Chart.defaults;D.font.family="'Sarabun',sans-serif";D.font.size=12;D.color='#64748B';D.plugins.legend.labels.usePointStyle=true;D.plugins.legend.labels.boxWidth=8;
- D.plugins.tooltip.backgroundColor='#1E293B';D.plugins.tooltip.padding=10;D.plugins.tooltip.cornerRadius=8;D.plugins.tooltip.titleFont={family:'Prompt',weight:'600'};D.maintainAspectRatio=false;
+ const D=Chart.defaults;D.font.family="'Anuphan',sans-serif";D.font.size=12;D.color='#64748B';D.plugins.legend.labels.usePointStyle=true;D.plugins.legend.labels.boxWidth=8;
+ D.plugins.tooltip.backgroundColor='#1E293B';D.plugins.tooltip.padding=10;D.plugins.tooltip.cornerRadius=8;D.plugins.tooltip.titleFont={family:'Bai Jamjuree',weight:'600'};D.maintainAspectRatio=false;
  q.forEach(x=>{const el=document.getElementById(x.id);if(!el)return;el.parentElement.querySelector('.chart-load')?.remove();try{CHARTS.push(new Chart(el,x.cfg))}catch(e){}})}
 const tipBaht={callbacks:{label:c=>` ${c.dataset.label||c.label}: ${baht(c.parsed.y??c.parsed)}`}};
 const axBaht={grid:{color:CC.grid},border:{display:false},ticks:{callback:v=>Math.abs(v)>=1000?(v/1000).toLocaleString('th-TH')+'k':v}};
@@ -2891,14 +3072,15 @@ CBP.prod={items:(inp,q)=>{const i=+inp.dataset.cbi;const mine=S.products.map(p=>
 
 function renderJobForm(){
  const j=F;const cdef=CROPS[cropOf(j)];
- $('#jf').innerHTML=`
+ $('#jf').innerHTML=`<nav class="jnav" aria-label="ไปยังส่วนของฟอร์ม">${[['js-info','ลูกค้า'],['js-pest','ศัตรูพืช'],['js-chem','สารและการบิน'],['js-wx','อากาศ'],['js-pay','ค่าบริการ'],['js-etc','หมายเหตุ']].map(([id,n],i)=>`<button type="button" data-act="jfJump" data-id="${id}"><i>${i+1}</i>${n}</button>`).join('')}</nav>
  <div class="sec jstat"><div class="seg wide"><button class="${!isQ(j)?'on':''}" data-act="jfStatus" data-s="done">✅ งานที่ทำแล้ว</button><button class="${isQ(j)?'on':''}" data-act="jfStatus" data-s="queued">📅 จองคิว / นัดหมาย</button></div>${isQ(j)?`<div class="seg wide qsseg">${[['pending','⏳ รอดำเนินการ'],['doing','🔄 กำลังดำเนินการ'],['cancelled','✕ ยกเลิก']].map(x=>`<button class="${(j.qstate||'pending')===x[0]?'on':''}" data-act="jfQs" data-s="${x[0]}">${x[1]}</button>`).join('')}</div>`:''}
   ${isQ(j)?'<div class="tiny muted" style="margin-top:6px">คิวจะยังไม่นับเป็นรายรับ เมื่อทำงานเสร็จกด “✓ เสร็จ” ที่กล่องคิวงาน หรือสลับเป็น “งานที่ทำแล้ว” แล้วบันทึก</div>':''}
   <div class="field" style="margin-top:10px"><label>📄 คัดลอกจากงานเดิม (สาร อัตรา ราคา ประเภทงาน) — ไม่ต้องกรอกใหม่</label>${cbHTML('copyfrom','','🔍 พิมพ์ชื่อลูกค้า แปลง หรือชื่อสาร ของงานที่เคยทำ')}</div></div>
- <div class="sec"><div class="row between" style="margin-bottom:8px"><h3 style="margin:0;color:var(--brand-d)">📋 ข้อมูลงาน</h3><span class="chip ${j.own?'on':''}" data-act="toggleOwn">🏡 งานสวนตัวเอง (ไม่คิดเงิน)</span></div><div class="grid g2">
+ <div class="sec" id="js-info"><div class="row between" style="margin-bottom:8px"><h3 style="margin:0">ลูกค้า แปลง และเวลา</h3><span class="chip ${j.own?'on':''}" data-act="toggleOwn">🏡 งานสวนตัวเอง (ไม่คิดเงิน)</span></div><div class="grid g2">
   <div class="field"><label>${isQ(j)?'วันนัด':'วันที่'}</label><input type="date" data-f="date" value="${esc(j.date)}"></div>
   <div class="field"><label>ประเภทงาน</label><select data-f="service">${SERVICES.map(s=>`<option value="${s[0]}" ${j.service===s[0]?'selected':''}>${s[2]} ${s[1]}</option>`).join('')}</select></div>
  </div>
+ <div class="grid g2" style="margin-top:10px"><div class="field"><label>${isQ(j)?'เวลานัด':'เวลาเริ่ม'}</label><input type="time" data-f="startTime" value="${esc(j.startTime)}"></div><div class="field"><label>เวลาเสร็จ</label><input type="time" data-f="endTime" value="${esc(j.endTime)}"></div></div>
  <div class="grid g2" style="margin-top:10px">
   ${j.own?`<div class="field"><label>ลูกค้า</label><input value="${esc(ownCustomer()?.name||'สวนของฉัน')}" disabled></div>`:`<div class="field"><label>ผู้จ้าง (พิมพ์ค้นหา หรือพิมพ์ชื่อใหม่)</label>${cbHTML('cust',custLabel(j.customerId),'🔍 ชื่อ เบอร์ หมู่บ้าน')}</div>`}
   <div class="field"><label>สวน/แปลง (พิมพ์ค้นหาได้)</label>${cbHTML('plot',plotLabel(j.plotId),'🔍 ชื่อแปลง ตำบล พืช')}</div>
@@ -2913,17 +3095,11 @@ function renderJobForm(){
  <div class="field" style="margin-top:10px"><label>📍 พิกัดจุดทำงาน</label>${llFields('job')}<div id="jf-ll" class="tiny" style="margin-top:4px"></div></div>
  </div>
 
- <div class="sec"><h3>💰 พื้นที่และค่าบริการ</h3>
-  <div class="grid g4"><div class="field"><label>พื้นที่ (ไร่)</label><input data-f="area" inputmode="decimal" value="${esc(j.area)}"></div>
-  <div class="field"><label>ราคา/ไร่</label><input data-f="pricePerRai" inputmode="decimal" value="${esc(j.pricePerRai)}" ${j.own?'disabled':''}></div>
-  <div class="field"><label>ค่าเดินทาง/อื่นๆ</label><input data-f="extraFee" inputmode="decimal" value="${esc(j.extraFee)}" ${j.own?'disabled':''}></div>
-  <div class="field"><label>ส่วนลด</label><input data-f="discount" inputmode="decimal" value="${esc(j.discount)}" ${j.own?'disabled':''}></div></div>
-  ${j.own||isQ(j)?'':`<div class="grid g3" style="margin-top:10px"><div class="field"><label>สถานะการชำระ</label><select data-f="payStatus">${PAY.map(p=>`<option value="${p[0]}" ${j.payStatus===p[0]?'selected':''}>${p[1]}</option>`).join('')}</select></div>
-  <div class="field"><label>ช่องทาง</label><select data-f="payMethod">${PAYM.map(p=>`<option ${j.payMethod===p?'selected':''}>${p}</option>`).join('')}</select></div>
-  ${j.payStatus==='part'?`<div class="field"><label>รับแล้ว (บาท)</label><input data-f="paidAmount" inputmode="decimal" value="${esc(j.paidAmount)}"></div>`:''}</div>`}
-  <div id="jf-tot" style="margin-top:10px"></div></div>
+ <div class="sec" id="js-pest"><h3>ศัตรูพืชหรือโรคที่พบ</h3>
+  <div class="row" id="jf-pests">${pestChips()}</div>
+  <div style="margin-top:8px;max-width:380px">${cbHTML('pest','','🔍 พิมพ์ชื่อศัตรูพืชอื่นๆ เพื่อค้นหา/เพิ่ม')}</div></div>
 
- <div class="sec"><h3>🧪 สาร ปุ๋ย ฮอร์โมนที่ใช้</h3>
+ <div class="sec" id="js-chem"><h3>สารที่ใช้และค่าการบิน</h3>
   <div class="tiny muted" style="margin-bottom:8px">พิมพ์ชื่อสาร ชื่อการค้า หรือชื่อแมลง/โรค (เช่น “เพลี้ยไฟ”) แล้วเลือกจากรายการ — ระบบรู้กลุ่ม IRAC/FRAC และเตือนเมื่อใช้กลุ่มเดิมกับแปลงนี้</div>
   <div id="jf-chems"></div>
   <div class="row"><button class="btn sm" data-act="addLine" data-c="ins">+ ยาแมลง</button><button class="btn sm" data-act="addLine" data-c="fun">+ ยารา</button><button class="btn sm" data-act="addLine" data-c="her">+ ยาหญ้า</button><button class="btn sm" data-act="addLine" data-c="fer">+ ปุ๋ย</button><button class="btn sm" data-act="addLine" data-c="pgr">+ ฮอร์โมน</button><button class="btn sm" data-act="addLine" data-c="adj">+ สารจับใบ</button></div>
@@ -2933,18 +3109,23 @@ function renderJobForm(){
   <div id="jf-tank" class="small" style="margin-top:8px"></div>
  </div>
 
- <div class="sec"><h3>🐛 ศัตรูพืช/โรคที่พบ</h3>
-  <div class="row" id="jf-pests">${pestChips()}</div>
-  <div style="margin-top:8px;max-width:380px">${cbHTML('pest','','🔍 พิมพ์ชื่อศัตรูพืชอื่นๆ เพื่อค้นหา/เพิ่ม')}</div></div>
-
- <div class="sec"><h3>🌤️ สภาพอากาศขณะพ่น</h3>
+ <div class="sec" id="js-wx"><h3>สภาพอากาศขณะพ่น</h3>
   ${wxChips(j.wx.cond||[],'jfWx')}
   <div class="grid g3" style="margin-top:8px"><div class="field"><label>อุณหภูมิ (°C)</label><input data-wx="temp" inputmode="decimal" value="${esc(j.wx.temp)}"></div><div class="field"><label>ความชื้น (%)</label><input data-wx="rh" inputmode="decimal" value="${esc(j.wx.rh)}"></div><div class="field"><label>ลม ${windUnitSeg()}</label><input data-wx="wind" inputmode="decimal" value="${esc(windShow(j.wx.wind))}"></div></div><button class="btn sm" style="margin-top:6px" data-act="jfWxFetch">📍 ดึงอากาศตอนนี้</button>
   <div id="jf-safe" style="margin-top:8px"></div></div>
 
- <div class="sec"><h3>📝 อื่นๆ</h3><div class="grid g3">
-  <div class="field"><label>${isQ(j)?'เวลานัด':'เวลาเริ่ม'}</label><input type="time" data-f="startTime" value="${esc(j.startTime)}"></div><div class="field"><label>เวลาเสร็จ</label><input type="time" data-f="endTime" value="${esc(j.endTime)}"></div>
-  <div class="field"><label>วันนัดครั้งถัดไป</label><input type="date" data-f="nextDate" value="${esc(j.nextDate)}"></div></div>
+ <div class="sec" id="js-pay"><h3>พื้นที่และค่าบริการ</h3>
+  <div class="grid g4"><div class="field"><label>พื้นที่ (ไร่)</label><input data-f="area" inputmode="decimal" value="${esc(j.area)}"></div>
+  <div class="field"><label>ราคา/ไร่</label><input data-f="pricePerRai" inputmode="decimal" value="${esc(j.pricePerRai)}" ${j.own?'disabled':''}></div>
+  <div class="field"><label>ค่าเดินทาง/อื่นๆ</label><input data-f="extraFee" inputmode="decimal" value="${esc(j.extraFee)}" ${j.own?'disabled':''}></div>
+  <div class="field"><label>ส่วนลด</label><input data-f="discount" inputmode="decimal" value="${esc(j.discount)}" ${j.own?'disabled':''}></div></div>
+  ${j.own||isQ(j)?'':`<div class="grid g3" style="margin-top:10px"><div class="field"><label>สถานะการชำระ</label><select data-f="payStatus">${PAY.map(p=>`<option value="${p[0]}" ${j.payStatus===p[0]?'selected':''}>${p[1]}</option>`).join('')}</select></div>
+  <div class="field"><label>ช่องทาง</label><select data-f="payMethod">${PAYM.map(p=>`<option ${j.payMethod===p?'selected':''}>${p}</option>`).join('')}</select></div>
+  ${j.payStatus==='part'?`<div class="field"><label>รับแล้ว (บาท)</label><input data-f="paidAmount" inputmode="decimal" value="${esc(j.paidAmount)}"></div>`:''}</div>`}
+  <div id="jf-tot" style="margin-top:10px"></div></div>
+
+ <div class="sec" id="js-etc"><h3>นัดครั้งถัดไปและหมายเหตุ</h3><div class="grid g2">
+  <div class="field"><label>วันนัดครั้งถัดไป (ครบรอบพ่นซ้ำ)</label><input type="date" data-f="nextDate" value="${esc(j.nextDate)}"></div></div>
   <div class="field" style="margin-top:8px"><label>หมายเหตุ</label><textarea data-f="note" placeholder="เช่น ลูกค้าเตรียมยาเอง ระวังสายไฟด้านทิศเหนือ">${esc(j.note)}</textarea></div></div>`;
  renderChemLines();updateJobComputed();updateLLInfo();
 }
@@ -3367,6 +3548,7 @@ document.addEventListener('change',e=>{const t=e.target;if(!$('#view').contains(
  else if(k==='advCrop'){UI.adv.crop=t.value;UI.adv.stage='';UI.adv.aiText='';render()}
  else if(k==='advMonth'){UI.adv.month=+t.value;render()}
  else if(k==='advStage'){UI.adv.stage=t.value;UI.adv._stageTouched=true;render()}
+ else if(k==='flyMobSel'){const f=flyState();f.mob=t.value==='auto'?null:t.value;flyApply(true);render()}
  else if(k==='importFile'){const f=t.files&&t.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{importData(JSON.parse(r.result))}catch(err){toast('อ่านไฟล์ไม่ได้')}};r.readAsText(f);t.value=''}
 });
 document.addEventListener('submit',e=>{if(e.target.id!=='set-form')return;e.preventDefault();const fd=new FormData(e.target);const s=clone(S.settings);
@@ -3475,6 +3657,7 @@ function renderAppChrome(){
  const it=(v,lab,ic,b)=>`<button class="${UI.view===v?'on':''}" data-act="tab" data-v="${v}">${IC[ic]}${b?`<i class="nbadge">${b}</i>`:''}<span>${lab}</span></button>`;
  $('#bottom').innerHTML=it('home','หน้าหลัก','home')+it('queue','คิวงาน','queue',due)+`<button class="bn-plus" data-act="quickAdd" aria-label="เพิ่มรายการ"><span>${IC.plus}</span></button>`+it('finance','การเงิน','fin')+it('reports','รายงาน','rep');
  document.body.dataset.view=UI.view;
+ requestAnimationFrame(()=>{const h=document.getElementById('mbar');document.documentElement.style.setProperty('--ahH',((h&&h.offsetHeight)||0)+'px')});
 }
 
 /* ---------- การ์ดคิว ---------- */
@@ -3966,7 +4149,7 @@ function dtLive(){const A=UI.adv;if(!A)return;const g=id=>{const e=document.getE
 function flyWindSync(){const A=UI.adv,f=UI.fly;if(!A||!f)return;if(A.wind!==''&&A.wind!=null){f.wind=Math.min(8,num(A.wind));const sl=document.querySelector('[data-fly="wind"]');if(sl)sl.value=f.wind;const l=$('#fsl-wind');if(l)l.textContent=windTxt(f.wind)}flyRefresh()}
 function advChecksLive(){const A=UI.adv;const el=$('#adv-checks');if(!A||!el)return;let cond=A.wx;if(!cond.length){try{cond=seasonInfo(+A.month,S.settings.region).wx||[]}catch(e){cond=[]}}
  el.innerHTML=sprayCheck({cond,temp:A.temp,rh:A.rh,wind:A.wind},A.stage,A.crop).map(c=>`<div class="note ${c[0]}" style="margin-bottom:6px">${esc(c[1])}</div>`).join('')}
-function advDtHTML(){const A=UI.adv;return `<div class="card dt-card" id="dt-card"><div class="ch"><div><h2>🌡️ เช็คอากาศก่อนบิน (Delta T)</h2><div class="sub">คำนวณใหม่ทันทีที่แก้อุณหภูมิ ความชื้น หรือลม · 2–8 = เหมาะพ่น · ต่ำกว่า 2 ชื้นจัด · เกิน 10 ร้อนแห้งเกิน</div></div><div class="row" style="gap:6px"><button class="btn" data-act="dtRecalc">🔄 คำนวณใหม่</button><button class="btn primary" data-act="wxFetch">📍 ดึงอากาศตอนนี้</button></div></div>
+function advDtHTML(){const A=UI.adv;return `<div class="card dt-card" id="dt-card"><div class="ch"><div><h2>🌡️ อากาศตอนพ่น</h2><div class="sub">Delta T 2–8 เหมาะพ่น · ต่ำกว่า 2 ชื้นจัด · เกิน 10 ร้อนแห้งเกิน</div></div><button class="btn primary" data-act="wxFetch">📍 ดึงอากาศตอนนี้</button></div>
  <div class="grid g3 dt-in"><div class="field"><label>อุณหภูมิ (°C)</label><input id="dt-temp" inputmode="decimal" value="${esc(A.temp)}" data-dt="temp"></div><div class="field"><label>ความชื้น (%)</label><input id="dt-rh" inputmode="decimal" value="${esc(A.rh)}" data-dt="rh"></div><div class="field"><label>ลม ${windUnitSeg()}</label><input id="dt-wind" inputmode="decimal" value="${esc(A.windIn&&A.windIn.u===WU()?A.windIn.v:windShow(A.wind))}" data-dt="wind"></div></div>
  <div id="dt-live">${dtCard(A.temp,A.rh,A.wind,{fetch:true})}</div>${wxHoursHTML()}</div>`}
 /* ช่องกรอกในการ์ด Delta T — คำนวณทันที (ไม่ต้องวาดทั้งหน้าใหม่) และซิงก์กับช่องด้านบน */
@@ -3981,7 +4164,7 @@ Object.assign(ACT,{
  speedUnit:a=>{try{localStorage.setItem('speedUnit',a.dataset.u)}catch(e){}if(!$('#modal').classList.contains('hidden')&&F&&$('#jf-fly'))renderJobForm();else render()},
  dtRecalc:()=>{dtLive();const A=UI.adv;['temp','rh'].forEach(k=>{const e=document.getElementById('dt-'+k);if(e&&e.value!==A[k])A[k]=e.value});render();toast('คำนวณใหม่แล้ว','ok')},
  wxHour:a=>{const h=UI.wxLive?.hours?.find(x=>x.t===a.dataset.t);if(!h)return;const A=UI.adv;A.windIn=null;A.temp=String(r1(h.temp));A.rh=String(Math.round(h.rh));A.wind=String(r1(h.wind));{const i=UI.wxLive.hours.indexOf(h);A.wx=wxAuto(A.wx,{rad:h.rad,isDay:h.rad>20,wind:h.wind,pop2:Math.max(0,...UI.wxLive.hours.slice(i,i+3).map(x=>x.pop||0))})}render();toast(`ใช้ค่าอากาศเวลา ${h.t.slice(11,16)} น.`)},
- goDt:()=>{closeModal();go('advisor');setTimeout(()=>$('#dt-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
+ goDt:()=>{closeModal();UI.advTab='wx';go('advisor');setTimeout(()=>$('#dt-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
  jfWxFetch:async()=>{if(!STANDALONE){toast('ดึงอากาศอัตโนมัติใช้ได้บนเว็บ GitHub');return}
   try{const p=plotById(F.plotId);let loc=hasLL(F)?{lat:+F.lat,lng:+F.lng}:hasLL(p)?{lat:+p.lat,lng:+p.lng}:null;if(!loc){toast('กำลังหาตำแหน่ง…');loc=await wxLocate()}if(!loc)throw 0;
    const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${loc.lat.toFixed(4)}&longitude=${loc.lng.toFixed(4)}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_gusts_10m,shortwave_radiation,precipitation,is_day&hourly=precipitation_probability&forecast_days=1&wind_speed_unit=ms&timezone=Asia%2FBangkok`);const d=await r.json();const c=d.current;
@@ -4188,17 +4371,20 @@ function djiScene(crop,stg){const P=FLY[crop]||FLY.other;
  return ['🟩 พื้นที่ราบ','ถ้าแปลงเป็นเนินหรือลาดชัน เปลี่ยนเป็นสวนผลไม้/เนินเขา และบินช้าลง']}
 function flyRecHTML(){return spTxt(flyRecHTML0())}
 function flyRecHTML0(){const f=flyState();const a=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx(),f.tgt,flyFix(f),f.mob);if(a.S.spread)return '';
- return `<div class="frec2"><div class="frec2-h"><b>🎯 ${(f.lk||[]).length?'ค่าที่ดีที่สุดเมื่อล็อก '+f.lk.map(k=>FIX_N[k]).join(' + '):'ค่าที่ดีที่สุดตามอากาศตอนนี้'}</b>${(f.lk||[]).length?'<button class="btn sm" data-act="flyReset">🔓 ปลดล็อกทั้งหมด</button>':'<span class="tiny muted">แถบเลื่อนปรับตามให้อัตโนมัติ</span>'}</div>
- <div class="frec2-v"><span>สูง <b>${fmt(a.h,1)}</b> ม.</span><span>ร่อง <b>${fmt(a.sw,1)}</b> ม.</span><span>เร็ว <b>${spdN(a.v)}</b> ${SU_LAB()}</span><span>น้ำ <b>${fmt(a.w,1)}</b> ล./ไร่</span><span>ละออง <b>${a.drop}</b> µm</span></div>
- ${(()=>{const d=djiScene(f.crop,f.stg);return `<div class="fadj info">📱 โหมดในแอป DJI (จำลองสถานการณ์): <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
- ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น และลม (การ์ด Delta T ด้านบน) เพื่อให้ค่าปรับตามอากาศ</div>'}</div>`}
+ const lk=f.lk||[],cell=(k,lab,v,u)=>`<div class="hud-c ${lk.includes(k)?'lk':''}${String(v).length>=4?' long':''}"><span>${lab}${lk.includes(k)?' 🔒':''}</span><b>${v}</b><em>${u}</em></div>`;
+ const d=djiScene(f.crop,f.stg),crit=a.adj.filter(x=>x[0]==='bad'||x[0]==='warn'),rest=a.adj.filter(x=>x[0]!=='bad'&&x[0]!=='warn'),cov=a.model?Math.round(a.model.cov*100):null;
+ return `<div class="hud ${a.stop?'stop':''}"><div class="hud-h"><span>${a.stop?'⛔ ไม่ควรบินพ่นตอนนี้':lk.length?'ค่าดีที่สุดเมื่อล็อก '+lk.map(k=>FIX_N[k]).join(' + '):'ค่าบินที่ดีที่สุดตอนนี้'}</span>${lk.length?'<button class="hud-x" data-act="flyReset">ปลดล็อก</button>':''}</div>
+  <div class="hud-g">${cell('h','สูงจากยอด',fmt(a.h,1),'ม.')}${cell('sw','ระยะร่อง',fmt(a.sw,1),'ม.')}${cell('v','ความเร็ว',spdN(a.v),SU_LAB())}${cell('w','น้ำ',fmt(a.w,1),'ล./ไร่')}${cell('d','ละออง',a.d,'µm')}<div class="hud-c cov"><span>ทั่วทั้งต้น</span><b>${cov==null?'–':cov}</b><em>%</em></div></div>
+  <div class="hud-f">📱 ตั้งในแอป DJI: <b>${d[0]}</b></div></div>
+ ${crit.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}
+ <details class="fold why" ${UI.whyOpen?'open':''} data-tog="why"><summary><span>💡 ทำไมได้ค่านี้</span><em>${rest.length+1} ข้อ</em></summary><div class="fadj info">${esc(d[1])}</div>${rest.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}</details>`}
 function flySliderSync(skip){const f=UI.fly;['h','sw','v','w','d'].forEach(k=>{if(k===skip)return;const sl=document.querySelector(`[data-fly="${k}"]`);if(sl)sl.value=k==='v'&&SU()==='kmh'?Math.round(f[k]*3.6):f[k];const l=$('#fsl-'+k);if(l)l.textContent=k==='v'?spd(f[k]):fmt(f[k],k==='d'?0:1)+' '+FLY_U[k];const lk=$('#flk-'+k);if(lk)lk.className='flk'+((f.lk||[]).includes(k)?' on':'')})}
 /* ตรึงตำแหน่งจอ: วัดตำแหน่งช่องที่กำลังปรับก่อน/หลังอัปเดต แล้วเลื่อนจอชดเชย (iPhone Safari ไม่มี scroll anchoring ให้) */
 function scrollHost(el){for(let p=el&&el.parentElement;p&&p!==document.body;p=p.parentElement){const o=getComputedStyle(p).overflowY;if((o==='auto'||o==='scroll')&&p.scrollHeight>p.clientHeight+1)return p}return null}
 function keepPos(el,fn){if(!el||!el.getBoundingClientRect||!document.contains(el)){fn();return}const y0=el.getBoundingClientRect().top;fn();if(!document.contains(el))return;const dy=el.getBoundingClientRect().top-y0;if(Math.abs(dy)>0.5){const h=scrollHost(el);if(h)h.scrollTop+=dy;else window.scrollBy(0,dy)}}
 function flyRefresh(skip,live,anc){const f=UI.fly;if(!f)return;if((f.svc==='fert'||f.svc==='seed')&&UI.sp&&$('#sp-out')){spRefresh(null,live,anc||(skip?document.querySelector(`[data-fly="${skip}"]`):null));return}anc=anc||(skip?document.querySelector(`[data-fly="${skip}"]`):document.activeElement);
- keepPos(anc,()=>{flyApply(true);flySliderSync(skip);const r=$('#fly-rec');if(r){if(live){r.classList.add('stale')}else{r.innerHTML=flyRecHTML();r.classList.remove('stale')}}const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()})}
-document.addEventListener('change',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){keepPos(t,()=>{const r=$('#fly-rec');if(r){r.innerHTML=flyRecHTML();r.classList.remove('stale')}})}});
+ keepPos(anc,()=>{flyApply(true);flySliderSync(skip);const r=$('#fly-rec');if(r){if(live){r.classList.add('stale')}else{r.innerHTML=flyRecHTML();r.classList.remove('stale')}}const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML();if(!live){const e=$('#fly-eff');if(e)e.innerHTML=flyEffHTML();const x=$('#fly-mix');if(x)x.innerHTML=flyMixHTML()}})}
+document.addEventListener('change',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){keepPos(t,()=>{const r=$('#fly-rec');if(r){r.innerHTML=flyRecHTML();r.classList.remove('stale')}const e=$('#fly-eff');if(e)e.innerHTML=flyEffHTML();const x=$('#fly-mix');if(x)x.innerHTML=flyMixHTML()})}});
 function flyCalc(h,sw,v,w,crop,stg){
  h=num(h);sw=num(sw);v=num(v);w=num(w);const P=flyRange(crop,stg);const fm=FLOWMAX();
  const raiMin=v*60*sw/1600,need=w*raiMin,maxV=w&&sw?fm*1600/(60*w*sw):0,effV=Math.min(v,maxV||v);
@@ -4217,20 +4403,22 @@ function flyCardHTML(){return spTxt(flyCardHTML0())}
 function flyCardHTML0(){
  const f=flyState();const p=flyPreset(f.crop,f.svc,f.can,f.stg);const P=p.P;
  if(p.S.spread){return spCardHTML(f)}
- const lkB=k=>`<button class="flk${(f.lk||[]).includes(k)?' on':''}" id="flk-${k}" data-act="flyLock" data-k="${k}" title="ล็อก/ปลดล็อก"></button>`;
- const sl=(k,l,min,max,st,u)=>k==='v'?`<div class="fsl"><div class="fsl-h"><span>${lkB(k)}${l} ${speedUnitSeg()}</span><b id="fsl-v">${spd(f.v)}</b></div><input type="range" ${SU()==='kmh'?'min="4" max="36" step="1" value="'+Math.round(f.v*3.6)+'"':'min="1" max="10" step="0.5" value="'+f.v+'"'} data-fly="v"></div>`:`<div class="fsl"><div class="fsl-h"><span>${lkB(k)}${l}</span><b id="fsl-${k}">${fmt(f[k],k==='d'?0:1)} ${u}</b></div><input type="range" min="${min}" max="${max}" step="${st}" value="${f[k]}" data-fly="${k}"></div>`;
+ const lkB=k=>`<button class="flk${(f.lk||[]).includes(k)?' on':''}" id="flk-${k}" data-act="flyLock" data-k="${k}" title="ล็อก/ปลดล็อก" aria-label="ล็อก"></button>`;
+ const sl=(k,l,min,max,st,u)=>k==='v'?`<div class="fsl"><div class="fsl-h"><span>${lkB(k)}${l} ${speedUnitSeg()}</span><b id="fsl-v">${spd(f.v)}</b></div><input type="range" ${SU()==='kmh'?'min="4" max="36" step="1" value="'+Math.round(f.v*3.6)+'"':'min="1" max="10" step="0.5" value="'+f.v+'"'} data-fly="v" aria-label="${l}"></div>`:`<div class="fsl"><div class="fsl-h"><span>${lkB(k)}${l}</span><b id="fsl-${k}">${fmt(f[k],k==='d'?0:1)} ${u}</b></div><input type="range" min="${min}" max="${max}" step="${st}" value="${f[k]}" data-fly="${k}" aria-label="${l}"></div>`;
  const rng=(a,u)=>`${fmt(a[0],1)}–${fmt(a[1],1)} ${u}`;
- return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการบินตามพืช</h2><div class="sub">ความสูง · ระยะร่อง · ความเร็ว · น้ำต่อไร่ — ค่าตั้งต้นสำหรับ DJI T55</div></div><button class="btn sm ghost" data-act="flyReset">↺ ค่าแนะนำ</button></div>
+ return `<div class="card fly" id="fly-card">
  ${flyTabs(f)}
- <div class="frec"><div><span>พืช/ความสูงพืช</span><b>${esc(P.n)} · ${esc(P.tall)}</b></div><div><span>สูงจากยอดพืช</span><b>${rng(P.h,'ม.')}</b></div><div><span>ระยะร่อง</span><b>${rng(P.sw,'ม.')}</b></div><div><span>ความเร็ว</span><b>${rng(P.v,'ม./วิ.')}</b></div><div><span>น้ำ</span><b>${rng(P.w,'ล./ไร่')}</b></div><div><span>ขนาดละออง</span><b>${p.drop} µm</b></div></div>
  <div id="fly-rec">${flyRecHTML()}</div>
- <div class="tiny muted" style="margin:2px 2px 8px">เลื่อนค่าไหน ค่านั้นจะถูก 🔒 ล็อก แล้วค่าอื่นคำนวณใหม่ให้ดีที่สุดทันที (ล็อกได้ครั้งละ 2 ค่า) · แตะ 🔒 เพื่อปลดล็อก</div>
- <div class="fsls">${sl('h','ความสูงจากยอดพืช',1.5,12,0.5,'ม.')}${sl('sw','ระยะร่อง (Spray width)',3,11,0.5,'ม.')}${sl('v','ความเร็วบิน',1,10,0.5,'ม./วิ.')}${sl('w','น้ำต่อไร่',1,40,0.5,'ล.')}${sl('d','ขนาดละออง (ตั้งในแอป DJI)',50,500,10,'µm')}<div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" min="0" max="8" step="0.1" value="${f.wind}" data-fly="wind"></div></div>
+ <details class="fold man" ${UI.manOpen?'open':''} data-tog="man"><summary><span>🎚️ ปรับค่าเอง</span><em>${(f.lk||[]).length?'ล็อกอยู่ '+f.lk.length+' ค่า':'เลื่อนแล้วค่าอื่นคำนวณตาม'}</em></summary>
+  <div class="tiny muted" style="margin:0 0 8px">ค่าที่เลื่อนจะถูก 🔒 ล็อก ค่าอื่นคำนวณใหม่ให้ดีที่สุดทันที (ล็อกได้ครั้งละ 2 ค่า)</div>
+  <div class="fsls">${sl('h','ความสูงจากยอดพืช',1.5,12,0.5,'ม.')}${sl('sw','ระยะร่อง',3,11,0.5,'ม.')}${sl('v','ความเร็วบิน',1,10,0.5,'ม./วิ.')}${sl('w','น้ำต่อไร่',1,40,0.5,'ล.')}${sl('d','ขนาดละออง (ตั้งในแอป DJI)',50,500,10,'µm')}<div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" min="0" max="8" step="0.1" value="${f.wind}" data-fly="wind" aria-label="ลมขณะบิน"></div></div></details>
  <div id="fly-out">${flyOutHTML()}</div>
  <div id="fly-cal">${flyCalHTML()}</div>
- <div class="fnote"><b>📌 ข้อแนะนำสำหรับ${esc(P.n)}</b>${P.stageNote&&f.stg&&P.stageNote[f.stg]?`<div class="fstn">ระยะนี้: ${esc(P.stageNote[f.stg])} → แนะนำสูงจากยอด <b>${fmt(P.h[0],0)}–${fmt(P.h[1],0)} ม.</b></div>`:''}<ul>${P.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul></div>
- <div class="row" style="gap:8px;margin-top:8px;align-items:center"><span class="small muted">หัวพ่น:</span><span class="wuseg">${Object.entries(NOZ).map(([k,x])=>`<button class="${NZ()===x?'on':''}" data-act="flyNoz" data-n="${k}">${x.n} (${x.q} ล./นาที)</button>`).join('')}</span></div><div class="tiny muted" style="margin-top:4px">${NZ().code} · ${NZ().pos} · เหมาะกับ${NZ().use} · ละออง 50–500 µm · น้ำหนักขึ้นบินสูงสุด ${NZ().mtow} กก. (แบต DB1050)</div>
- <div class="tiny muted" style="margin-top:8px">ทดสอบด้วยกระดาษไวน้ำ วางบน–กลาง–ล่างทรงพุ่ม · เป้าหมายโดยประมาณ: ยาแมลง ≥20–30 จุด/ตร.ซม. · ยาเชื้อรา ≥50–70 · ยาหญ้า ≥20–40 · ถ้าไม่ถึงให้ลดความเร็ว/ร่อง หรือเพิ่มน้ำ</div></div>`}
+ <details class="fold" ${UI.noteOpen?'open':''} data-tog="note"><summary><span>📌 ข้อแนะนำสำหรับ${esc(P.n)}</span><em>${esc(P.tall)}</em></summary>
+  <div class="frec"><div><span>สูงจากยอดพืช</span><b>${rng(P.h,'ม.')}</b></div><div><span>ระยะร่อง</span><b>${rng(P.sw,'ม.')}</b></div><div><span>ความเร็ว</span><b>${rng(P.v,'ม./วิ.')}</b></div><div><span>น้ำ</span><b>${rng(P.w,'ล./ไร่')}</b></div><div><span>ขนาดละออง</span><b>${p.drop} µm</b></div></div>
+  <div class="fnote">${P.stageNote&&f.stg&&P.stageNote[f.stg]?`<div class="fstn">ระยะนี้: ${esc(P.stageNote[f.stg])}</div>`:''}<ul>${P.notes.map(n=>`<li>${esc(n)}</li>`).join('')}</ul></div>
+  <div class="tiny muted">ทดสอบด้วยกระดาษไวน้ำ วางบน–กลาง–ล่างทรงพุ่ม · ยาแมลง ≥20–30 จุด/ตร.ซม. · ยาเชื้อรา ≥50–70 · ยาหญ้า ≥20–40</div></details>
+ </div>`}
 function flyOutHTML(){return spTxt(flyOutHTML0())}
 const BURN_SENS={durian:['flush','bud','flower','fruitset','flushfruit'],rubber:['newleaf'],rice:['heading'],veg:['seedling','flower'],corn:['tassel'],coconut:['cflower']};
 function burnRisk(o){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has(o.temp))return null;
@@ -4289,18 +4477,18 @@ function denBox(m,w,d,cls=''){const D=m.T.D,st=m.target>=D?'ok':m.target>=0.6*D?
  <div class="tiny muted" style="margin-top:4px">ที่มา: ละอองลงถึงพืช ~${Math.round(m.eff*100)}% (ที่เหลือปลิว/ระเหย/ตกช่องว่างระหว่างต้น) · ใบซ้อน ~${fmt(m.lai,1)} ชั้น ละอองลดลงทีละชั้น ลงถึง${depthLbl(m.depth)} ~${Math.round(m.a*100)}% ของที่ยอดได้ (ที่เหลือติดใบชั้นบน ไม่สูญเปล่า) · บินช้า/ต่ำ = ลมใบพัดกดลงลึกขึ้น · ใต้ใบมักได้น้อยกว่านี้ · เป็นค่าประมาณ ยืนยันด้วยกระดาษไวน้ำ</div></div>`}
 function flyOutHTML0(){const f=flyState();const P=flyRange(f.crop,f.stg);const c=flyCalc(f.h,f.sw,f.v,f.w,f.crop,f.stg);const wx=flyWx();const _h=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));const _dt=_h(wx.temp)&&_h(wx.rh)?deltaT(num(wx.temp),num(wx.rh)):null;const md=f.svc==='fert'||f.svc==='seed'?null:flyModel({crop:f.crop,stg:f.stg,can:f.can,tgt:f.tgt||defTgt(f.svc),mob:f.mob,h:f.h,sw:f.sw,w:f.w,d:f.d,wind:f.wind,dt:_dt,v:f.v,env:envOf(wx)});
  const lo=flyCalc(P.h[0],Math.min(P.sw[0],P.h[0]*3),P.v[1],f.w,f.crop,f.stg),hi=flyCalc(P.h[1],Math.min(P.sw[1],P.h[1]*3.5),(P.v[0]+P.v[1])/2,f.w,f.crop,f.stg);
- return `${md?sprayPanels(f,md,wx):''}<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
+ return `<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
   <div><span>ความเร็วที่ทำได้จริง</span><b>${spdN(c.effV)} <small>${SU_LAB()}</small></b></div><div><span>พ่นได้ (เฉพาะเวลาบิน)</span><b>${fmt(c.raiHr,0)} <small>ไร่/ชม.</small></b></div><div><span>1 ถัง (${TANK} ล.)</span><b>${fmt(c.perTank,1)} <small>ไร่</small></b></div><div><span>แปลงกว้าง 100 ม.</span><b>${c.passes} <small>รอบ</small></b></div></div>
  ${c.warn.length?c.warn.map(x=>`<div class="note ${x[0]} small" style="margin-top:6px">${esc(x[1])}</div>`).join(''):(md&&md.target<md.T.D?`<div class="note warn small" style="margin-top:6px">ความสูง/ร่อง/ความเร็วอยู่ในช่วงสำหรับ${esc(P.n)} แต่ละอองยังไม่ถึงเป้า — ดูกล่องคาดการณ์ด้านบน</div>`:`<div class="note ok small" style="margin-top:6px">✅ ความสูง ร่อง ความเร็ว อยู่ในช่วงเหมาะสมสำหรับ${esc(P.n)}</div>`)}
  ${md?flyMathHTML(f,md,c):''}${windDirHTML(f)}
- <div class="fcmp"><div class="fcmp-h">เทียบ 2 แบบ (น้ำ ${fmt(f.w,1)} ล./ไร่ เท่ากัน)</div>
+ <details class="fold" ${UI.cmpOpen?'open':''} data-tog="cmp"><summary><span>⚖️ บินต่ำร่องแคบ หรือ บินสูงร่องกว้าง</span><em>น้ำ ${fmt(f.w,1)} ล./ไร่ เท่ากัน</em></summary><div class="fcmp">
   <table><tr><th></th><th>บินต่ำ ร่องแคบ</th><th>บินสูง ร่องกว้าง</th></tr>
   <tr><td>ความสูง / ร่อง</td><td>${fmt(P.h[0],1)} ม. / ${fmt(Math.min(P.sw[0],P.h[0]*3),1)} ม.</td><td>${fmt(P.h[1],1)} ม. / ${fmt(Math.min(P.sw[1],P.h[1]*3.5),1)} ม.</td></tr>
   <tr><td>ความเร็วที่ทำได้</td><td>${fmt(lo.effV,1)} ม./วิ.</td><td>${fmt(hi.effV,1)} ม./วิ.</td></tr>
   <tr><td>จำนวนรอบ /100 ม.</td><td>${lo.passes}</td><td>${hi.passes}</td></tr>
   <tr><td>ไร่/ชม.</td><td>${fmt(lo.raiHr,0)}</td><td>${fmt(hi.raiHr,0)}</td></tr>
   <tr><td>ข้อดี</td><td>ลมกดลงลึก ปลิวน้อย</td><td>รอบน้อย เลี้ยวน้อย</td></tr>
-  <tr><td>ข้อเสีย</td><td>บินหลายรอบ เลี้ยวบ่อย</td><td>ต้องบินช้าลงชดเชยลมใบพัดที่อ่อนลง · ปลิวง่าย</td></tr></table><div class="tiny muted" style="padding:6px 10px">โดรนรักษาน้ำ/ไร่ให้คงที่เอง: ร่องกว้างหรือบินเร็ว = ปั๊มต้องจ่ายมากขึ้น ถ้าเกินกำลังปั๊ม โดรนจะลดความเร็วเอง</div></div>`}
+  <tr><td>ข้อเสีย</td><td>บินหลายรอบ เลี้ยวบ่อย</td><td>ต้องบินช้าลงชดเชยลมใบพัดที่อ่อนลง · ปลิวง่าย</td></tr></table><div class="tiny muted" style="padding:6px 10px">โดรนรักษาน้ำ/ไร่ให้คงที่เอง: ร่องกว้างหรือบินเร็ว = ปั๊มต้องจ่ายมากขึ้น ถ้าเกินกำลังปั๊ม โดรนจะลดความเร็วเอง</div></div></details>`}
 function windDirHTML(f){
  const w=num(f.wind),h=num(f.h),herb=f.svc==='herb',orch=(FLY[f.crop]||{}).orchard;
  const off=Math.min(6,Math.max(0.5,Math.round(h*w*0.3*2)/2)),buf=Math.round((3+2*w+(h>5?3:0))*(herb?2:1));
@@ -4312,21 +4500,28 @@ function windDirHTML(f){
  if(orch&&w<=5)items.push('สวนไม้ผลบินตามแถวต้นเป็นหลัก — ถ้าลมขวางแถว ให้เลื่อนแนวบินไปทางต้นลมตามระยะด้านบน');
  if(herb&&w<=5)items.push('ยาหญ้าปลิวไปโดนพืชข้างเคียงเสียหายหนัก — เว้นกันชนเป็น 2 เท่า');
  return `<div class="fwind lv-${lv}"><div class="fwind-h"><b>🧭 ทิศทางบิน: ${t}</b><span>ลม ${windTxt(w)}</span></div><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="tiny muted">ระยะเลื่อน/กันชนเป็นค่าประมาณ — ตรวจด้วยกระดาษไวน้ำวางขวางแนวบิน</div></div>`}
-function flyTabs(f){const cgc=['spray','foliar','herb'].includes(f.svc)?`<div class="fstg"><span class="small muted">ความทั่ว:</span>${Object.entries(CG_N).map(([k,v])=>`<button class="fchip ${CG()===k?'on':''}" data-act="flyCg" data-g="${k}" title="${v[1]}">${v[0]}</button>`).join('')}</div>`:'';const tg=f.svc==='spray'||f.svc==='herb'?`<div class="fstg"><span class="small muted">เป้าหมาย:</span>${(f.svc==='herb'?['herb','herbS','herbP']:['fun','ins','deep']).map(k=>`<button class="fchip ${f.tgt===k?'on':''}" data-act="flyTgt" data-t="${k}">${FLY_TGT[k].n} (≥${FLY_TGT[k].D})</button>`).join('')}</div>`:'';return `<div class="ftabs" style="margin-bottom:8px">${Object.entries(FLY).map(([k,v])=>`<button class="${f.crop===k?'on':''}" data-act="flyCrop" data-c="${k}">${esc(v.n)}</button>`).join('')}</div>
- <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(CROPS[f.crop]?.stages||[]).length?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${(CROPS[f.crop]?.stages||[]).filter((s,i,a)=>a.findIndex(x=>x.g===s.g)===i).filter(s=>!(FLY[f.crop]||{}).stageH||FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}${tg}${mobChips(f)}${f.svc==='foliar'?folSrcChips(f):''}${cgc}</div>`}
+function flyTabs(f){
+ const svc=`<div class="ctl"><span class="ctl-l">งานที่จะทำ</span><div class="svcg">${Object.entries(FLY_SVC).map(([k,v])=>{const u=SVC_UI[k]||['•',v.n];return `<button type="button" class="${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}" aria-pressed="${f.svc===k}"><i>${u[0]}</i><b>${u[1]}</b></button>`}).join('')}</div></div>`;
+ if(f.svc==='fert'||f.svc==='seed')return `<div class="fctl">${svc}</div>`;
+ const noz=segCtl('หัวพ่น',Object.entries(NOZ).map(([k,x])=>[k,`${x.n} <small>${x.q} ล./นาที</small>`]),NZ()===NOZ.mist?'mist':'cen','flyNoz','n');
+ const can=segCtl('ทรงพุ่ม',Object.entries(CAN_SHORT),f.can,'flyCan','k');
+ const tg=f.svc==='spray'||f.svc==='herb'?segCtl('ศัตรูพืชเป้าหมาย',(f.svc==='herb'?['herb','herbS','herbP']:['fun','ins','deep']).map(k=>[k,TGT_SHORT[k]]),f.tgt,'flyTgt','t'):'';
+ const mob=f.svc==='spray'?`<div class="ctl"><span class="ctl-l">ยาที่ใช้เคลื่อนที่ในพืชแบบ</span><select class="sel" data-chg="flyMobSel" aria-label="การเคลื่อนที่ของยาในพืช">${Object.entries(MOB).filter(([k,m])=>!(m.ins&&(f.tgt||'fun')==='fun')).map(([k,m])=>`<option value="${k}" ${(f.mob||'auto')===k?'selected':''}>${m.n.replace('🔄 ','')}${m.D?` — ต้องการ ≥${m.D} จุด/ตร.ซม.`:' — ตามศัตรูพืชเป้าหมาย'}</option>`).join('')}</select></div>`:'';
+ const cg=segCtl('ความทั่วที่ต้องการ',Object.entries(CG_SHORT),CG(),'flyCg','g');
+ return `<div class="fctl">${svc}<div class="ctl2">${can}${noz}</div>${tg}${mob}${cg}${f.svc==='foliar'?folSrcHTML(f):''}</div>`}
 const flyFix=f=>{const o={};(f.lk||[]).forEach(k=>o[k]=f[k]);return o};
 function flyApply(keep){const f=UI.fly;if(!keep)f.lk=[];const p=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx(),f.tgt,flyFix(f),f.mob);f.manual=false;f.tgt=p.tgt||f.tgt;if(p.S.spread)return p;['h','sw','v','w','d'].forEach(k=>{if(!(f.lk||[]).includes(k)&&p[k]!=null)f[k]=p[k]});return p}
 Object.assign(ACT,{
- flyCrop:a=>{const f=flyState();f.crop=a.dataset.c;f.touched=true;flyApply();render()},
+ flyCrop:a=>{const A=UI.adv||(UI.adv=defaultAdv());if(A.plotId&&cropOf(plotById(A.plotId))!==a.dataset.c){toast('พืชกำหนดตามแปลงที่เลือก — ล้างช่องแปลงก่อนถ้าจะเปลี่ยนพืช');return}A.crop=a.dataset.c;A.stage='';A._stageTouched=false;A.aiText='';render()},
  flyTgt:a=>{const f=flyState();f.tgt=a.dataset.t;flyApply(true);render()},
  flySvc:a=>{const f=flyState();f.svc=a.dataset.s;f.tgt=defTgt(f.svc);f.touched=true;flyApply();render()},
- flyStg:a=>{const f=flyState();f.stg=f.stg===a.dataset.g?'':a.dataset.g;f.touched=true;flyApply();render()},
+ flyStg:a=>{const A=UI.adv||(UI.adv=defaultAdv());let id=a.dataset.id;if(!id){const x=((CROPS[A.crop]||CROPS.other).stages||[]).find(q=>q.g===a.dataset.g);id=x?x.id:''}A.stage=A.stage===id?'':id;A._stageTouched=true;render()},
  flyCan:a=>{const f=flyState();f.can=a.dataset.k;f.touched=true;flyApply(true);render()},
  flyReset:()=>{flyApply();render()},
  flyCg:a=>{try{localStorage.setItem('covGoal',a.dataset.g)}catch(e){}flyApply(true);render()},
  flyLock:a=>{const f=flyState(),k=a.dataset.k;f.lk=f.lk||[];if(f.lk.includes(k))f.lk=f.lk.filter(x=>x!==k);else{f.lk.push(k);if(f.lk.length>2)f.lk.shift()}flyRefresh(null,false,a)},
  flyNoz:a=>{try{localStorage.setItem('nozzle',a.dataset.n)}catch(e){}if(UI.fly)flyApply(true);render()},
- goFly:()=>{closeModal();go('advisor');setTimeout(()=>$('#fly-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
+ goFly:()=>{closeModal();UI.advTab='fly';go('advisor');setTimeout(()=>$('.atabs')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
  jfFly:a=>{if(a&&a.dataset&&a.dataset.free)UI.jfLk=[];const cr=FLY[F.crop]?F.crop:'other';const wx=F.wx||{};const p=flyAdj(cr,F.service||'spray','m',stageGroup(cr,F.stage),{temp:wx.temp,rh:wx.rh,wind:wx.wind,cond:wx.cond||[]},tgtFromChems(F),jfFix(),mobFromChems(F));if(p.S.spread){F.flyH=3;F.swath=6;F.speed=6}else{F.flyH=p.h;F.swath=p.sw;F.speed=p.v;F.drop=p.d;F.waterRate=p.w}renderJobForm();toast('ใส่ค่าแนะนำสำหรับ'+p.P.n+'แล้ว — ปรับตามหน้างานได้','ok')}
 });
 const FLY_U={h:'ม.',sw:'ม.',v:'ม./วิ.',w:'ล.',d:'µm',wind:''};
@@ -5147,12 +5342,16 @@ function spProgHTML(f,s){const L=fertProg(f.crop,s);const tr=s.trees||ORCH_TREES
  const opts=f.crop==='rice'?`<div class="fstg"><span class="small muted">พันธุ์:</span>${[['sens','ไวแสง (หอมมะลิ/กข6)'],['non','ไม่ไวแสง']].map(([k,n])=>`<button class="fchip ${s.rtype===k?'on':''}" data-act="spOpt" data-k="rtype" data-v="${k}">${n}</button>`).join('')}<span class="small muted">ดิน:</span>${[['sand','ทราย/ร่วนทราย'],['clay','เหนียว']].map(([k,n])=>`<button class="fchip ${s.soil===k?'on':''}" data-act="spOpt" data-k="soil" data-v="${k}">${n}</button>`).join('')}</div><div class="fstg"><span class="small muted">สีใบ (แผ่นเทียบสีใบข้าว):</span>${[['','ไม่ได้วัด'],['3','≤3 เหลือง'],['4','4 เขียว'],['5','≥5 เขียวเข้ม']].map(([k,n])=>`<button class="fchip ${(s.lcc||'')===k?'on':''}" data-act="spOpt" data-k="lcc" data-v="${k}">${n}</button>`).join('')}</div>`
   :isT?`<div class="row" style="gap:10px;margin:6px 0"><label class="small">ต้น/ไร่ <input class="spnum" data-spi="trees" inputmode="numeric" value="${tr}"></label><label class="small">ระยะแถว (ม.) <input class="spnum" data-spi="row" inputmode="decimal" value="${s.row||ORCH_ROW[f.crop]||8}"></label><label class="small">ความสูงต้น (ม.) <input class="spnum" data-spi="treeH" inputmode="decimal" value="${s.treeH||treeHdef(f.crop,f.stg)}"></label><span class="tiny muted">สวน: บินตามแนวแถว ร่อง = ระยะแถว</span></div>`:'';
  return `<div class="spprog"><div class="fden-h">🧪 แผนปุ๋ยตามระยะ${esc(FLY[f.crop]?.n||'')} <span class="tiny muted">(แตะเพื่อใช้)</span></div>${opts}${rows}<div class="tiny muted">อ้างอิงคำแนะนำกรมการข้าว/กรมวิชาการเกษตร (ดินภาคอีสาน) — ถ้ามีผลวิเคราะห์ดิน ปรับอัตราตามนั้น</div></div>`}
-function spRecHTML(){const s=UI.sp;const r=spRun(s);const box=(l,v,u)=>`<span>${l} <b>${v}</b> ${u}</span>`;
- return `<div class="frec2 ${r.stop?'bad':''}"><div class="frec2-h"><b>🎯 ${(s.lk||[]).length?'ค่าที่ดีที่สุดเมื่อล็อก '+s.lk.map(k=>SP_N[k]).join(' + '):'ค่าที่ดีที่สุดตามวัสดุ+อากาศตอนนี้'}</b>${(s.lk||[]).length?'<button class="btn sm" data-act="spReset">🔓 ปลดล็อกทั้งหมด</button>':''}</div>
- <div class="frec2-v">${box('สูง',fmt(r.h,1),'ม.')}${box('รอบจาน',r.rpm,'rpm')}${box('ร่อง',fmt(r.S,1),'ม.')}${box('เร็ว',spd(r.v).replace(/ (กม\.\/ชม\.|ม\.\/วิ\.)/,''),SU()==='kmh'?'กม./ชม.':'ม./วิ.')}${box('อัตรา',fmt(r.rate,1),'กก./ไร่')}<span>เกลียว <b>${esc(r.fd.n)}</b></span></div>
- <ul class="fadj">${[[r.fd.inRange?'ok':'warn',`⚙️ ${r.fd.n}${r.fd.std?' (มาตรฐาน T55)':' (อุปกรณ์เสริม)'} — อัตราไหล ${fmt(r.Q,1)} กก./นาที (ช่วงแม่นยำ ${fmt(r.fr[0],0)}–${fmt(r.fr[1],0)} กก./นาที)`],
+function spRecHTML(){const s=UI.sp;const r=spRun(s);const lk=s.lk||[];
+ const cell=(k,lab,v,u,c)=>`<div class="hud-c ${lk.includes(k)?'lk':''} ${c||''}${!c&&String(v).length>=4?' long':''}"><span>${lab}${lk.includes(k)?' 🔒':''}</span><b>${v}</b><em>${u}</em></div>`;
+ const items=[[r.fd.inRange?'ok':'warn',`⚙️ ${r.fd.n}${r.fd.std?' (มาตรฐาน T55)':' (อุปกรณ์เสริม)'} — อัตราไหล ${fmt(r.Q,1)} กก./นาที (ช่วงแม่นยำ ${fmt(r.fr[0],0)}–${fmt(r.fr[1],0)} กก./นาที)`],
   ['ok',`🌀 ${r.rpm} rpm ที่สูง ${fmt(r.h,1)} ม. → เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง · ลอย ${fmt(r.th.t,2)} วิ. → ร่อง ${fmt(r.S,1)} ม. ให้ CV ${Math.round(r.cv*100)}% (เป้า ≤${Math.round(r.cvT*100)}%)${r.orch?(r.rowS&&r.S<r.rowS-0.01?` · สวน: เม็ดเหวี่ยงไม่ถึงครึ่งแถว → บิน 2 เที่ยวต่อแถว (ร่อง ${fmt(r.S,1)} ม.)`:' · สวน: ร่อง = ระยะแถว'):''}`],
-  ...(r.vWhy?[['ok',`💨 ${r.vWhy}`]]:[]),...r.adj].map(([c,t])=>`<li class="${c}">${esc(t)}</li>`).join('')}</ul></div>`}
+  ...(r.vWhy?[['ok',`💨 ${r.vWhy}`]]:[]),...r.adj],crit=items.filter(x=>x[0]==='bad'||x[0]==='warn'),rest=items.filter(x=>x[0]!=='bad'&&x[0]!=='warn');
+ return `<div class="hud ${r.stop?'stop':''}"><div class="hud-h"><span>${r.stop?'⛔ ไม่ควรหว่านตอนนี้':lk.length?'ค่าดีที่สุดเมื่อล็อก '+lk.map(k=>SP_N[k]).join(' + '):'ค่าหว่านที่ดีที่สุดตอนนี้'}</span>${lk.length?'<button class="hud-x" data-act="spReset">ปลดล็อก</button>':''}</div>
+ <div class="hud-g">${cell('h','สูงจากยอด',fmt(r.h,1),'ม.')}${cell('rpm','รอบจาน',r.rpm,'rpm')}${cell('S','ระยะร่อง',fmt(r.S,1),'ม.')}${cell('v','ความเร็ว',spdN(r.v),SU_LAB())}${cell('rate','อัตรา',fmt(r.rate,1),'กก./ไร่')}${cell('fd','เกลียวป้อน',esc(r.fd.n.replace('เกลียว','')),r.fd.std?'มาตรฐาน':'เสริม','txt')}</div>
+ <div class="hud-f">ความสม่ำเสมอ CV <b>${Math.round(r.cv*100)}%</b> (เป้า ≤${Math.round(r.cvT*100)}%) · เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง</div></div>
+ ${crit.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}
+ <details class="fold why" ${UI.whyOpen?'open':''} data-tog="why"><summary><span>💡 ทำไมได้ค่านี้</span><em>${rest.length} ข้อ</em></summary>${rest.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}</details>`}
 const SP_N={h:'ความสูง',rpm:'รอบจาน',S:'ร่อง',v:'ความเร็ว',rate:'อัตรา'};
 function spOutHTML(){const s=UI.sp;const r=spEval(s);const pc=Math.round(r.eff*100),st=r.eff>=0.85?'ok':r.eff>=0.7?'warn':'bad';
  const g=(l,v,c)=>`<div class="spm ${c||''}"><span>${l}</span><b>${v}</b></div>`;
@@ -5169,7 +5368,7 @@ function spCardHTML(f){const s=spState();const r=spEval(s);const P=FLY[f.crop]||
  const lkB=k=>`<button class="flk${(s.lk||[]).includes(k)?' on':''}" id="splk-${k}" data-act="spLock" data-k="${k}"></button>`;
  const sl=(k,l,min,max,st,val,lab)=>`<div class="fsl"><div class="fsl-h"><span>${lkB(k)}${l}</span><b id="spl-${k}">${lab}</b></div><input type="range" data-sp="${k}" min="${min}" max="${max}" step="${st}" value="${val}"></div>`;
  const mats=Object.entries(MAT).filter(([k,m])=>f.svc==='seed'?m.k==='seed':m.k!=='seed');
- return `<div class="card fly" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการหว่าน T55 ตามพืช</h2><div class="sub">${esc(P.n)} · ${f.svc==='seed'?'หว่านเมล็ด':'หว่านปุ๋ยเม็ด'} · ถัง 80 ล./55 กก. · จานเหวี่ยง + เกลียวป้อน</div></div></div>${flyTabs(f)}
+ return `<div class="card fly spc" id="fly-card"><div class="ch"><div><h2>✈️ ตั้งค่าการหว่าน T55 ตามพืช</h2><div class="sub">${esc(P.n)} · ${f.svc==='seed'?'หว่านเมล็ด':'หว่านปุ๋ยเม็ด'} · ถัง 80 ล./55 กก. · จานเหวี่ยง + เกลียวป้อน</div></div></div>${flyTabs(f)}
  ${f.svc==='fert'?spProgHTML(f,s)+nutriHTML(f,s):f.crop==='rice'?`<div class="spprog"><div class="fden-h">🌾 อัตราเมล็ดเพื่อผลผลิตสูงสุด <span class="tiny muted">(คำนวณจากเป้าต้นตั้งตัว)</span></div>
  <div class="fstg"><span class="small muted">เป้าต้นตั้งตัว/ตร.ม.:</span>${[[150,'150 ดินดี แตกกอเก่ง'],[190,'190 แนะนำ'],[230,'230 ปลูกล่า/ดินทราย/วัชพืชมาก']].map(([k,n])=>`<button class="fchip ${s.tgtP==k?'on':''}" data-act="spTgt" data-v="${k}">${n}</button>`).join('')}</div>
  <div class="row" style="gap:10px;margin:6px 0;flex-wrap:wrap"><label class="small">น้ำหนัก 1000 เมล็ด (ก.) <input class="spnum" data-spi="tgw" inputmode="decimal" value="${s.tgw}"></label><label class="small">ความงอก (%) <input class="spnum" data-spi="germ" inputmode="numeric" value="${s.germ}"></label></div>
@@ -5318,7 +5517,7 @@ function sprayPanels(f,md,wx){const env=envOf(wx),tgt=f.tgt||defTgt(f.svc);const
  const bio=bioOf({crop:f.crop,stg:f.stg,env,d:f.d,tgt,mob:f.mob||(md.T&&md.T.mob),srcs:f.fsrc,hasAdj:forms.includes('ADJ')});
  const b=sprayBenefit(md,{mix,burn,water:f.water||'tap',bio});
  const H=sprayHazards(md,{tgt,flower:FLOWER_G.includes(f.stg),burn,mix,w:f.w,speedHi:f.v>((FLY[f.crop]||FLY.other).v[1]+0.4)});
- return benefitBox(b)+bioBox(bio,{crop:f.crop,stgN:stageNameG(f.crop,f.stg),d:f.d,wind:f.wind})+denBox(md,f.w,f.d)+burnBox(burn)+formAdviceHTML(env,f.crop,f.stg)+hazBox(H)+mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:forms.length>0,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}
+ return {eff:benefitBox(b)+bioBox(bio,{crop:f.crop,stgN:stageNameG(f.crop,f.stg),d:f.d,wind:f.wind})+denBox(md,f.w,f.d)+burnBox(burn)+formAdviceHTML(env,f.crop,f.stg)+hazBox(H),mix:mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:true,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}}
 /* ---------- งานบริการ: ใช้สารจริงในฟอร์ม ---------- */
 function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.temp,rh:wx.rh,wind:wx.wind,cond});const cr=FLY[F.crop]?F.crop:'other',stg=stageGroup(cr,F.stage);
  const lines=(F.chems||[]).filter(l=>l.activeId||l.product||l.active);const items=lines.map(l=>({form:lineForm(l),name:(lineChem(l)?.th||l.active||l.product||'').slice(0,40),rate:l.rate,unit:l.unit,cat:l.cat,g:lineChem(l)?.g||l.g}));
@@ -5415,7 +5614,7 @@ function flyMathHTML(f,md,c){const nz=NZ(),h=num(f.h),sw=num(f.sw),v=num(f.v),w=
  const rtk=Math.PI/2*0.10/sw*100,nortk=Math.PI/2*0.60/sw*100,dwP=Math.max(Math.abs(Dd.wc-D.wc),Math.abs(D.wc-Du.wc))/D.wc*100;
  const L=(t,fx,res)=>`<div class="fm-l"><span>${t}</span><code>${fx}</code><b>${res}</b></div>`;
  const pump=Q/c.fm*100;
- return `<details class="fmath" ${UI.fmOpen?'open':''} data-dt="fm"><summary>🧮 สูตรและตัวเลขตรวจสอบ (${esc(nz.n)} · ${nz.q} ล./นาที)</summary>
+ return `<details class="fmath" ${UI.fmOpen?'open':''} data-tog="fm"><summary>🧮 สูตรและตัวเลขตรวจสอบ (${esc(nz.n)} · ${nz.q} ล./นาที)</summary>
  <div class="fm-g">⚙️ อัตราจ่าย · พื้นที่ · ถัง</div>
  ${L('อัตราจ่ายรวม Q','น้ำ/ไร่ × V(ม./วินาที) × ร่อง × 60 ÷ 1600 = '+fmt(w,1)+' × '+fmt(v,2)+' × '+fmt(sw,2)+' × 60 ÷ 1600',`${fmt(Q,2)} ล./นาที <small class="${pump>100?'neg':''}">(${Math.round(pump)}% ของปั๊ม ${c.fm})</small>`)}
  ${L('ต่อหัวพ่น','Q ÷ '+nz.k+' หัว',fmt(qn,2)+' ล./นาที/หัว')}
@@ -5459,7 +5658,7 @@ function calResHTML(r){if(r.err)return `<div class="note warn small">${esc(r.err
  <button class="btn sm" data-act="calSave">💾 บันทึกใช้กับ${esc((FLY[r.crop]||FLY.other).n)}ทุกการคำนวณ</button>`}
 function flyCalHTML(){const f=UI.fly;if(!f||f.svc==='fert'||f.svc==='seed')return '';const c=UI.cal||{},cal=flyCalGet(f.crop),P=FLY[f.crop]||FLY.other,r=UI.calRes;
  const inp=k=>`<input class="spnum" data-cal="${k}" inputmode="decimal" value="${esc(c[k]??'')}" placeholder="จุด">`;
- return `<details class="fcal" ${UI.calOpen?'open':''} data-dt="cal"><summary>📏 ปรับเทียบจากกระดาษไวน้ำ${cal?` — ใช้อยู่ (${cal.n} ครั้ง)`:''}</summary>
+ return `<details class="fcal" ${UI.calOpen?'open':''} data-tog="cal"><summary>📏 ปรับเทียบจากกระดาษไวน้ำ${cal?` — ใช้อยู่ (${cal.n} ครั้ง)`:''}</summary>
  <div class="tiny muted">บินจริงด้วยค่าตอนนี้ (สูง ${fmt(f.h,1)} ม. · ร่อง ${fmt(f.sw,1)} ม. · เร็ว ${spd(f.v)} · น้ำ ${fmt(f.w,1)} ล./ไร่ · ละออง ${f.d} µm · ลม ${windTxt(f.wind)}) วางกระดาษไวน้ำ 3 ระดับทรงพุ่ม ระดับละ ≥3 แผ่น ใต้กลางร่อง นับจุด/ตร.ซม. แล้วกรอกค่าเฉลี่ย</div>
  <div class="row" style="gap:8px;flex-wrap:wrap;margin:6px 0;align-items:center"><label class="small">บน ${inp('top')}</label><label class="small">กลาง ${inp('mid')}</label><label class="small">ล่าง ${inp('bot')}</label><button class="btn sm" data-act="calRun">คำนวณ</button></div>
  ${r&&(r.err||r.crop===f.crop)?calResHTML(r):''}
@@ -5492,7 +5691,7 @@ function trayResHTML(r){if(r.err)return `<div class="note warn small">${esc(r.er
  ${r.fx>0.5&&r.fx<1.8?`<button class="btn sm" data-act="traySave">💾 บันทึกปรับเทียบ ${esc(r.mat)}</button>`:'<div class="note warn small">ต่างจากแบบจำลองมากเกินไป — ตรวจการวางถาด/ลมขณะทดสอบก่อนบันทึก</div>'}</div>`}
 function trayHTML(){const t=UI.tray||(UI.tray={sp:'1',A:'',pass:'1',w:''}),s=UI.sp;if(!s)return '';const r=UI.trayRes,cal=spCalAll()[(MAT[s.mat]||{}).n];
  const inp=(k,ph,w)=>`<input class="spnum" data-tray="${k}" inputmode="decimal" value="${esc(t[k]??'')}" placeholder="${ph}" style="width:${w||64}px">`;
- return `<details class="fcal" ${UI.trayOpen?'open':''} data-dt="tray"><summary>📏 ทดสอบถาด (ASABE S341) — หาร่องจริง · อัตราจริง · ปรับเทียบระยะเหวี่ยง${cal?' · ใช้อยู่ ×'+fmt(cal.x,2):''}</summary>
+ return `<details class="fcal" ${UI.trayOpen?'open':''} data-tog="tray"><summary>📏 ทดสอบถาด (ASABE S341) — หาร่องจริง · อัตราจริง · ปรับเทียบระยะเหวี่ยง${cal?' · ใช้อยู่ ×'+fmt(cal.x,2):''}</summary>
  <div class="tiny muted">วางถาดเรียงขวางแนวบิน ระยะเท่ากัน ถาดกลางอยู่ใต้แนวบิน กว้างเกินระยะเหวี่ยงทั้ง 2 ข้าง บินผ่านด้วยค่าตอนนี้ (สูง ${fmt(s.h,1)} ม. · ${s.rpm} rpm · ร่องที่ตั้ง ${fmt(s.S,2)} ม. · อัตรา ${fmt(s.rate,1)} กก./ไร่) แล้วชั่งแต่ละถาด เรียงจากซ้ายไปขวา (มองไปทางหัวเครื่อง)</div>
  <div class="row" style="gap:8px;flex-wrap:wrap;margin:6px 0"><label class="small">ระยะถาด (ม.) ${inp('sp','1')}</label><label class="small">พื้นที่ถาด (ตร.ซม.) ${inp('A','เช่น 2500',80)}</label><label class="small">บินผ่าน (เที่ยว) ${inp('pass','1')}</label></div>
  <textarea class="spta" data-tray="w" rows="2" placeholder="น้ำหนักแต่ละถาด (กรัม) เช่น 0.2 1.1 2.8 4.0 4.6 4.2 2.9 1.2 0.3">${esc(t.w||'')}</textarea>
@@ -5502,7 +5701,6 @@ function trayHTML(){const t=UI.tray||(UI.tray={sp:'1',A:'',pass:'1',w:''}),s=UI.
 document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset)return;
  if(t.dataset.cal){UI.cal=UI.cal||{};UI.cal[t.dataset.cal]=t.value}
  if(t.dataset.tray){UI.tray=UI.tray||{};UI.tray[t.dataset.tray]=t.value}});
-document.addEventListener('toggle',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.dt)return;const o=t.open;if(t.dataset.dt==='fm')UI.fmOpen=o;else if(t.dataset.dt==='cal')UI.calOpen=o;else if(t.dataset.dt==='tray')UI.trayOpen=o},true);
 Object.assign(ACT,{
  calRun:a=>{UI.calRes=flyCalCalc();UI.calOpen=true;const el=$('#fly-cal');keepPos(a,()=>{if(el)el.innerHTML=flyCalHTML()})},
  calSave:()=>{const r=UI.calRes;if(!r||r.err)return;const o=flyCalGet(r.crop),n=o?o.n:0;
@@ -5662,7 +5860,7 @@ function folSrcChips(f){const B=leafBio(f.crop,f.stg),sel=f.fsrc||[],sug=suggest
 function mobChips(f){if(f.svc!=='spray')return '';const t=f.tgt||'fun';return `<div class="fstg"><span class="small muted">ยาเคลื่อนที่ในพืชแบบ:</span>${Object.entries(MOB).filter(([k,m])=>!(m.ins&&t==='fun')).map(([k,m])=>`<button class="fchip ${(f.mob||'auto')===k?'on':''}" data-act="flyMob" data-k="${k}">${m.n}${m.D?` (≥${m.D})`:''}</button>`).join('')}</div>`}
 Object.assign(ACT,{
  flyMob:a=>{const f=flyState();f.mob=a.dataset.k==='auto'?null:a.dataset.k;flyApply(true);render()},
- flySrc:a=>{const f=flyState(),k=a.dataset.k;f.fsrc=f.fsrc||[];if(f.fsrc.includes(k))f.fsrc=f.fsrc.filter(x=>x!==k);else f.fsrc.push(k);flyRefresh(null,false,a)}
+ flySrc:a=>{const f=flyState(),k=a.dataset.k;f.fsrc=f.fsrc||[];if(f.fsrc.includes(k))f.fsrc=f.fsrc.filter(x=>x!==k);else f.fsrc.push(k);a.classList.toggle('on',f.fsrc.includes(k));const sm=$('#fsrc-sum');if(sm)sm.textContent=f.fsrc.length?f.fsrc.map(x=>FSRC[x].n.split(' ')[0]).join(', '):'อัตโนมัติตามระยะพืช';flyRefresh(null,false,a)}
 });
 document.head.insertAdjacentHTML('beforeend',`<style>
 .fden.bio{border-color:#86EFAC;background:#F0FDF4}
@@ -5670,6 +5868,53 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .bio-tw{overflow-x:auto;margin:6px -4px}.bio-t{min-width:440px;font-size:12px}.bio-t td{vertical-align:top}
 .bio-el small{font-weight:400;font-size:10px;color:#64748B}.bio-el.mob-h{border-color:#34D399}.bio-el.mob-m{border-color:#FBBF24}.bio-el.mob-l{border-color:#F87171}
 </style>`);
+
+
+/* =========================================================
+   ส่วนที่ 16: หน้าตา v2 — "Field HUD"
+   หน้าคำแนะนำการพ่น: แปลง/พืช/ระยะ อยู่บนสุดเสมอ แล้วแบ่ง 4 แท็บ อากาศ · ตั้งค่าบิน · ผลต่อพืช · ยาแนะนำ
+   ตัวเลือกแต่ละชนิดใช้ปุ่มคนละแบบ: พืช = การ์ดรูป · ระยะ = เส้นเวลา · งาน = ตารางไอคอน · ตัวเลือก 2–3 ทาง = ปุ่มแบ่งช่อง · ตัวเลือกยาว = รายการเลือก
+   ========================================================= */
+const SVC_UI={spray:['🐛','ฉีดยา'],foliar:['💧','ปุ๋ยน้ำ'],herb:['🌿','ยาหญ้า'],fert:['🌱','หว่านปุ๋ย'],seed:['🌾','หว่านเมล็ด']};
+const TGT_SHORT={fun:'🍄 เชื้อรา',ins:'🐛 แมลง/ไร',deep:'🎯 โคนต้น/ใต้ใบ',herb:'สัมผัส',herbS:'ดูดซึม',herbP:'ยาคุม'};
+const CAN_SHORT={s:'โปร่ง',m:'ปานกลาง',d:'ทึบ/ใหญ่'};
+const CG_SHORT={eco:'ประหยัด',bal:'สมดุล',max:'ทั่วสุด'};
+function segCtl(label,items,cur,act,key,hint){return `<div class="ctl"><span class="ctl-l">${label}${hint?` <small>${hint}</small>`:''}</span><div class="sg">${items.map(([k,n])=>`<button type="button" class="${cur===k?'on':''}" data-act="${act}" data-${key}="${k}">${n}</button>`).join('')}</div></div>`}
+/* ซิงก์พืช/ระยะของการ์ดบินกับแปลงด้านบน (แหล่งข้อมูลเดียว) */
+function advSyncFly(){const A=UI.adv;if(!A)return;const f=flyState(),g=stageGroup(A.crop,A.stage)||'';
+ if(f.crop!==A.crop){f.crop=A.crop;f.stg=g;f.touched=true;f.lk=[];flyApply()}else if((f.stg||'')!==g){f.stg=g;f.touched=true;flyApply(true)}}
+function advInfIds(crop,month,stage){if(stage)return [];return ((CROPS[crop]||CROPS.other).stages||[]).filter(s=>s.m&&s.m.includes(+month)).map(s=>s.id)}
+function advWxLine(A){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has(A.temp)&&!has(A.rh))return `<span>🌤️ ยังไม่ได้ใส่อากาศ — แตะเพื่อดึงอากาศตอนนี้</span>`;
+ const dt=has(A.temp)&&has(A.rh)?deltaT(num(A.temp),num(A.rh)):null,g=dt==null?null:dt<2?['ชื้นจัด','warn']:dt>10?['ร้อนแห้งเกิน','bad']:dt>8?['เริ่มแห้ง','warn']:['เหมาะพ่น','ok'];
+ return `<span>🌡️ <b>${has(A.temp)?fmt(num(A.temp),0)+'°':'–'}</b></span><span>💧 <b>${has(A.rh)?Math.round(num(A.rh))+'%':'–'}</b></span><span>💨 <b>${A.wind!==''&&A.wind!=null?windTxt(num(A.wind)):'–'}</b></span>${dt!=null?`<span class="wxg-${g[1]}">Delta T <b>${fmt(dt,1)}</b> ${g[0]}</span>`:''}<span class="actx-edit">แก้ไข ›</span>`}
+function advCtxHTML(A,plot,crop){const C=CROPS[crop]||CROPS.other,inf=advInfIds(crop,A.month,A.stage);
+ const stg=(C.stages||[]).map(s=>`<button type="button" class="${A.stage===s.id?'on':''} ${inf.includes(s.id)?'inf':''}" data-act="flyStg" data-id="${s.id}" data-g="${s.g}" title="${esc(s.n)}"><span>${esc(s.n.replace(/\s*\(.*?\)/,''))}</span></button>`).join('');
+ return `<div class="card actx">
+  <div class="actx-r"><div class="actx-plot">${cbHTML('advplot',plot?`${custById(plot.customerId)?.name||''} — ${plot.name}`:'','🔍 เลือกแปลงลูกค้า (ไม่บังคับ)','id="adv-plot"')}</div>
+   <select id="adv-month" class="sel sm" data-chg="advMonth" aria-label="เดือน">${MONTHS_FULL.map((m,i)=>`<option value="${i+1}" ${+A.month===i+1?'selected':''}>${m}</option>`).join('')}</select></div>
+  <div class="ctiles" role="radiogroup" aria-label="พืช">${Object.entries(CROPS).map(([k,v])=>`<button type="button" class="${crop===k?'on':''}" data-act="flyCrop" data-c="${k}" ${plot&&crop!==k?'disabled':''} aria-pressed="${crop===k}"><i>${v.ic}</i><span>${esc(v.n)}</span></button>`).join('')}</div>
+  ${stg?`<div class="stl-h"><span>ระยะพืช</span><em>${A.stage?esc(stageName(crop,A.stage)):inf.length?'ยังไม่เลือก — วงประคือระยะที่น่าจะเป็นในเดือนนี้':'ยังไม่เลือก'}</em></div><div class="stl">${stg}</div>`:''}
+  <div class="actx-wx" data-act="advTab" data-t="wx" role="button" tabindex="0">${advWxLine(A)}</div></div>`}
+function advTabsHTML(tab,nHigh){const T=[['wx','🌤️','อากาศ',''],['fly','✈️','ตั้งค่าบิน',''],['eff','🌿','ผลต่อพืช',''],['chem','💊','ยาแนะนำ',nHigh||'']];
+ return `<div class="atabs" role="tablist">${T.map(([k,ic,n,b])=>`<button type="button" role="tab" aria-selected="${tab===k}" class="${tab===k?'on':''}" data-act="advTab" data-t="${k}"><i>${ic}</i><span>${n}</span>${b?`<b>${b}</b>`:''}</button>`).join('')}</div>`}
+/* ผลการคำนวณการพ่นชุดเดียว ใช้ร่วมทุกแท็บ */
+function flyMd(f){const wx=flyWx(),_h=x=>x!==''&&x!=null&&!isNaN(parseFloat(x)),_dt=_h(wx.temp)&&_h(wx.rh)?deltaT(num(wx.temp),num(wx.rh)):null;
+ return {wx,md:flyModel({crop:f.crop,stg:f.stg,can:f.can,tgt:f.tgt||defTgt(f.svc),mob:f.mob,h:f.h,sw:f.sw,w:f.w,d:f.d,wind:f.wind,dt:_dt,v:f.v,env:envOf(wx)})}}
+function flyEffHTML(){const f=flyState();if(f.svc==='fert'||f.svc==='seed')return `<div class="card empty-cta"><b>🌱 งานหว่าน</b><div class="small muted">ดูการกระจายของเม็ด ธาตุอาหารที่พืชได้ และการเก็บขอบได้ในแท็บ ✈️ ตั้งค่าบิน</div><button class="btn sm" data-act="advTab" data-t="fly">ไปที่ตั้งค่าบิน</button></div>`;
+ const {md,wx}=flyMd(f);return spTxt(sprayPanels(f,md,wx).eff)}
+function flyMixHTML(){const f=flyState();if(f.svc==='fert'||f.svc==='seed')return '';const {md,wx}=flyMd(f);return spTxt(sprayPanels(f,md,wx).mix)}
+function folSrcHTML(f){const B=leafBio(f.crop,f.stg),sel=f.fsrc||[],sug=suggestSrc(B.need);
+ return `<details class="fold" ${UI.srcOpen?'open':''} data-tog="src"><summary><span>🧪 สารที่ผสมในถัง</span><em id="fsrc-sum">${sel.length?sel.map(k=>esc(FSRC[k].n.split(' ')[0])).join(', '):'อัตโนมัติตามระยะพืช'}</em></summary>
+ <div class="mslist">${Object.entries(FSRC).map(([k,s])=>`<button type="button" class="${sel.includes(k)?'on':''}" data-act="flySrc" data-k="${k}"><span class="ck"></span><span class="ms-n">${esc(s.n)}</span>${sug.includes(k)?'<span class="ms-tag">ระยะนี้ต้องการ</span>':''}</button>`).join('')}</div></details>`}
+/* หลังวาดหน้า: เลื่อนการ์ดพืช/เส้นเวลาระยะให้ตัวที่เลือกอยู่กลางจอ */
+function advCenterSel(){['.ctiles','.stl'].forEach(q=>{const c=document.querySelector(q),on=c&&c.querySelector('.on');if(c&&on)c.scrollLeft=Math.max(0,on.offsetLeft-c.clientWidth/2+on.clientWidth/2)})}
+Object.assign(ACT,{
+ advTab:a=>{UI.advTab=a.dataset.t;document.querySelectorAll('.apane').forEach(p=>p.classList.toggle('on',p.dataset.pane===UI.advTab));document.querySelectorAll('.atabs button').forEach(b=>{const on=b.dataset.t===UI.advTab;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
+  const t=document.querySelector('.atabs');if(t){const y=t.getBoundingClientRect().top+window.scrollY-(parseFloat(getComputedStyle(t).top)||0)-2;if(window.scrollY>y+4)window.scrollTo({top:y})}},
+ jfJump:a=>{const el=document.getElementById(a.dataset.id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+});
+document.addEventListener('toggle',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.tog)return;const k={fm:'fmOpen',cal:'calOpen',tray:'trayOpen',src:'srcOpen',why:'whyOpen',man:'manOpen',cmp:'cmpOpen',note:'noteOpen'}[t.dataset.tog];if(k)UI[k]=t.open},true);
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target&&e.target.classList&&e.target.classList.contains('actx-wx')){e.preventDefault();e.target.click()}});
 
 </script>
 </body>
