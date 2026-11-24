@@ -1344,6 +1344,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fhaz{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #86EFAC;background:#fff}.fhaz.warn{border-color:#FCD34D}.fhaz.bad{border-color:#FCA5A5}.fhaz ul{margin:4px 0 0;padding-left:18px;font-size:13px}.fhaz li.bad{color:#B91C1C}
 .fmix{border:1.5px solid #CBD5E1;border-radius:14px;padding:8px 12px;margin-bottom:10px;background:#F8FAFC}.fmix summary{cursor:pointer;padding:4px 0}.fsteps{margin:6px 0;padding-left:20px;font-size:13px}.fsteps li{margin:3px 0}
 table.nut{width:100%;font-size:13px;border-collapse:collapse;margin:4px 0}table.nut th,table.nut td{padding:3px 4px;border-bottom:1px solid #EEF2F7;text-align:right}table.nut th:first-child,table.nut td:first-child{text-align:left}
+.fadv{display:flex;gap:8px;font-size:12.5px;padding:3px 0;border-top:1px dashed #E5E7EB}.fadv b{min-width:56px;font-family:Prompt,sans-serif}.fadv.bad b{color:#B91C1C}.fadv.warn b{color:#B45309}.fadv.ok b{color:#047857}.fdry{background:#fff;border-radius:10px;padding:6px 8px;margin:6px 0}
 .fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:Prompt,sans-serif;font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
 .fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:Prompt,sans-serif;font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
 #fly-rec.stale{opacity:.5;transition:opacity .15s}
@@ -4227,10 +4228,32 @@ function burnRisk(o){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has
  if(TL>=32||(dt!=null&&dt>8))tip.unshift('ย้ายไปพ่นเช้าตรู่ (ก่อน ~9 โมง) หรือหลัง ~4 โมงเย็น — ใบเย็นลง หยดเปียกนานขึ้น');if(E&&E.sun>0.7&&TL>=31)tip.push('ถ้าต้องพ่นช่วงแดดจ้า: เพิ่มน้ำต่อไร่ + ละออง 180–200 µm ให้หยดแห้งช้าลง');
  if(TL>=30&&!risky.length)tip.push('เลี่ยงกำมะถัน/คอปเปอร์/น้ำมัน และ EC บางชนิดเมื่อเกิน 32°C');
  if(s>=25)tip.push('ไม่เติมสารจับใบ/สารเสริมเกินอัตรา');
- s=Math.max(0,Math.min(100,s));const lv=s<25?['ok','ต่ำ']:s<50?['warn','ปานกลาง']:s<75?['bad','สูง']:['bad','สูงมาก'];return {s,lv,why,tip}}
+ s=Math.max(0,Math.min(100,s));const lv=s<25?['ok','ต่ำ']:s<50?['warn','ปานกลาง']:s<75?['bad','สูง']:['bad','สูงมาก'];return {s,lv,why,tip,dry:E?dryInfo(E,d,o.crop):null}}
+/* ผิวใบแต่ละพืช: ใบมันเคลือบไข (ทุเรียน มะพร้าว ยาง ข้าว) หยดเกาะเป็นเม็ด แห้งช้า · ใบผักอ่อนนุ่ม หยดแผ่ แห้งเร็ว */
+const LEAF_DRY={durian:1.3,coconut:1.3,rubber:1.2,rice:1.2,sugarcane:1.15,corn:1,veg:0.85,other:1};
+/* หยดระเหย: ปริมาตรลดแทบคงที่ตามเวลา → ความเข้มข้น = เริ่มต้น ÷ (1 − t/เวลาแห้ง) */
+function dryInfo(E,d,crop){const t0=tDry(E,d);if(t0==null)return null;const t=t0*(LEAF_DRY[crop]||1),tBig=t*2.25;
+ return {t,tBig,t2:t*0.5,t5:t*0.8,dew:E.sun<0.15||E.wetLeaf}}
+const fmtT=x=>x<90?`${Math.round(x)} วินาที`:`${fmt(x/60,1)} นาที`;
+/* แนะนำ/หลีกเลี่ยงสูตรสาร ตามสภาพอากาศตอนนี้ + พืช */
+function formAdvice(E,crop,stg){if(!E||E.TL==null)return null;const TL=E.TL,sens=(BURN_SENS[crop]||[]).includes(stg);
+ return FORM_KEYS.filter(k=>k!=='ADJ').map(k=>{const F=FORMS[k];let sc=formBurn([k],E,TL).s,why=[];
+  if(F.heat>0.3&&TL>=29)why.push(`ใบ ${fmt(TL,0)}°C ตัวทำละลาย/น้ำมันกัดผิวใบ`);if(F.salt>0.3&&E.vpdL>1.6)why.push(`อากาศแห้ง (VPD ${fmt(E.vpdL,1)}) เกลือตกผลึกเร็ว`);
+  if(E.rainSoon){const p=Math.round((1-F.rain)*30);sc+=p;if(p>=10)why.push(`ฝนใกล้ตก ต้องแห้ง ~${F.rainH} ชม.`)}
+  if(sens&&(F.heat>0.3||F.salt>0.5)){sc+=6;why.push('ระยะใบอ่อน/ดอกบอบบาง')}
+  if(E.wetLeaf&&F.rain<0.5){sc+=5;why.push('ใบเปียก สารเจือจาง/ไหลทิ้ง')}
+  if(k==='OIL'&&TL>=32){sc+=10}
+  const lv=sc>=18?'bad':sc>=8?'warn':'ok';if(lv==='ok'&&!why.length)why.push(F.heat>0.3?'ใบยังเย็นพอ':F.salt>0.3?'ความชื้นพอ หยดไม่แห้งเร็ว':'ไหม้น้อยในสภาพนี้');return {k,F,sc,lv,why}}).sort((a,b)=>a.sc-b.sc)}
+function formAdviceHTML(E,crop,stg){const A=formAdvice(E,crop,stg);if(!A)return '<div class="fhaz"><b>🧪 สูตรสารที่เหมาะกับอากาศตอนนี้</b><div class="tiny muted">กรอกอุณหภูมิ/ความชื้นก่อน</div></div>';
+ const g=lv=>A.filter(x=>x.lv===lv),row=(x)=>`<div class="fadv ${x.lv}"><b>${x.k==='FOL'?'ปุ๋ยน้ำ':x.k==='OIL'?'น้ำมัน':x.k}</b><span>${esc(x.why.join(' · '))}</span></div>`;
+ return `<div class="fhaz ${g('bad').length?'warn':'ok'}"><b>🧪 สูตรสารกับอากาศตอนนี้</b> <span class="tiny muted">(ผิวใบ ~${fmt(E.TL,0)}°C · ${E.rainSoon?'ฝนใกล้ตก':'ไม่มีฝน'})</span>
+ ${g('bad').length?`<div class="small" style="margin-top:4px;color:#B91C1C"><b>⛔ หลีกเลี่ยง</b></div>${g('bad').map(row).join('')}`:''}
+ ${g('warn').length?`<div class="small" style="margin-top:4px;color:#B45309"><b>⚠️ ใช้ได้ถ้าจำเป็น — พ่นเช้า/เย็น เพิ่มน้ำ</b></div>${g('warn').map(row).join('')}`:''}
+ <div class="small" style="margin-top:4px;color:#047857"><b>✅ เหมาะ</b></div>${g('ok').map(row).join('')||'<div class="tiny muted">ไม่มีสูตรที่ปลอดภัยเต็มที่ในสภาพนี้ — เลื่อนเวลาพ่น</div>'}
+ <div class="tiny muted" style="margin-top:4px">สารตัวเดียวกันมักมีหลายสูตร (เช่น EC กับ SC/WG) — ถ้าอากาศร้อน เลือกสูตรแขวนลอยแทนสูตรตัวทำละลาย</div></div>`}
 function burnBox(r){if(!r)return '<div class="fburn"><div class="fburn-h">🔥 โอกาสใบไหม้</div><div class="tiny muted">กรอกอุณหภูมิ/ความชื้น (การ์ด Delta T) เพื่อประเมิน</div></div>';
  return `<div class="fburn ${r.lv[0]}"><div class="fburn-h">🔥 โอกาสใบไหม้/ใบจุดจากสาร: <b>${r.lv[1]}</b> <span class="tiny muted">(${r.s}/100)</span></div><div class="fburn-bar"><i style="left:${r.s}%"></i></div>
- ${r.why.length?`<div class="small">${r.why.map(esc).join(' · ')}</div>`:'<div class="small">อากาศเย็นพอ ความเข้มข้นปกติ</div>'}${r.tip.length?`<ul class="tiny">${r.tip.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}<div class="tiny muted">ประเมินจากอุณหภูมิ/ความชื้นที่ระบุ · ความเข้มข้นตามน้ำต่อไร่ · ระยะพืช — ทดสอบพ่นไม่กี่ต้นก่อนถ้าใช้สารใหม่</div></div>`}
+ ${r.why.length?`<div class="small">${r.why.map(esc).join(' · ')}</div>`:'<div class="small">อากาศเย็นพอ ความเข้มข้นปกติ</div>'}${r.tip.length?`<ul class="tiny">${r.tip.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${r.dry?`<div class="fdry"><b>⏱️ หยดบนใบ${r.dry.t<60?'แห้งเร็ว':''}</b><div class="small">ความเข้มข้นในหยดเพิ่ม 2 เท่าที่ ~${fmtT(r.dry.t2)} · 5 เท่าที่ ~${fmtT(r.dry.t5)} · <b>แห้งสนิท ~${fmtT(r.dry.t)}</b> (หยดใหญ่/หยดรวมกัน ~${fmtT(r.dry.tBig)})</div><div class="tiny muted">ช่วงเสี่ยงไหม้คือช่วงหยดกำลังแห้ง (ความเข้มข้นพุ่งตอนท้าย) — เมื่อแห้งสนิทแล้วไม่ไหม้เพิ่ม เหลือคราบสาร${r.dry.dew?' · กลางคืน/น้ำค้างจะละลายคราบซ้ำ สารเกลือ/ปุ๋ยอาจไหม้ซ้ำได้':' · ถ้าคืนนี้มีน้ำค้าง คราบสารเกลือจะละลายซ้ำ'} · แห้งเร็วเกินไป (<15 วินาที) = ซึมไม่ทันและไหม้ง่าย · ใบมันแห้งช้ากว่าใบผัก</div></div>`:''}<div class="tiny muted">ประเมินจากอุณหภูมิ/ความชื้นที่ระบุ · ความเข้มข้นตามน้ำต่อไร่ · ระยะพืช — ทดสอบพ่นไม่กี่ต้นก่อนถ้าใช้สารใหม่</div></div>`}
 function denBox(m,w,d,cls=''){const D=m.T.D,st=m.target>=D?'ok':m.target>=0.6*D?'warn':'bad',pc=Math.round(m.cov*100);
  const lv=(n,x)=>`<div class="fly-l ${x>=D?'ok':x>=0.6*D?'warn':'bad'}"><span>${n}</span><b>${Math.round(x)}</b></div>`;
  const pl=isH(m.T&&Object.keys(FLY_TGT).find(k=>FLY_TGT[k]===m.T))?'วัชพืช':'ต้น';
@@ -5264,7 +5287,7 @@ function sprayPanels(f,md,wx){const env=envOf(wx),tgt=f.tgt||defTgt(f.svc);const
  const mix=mixPlan(items,f.w,f.water||'tap',[]);const burn=burnRisk({crop:f.crop,stg:f.stg,tgt,temp:wx.temp,rh:wx.rh,w:f.w,d:f.d,env,forms});
  const b=sprayBenefit(md,{mix,burn,water:f.water||'tap'});
  const H=sprayHazards(md,{tgt,flower:FLOWER_G.includes(f.stg),burn,mix,w:f.w,speedHi:f.v>((FLY[f.crop]||FLY.other).v[1]+0.4)});
- return benefitBox(b)+denBox(md,f.w,f.d)+burnBox(burn)+hazBox(H)+mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:forms.length>0,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}
+ return benefitBox(b)+denBox(md,f.w,f.d)+burnBox(burn)+formAdviceHTML(env,f.crop,f.stg)+hazBox(H)+mixPanelHTML({mix,forms,water:f.water||'tap',pick:true,open:forms.length>0,crop:f.crop,stg:f.stg,tgt,w:f.w,d:f.d})}
 /* ---------- งานบริการ: ใช้สารจริงในฟอร์ม ---------- */
 function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.temp,rh:wx.rh,wind:wx.wind,cond});const cr=FLY[F.crop]?F.crop:'other',stg=stageGroup(cr,F.stage);
  const lines=(F.chems||[]).filter(l=>l.activeId||l.product||l.active);const items=lines.map(l=>({form:lineForm(l),name:(lineChem(l)?.th||l.active||l.product||'').slice(0,40),rate:l.rate,unit:l.unit,cat:l.cat,g:lineChem(l)?.g||l.g}));
@@ -5275,7 +5298,7 @@ function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.
  const chemTxt=lines.filter(l=>num(l.rate)).map(l=>`${(lineChem(l)?.th||l.product||'').slice(0,18)} ~${fmt(num(l.rate)*dr,1)} ${l.unit}/ไร่`).join(', ');
  const H=sprayHazards(mj,{tgt:a.tgt,flower:FLOWER_G.includes(stg),bee,burn,mix,w:wv,chemTxt});
  const noForm=items.filter(x=>!x.form).length;
- return benefitBox(b)+denBox(mj,wv,num(F.drop)||a.d,'jf')+(burn?burnBox(burn):'')+hazBox(H)+mixPanelHTML({mix,forms,water:F.water||'tap',pick:false,open:true,crop:cr,stg,tgt:a.tgt,w:wv,d:num(F.drop)||a.d})
+ return benefitBox(b)+denBox(mj,wv,num(F.drop)||a.d,'jf')+(burn?burnBox(burn):'')+formAdviceHTML(env,cr,stg)+hazBox(H)+mixPanelHTML({mix,forms,water:F.water||'tap',pick:false,open:true,crop:cr,stg,tgt:a.tgt,w:wv,d:num(F.drop)||a.d})
   +(noForm?`<div class="tiny muted">ℹ️ ${noForm} สารยังไม่ระบุสูตร (WP/SC/EC…) — เลือกในช่อง "สูตร" ของแต่ละสาร เพื่อเรียงลำดับผสมและประเมินไหม้แม่นขึ้น</div>`:'')
   +`<div class="fstg" style="margin-top:6px"><span class="small muted">น้ำที่ใช้ผสม:</span>${Object.entries(WATER).map(([k,v])=>`<button class="fchip ${(F.water||'tap')===k?'on':''}" data-act="jfWater" data-k="${k}">${v.n}</button>`).join('')}</div>`}
 /* =========================================================
