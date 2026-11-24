@@ -1330,6 +1330,9 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .frec2-v{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-bottom:6px}.frec2-v b{font-family:Prompt,sans-serif;font-size:17px;color:var(--brand)}
 .fadj{font-size:13px;padding:5px 9px;border-radius:9px;margin-top:4px;border-left:3px solid}.fadj.ok{background:#ECFDF5;border-color:#10B981}.fadj.warn{background:#FFFBEB;border-color:#F59E0B}.fadj.bad{background:#FEF2F2;border-color:#EF4444}.fadj.info{background:#F0F9FF;border-color:#0EA5E9}
 .flk{border:0;background:none;padding:0 4px 0 0;font-size:13px;cursor:pointer;opacity:.35}.flk::before{content:'🔓'}.flk.on{opacity:1}.flk.on::before{content:'🔒'}
+.fdrift{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;margin-top:6px}.fdrift .neg{color:#DC2626;font-weight:700}.fdrift .warnc{color:#B45309;font-weight:700}
+.fburn{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #E2E8F0;background:#fff}.fburn.ok{border-color:#86EFAC}.fburn.warn{border-color:#FCD34D;background:#FFFBEB}.fburn.bad{border-color:#FCA5A5;background:#FEF2F2}.fburn-h{font-weight:700;font-size:14px;margin-bottom:6px}.fburn-h b{font-family:Prompt,sans-serif}
+.fburn-bar{position:relative;height:8px;border-radius:6px;background:linear-gradient(90deg,#10B981 0 25%,#F59E0B 25% 50%,#F97316 50% 75%,#DC2626 75%);margin:2px 0 8px}.fburn-bar i{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:#0F172A;transform:translateX(-2px)}.fburn ul{margin:4px 0 2px;padding-left:18px}
 .fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:Prompt,sans-serif;font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
 .fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:Prompt,sans-serif;font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
 .fden{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid}.fden.ok{background:#F0FDF4;border-color:#86EFAC}.fden.warn{background:#FFFBEB;border-color:#FCD34D}.fden.bad{background:#FEF2F2;border-color:#FCA5A5}.fden.jf{margin-top:8px;margin-bottom:0}
@@ -2977,7 +2980,7 @@ function jfFlyLive(){const el=$('#jf-fly');if(!el||!F)return;const cr=FLY[F.crop
  <div class="frec2-v"><span>สูง <b>${fmt(a.h,1)}</b> ม.</span><span>ร่อง <b>${fmt(a.sw,1)}</b> ม.</span><span>เร็ว <b>${spdN(a.v)}</b> ${SU_LAB()}</span><span>น้ำ <b>${fmt(a.w,1)}</b> ล./ไร่</span><span>ละออง <b>${a.drop}</b> µm</span></div>
  ${(()=>{const d=djiScene(cr,stg);return `<div class="fadj info">📱 โหมดในแอป DJI: <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
  ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น ลม ในส่วน “สภาพอากาศขณะพ่น” ค่าแนะนำจะปรับตามอากาศทันที</div>'}
- ${mj?denBox(mj,wv,num(F.drop)||a.d,'jf'):''}${c?`<div class="tiny" style="margin-top:6px">ค่าที่กรอก: ปั๊มต้องจ่าย <b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)}</b> / ${c.fm} ล./นาที · ~${fmt(c.raiHr,0)} ไร่/ชม. · 1 ถัง ${fmt(c.perTank,1)} ไร่</div>${c.warn.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}`:''}</div>`)}
+ ${mj?denBox(mj,wv,num(F.drop)||a.d,'jf')+burnBox(burnRisk({crop:cr,stg,tgt:a.tgt,temp:wx.temp,rh:wx.rh,w:wv,d:num(F.drop)||a.d,chems:F.chems})):''}${c?`<div class="tiny" style="margin-top:6px">ค่าที่กรอก: ปั๊มต้องจ่าย <b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)}</b> / ${c.fm} ล./นาที · ~${fmt(c.raiHr,0)} ไร่/ชม. · 1 ถัง ${fmt(c.perTank,1)} ไร่</div>${c.warn.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}`:''}</div>`)}
 function updateJobComputed(){
  jfFlyLive();
  const j=F;const base=num(j.area)*num(j.pricePerRai),cc=jobChemCharge(j),cost=jobChemCost(j),t=jobTotal(j);
@@ -3972,6 +3975,12 @@ const defTgt=svc=>svc==='herb'?'herb':svc==='foliar'?'fol':'fun';
 function tgtFromChems(j){const c=(j.chems||[]).filter(x=>x.active||x.product).map(x=>x.cat);if(j.service==='herb'||c.includes('her'))return 'herb';if(c.includes('fun'))return 'fun';if(c.includes('ins'))return 'ins';if(c.includes('fer')||c.includes('pgr')||j.service==='foliar')return 'fol';return defTgt(j.service)}
 const dropVol=d=>Math.PI/6*Math.pow(d*1e-4,3);
 const depthLbl=x=>x<=0.3?'ผิวบน/วัชพืช':x<0.5?'ใบชั้นบน–กลาง':x<=0.5?'กลางทรงพุ่ม':x<1?'ในทรงพุ่ม/ใต้ใบ':'โคนต้น/ล่างสุด';
+/* sf = ผลของความเร็ว: บินช้า ลมใบพัดกดละอองลงตรงๆ ปลิวน้อยลง · บินเร็ว กระแสวนท้ายเครื่องหอบละอองเล็กขึ้นไป */
+const spdF=(v,vRef)=>v==null||!vRef?1:Math.max(0.7,Math.min(1.6,0.5+0.5*num(v)/vRef));
+const driftF=(wind,h,d,sf=1)=>0.12*Math.max(0.3,wind==null||wind===''?1.5:num(wind))/3*(num(h)/3)*Math.pow(150/d,2)*sf;
+const evapF=(dt,h,d)=>dt!=null&&dt>4?0.02*(dt-4)*Math.pow(150/d,2)*(num(h)/3):0;
+const CG=()=>{try{return localStorage.getItem('covGoal')||'bal'}catch(e){return 'bal'}};
+const CG_N={eco:['💰 ประหยัด','ถึงจุดศัตรูพืชพอดี'],bal:['⚖️ สมดุล','ทั่วต้นมากสุดในช่วงน้ำปกติ'],max:['🌳 ทั่วต้นสูงสุด','≥90% ของทั้งต้น']};
 function flyModel(o){
  const P=flyRange(o.crop,o.stg);const T=FLY_TGT[o.tgt]||FLY_TGT.fun;const L0=FLY_LAI[o.crop]||FLY_LAI.other;
  let lai=(o.stg&&L0[o.stg]!=null?L0[o.stg]:L0._)*(o.can==='s'?0.6:o.can==='d'?1.4:1);if(isH(o.tgt))lai=1.2;
@@ -3980,14 +3989,15 @@ function flyModel(o){
  const vRef=(P.v[0]+P.v[1])/2,hRef0=P.orchard?3:2.5,vv=o.v!=null&&o.v!==''?num(o.v):vRef;
  const k=Math.max(0.38,Math.min(0.85,0.5*(1+0.08*(vv-vRef)+0.06*(num(o.h||hRef0)-hRef0))+0.1*Math.max(0,vv-P.v[1])));
  const a=Math.exp(-k*lai*depth);
- let eff=(P.orchard?0.5:0.6)+(isH(o.tgt)?0.05:0);const wind=o.wind,dt=o.dt,d=num(o.d)||150,h=num(o.h);
- if(wind!=null&&wind>2)eff-=0.06*(wind-2);if(dt!=null&&dt>8)eff-=0.03*(dt-8);
- const hRef=P.orchard?3:2.5;if(h>hRef)eff-=0.03*(h-hRef);if(d<120)eff-=0.004*(120-d)*(1+(wind||0)/3);
- {const sev=(dt!=null&&dt>8?(dt-8)/2:0)+(wind!=null&&wind>3?wind-3:0);if(sev>0&&d<220)eff-=0.0012*(220-d)*sev}
- eff=Math.max(0.15,Math.min(0.75,eff));
+ const wind=o.wind,dt=o.dt,d=num(o.d)||150,hh=num(o.h)||hRef0;
+ /* ปลิวออกนอกแปลง ∝ ลม × ความสูง ÷ ขนาดละออง²  ·  ระเหยก่อนถึงใบ ∝ ΔT × ระยะตก ÷ ขนาดละออง² */
+ const drift=Math.min(0.7,driftF(wind,hh,d,spdF(vv,vRef))),evap=Math.min(0.5,evapF(dt,hh,d));
+ let eff=((P.orchard?0.5:0.6)+(isH(o.tgt)?0.05:0))*(1-drift-evap)-0.02*Math.max(0,hh-hRef0);
+ eff=Math.max(0.1,Math.min(0.75,eff));
  const ground=(num(o.w)*1000/16e6)/dropVol(d),top=ground*eff,target=top*a,wNeed=T.D*dropVol(d)*16000/(eff*a);
  const at=z=>top*Math.exp(-k*lai*z),cov=top<T.D?0:lai<0.05?1:Math.min(1,Math.log(top/T.D)/(k*lai));
- return {P,T,lai,depth,a,k,eff,ground,top,target,wNeed,d,cov,mid:at(0.5),bot:at(1)}}
+ const wFor=z=>T.D*dropVol(d)*16000/(eff*Math.exp(-k*lai*z));
+ return {P,T,lai,depth,a,k,eff,ground,top,target,wNeed,wFor,d,cov,drift,evap,mid:at(0.5),bot:at(1)}}
 /* ---------- ตัวหาค่าที่ดีที่สุด: ค่าที่ผู้ใช้ล็อก (fix) เป็นเงื่อนไข ค่าที่เหลือคำนวณใหม่ทั้งหมดตามหลักฟิสิกส์ ---------- */
 const FIX_N={h:'ความสูง',sw:'ร่อง',v:'ความเร็ว',w:'น้ำต่อไร่',d:'ละออง'};
 function flyAdj(crop,svc,can,stg,wx,tgt,fix){
@@ -4002,43 +4012,54 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix){
  const vPen=(deepT?0.5:0)+(can==='d'?0.5:0)+(wind!=null&&wind>3?1:0)+(dt!=null&&dt>8?0.5:0);
  const vCap=h=>P.v[1]-0.5*Math.max(0,h-P.h[0])-vPen;
  /* ขนาดละอองเล็กสุดที่ไม่ระเหย/ปลิว: ขึ้นกับอากาศ + ความสูง (ระยะตกยิ่งไกล ยิ่งปลิว) */
- const dBase=tgt==='herbP'?300:svc==='herb'?250:svc==='foliar'?140:150;const dW=(()=>{let d=dBase;if(dt!=null&&dt>10)d+=120;else if(dt!=null&&dt>8)d+=60;if(wind!=null&&wind>3)d+=80;else if(wind!=null&&wind<0.5&&d<200)d=200;if(dt!=null&&dt<2&&d<180)d=180;return d})();
- const dAuto=h=>Math.min(450,Math.max(100,Math.round((dW+(wind!=null&&wind>1&&h>hRef?8*(h-hRef)*Math.min(wind,4):0))/10)*10));
+ const dBase=tgt==='herbP'?300:svc==='herb'?250:svc==='foliar'?140:150;
+ const dLim=isH(tgt)?0.06:0.12;/* ยอมให้ปลิวออกนอกแปลงไม่เกิน 12% (ยาหญ้า 6%) */
+ const vRefA=(P.v[0]+P.v[1])/2;
+ const dAuto=(h,vx)=>{const wv=Math.max(0.3,wind==null?1.5:wind);let dd=Math.max(dBase,150*Math.sqrt(0.12*(wv/3)*(h/3)*spdF(vx,vRefA)/dLim));if(dt!=null&&dt>4)dd=Math.max(dd,150*Math.sqrt(0.02*(dt-4)*(h/3)/0.08));if(wind!=null&&wind<0.5)dd=Math.max(dd,200);if(dt!=null&&dt<2&&(wind==null||wind<1))dd=Math.max(dd,180);return Math.min(450,Math.max(100,Math.ceil(dd/10)*10))};
  /* 1) ความสูง */
  let h=F_('h'),hWhy='';
- if(h==null){h=(P.h[0]+P.h[1])/2+(p.S.dh||0);/* ระยะปลิว ∝ ความสูง × ลม: ลมแรงให้บินต่ำสุดที่ปลอดภัยเสมอ ไม่ขึ้นกับความเร็ว */if(wind!=null&&wind>3){h=hMin;hWhy=`ลม ${windTxt(wind)} บินต่ำสุดที่ปลอดภัย ลดระยะปลิว`}else if(wind!=null&&wind>2)h-=0.5;if(dt!=null&&dt>8)h-=0.5;
+ if(h==null){h=(P.h[0]+P.h[1])/2+(p.S.dh||0);/* ระยะปลิว ∝ ความสูง × ลม: ลมแรงให้บินต่ำสุดที่ปลอดภัยเสมอ ไม่ขึ้นกับความเร็ว */if(wind!=null&&wind>3){const sens=(BURN_SENS[crop]||[]).includes(stg);h=P.orchard&&!sens?Math.max(3,P.h[0]-1):hMin;hWhy=`ลม ${windTxt(wind)} บินต่ำสุดที่ปลอดภัย${P.orchard&&!sens?' (ต่ำกว่าช่วงปกติ 1 ม.)':''} — ระยะปลิวแปรตามความสูง จึงใช้ละอองเล็กลงได้${sens?' · ระยะดอก/ใบอ่อน ไม่ลดต่ำกว่าช่วงปกติ กันลมใบพัดตีดอก/ใบช้ำ':''}`}else if(wind!=null&&wind>2)h-=0.5;if(dt!=null&&dt>8)h-=0.5;
   const sw0=F_('sw');
   if(sw0!=null){const hs=P.orchard?Math.max(sw0/3.5,P.h[0]+(sw0-P.sw[0])/((P.sw[1]-P.sw[0])||1)*(P.h[1]-P.h[0])):sw0/2.4;if(!P.orchard||hs>h){h=hs;hWhy=`ร่อง ${fmt(sw0,1)} ม. ต้องบินสูงพอให้ละอองแผ่ถึงขอบร่อง`}}
-  h=Math.max(hMin,Math.min(12,Math.round(h*2)/2))}
+  const hFloor=wind!=null&&wind>3&&P.orchard&&!(BURN_SENS[crop]||[]).includes(stg)?Math.max(3,P.h[0]-1):hMin;h=Math.max(hFloor,Math.min(12,Math.round(h*2)/2))}
  /* 2) ละออง */
- let d=F_('d');const dBest=dAuto(h);if(d==null)d=dBest;
+ let d=F_('d');let dBest=dAuto(h);if(d==null)d=dBest;
  /* 3) ร่อง: ละอองจากหัวเหวี่ยงแผ่กว้างตามความสูง */
  let sw=F_('sw'),swWhy='';
  if(sw==null){sw=P.orchard?P.sw[0]+(P.sw[1]-P.sw[0])*Math.min(1,Math.max(0,(h-P.h[0])/((P.h[1]-P.h[0])||1))):2.4*h;
   sw=Math.min(P.sw[1]+(P.orchard?0:1),Math.max(P.sw[0],sw),3.5*h);if(wind!=null&&wind>3){sw-=1.5;swWhy='ลมแรง แคบร่อง 1.5 ม. ให้ทับซ้อนมากขึ้น'}sw=Math.max(3,Math.round(sw*2)/2)}
- /* 4) น้ำต่อไร่: คำนวณย้อนจากจำนวนจุดเป้าหมาย */
- const vEst=F_('v')!=null?F_('v'):Math.max(vMin,vCap(h));const m0=flyModel({crop,stg,can,tgt,h,sw,w:1,d,wind,dt,v:vEst});
- let w=F_('w'),stop=false;const wMax=P.w[1]*1.5;
- if(w==null){w=Math.max(P.w[0],Math.ceil(m0.wNeed*2)/2);
-  if(w>wMax){stop=true;adj.push(['bad',`ต้องใช้น้ำ ~${fmt(m0.wNeed,0)} ล./ไร่ ถึงจะได้ ${T.D} จุด/ตร.ซม. ที่${depthLbl(m0.depth)} — เกินที่ทำได้จริง ควรรอให้ลมเบาลง/Delta T อยู่ 2–8 หรือบินต่ำลง`]);w=Math.ceil(wMax*2)/2}}
- /* 5) ความเร็ว + กำลังปั๊ม */
- let v=F_('v');const vWhy=[];
- if(v==null){v=vCap(h);if(h>P.h[0])vWhy.push(`บินสูง ${fmt(h,1)} ม. ลมใบพัดอ่อนลง`);if(deepT)vWhy.push('ต้องให้ลมพลิกใบ/ลงลึก');if(can==='d')vWhy.push('ทรงพุ่มทึบ');if(wind!=null&&wind>3)vWhy.push('ลมแรง');if(dt!=null&&dt>8)vWhy.push('ร้อนแห้ง');
-  if(v<vMin){v=vMin}
+ /* 4+5) น้ำต่อไร่ + ความเร็ว: ไล่จากเร็วสุดที่ลมใบพัดยังกดได้ ลงไปทีละ ~1 กม./ชม. เลือกความเร็วที่เร็วที่สุดที่ยังได้ตามเป้าความทั่ว */
+ const g=CG(),wMax=P.w[1]*1.5,wCap=g==='max'?wMax:P.w[1];let stop=false,wT=0,wC=0;const vWhy=[];
+ const wPick=m0=>{const t=m0.wNeed,c=m0.wFor(0.9);return {t,c,w:Math.max(P.w[0],Math.ceil((g==='eco'?t:g==='max'?Math.max(t,c):Math.max(t,Math.min(c,P.w[1])))*2)/2)}};
+ const cands=[];if(F_('v')!=null)cands.push(F_('v'));else{const top=Math.max(vMin,vCap(h));for(let x=top;x>=vMin-1e-6;x-=0.25)cands.push(x);if(!cands.length)cands.push(vMin)}
+ let v=null,w=F_('w'),pick=null;
+ for(const vc of cands){const dc=F_('d')!=null?F_('d'):dAuto(h,vc);const m0=flyModel({crop,stg,can,tgt,h,sw,w:1,d:dc,wind,dt,v:vc});const pw=wPick(m0);const ww=w!=null?w:pw.w;
+  const mm=flyModel({crop,stg,can,tgt,h,sw,w:ww,d:dc,wind,dt,v:vc});const vP=fm*1600/(60*ww*sw);
+  const ok=(w!=null?(g==='eco'?mm.target>=T.D:mm.cov>=0.9||mm.target>=T.D&&g==='bal'&&pw.c>P.w[1]):(pw.t<=wMax&&(g==='eco'||pw.w<=wCap||pw.c>wMax)))&&vP>=vc-0.01;
+  if(!pick||ok&&!pick.ok||(!pick.ok&&!ok&&pw.t<pick.t))pick={v:vc,d:dc,t:pw.t,c:pw.c,w:ww,ok};if(ok)break}
+ v=pick.v;wT=pick.t;wC=pick.c;if(w==null)w=pick.w;if(F_('d')==null)d=pick.d;dBest=dAuto(h,v);
+ if(F_('v')==null){const top=Math.max(vMin,vCap(h));
+  if(v<top-0.1)vWhy.push(`ลดจาก ${spd(top)} — ลมใบพัดกดละอองลงชั้นล่างได้ดีขึ้น${wind!=null&&wind>2?' และปลิวน้อยลง จึงใช้ละอองเล็กลงได้':''} จนถึงเป้า${g==='eco'?'':'ความทั่ว'}`);
+  else{if(h>P.h[0])vWhy.push(`บินสูง ${fmt(h,1)} ม. ลมใบพัดอ่อนลง`);if(deepT)vWhy.push('ต้องให้ลมพลิกใบ/ลงลึก');if(can==='d')vWhy.push('ทรงพุ่มทึบ');if(wind!=null&&wind>3)vWhy.push('ลมแรง');if(dt!=null&&dt>8)vWhy.push('ร้อนแห้ง')}
   const vP=fm*1600/(60*w*sw);if(v>vP){v=vP;vWhy.push(`ปั๊ม ${fm} ล./นาที จ่ายได้แค่นี้ที่น้ำ ${fmt(w,1)} ล. ร่อง ${fmt(sw,1)} ม.`)}
-  v=Math.max(1/3.6,Math.floor(v*3.6)/3.6)}
+  v=Math.max(1/3.6,Math.floor(v*3.6+1e-6)/3.6)}
  else if(F_('sw')==null){const swP=fm*1600/(60*w*v);if(sw>swP){sw=Math.max(3,Math.floor(swP*2)/2);swWhy=`ความเร็ว ${spd(v)} + น้ำ ${fmt(w,1)} ล. ปั๊มจ่ายไม่ทัน จึงแคบร่องลง`}}
+ if(F_('w')==null){
+  if(wT>wMax){stop=true;adj.push(['bad',`แม้บินช้าสุด ก็ต้องใช้น้ำ ~${fmt(wT,0)} ล./ไร่ ถึงจะได้ ${T.D} จุด/ตร.ซม. ที่${depthLbl(flyModel({crop,stg,can,tgt,h,sw,w:1,d,wind,dt,v}).depth)} — เกินที่ทำได้จริง ควรรอให้ลมเบาลง/Delta T อยู่ 2–8 หรือบินต่ำลง`]);w=Math.ceil(wMax*2)/2}
+  else if(g!=='eco'&&wC>wCap&&w>=wCap)adj.push(['info',`ทั่วต้น 90% ต้องใช้น้ำ ~${fmt(wC,0)} ล./ไร่ — ${g==='max'?'เกินที่ทำได้':'เกินช่วงน้ำปกติ'} จึงใช้ ${fmt(w,1)} ล. (ทั่วต้นได้เท่าที่แสดงด้านล่าง)`]);if(w>wMax)w=Math.ceil(wMax*2)/2}
  const m=flyModel({crop,stg,can,tgt,h,sw,w,d,wind,dt,v});
  const fk=Object.keys(fix).filter(k=>has(fix[k]));
  if(fk.length)adj.push(['info',`🔒 ล็อก: ${fk.map(k=>FIX_N[k]+' '+(k==='v'?spd(num(fix[k])):fmt(num(fix[k]),1)+(k==='d'?' µm':k==='w'?' ล.':' ม.'))).join(' · ')} → ค่าอื่นคำนวณใหม่ให้ดีที่สุดตามนี้`]);
  if(wind!=null&&wind>5){stop=true;adj.unshift(['bad',`ลม ${windTxt(wind)} แรงเกิน → ไม่ควรบินพ่น`])}
  else if(wind!=null&&wind>3&&P.orchard&&h>=3)adj.push(['warn',`ลม ${windTxt(wind)} ที่ความสูงยอด${P.n} — ละอองปลิวมาก ถ้าเลื่อนได้ควรรอลมต่ำกว่า 3 ม./วิ.`]);
  if(dt!=null&&dt>10)adj.push(['bad',`Delta T ${fmt(dt,1)} ร้อนแห้งมาก — ควรเลื่อนไปช่วงเช้า/เย็น`]);
- adj.push(['info',`🎯 เป้าหมาย ${T.n}: ≥${T.D} จุด/ตร.ซม. ที่${depthLbl(m.depth)}`]);
+ adj.push(['info',`🎯 เป้าหมาย ${T.n}: ≥${T.D} จุด/ตร.ซม. ที่${depthLbl(m.depth)} · โหมด ${CG_N[g][0]} (${CG_N[g][1]})`]);
  if(F_('h')!=null){if(h>P.h[1]+0.5)adj.push(['warn',`ล็อกความสูง ${fmt(h,1)} ม. สูงกว่าช่วงแนะนำ (${fmt(P.h[0],0)}–${fmt(P.h[1],0)} ม.) — ละอองลงถึงพืชเหลือ ~${Math.round(m.eff*100)}% จึงต้องใช้น้ำมากขึ้น บินช้าลง`]);else if(h<hMin-0.2)adj.push(['warn',`ล็อกความสูง ${fmt(h,1)} ม. ต่ำกว่าแนะนำ — ร่องแคบ เสี่ยงชนกิ่ง/ลายเป็นแถบ`])}
  else if(hWhy)adj.push(['ok',`ความสูง ${fmt(h,1)} ม. — ${hWhy}`]);
- if(F_('d')!=null){if(d<dBest-20)adj.push(['warn',`ล็อกละออง ${d} µm เล็กกว่าที่อากาศตอนนี้รับได้ (~${dBest} µm) — ระเหย/ปลิวมาก นับว่าลงถึงพืชแค่ ~${Math.round(m.eff*100)}%`]);else if(d>dBest+60)adj.push(['info',`ล็อกละออง ${d} µm ใหญ่กว่าจำเป็น (อากาศนี้ใช้ ~${dBest} µm ได้) — จำนวนจุดต่อน้ำ 1 ลิตรน้อยลง ${fmt(Math.pow(d/dBest,3),1)} เท่า จึงต้องใช้น้ำมากขึ้น`])}
- else adj.push([dBest>dBase?'warn':'ok',`ละออง ~${d} µm — ${dBest>dBase?'ใหญ่ขึ้นตามอากาศ/ความสูง ลดการปลิว/ระเหย':'ใช้ละเอียดได้ ได้จำนวนจุดมากต่อน้ำ 1 ลิตร'}`]);
+ {const dr=Math.round(m.drift*100),ev=Math.round(m.evap*100),lim=Math.round(dLim*100);
+  if(F_('d')!=null&&d<dBest-10)adj.push([dr>lim*1.5?'bad':'warn',`ล็อกละออง ${d} µm — ได้จำนวนจุดบนพืชมากขึ้นจริง แต่ปลิวออกนอกแปลง ~${dr}% (แนะนำไม่เกิน ${lim}%) ยาไปตกแปลงข้างเคียง/บ้าน/แหล่งน้ำ${ev>5?` · ระเหย ~${ev}%`:''}`]);
+  else if(F_('d')!=null&&d>dBest+60)adj.push(['info',`ล็อกละออง ${d} µm ใหญ่กว่าจำเป็น (อากาศนี้ใช้ ~${dBest} µm ได้) — จำนวนจุดต่อน้ำ 1 ลิตรน้อยลง ${fmt(Math.pow(d/dBest,3),1)} เท่า`]);
+  else adj.push([d>dBase?'warn':'ok',`ละออง ~${d} µm — ${d>dBase?`เล็กสุดที่ยังคุมการปลิวได้ ที่ลม ${wind!=null?windTxt(wind):'-'} · สูง ${fmt(h,1)} ม. · เร็ว ${spd(v)}${dt!=null&&dt<2&&(wind==null||wind<1)?' · ชื้นจัด+ลมนิ่ง เสี่ยงอากาศผกผัน ละอองเล็กลอยค้าง ไม่ใช้ต่ำกว่า 180 µm':dt!=null&&dt<4?' · ความชื้นสูง ไม่ต้องเผื่อการระเหย':''}`:'ใช้ละเอียดได้ ได้จำนวนจุดมากต่อน้ำ 1 ลิตร'} · ปลิวออกนอกแปลง ~${dr}%${ev>2?` · ระเหย ~${ev}%`:''}`])}
  if(F_('sw')==null)adj.push(['ok',`ร่อง ${fmt(sw,1)} ม. — ${swWhy||(P.orchard?'ตามความสูงเหนือทรงพุ่ม':'≈2.4 เท่าของความสูง ละอองแผ่ทับซ้อนพอดี')}`]);
  else if(sw>3.5*h)adj.push(['warn',`ล็อกร่อง ${fmt(sw,1)} ม. กว้างเกินความสูง ${fmt(h,1)} ม. — ขอบร่องบาง เป็นแถบลาย`]);
  adj.push([m.target>=T.D?'ok':'warn',`น้ำ ${fmt(w,1)} ล./ไร่ → คาดได้ ~${Math.round(m.target)} จุด/ตร.ซม. ที่${depthLbl(m.depth)} (ยอด ~${Math.round(m.top)}) · ทั่วทั้งต้นถึงเป้า ~${Math.round(m.cov*100)}%${F_('w')!=null&&m.target<T.D?` — ล็อกน้ำไว้ ต้องใช้ ~${fmt(m.wNeed,1)} ล. ถึงจะถึงเป้า`:''}`]);
@@ -4091,17 +4112,37 @@ function flyCardHTML0(){
  <div class="row" style="gap:8px;margin-top:8px;align-items:center"><span class="small muted">หัวพ่น:</span><span class="wuseg">${[['cen','เหวี่ยง 2 หัว (40 ล./นาที)'],['mist','พ่นหมอก 4 หัว (50 ล./นาที)']].map(x=>`<button class="${(FLOWMAX()===50?'mist':'cen')===x[0]?'on':''}" data-act="flyNoz" data-n="${x[0]}">${x[1]}</button>`).join('')}</span></div>
  <div class="tiny muted" style="margin-top:8px">ทดสอบด้วยกระดาษไวน้ำ วางบน–กลาง–ล่างทรงพุ่ม · เป้าหมายโดยประมาณ: ยาแมลง ≥20–30 จุด/ตร.ซม. · ยาเชื้อรา ≥50–70 · ยาหญ้า ≥20–40 · ถ้าไม่ถึงให้ลดความเร็ว/ร่อง หรือเพิ่มน้ำ</div></div>`}
 function flyOutHTML(){return spTxt(flyOutHTML0())}
+const BURN_SENS={durian:['flush','bud','flower','fruitset','flushfruit'],rubber:['newleaf'],rice:['heading'],veg:['seedling','flower'],corn:['tassel'],coconut:['cflower']};
+function burnRisk(o){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has(o.temp))return null;
+ const T=num(o.temp),dt=has(o.rh)?deltaT(T,num(o.rh)):null,P=flyRange(o.crop,o.stg),w=num(o.w),d=num(o.d)||150;let s=0;const why=[],tip=[];
+ if(T>=35){s+=40;why.push(`ร้อนจัด ${fmt(T,0)}°C`)}else if(T>=32){s+=25;why.push(`ร้อน ${fmt(T,0)}°C`)}else if(T>=30){s+=10;why.push(`อุ่น ${fmt(T,0)}°C`)}
+ if(dt!=null&&dt>10){s+=25;why.push(`Delta T ${fmt(dt,1)} แห้งเร็วมาก ยาเข้มข้นบนใบ`)}else if(dt!=null&&dt>8){s+=15;why.push(`Delta T ${fmt(dt,1)} แห้งเร็ว`)}
+ if(w){const c=((P.w[0]+P.w[1])/2)/w;if(c>1.2){s+=Math.min(20,Math.round(25*(c-1)));why.push(`น้ำ ${fmt(w,1)} ล./ไร่ น้อย → ยาเข้มข้นกว่าปกติ ~${fmt(c,1)} เท่า`);tip.push('เพิ่มน้ำต่อไร่ (ใช้ยาเท่าเดิม) ให้ความเข้มข้นต่อหยดลดลง')}}
+ if(d<150&&dt!=null&&dt>8){s+=10;why.push(`ละอองเล็ก ${d} µm ระเหยเร็ว ทิ้งคราบยาเข้มข้น`)}
+ if((BURN_SENS[o.crop]||[]).includes(o.stg)){s+=15;why.push('ระยะใบอ่อน/ดอก บอบบาง');tip.push('ใบอ่อน/ดอก: ใช้อัตราต่ำสุดตามฉลาก ไม่ผสมหลายตัวในถังเดียว')}
+ if(o.tgt==='fol'){s+=10;why.push('ปุ๋ย/ฮอร์โมนมีเกลือ ระเหยแล้วเข้มข้น');tip.push('ปุ๋ยทางใบ: ไม่เกินอัตราฉลาก โดยเฉพาะยูเรีย/โพแทสเซียม')}
+ const ch=(o.chems||[]).map(c=>(c.active||'')+' '+(c.product||'')).join(' ').toLowerCase(),risky=[];
+ if(/กำมะถัน|ซัลเฟอร์|sulfur|sulphur/.test(ch))risky.push('กำมะถัน');if(/คอปเปอร์|ทองแดง|copper|คิวปรัส/.test(ch))risky.push('คอปเปอร์');if(/น้ำมัน|ออยล์|oil|ปิโตรเลียม/.test(ch))risky.push('น้ำมัน');
+ if(risky.length){s+=T>=32?20:T>=30?10:0;why.push(`มี${risky.join('/')} ในถัง — ไหม้ง่ายเมื่ออากาศร้อน`)}
+ if(T>=32||(dt!=null&&dt>8))tip.unshift('ย้ายไปพ่นเช้าตรู่ (ก่อน ~9 โมง) หรือหลัง ~4 โมงเย็น');
+ if(T>=30&&!risky.length)tip.push('เลี่ยงกำมะถัน/คอปเปอร์/น้ำมัน และ EC บางชนิดเมื่อเกิน 32°C');
+ if(s>=25)tip.push('ไม่เติมสารจับใบ/สารเสริมเกินอัตรา');
+ s=Math.min(100,s);const lv=s<25?['ok','ต่ำ']:s<50?['warn','ปานกลาง']:s<75?['bad','สูง']:['bad','สูงมาก'];return {s,lv,why,tip}}
+function burnBox(r){if(!r)return '<div class="fburn"><div class="fburn-h">🔥 โอกาสใบไหม้</div><div class="tiny muted">กรอกอุณหภูมิ/ความชื้น (การ์ด Delta T) เพื่อประเมิน</div></div>';
+ return `<div class="fburn ${r.lv[0]}"><div class="fburn-h">🔥 โอกาสใบไหม้/ใบจุดจากสาร: <b>${r.lv[1]}</b> <span class="tiny muted">(${r.s}/100)</span></div><div class="fburn-bar"><i style="left:${r.s}%"></i></div>
+ ${r.why.length?`<div class="small">${r.why.map(esc).join(' · ')}</div>`:'<div class="small">อากาศเย็นพอ ความเข้มข้นปกติ</div>'}${r.tip.length?`<ul class="tiny">${r.tip.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}<div class="tiny muted">ประเมินจากอุณหภูมิ/ความชื้นที่ระบุ · ความเข้มข้นตามน้ำต่อไร่ · ระยะพืช — ทดสอบพ่นไม่กี่ต้นก่อนถ้าใช้สารใหม่</div></div>`}
 function denBox(m,w,d,cls=''){const D=m.T.D,st=m.target>=D?'ok':m.target>=0.6*D?'warn':'bad',pc=Math.round(m.cov*100);
  const lv=(n,x)=>`<div class="fly-l ${x>=D?'ok':x>=0.6*D?'warn':'bad'}"><span>${n}</span><b>${Math.round(x)}</b></div>`;
  const pl=isH(m.T&&Object.keys(FLY_TGT).find(k=>FLY_TGT[k]===m.T))?'วัชพืช':'ต้น';
  return `<div class="fden ${st} ${cls}"><div class="fden-h">💧 คาดการณ์ละอองบนพืช (ตามค่าที่ตั้ง + อากาศ)</div>
  <div class="fcov"><div><span>ทั่วทั้ง${pl}ถึงเป้า</span><b>${pc}%</b></div><i><em style="width:${pc}%"></em></i><div class="tiny muted">วัดจากยอดลงถึงโคน: ใบ ${pc}% ของทั้ง${pl}ได้ละออง ≥${D} จุด/ตร.ซม. (${esc(m.T.n)})</div></div>
  <div class="fly-ls">${lv('ยอด',m.top)}${lv('กลาง',m.mid)}${lv('ล่าง/โคน',m.bot)}<div class="fly-l tgt"><span>เป้า</span><b>≥${D}</b></div></div>
+ <div class="fdrift"><span class="${m.drift>0.18?'neg':m.drift>0.12?'warnc':''}">💨 ปลิวออกนอกแปลง ~${Math.round(m.drift*100)}%</span>${m.evap>0.02?`<span class="${m.evap>0.12?'neg':''}">☀️ ระเหยก่อนถึงใบ ~${Math.round(m.evap*100)}%</span>`:''}<span class="muted">(แนะนำปลิว ≤12%)</span></div>
  <div class="small" style="margin-top:6px">${st==='ok'?`✅ จุดเป้าหมาย (${depthLbl(m.depth)}) ได้ ~${Math.round(m.target)} จุด/ตร.ซม. ถึงเป้า`:`ยังไม่ถึงเป้าที่${depthLbl(m.depth)} (~${Math.round(m.target)}) — ที่ละออง ${d} µm ต้องใช้น้ำ ~${fmt(m.wNeed,1)} ล./ไร่ หรือใช้ละอองเล็กลง/บินช้าลง/รออากาศดีขึ้น`}</div>
- <div class="tiny muted" style="margin-top:4px">ที่มา: ละอองลงถึงพืช ~${Math.round(m.eff*100)}% (อีก ${100-Math.round(m.eff*100)}% ปลิว/ระเหย/ตกพื้น) · ใบซ้อน ~${fmt(m.lai,1)} ชั้น ละอองลดลงทีละชั้น ลงถึง${depthLbl(m.depth)} ~${Math.round(m.a*100)}% ของที่ยอดได้ (ที่เหลือติดใบชั้นบน ไม่สูญเปล่า) · บินช้า/ต่ำ = ลมใบพัดกดลงลึกขึ้น · ใต้ใบมักได้น้อยกว่านี้ · เป็นค่าประมาณ ยืนยันด้วยกระดาษไวน้ำ</div></div>`}
+ <div class="tiny muted" style="margin-top:4px">ที่มา: ละอองลงถึงพืช ~${Math.round(m.eff*100)}% (ที่เหลือปลิว/ระเหย/ตกช่องว่างระหว่างต้น) · ใบซ้อน ~${fmt(m.lai,1)} ชั้น ละอองลดลงทีละชั้น ลงถึง${depthLbl(m.depth)} ~${Math.round(m.a*100)}% ของที่ยอดได้ (ที่เหลือติดใบชั้นบน ไม่สูญเปล่า) · บินช้า/ต่ำ = ลมใบพัดกดลงลึกขึ้น · ใต้ใบมักได้น้อยกว่านี้ · เป็นค่าประมาณ ยืนยันด้วยกระดาษไวน้ำ</div></div>`}
 function flyOutHTML0(){const f=flyState();const P=flyRange(f.crop,f.stg);const c=flyCalc(f.h,f.sw,f.v,f.w,f.crop,f.stg);const wx=flyWx();const _h=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));const _dt=_h(wx.temp)&&_h(wx.rh)?deltaT(num(wx.temp),num(wx.rh)):null;const md=f.svc==='fert'||f.svc==='seed'?null:flyModel({crop:f.crop,stg:f.stg,can:f.can,tgt:f.tgt||defTgt(f.svc),h:f.h,sw:f.sw,w:f.w,d:f.d,wind:f.wind,dt:_dt,v:f.v});
  const lo=flyCalc(P.h[0],Math.min(P.sw[0],P.h[0]*3),P.v[1],f.w,f.crop,f.stg),hi=flyCalc(P.h[1],Math.min(P.sw[1],P.h[1]*3.5),(P.v[0]+P.v[1])/2,f.w,f.crop,f.stg);
- return `${md?denBox(md,f.w,f.d):''}<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
+ return `${md?denBox(md,f.w,f.d)+burnBox(burnRisk({crop:f.crop,stg:f.stg,tgt:f.tgt||defTgt(f.svc),temp:wx.temp,rh:wx.rh,w:f.w,d:f.d})):''}<div class="fout"><div><span>ปั๊มต้องจ่าย</span><b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)} <small>/ ${c.fm} ล./นาที</small></b><i class="fbar"><em style="width:${Math.min(100,c.need/c.fm*100)}%;background:${c.need>c.fm?'#EF4444':c.need>c.fm*.85?'#F59E0B':'#10B981'}"></em></i></div>
   <div><span>ความเร็วที่ทำได้จริง</span><b>${spdN(c.effV)} <small>${SU_LAB()}</small></b></div><div><span>พ่นได้ (เฉพาะเวลาบิน)</span><b>${fmt(c.raiHr,0)} <small>ไร่/ชม.</small></b></div><div><span>1 ถัง (${TANK} ล.)</span><b>${fmt(c.perTank,1)} <small>ไร่</small></b></div><div><span>แปลงกว้าง 100 ม.</span><b>${c.passes} <small>รอบ</small></b></div></div>
  ${c.warn.length?c.warn.map(x=>`<div class="note ${x[0]} small" style="margin-top:6px">${esc(x[1])}</div>`).join(''):(md&&md.target<md.T.D?`<div class="note warn small" style="margin-top:6px">ความสูง/ร่อง/ความเร็วอยู่ในช่วงสำหรับ${esc(P.n)} แต่ละอองยังไม่ถึงเป้า — ดูกล่องคาดการณ์ด้านบน</div>`:`<div class="note ok small" style="margin-top:6px">✅ ความสูง ร่อง ความเร็ว อยู่ในช่วงเหมาะสมสำหรับ${esc(P.n)}</div>`)}
  ${windDirHTML(f)}
@@ -4118,14 +4159,14 @@ function windDirHTML(f){
  const off=Math.min(6,Math.max(0.5,Math.round(h*w*0.3*2)/2)),buf=Math.round((3+2*w+(h>5?3:0))*(herb?2:1));
  let lv,t,items;
  if(w>5){lv='bad';t='⛔ ลมแรงเกินไป — หยุดพ่น';items=['รอลมลดต่ำกว่า ~4.5 ม./วิ. (16 กม./ชม.)','ลมกระโชก: โดรนเอียงสู้ลม หัวพ่นเอียงตาม ยิ่งพ่นละอองออกนอกแปลง']}
- else if(w>3||(h>=6&&w>2)){lv='warn';t='↕️ บินตามแนวลม (ชนลม/ตามลม)';items=[`ร่องสมมาตร ไม่เบี้ยว — แคบร่องลง 1–2 ม. ลดความเร็ว 1–2 ม./วิ. ใช้ละอองหยาบขึ้น 250–350 µm`,`ขาชนลมกินแบตมาก · ขาตามลมละอองพุ่งไปข้างหน้า เผื่อปลายแปลงให้เลยออกไปเล็กน้อย`,`เว้นแนวกันชนด้านใต้ลม ~${buf} ม.`];if(h>=6)items.unshift('บินสูงเหนือยอด 6 ม.ขึ้นไป + ลมเกิน 2 ม./วิ. ละอองปลิวไกลมาก — ถ้าเลื่อนได้ควรรอลมสงบ')}
+ else if(w>3||(h>=6&&w>2)){lv='warn';t='↕️ บินตามแนวลม (ชนลม/ตามลม)';items=[`ร่องสมมาตร ไม่เบี้ยว — แคบร่องลง 1–2 ม. ลดความเร็ว 1–2 ม./วิ. ใช้ละอองใหญ่ขึ้นตามค่าแนะนำด้านบน (คุมปลิว ≤12%)`,`ขาชนลมกินแบตมาก · ขาตามลมละอองพุ่งไปข้างหน้า เผื่อปลายแปลงให้เลยออกไปเล็กน้อย`,`เว้นแนวกันชนด้านใต้ลม ~${buf} ม.`];if(h>=6)items.unshift('บินสูงเหนือยอด 6 ม.ขึ้นไป + ลมเกิน 2 ม./วิ. ละอองปลิวไกลมาก — ถ้าเลื่อนได้ควรรอลมสงบ')}
  else if(w<0.5){lv='low';t='🌫️ ลมนิ่ง — บินทิศไหนก็ได้';items=['ถ้าเช้ามืด/หัวค่ำ มีหมอก/ควันลอยเป็นชั้น = อากาศผกผัน ละอองเล็กลอยค้างแล้วไปไกล','ใช้ละอองกลาง–ใหญ่ ไม่ใช้ละอองละเอียด']}
  else{lv='ok';t='↔️ บินตัดขวางลม';items=[`เลื่อนแนวบินไปทางต้นลมประมาณ ${fmt(off,1)} ม. (ลมจะพาละอองลงมาเอง)`,`เริ่มบินจากขอบใต้ลม แล้วไล่ขึ้นไปทางต้นลม · คนบินยืนด้านต้นลม`,`เว้นแนวกันชนด้านใต้ลม ~${buf} ม. ถ้ามีบ้าน แหล่งน้ำ หรือพืชอ่อนไหว`]}
  if(orch&&w<=5)items.push('สวนไม้ผลบินตามแถวต้นเป็นหลัก — ถ้าลมขวางแถว ให้เลื่อนแนวบินไปทางต้นลมตามระยะด้านบน');
  if(herb&&w<=5)items.push('ยาหญ้าปลิวไปโดนพืชข้างเคียงเสียหายหนัก — เว้นกันชนเป็น 2 เท่า');
  return `<div class="fwind lv-${lv}"><div class="fwind-h"><b>🧭 ทิศทางบิน: ${t}</b><span>ลม ${windTxt(w)}</span></div><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul><div class="tiny muted">ระยะเลื่อน/กันชนเป็นค่าประมาณ — ตรวจด้วยกระดาษไวน้ำวางขวางแนวบิน</div></div>`}
-function flyTabs(f){const tg=f.svc==='spray'||f.svc==='herb'?`<div class="fstg"><span class="small muted">เป้าหมาย:</span>${(f.svc==='herb'?['herb','herbS','herbP']:['fun','ins','deep']).map(k=>`<button class="fchip ${f.tgt===k?'on':''}" data-act="flyTgt" data-t="${k}">${FLY_TGT[k].n} (≥${FLY_TGT[k].D})</button>`).join('')}</div>`:'';return `<div class="ftabs" style="margin-bottom:8px">${Object.entries(FLY).map(([k,v])=>`<button class="${f.crop===k?'on':''}" data-act="flyCrop" data-c="${k}">${esc(v.n)}</button>`).join('')}</div>
- <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(FLY[f.crop]||{}).stageH?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${(CROPS[f.crop]?.stages||[]).filter((s,i,a)=>a.findIndex(x=>x.g===s.g)===i).filter(s=>FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}${tg}</div>`}
+function flyTabs(f){const cgc=['spray','foliar','herb'].includes(f.svc)?`<div class="fstg"><span class="small muted">ความทั่ว:</span>${Object.entries(CG_N).map(([k,v])=>`<button class="fchip ${CG()===k?'on':''}" data-act="flyCg" data-g="${k}" title="${v[1]}">${v[0]}</button>`).join('')}</div>`:'';const tg=f.svc==='spray'||f.svc==='herb'?`<div class="fstg"><span class="small muted">เป้าหมาย:</span>${(f.svc==='herb'?['herb','herbS','herbP']:['fun','ins','deep']).map(k=>`<button class="fchip ${f.tgt===k?'on':''}" data-act="flyTgt" data-t="${k}">${FLY_TGT[k].n} (≥${FLY_TGT[k].D})</button>`).join('')}</div>`:'';return `<div class="ftabs" style="margin-bottom:8px">${Object.entries(FLY).map(([k,v])=>`<button class="${f.crop===k?'on':''}" data-act="flyCrop" data-c="${k}">${esc(v.n)}</button>`).join('')}</div>
+ <div class="row" style="gap:6px;margin-bottom:10px;flex-wrap:wrap">${Object.entries(FLY_SVC).map(([k,v])=>`<button class="fchip ${f.svc===k?'on':''}" data-act="flySvc" data-s="${k}">${v.n}</button>`).join('')}${(FLY[f.crop]||{}).stageH?`<div class="fstg"><span class="small muted">ระยะพืช:</span>${(CROPS[f.crop]?.stages||[]).filter((s,i,a)=>a.findIndex(x=>x.g===s.g)===i).filter(s=>FLY[f.crop].stageH[s.g]).map(s=>`<button class="fchip ${f.stg===s.g?'on':''}" data-act="flyStg" data-g="${s.g}">${esc(s.n.replace(/\s*\(.*?\)/,'').replace(/ระยะ/,''))}</button>`).join('')}</div>`:''}<span style="width:8px"></span>${Object.entries(CANOPY).map(([k,v])=>`<button class="fchip ${f.can===k?'on':''}" data-act="flyCan" data-k="${k}">ทรงพุ่ม${v[0]}</button>`).join('')}${tg}${cgc}</div>`}
 const flyFix=f=>{const o={};(f.lk||[]).forEach(k=>o[k]=f[k]);return o};
 function flyApply(keep){const f=UI.fly;if(!keep)f.lk=[];const p=flyAdj(f.crop,f.svc,f.can,f.stg,flyWx(),f.tgt,flyFix(f));f.manual=false;f.tgt=p.tgt||f.tgt;if(p.S.spread)return p;['h','sw','v','w','d'].forEach(k=>{if(!(f.lk||[]).includes(k)&&p[k]!=null)f[k]=p[k]});return p}
 Object.assign(ACT,{
@@ -4135,6 +4176,7 @@ Object.assign(ACT,{
  flyStg:a=>{const f=flyState();f.stg=f.stg===a.dataset.g?'':a.dataset.g;f.touched=true;flyApply();render()},
  flyCan:a=>{const f=flyState();f.can=a.dataset.k;f.touched=true;flyApply(true);render()},
  flyReset:()=>{flyApply();render()},
+ flyCg:a=>{try{localStorage.setItem('covGoal',a.dataset.g)}catch(e){}flyApply(true);render()},
  flyLock:a=>{const f=flyState(),k=a.dataset.k;f.lk=f.lk||[];if(f.lk.includes(k))f.lk=f.lk.filter(x=>x!==k);else{f.lk.push(k);if(f.lk.length>2)f.lk.shift()}flyRefresh()},
  flyNoz:a=>{try{localStorage.setItem('nozzle',a.dataset.n)}catch(e){}render()},
  goFly:()=>{closeModal();go('advisor');setTimeout(()=>$('#fly-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
