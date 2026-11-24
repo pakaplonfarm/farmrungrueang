@@ -1953,13 +1953,14 @@ async function initStore(){
  if(db){
   DB=db;backend='db';
   let pending=new Set([...COLLS,'settings']);
-  const timer=setTimeout(()=>{if(pending.size){dbNote='ยังเชื่อมต่อฐานข้อมูลไม่ได้ ข้อมูลที่แสดงอาจไม่ล่าสุด';render()}},10000);
-  const done=(k,meta)=>{if(!meta||!meta.fromCache){pending.delete(k);if(!pending.size){clearTimeout(timer);dbNote=''}}};
+  const timer=setTimeout(()=>{if(pending.size){dbNote=navigator.onLine===false?'ออฟไลน์อยู่ — บันทึกในเครื่องไว้ก่อน จะซิงก์ขึ้นคลาวด์เองเมื่อมีเน็ต':'ยังเชื่อมต่อฐานข้อมูลไม่ได้ ข้อมูลที่แสดงอาจไม่ล่าสุด';render()}},15000);
+  window.addEventListener('online',()=>{if(dbNote){dbNote='';scheduleRender()}});
+  const done=(k,meta)=>{if(!meta||!meta.fromCache){pending.delete(k);if(!pending.size){clearTimeout(timer);if(dbNote){dbNote='';scheduleRender()}}}};
   COLLS.forEach(c=>{
-   DB.collection(c).onSnapshot(snap=>{S[c]=snap.docs.map(d=>d.data());done(c,snap.metadata);scheduleRender()},
+   DB.collection(c).onSnapshot(...(FBMODE?[{includeMetadataChanges:true}]:[]),snap=>{S[c]=snap.docs.map(d=>d.data());done(c,snap.metadata);scheduleRender()},
     err=>{done(c);dbNote=FBMODE?fbErrText(err):'เกิดปัญหาการเชื่อมต่อฐานข้อมูล ('+(err&&err.code||'')+')';scheduleRender()});
   });
-  DB.doc('settings/main').onSnapshot(s=>{S.settings=mergeSettings(s.exists?s.data():null);done('settings',s.metadata);scheduleRender()},
+  DB.doc('settings/main').onSnapshot(...(FBMODE?[{includeMetadataChanges:true}]:[]),s=>{S.settings=mergeSettings(s.exists?s.data():null);done('settings',s.metadata);scheduleRender()},
    err=>{done('settings');scheduleRender()});
  } else {
   backend='local';
