@@ -1335,6 +1335,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .fburn-bar{position:relative;height:8px;border-radius:6px;background:linear-gradient(90deg,#10B981 0 25%,#F59E0B 25% 50%,#F97316 50% 75%,#DC2626 75%);margin:2px 0 8px}.fburn-bar i{position:absolute;top:-4px;width:4px;height:16px;border-radius:2px;background:#0F172A;transform:translateX(-2px)}.fburn ul{margin:4px 0 2px;padding-left:18px}
 .fcov{background:#fff;border-radius:12px;padding:8px 10px;margin:6px 0}.fcov>div:first-child{display:flex;justify-content:space-between;align-items:baseline}.fcov b{font-family:Prompt,sans-serif;font-size:26px;color:var(--brand)}.fcov i{display:block;height:8px;background:#E5E7EB;border-radius:6px;overflow:hidden;margin:4px 0}.fcov em{display:block;height:100%;background:linear-gradient(90deg,#10B981,#059669)}
 .fly-ls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.fly-l{border-radius:10px;padding:6px;text-align:center;background:#fff}.fly-l span{display:block;font-size:11.5px;color:#64748B}.fly-l b{font-family:Prompt,sans-serif;font-size:18px}.fly-l.ok b{color:#047857}.fly-l.warn b{color:#B45309}.fly-l.bad b{color:#DC2626}.fly-l.tgt{background:#F1F5F9}
+#fly-rec.stale{opacity:.5;transition:opacity .15s}
 .fden{border-radius:14px;padding:10px 12px;margin-bottom:10px;border:1.5px solid}.fden.ok{background:#F0FDF4;border-color:#86EFAC}.fden.warn{background:#FFFBEB;border-color:#FCD34D}.fden.bad{background:#FEF2F2;border-color:#FCA5A5}.fden.jf{margin-top:8px;margin-bottom:0}
 .fden-h{font-weight:700;font-size:14px;margin-bottom:4px}.fden-v{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font-size:13.5px}.fden-v b{font-family:Prompt,sans-serif;font-size:20px;color:var(--brand)}.fden.bad .fden-v b,.fden.warn .fden-v b{color:#B45309}
 .fnote{margin-top:12px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:10px 12px}.fnote ul{margin:6px 0 0;padding-left:20px;font-size:13.5px;line-height:1.6}
@@ -2981,7 +2982,8 @@ function jfFlyLive(){const el=$('#jf-fly');if(!el||!F)return;const cr=FLY[F.crop
  ${(()=>{const d=djiScene(cr,stg);return `<div class="fadj info">📱 โหมดในแอป DJI: <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
  ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น ลม ในส่วน “สภาพอากาศขณะพ่น” ค่าแนะนำจะปรับตามอากาศทันที</div>'}
  ${mj?denBox(mj,wv,num(F.drop)||a.d,'jf')+burnBox(burnRisk({crop:cr,stg,tgt:a.tgt,temp:wx.temp,rh:wx.rh,w:wv,d:num(F.drop)||a.d,chems:F.chems})):''}${c?`<div class="tiny" style="margin-top:6px">ค่าที่กรอก: ปั๊มต้องจ่าย <b class="${c.need>c.fm?'neg':''}">${fmt(c.need,1)}</b> / ${c.fm} ล./นาที · ~${fmt(c.raiHr,0)} ไร่/ชม. · 1 ถัง ${fmt(c.perTank,1)} ไร่</div>${c.warn.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join('')}`:''}</div>`)}
-function updateJobComputed(){
+function updateJobComputed(){const _ae=document.activeElement;keepPos(_ae&&_ae.closest&&_ae.closest('#modal')?_ae:null,updateJobComputed0)}
+function updateJobComputed0(){
  jfFlyLive();
  const j=F;const base=num(j.area)*num(j.pricePerRai),cc=jobChemCharge(j),cost=jobChemCost(j),t=jobTotal(j);
  $('#jf-tot').innerHTML=j.own?`<div class="note info small">งานสวนตัวเอง: ไม่คิดรายรับ ต้นทุนสารที่ "เราจัดหา" จะนับเป็นต้นทุนสวนตัวเอง (${baht(cost)}) · มูลค่าเทียบค่าจ้าง ~${baht(num(j.area)*priceFor(j.service,j.crop))}</div>`:
@@ -4009,7 +4011,8 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix){
  const fm=FLOWMAX(),hRef=P.orchard?3:2.5,deepT=(T.depth!=null?T.depth:(P.orchard?0.75:0.5))>=0.75;
  const hMin=P.orchard?P.h[0]:Math.max(1.5,P.h[0]-0.5),vMin=Math.max(1,P.v[0]-0.5);
  /* แรงลมใบพัดอ่อนลงตามความสูง → ความเร็วสูงสุดที่ยังกดละอองลงทรงพุ่มได้ */
- const vPen=(deepT?0.5:0)+(can==='d'?0.5:0)+(wind!=null&&wind>3?1:0)+(dt!=null&&dt>8?0.5:0);
+ /* ลมพัดขวาง + อากาศแห้ง → ต้องให้ลมใบพัดกดลงแรงขึ้น = บินช้าลง แบบต่อเนื่อง */
+ const vPen=(deepT?0.5:0)+(can==='d'?0.5:0)+(wind!=null?Math.min(1.5,0.4*Math.max(0,wind-1.5)):0)+(dt!=null?Math.min(0.75,0.15*Math.max(0,dt-6)):0);
  const vCap=h=>P.v[1]-0.5*Math.max(0,h-P.h[0])-vPen;
  /* ขนาดละอองเล็กสุดที่ไม่ระเหย/ปลิว: ขึ้นกับอากาศ + ความสูง (ระยะตกยิ่งไกล ยิ่งปลิว) */
  const dBase=tgt==='herbP'?300:svc==='herb'?250:svc==='foliar'?140:150;
@@ -4018,16 +4021,20 @@ function flyAdj(crop,svc,can,stg,wx,tgt,fix){
  const dAuto=(h,vx)=>{const wv=Math.max(0.3,wind==null?1.5:wind);let dd=Math.max(dBase,150*Math.sqrt(0.12*(wv/3)*(h/3)*spdF(vx,vRefA)/dLim));if(dt!=null&&dt>4)dd=Math.max(dd,150*Math.sqrt(0.02*(dt-4)*(h/3)/0.08));if(wind!=null&&wind<0.5)dd=Math.max(dd,200);if(dt!=null&&dt<2&&(wind==null||wind<1))dd=Math.max(dd,180);return Math.min(450,Math.max(100,Math.ceil(dd/10)*10))};
  /* 1) ความสูง */
  let h=F_('h'),hWhy='';
- if(h==null){h=(P.h[0]+P.h[1])/2+(p.S.dh||0);/* ระยะปลิว ∝ ความสูง × ลม: ลมแรงให้บินต่ำสุดที่ปลอดภัยเสมอ ไม่ขึ้นกับความเร็ว */if(wind!=null&&wind>3){const sens=(BURN_SENS[crop]||[]).includes(stg);h=P.orchard&&!sens?Math.max(3,P.h[0]-1):hMin;hWhy=`ลม ${windTxt(wind)} บินต่ำสุดที่ปลอดภัย${P.orchard&&!sens?' (ต่ำกว่าช่วงปกติ 1 ม.)':''} — ระยะปลิวแปรตามความสูง จึงใช้ละอองเล็กลงได้${sens?' · ระยะดอก/ใบอ่อน ไม่ลดต่ำกว่าช่วงปกติ กันลมใบพัดตีดอก/ใบช้ำ':''}`}else if(wind!=null&&wind>2)h-=0.5;if(dt!=null&&dt>8)h-=0.5;
+ if(h==null){/* ระยะปลิว ∝ ความสูง × ลม: ลมยิ่งแรง ยิ่งบินต่ำลงต่อเนื่อง จนถึงต่ำสุดที่ปลอดภัย (ลม ≥3.5 ม./วิ.) */
+  const sens=(BURN_SENS[crop]||[]).includes(stg),hLow=P.orchard&&!sens?Math.max(3,P.h[0]-1):hMin;
+  const wf=wind!=null?Math.max(0,Math.min(1,(wind-1.5)/2)):0,hF=hMin-(hMin-hLow)*wf,h0=(P.h[0]+P.h[1])/2+(p.S.dh||0);
+  h=h0-(h0-hF)*wf;if(dt!=null&&dt>7)h-=0.5*Math.min(1,(dt-7)/3);
+  if(wf>0.05)hWhy=`ลม ${windTxt(wind)} → ลดความสูงลง ${fmt(h0-h,1)} ม. (ระยะปลิวแปรตามความสูง จึงใช้ละอองเล็กลงได้)${sens&&wf>=1?' · ระยะดอก/ใบอ่อน ไม่ลดต่ำกว่าช่วงปกติ กันลมใบพัดตีดอก/ใบช้ำ':''}`;
   const sw0=F_('sw');
   if(sw0!=null){const hs=P.orchard?Math.max(sw0/3.5,P.h[0]+(sw0-P.sw[0])/((P.sw[1]-P.sw[0])||1)*(P.h[1]-P.h[0])):sw0/2.4;if(!P.orchard||hs>h){h=hs;hWhy=`ร่อง ${fmt(sw0,1)} ม. ต้องบินสูงพอให้ละอองแผ่ถึงขอบร่อง`}}
-  const hFloor=wind!=null&&wind>3&&P.orchard&&!(BURN_SENS[crop]||[]).includes(stg)?Math.max(3,P.h[0]-1):hMin;h=Math.max(hFloor,Math.min(12,Math.round(h*2)/2))}
+  h=Math.max(Math.min(hF,h0),Math.min(12,Math.round(h*2)/2))}
  /* 2) ละออง */
  let d=F_('d');let dBest=dAuto(h);if(d==null)d=dBest;
  /* 3) ร่อง: ละอองจากหัวเหวี่ยงแผ่กว้างตามความสูง */
  let sw=F_('sw'),swWhy='';
  if(sw==null){sw=P.orchard?P.sw[0]+(P.sw[1]-P.sw[0])*Math.min(1,Math.max(0,(h-P.h[0])/((P.h[1]-P.h[0])||1))):2.4*h;
-  sw=Math.min(P.sw[1]+(P.orchard?0:1),Math.max(P.sw[0],sw),3.5*h);if(wind!=null&&wind>3){sw-=1.5;swWhy='ลมแรง แคบร่อง 1.5 ม. ให้ทับซ้อนมากขึ้น'}sw=Math.max(3,Math.round(sw*2)/2)}
+  sw=Math.min(P.sw[1]+(P.orchard?0:1),Math.max(P.sw[0],sw),3.5*h);{const cw=wind!=null?Math.min(2,0.75*Math.max(0,wind-1.5)):0;if(cw>=0.25){sw-=cw;swWhy=`ลม ${windTxt(wind)} พาละอองเบี่ยง → แคบร่อง ${fmt(cw,1)} ม. ให้ทับซ้อนมากขึ้น`}}sw=Math.max(3,Math.round(sw*2)/2)}
  /* 4+5) น้ำต่อไร่ + ความเร็ว: ไล่จากเร็วสุดที่ลมใบพัดยังกดได้ ลงไปทีละ ~1 กม./ชม. เลือกความเร็วที่เร็วที่สุดที่ยังได้ตามเป้าความทั่ว */
  const g=CG(),wMax=P.w[1]*1.5,wCap=g==='max'?wMax:P.w[1];let stop=false,wT=0,wC=0;const vWhy=[];
  const wPick=m0=>{const t=m0.wNeed,c=m0.wFor(0.9);return {t,c,w:Math.max(P.w[0],Math.ceil((g==='eco'?t:g==='max'?Math.max(t,c):Math.max(t,Math.min(c,P.w[1])))*2)/2)}};
@@ -4077,8 +4084,12 @@ function flyRecHTML0(){const f=flyState();const a=flyAdj(f.crop,f.svc,f.can,f.st
  ${(()=>{const d=djiScene(f.crop,f.stg);return `<div class="fadj info">📱 โหมดในแอป DJI (จำลองสถานการณ์): <b>${d[0]}</b> — ${esc(d[1])}</div>`})()}
  ${a.adj.length?a.adj.map(x=>`<div class="fadj ${x[0]}">${esc(x[1])}</div>`).join(''):'<div class="tiny muted">กรอกอุณหภูมิ ความชื้น และลม (การ์ด Delta T ด้านบน) เพื่อให้ค่าปรับตามอากาศ</div>'}</div>`}
 function flySliderSync(skip){const f=UI.fly;['h','sw','v','w','d'].forEach(k=>{if(k===skip)return;const sl=document.querySelector(`[data-fly="${k}"]`);if(sl)sl.value=k==='v'&&SU()==='kmh'?Math.round(f[k]*3.6):f[k];const l=$('#fsl-'+k);if(l)l.textContent=k==='v'?spd(f[k]):fmt(f[k],k==='d'?0:1)+' '+FLY_U[k];const lk=$('#flk-'+k);if(lk)lk.className='flk'+((f.lk||[]).includes(k)?' on':'')})}
-function flyRefresh(skip){const f=UI.fly;if(!f)return;flyApply(true);flySliderSync(skip);
- const r=$('#fly-rec');if(r)r.innerHTML=flyRecHTML();const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()}
+/* ตรึงตำแหน่งจอ: วัดตำแหน่งช่องที่กำลังปรับก่อน/หลังอัปเดต แล้วเลื่อนจอชดเชย (iPhone Safari ไม่มี scroll anchoring ให้) */
+function scrollHost(el){for(let p=el&&el.parentElement;p&&p!==document.body;p=p.parentElement){const o=getComputedStyle(p).overflowY;if((o==='auto'||o==='scroll')&&p.scrollHeight>p.clientHeight+1)return p}return null}
+function keepPos(el,fn){if(!el||!el.getBoundingClientRect||!document.contains(el)){fn();return}const y0=el.getBoundingClientRect().top;fn();if(!document.contains(el))return;const dy=el.getBoundingClientRect().top-y0;if(Math.abs(dy)>0.5){const h=scrollHost(el);if(h)h.scrollTop+=dy;else window.scrollBy(0,dy)}}
+function flyRefresh(skip,live,anc){const f=UI.fly;if(!f)return;anc=anc||(skip?document.querySelector(`[data-fly="${skip}"]`):document.activeElement);
+ keepPos(anc,()=>{flyApply(true);flySliderSync(skip);const r=$('#fly-rec');if(r){if(live){r.classList.add('stale')}else{r.innerHTML=flyRecHTML();r.classList.remove('stale')}}const o=$('#fly-out');if(o)o.innerHTML=flyOutHTML()})}
+document.addEventListener('change',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){keepPos(t,()=>{const r=$('#fly-rec');if(r){r.innerHTML=flyRecHTML();r.classList.remove('stale')}})}});
 function flyCalc(h,sw,v,w,crop,stg){
  h=num(h);sw=num(sw);v=num(v);w=num(w);const P=flyRange(crop,stg);const fm=FLOWMAX();
  const raiMin=v*60*sw/1600,need=w*raiMin,maxV=w&&sw?fm*1600/(60*w*sw):0,effV=Math.min(v,maxV||v);
@@ -4115,8 +4126,8 @@ function flyOutHTML(){return spTxt(flyOutHTML0())}
 const BURN_SENS={durian:['flush','bud','flower','fruitset','flushfruit'],rubber:['newleaf'],rice:['heading'],veg:['seedling','flower'],corn:['tassel'],coconut:['cflower']};
 function burnRisk(o){const has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));if(!has(o.temp))return null;
  const T=num(o.temp),dt=has(o.rh)?deltaT(T,num(o.rh)):null,P=flyRange(o.crop,o.stg),w=num(o.w),d=num(o.d)||150;let s=0;const why=[],tip=[];
- if(T>=35){s+=40;why.push(`ร้อนจัด ${fmt(T,0)}°C`)}else if(T>=32){s+=25;why.push(`ร้อน ${fmt(T,0)}°C`)}else if(T>=30){s+=10;why.push(`อุ่น ${fmt(T,0)}°C`)}
- if(dt!=null&&dt>10){s+=25;why.push(`Delta T ${fmt(dt,1)} แห้งเร็วมาก ยาเข้มข้นบนใบ`)}else if(dt!=null&&dt>8){s+=15;why.push(`Delta T ${fmt(dt,1)} แห้งเร็ว`)}
+ {const x=Math.round(Math.min(45,Math.max(0,(T-29)*6.5)));if(x>0){s+=x;why.push(`${T>=35?'ร้อนจัด':T>=32?'ร้อน':'อุ่น'} ${fmt(T,0)}°C`)}}
+ if(dt!=null&&dt>6){const x=Math.round(Math.min(30,(dt-6)*6));s+=x;why.push(`Delta T ${fmt(dt,1)} ${dt>10?'แห้งเร็วมาก ยาเข้มข้นบนใบ':'หยดยาแห้งเร็ว'}`)}
  if(w){const c=((P.w[0]+P.w[1])/2)/w;if(c>1.2){s+=Math.min(20,Math.round(25*(c-1)));why.push(`น้ำ ${fmt(w,1)} ล./ไร่ น้อย → ยาเข้มข้นกว่าปกติ ~${fmt(c,1)} เท่า`);tip.push('เพิ่มน้ำต่อไร่ (ใช้ยาเท่าเดิม) ให้ความเข้มข้นต่อหยดลดลง')}}
  if(d<150&&dt!=null&&dt>8){s+=10;why.push(`ละอองเล็ก ${d} µm ระเหยเร็ว ทิ้งคราบยาเข้มข้น`)}
  if((BURN_SENS[o.crop]||[]).includes(o.stg)){s+=15;why.push('ระยะใบอ่อน/ดอก บอบบาง');tip.push('ใบอ่อน/ดอก: ใช้อัตราต่ำสุดตามฉลาก ไม่ผสมหลายตัวในถังเดียว')}
@@ -4177,16 +4188,16 @@ Object.assign(ACT,{
  flyCan:a=>{const f=flyState();f.can=a.dataset.k;f.touched=true;flyApply(true);render()},
  flyReset:()=>{flyApply();render()},
  flyCg:a=>{try{localStorage.setItem('covGoal',a.dataset.g)}catch(e){}flyApply(true);render()},
- flyLock:a=>{const f=flyState(),k=a.dataset.k;f.lk=f.lk||[];if(f.lk.includes(k))f.lk=f.lk.filter(x=>x!==k);else{f.lk.push(k);if(f.lk.length>2)f.lk.shift()}flyRefresh()},
+ flyLock:a=>{const f=flyState(),k=a.dataset.k;f.lk=f.lk||[];if(f.lk.includes(k))f.lk=f.lk.filter(x=>x!==k);else{f.lk.push(k);if(f.lk.length>2)f.lk.shift()}flyRefresh(null,false,a)},
  flyNoz:a=>{try{localStorage.setItem('nozzle',a.dataset.n)}catch(e){}render()},
  goFly:()=>{closeModal();go('advisor');setTimeout(()=>$('#fly-card')?.scrollIntoView({behavior:'smooth',block:'start'}),120)},
  jfFly:a=>{if(a&&a.dataset&&a.dataset.free)UI.jfLk=[];const cr=FLY[F.crop]?F.crop:'other';const wx=F.wx||{};const p=flyAdj(cr,F.service||'spray','m',stageGroup(cr,F.stage),{temp:wx.temp,rh:wx.rh,wind:wx.wind},tgtFromChems(F),jfFix());if(p.S.spread){F.flyH=3;F.swath=6;F.speed=6}else{F.flyH=p.h;F.swath=p.sw;F.speed=p.v;F.drop=p.d;F.waterRate=p.w}renderJobForm();toast('ใส่ค่าแนะนำสำหรับ'+p.P.n+'แล้ว — ปรับตามหน้างานได้','ok')}
 });
 const FLY_U={h:'ม.',sw:'ม.',v:'ม./วิ.',w:'ล.',d:'µm',wind:''};
 document.addEventListener('input',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.fly&&UI.fly){const f=UI.fly,k=t.dataset.fly;f[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:+t.value;f.touched=true;
- if(k==='wind'){const l=$('#fsl-wind');if(l)l.textContent=windTxt(+t.value);flyRefresh();return}
+ if(k==='wind'){const l=$('#fsl-wind');if(l)l.textContent=windTxt(+t.value);flyRefresh('wind',true,t);return}
  f.lk=(f.lk||[]).filter(x=>x!==k);f.lk.push(k);if(f.lk.length>2)f.lk.shift();
- const l=$('#fsl-'+k);if(l)l.textContent=k==='v'?spd(f.v):fmt(f[k],k==='d'?0:1)+' '+FLY_U[k];flyRefresh(k)}});
+ const l=$('#fsl-'+k);if(l)l.textContent=k==='v'?spd(f.v):fmt(f[k],k==='d'?0:1)+' '+FLY_U[k];flyRefresh(k,true,t)}});
 
 /* =========================================================
    ส่วนที่ 12: คู่มือโรคและศัตรูพืช (อาการ · สาเหตุ · การจัดการ) — ยางพารา + ทุเรียน
