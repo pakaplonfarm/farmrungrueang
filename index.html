@@ -1574,6 +1574,9 @@ h3{font-size:16px;font-weight:700}
 .bset-t{width:100%;border-collapse:collapse;margin:8px 0 2px;font-size:13.5px}.bset-t th{font-weight:700;font-size:13px;color:#E8F2EA;text-align:left;padding:4px 6px 5px}.bset-t td{padding:3px 6px;border-top:1px solid rgba(255,255,255,.08);color:#B9D3C1;white-space:nowrap}.bset-t td b{font-size:16px;font-weight:700;color:#FFD47E;font-variant-numeric:tabular-nums}.bset-t td em{font-style:normal;font-size:11.5px;color:#9EBEA9;margin-left:3px}.bset-t.two .edge{background:rgba(255,212,126,.07)}.bset-t th.edge{border-radius:8px 8px 0 0}.bset-n{font-size:12.5px;color:#B9D3C1;margin-top:4px}
 .bud-done{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}.bud-done span{font-size:12px;color:#9EBEA9}
 .sl-scope{display:flex;flex-direction:column;gap:2px;margin:4px 2px 8px;padding:7px 10px;border-radius:10px;background:var(--leaf-l,#EAF6EE);font-size:12.5px}.sl-scope b{font-size:14px}.sl-scope span{color:#5B6B60}.sl-scope.e{background:#FFF4DC}.edst{margin-top:10px;padding:10px;border-radius:12px;background:#fff;border:1px solid #E7DCC4}.edst>b{display:block;margin-bottom:6px;font-size:14px}.edst-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:6px}.edst-g>div{background:#FFF8E8;border-radius:10px;padding:6px 8px;min-width:0}.edst-g span{display:block;font-size:12px;color:#6B5B3A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.edst-g b{font-size:19px;font-variant-numeric:tabular-nums}.edst-g em{display:block;font-style:normal;font-size:11px;color:#7A6A4A}.edst .tiny{margin-top:4px}
+.sl-opt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 2px 8px;font-size:12.5px}.sl-opt>span{color:#5B6B60;width:100%}.edcmp{margin-top:8px;padding:8px 10px;border-radius:10px;background:#EEF6FF;font-size:13px;line-height:1.5}.edcmp.same{background:#F1F7F2}.edcmp b{margin-right:4px}
+.bud-res-why{font-size:13px;line-height:1.5;margin:4px 0 6px;color:#4A3B12}.bud-res-c .small{color:#6B5B3A}
+.fcov b.wv{color:#B45309}.fcov b.bv{color:#B91C1C}
 .bud-act{margin:10px 0 8px}.bud-act .hud-f b{color:#FFD27A}.bud-det{margin-top:8px}.bud-det>summary{color:#3d6b52;font-weight:600}
 .bud-new{margin:8px 0}
 </style>
@@ -5296,15 +5299,15 @@ function spLoss(X,drift,inset){const f=spPat(X,Math.abs(drift));let tot=0,out=0;
    เลือก e · ความสูง · รอบจาน · WE · m ที่ "ไม่ให้ตกคันนา" (≤0.5%) ก่อน แล้วค่อยให้แถบขอบสม่ำเสมอที่สุด ---------- */
 function spSide(X,drift,side){const f=spPat(X,side==='par'?0:Math.abs(drift));return side==='out'?(u=>f(-u)):f}
 const SPE_C=new Map();
-function spEdge(m,o){const {hN,rpmN,S,W,cH,P,hMin,rpmMin,thN}=o,fx=o.fx||{},dy=0.1;
- const key=[m.n,hN,rpmN,S,W,cH,P.zr,P.hc,P.base,hMin,rpmMin,thN.X.toFixed(3),thN.drift.toFixed(3),JSON.stringify(fx)].join('|');if(SPE_C.has(key))return SPE_C.get(key);
+function spEdge(m,o){const {hN,rpmN,S,W,cH,P,hMin,rpmMin,thN}=o,fx=o.fx||{},eF=Math.max(0.5,o.eMin||0),dy=0.1;
+ const key=[m.n,hN,rpmN,S,W,cH,P.zr,P.hc,P.base,hMin,rpmMin,thN.X.toFixed(3),thN.drift.toFixed(3),JSON.stringify(fx),eF].join('|');if(SPE_C.has(key))return SPE_C.get(key);
  const res={},sides=Math.abs(thN.drift)>0.05||W>0.3?['out','par','in']:['par'];
  for(const side of sides){
   const pN=spSide(thN.X,thN.drift,side),RN=thN.X+Math.abs(thN.drift)*2+1;
   let IN=0;for(let u=-RN;u<=RN;u+=dy)IN+=pN(u);IN*=dy;
   let ext=0;for(let u=0;u<=RN;u+=dy)if(pN(-u)>1e-4)ext=u;          /* เส้นกลางแปลงเหวี่ยงเข้าหาคันนาได้ไกลสุด */
   const mFull=Math.max(S/2,ext+0.3),mL0=[];for(let mm=S/2;mm<mFull-0.05;mm+=0.5)mL0.push(mm);mL0.push(mFull);
-  const mList=fx.e>0?(mL0.some(mm=>mm>=fx.e-1e-9)?mL0.filter(mm=>mm>=fx.e-1e-9):[Math.max(fx.e,S/2)]):mL0;
+  const eL=fx.e>0?Math.max(fx.e,eF):eF,mList=mL0.some(mm=>mm>=eL-1e-9)?mL0.filter(mm=>mm>=eL-1e-9):[Math.max(eL,S/2)];
   const U0=-(RN+2),iZ=Math.round(-U0/dy);
   const mkI=mm=>{const Y=mm+1.5*S,N=Math.round((Y-U0)/dy),A=new Float64Array(N+1);for(let i=0;i<=N;i++){const u=U0+i*dy;let s=0;for(let k=0;mm+k*S<=Y+RN;k++)s+=pN(u-(mm+k*S));A[i]=S*s/IN}return {A,N}};
   /* ไม่บินเก็บขอบ: เส้นแรกห่างคันนาครึ่งร่อง (ค่าปกติ) → ตกคันนาเท่าไร */
@@ -5314,10 +5317,10 @@ function spEdge(m,o){const {hN,rpmN,S,W,cH,P,hMin,rpmMin,thN}=o,fx=o.fx||{},dy=0
   const pats=[];for(const h of hs)for(const rpm of rpmL){const th=spThrow(m,rpm,h,W,cH,P),pE=spSide(th.X,th.drift,side),n=Math.ceil((th.X+Math.abs(th.drift)*2+1)/dy),arr=new Float64Array(2*n+1);let I=0;
    for(let j=-n;j<=n;j++){const v=pE(j*dy);arr[j+n]=v;I+=v}I*=dy;let eMax=0;for(let j=0;j<=n;j++)if(arr[n-j]>1e-4)eMax=j*dy;pats.push({h,rpm,th,arr,n,I,eMax})}
   /* เส้นกลางแปลงต้องอยู่ไกลคันนากว่าเส้นขอบ — เติมระยะที่พอให้เส้นขอบลงได้ */
-  const eNeed=Math.max(...pats.map(p=>fx.e>0?fx.e:Math.max(0.5,p.eMax-0.3)));if(mList[mList.length-1]<eNeed-1e-9)mList.push(eNeed);
+  const eNeed=Math.max(...pats.map(p=>fx.e>0?eL:Math.max(eF,p.eMax-0.3)));if(mList[mList.length-1]<eNeed-1e-9)mList.push(eNeed);
   let best=null;
   for(const mm of mList){const {A,N}=mkI(mm),i02=Math.round((0.2-U0)/dy);
-   for(const p of pats){const eLo=fx.e>0?fx.e:Math.max(0.5,p.eMax-0.3),eHi=fx.e>0?fx.e:Math.min(mm,p.eMax+0.8);
+   for(const p of pats){const eLo=fx.e>0?eL:Math.max(eF,p.eMax-0.3),eHi=fx.e>0?eL:Math.min(mm,p.eMax+0.8);
     for(let e=eLo;e<=eHi+1e-9;e+=dy){const ei=Math.round((e-U0)/dy),g=i=>{const j=i-ei+p.n;return j>=0&&j<=2*p.n?p.arr[j]/p.I:0};
      let sg=0,sgg=0;for(let i=Math.max(iZ,ei-p.n);i<=Math.min(N,ei+p.n);i++){const v=g(i);sg+=v*(1-A[i]);sgg+=v*v}
      const WE=fx.WE>0?fx.WE:Math.max(0,Math.min(8,sgg?sg/sgg:0));
@@ -5394,9 +5397,9 @@ function spOpt(o){const m=MAT[o.mat]||MAT.c16168,env=o.env||envOf({}),fix=o.fix|
  cv=Math.hypot(cv,cv0x);const within=erf(0.25/(cv*Math.SQRT2));
  /* ขอบแปลง: หาค่าบินเก็บขอบ (ห่างคันนา · สูง · รอบจาน · ระยะร่อง) ตามลมแต่ละด้าน — ไม่ให้ตกคันนา (คำนวณเมื่อหน้าจอขอ) */
  let edge=null,inset,rE,lossN,lossE;const Wf=windZ(W,PW.zr,PW.hc,h+hcF);
- if(o.edge){const fx=o.efix||{},E0=spEdge(m,{hN:h,rpmN:Math.max(400,Math.min(rpm,rpmTop)),S,W,cH,P:PW,hMin:hR[0]-0.5,rpmMin:400,thN:th,fx:{e:fx.e,h:fx.h,rpm:fx.rpm,WE:fx.WE}});edge={};['out','par','in'].forEach(sd=>{edge[sd]=E0[sd]?{...E0[sd]}:null});const eW=edge.out;inset=eW.e;rE=eW.rpm;lossN=eW.loss0;lossE=eW.loss;
+ if(o.edge){const fx=o.efix||{},E0=spEdge(m,{hN:h,rpmN:Math.max(400,Math.min(rpm,rpmTop)),S,W,cH,P:PW,hMin:hR[0]-0.5,rpmMin:400,thN:th,fx:{e:fx.e,h:fx.h,rpm:fx.rpm,WE:fx.WE},eMin:o.eMin||0});edge={};['out','par','in'].forEach(sd=>{edge[sd]=E0[sd]?{...E0[sd]}:null});const eW=edge.out;inset=eW.e;rE=eW.rpm;lossN=eW.loss0;lossE=eW.loss;
   /* ความเร็วเส้นขอบ ≤6 ม./วิ. (ชิดคันนาต้องแม่นตำแหน่ง) · เร่งได้ถ้าอัตราไหลต่ำกว่าช่วงแม่นยำของเกลียว */
-  ['out','par','in'].forEach(sd=>{const e=edge[sd];if(e){const vLo=e.WE>0.05?fr[0]*1600/(hr*e.WE*60):3;e.v=fx.v>0?fx.v:Math.round(Math.min(6,Math.max(Math.min(v,6),vLo,3))*3.6)/3.6;e.Q=hr*e.v*e.WE*60/1600;e.lowQ=e.Q<fr[0]*0.98;e.vLk=fx.v>0}});edge.lk=Object.keys(fx).filter(k=>fx[k]>0)}
+  ['out','par','in'].forEach(sd=>{const e=edge[sd];if(e){const vLo=e.WE>0.05?fr[0]*1600/(hr*e.WE*60):3;e.v=fx.v>0?fx.v:Math.round(Math.min(6,Math.max(Math.min(v,6),vLo,3))*3.6)/3.6;e.Q=hr*e.v*e.WE*60/1600;e.lowQ=e.Q<fr[0]*0.98;e.vLk=fx.v>0}});edge.lk=Object.keys(fx).filter(k=>fx[k]>0);edge.eMin=o.eMin||0;if(edge.lk.length)edge.rec=spEdge(m,{hN:h,rpmN:Math.max(400,Math.min(rpm,rpmTop)),S,W,cH,P:PW,hMin:hR[0]-0.5,rpmMin:400,thN:th,fx:{},eMin:o.eMin||0})}
  else{inset=S/2+Math.max(0,th.drift);lossN=spLoss(th.X,th.drift,S/2);rE=rpm;for(let r=rpm;r>=400;r-=50){const t=spThrow(m,r,h,W,cH,PW);if(t.X<=S/2+0.4){rE=r;break}rE=r}const thE=spThrow(m,rE,h,W,cH,PW);lossE=spLoss(thE.X,thE.drift,inset)}
  /* บรรทุก/ผลงาน */
  const capV=T55S.vol*(num(o.bulk)||m.bulk),capM=Math.min(T55S.pay,capV),load=Math.max(5,Math.min(capM,num(o.loadU)||capM)),raiLoad=load/hr,tFly=raiLoad*1600/(S*v)*1.15/60,raiHr=raiLoad/((tFly+2.5)/60);
@@ -5433,10 +5436,10 @@ function spState(){const f=flyState();let s=UI.sp;const key=f.crop+'|'+f.stg+'|'
 const spFix=s=>{const o={};(s.lk||[]).forEach(k=>o[k]=s[k]);return o};
 const spEfix=s=>{const o={};(s.elk||[]).forEach(k=>{if(s.E&&s.E[k]>0)o[k]=s.E[k]});return o};
 function spEsync(s,r){if(!r||!r.edge)return;const E=r.edge[UI.spSide&&r.edge[UI.spSide]?UI.spSide:'out'];if(!E)return;s.E=s.E||{};['e','h','rpm','WE','v'].forEach(k=>{if(!(s.elk||[]).includes(k))s.E[k]=E[k]})}
-function spRun(s){s=s||UI.sp;const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),wz:s.wz,edge:1,fix:spFix(s),efix:spEfix(s),row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
+function spRun(s){s=s||UI.sp;const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),wz:s.wz,edge:1,fix:spFix(s),efix:spEfix(s),eMin:num(s.eMin)||0,row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
 function spApply(){const s=UI.sp;const r=spRun(s);['h','rpm','S','v'].forEach(k=>{if(!(s.lk||[]).includes(k))s[k]=r[k]});spEsync(s,r);return r}
 /* ผลจากค่าที่ตั้งจริงบนแถบเลื่อน (ไม่ใช่ค่าที่แนะนำ) */
-function spEval(s){const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),wz:s.wz,edge:1,fix:{h:s.h,rpm:s.rpm,S:s.S,v:s.v},efix:spEfix(s),row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
+function spEval(s){const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),wz:s.wz,edge:1,fix:{h:s.h,rpm:s.rpm,S:s.S,v:s.v},efix:spEfix(s),eMin:num(s.eMin)||0,row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
 function spPatSVG(r){const W=340,H=96,S=r.S,X=r.th.X,f=spPat(X,r.th.drift),span=S*3.2,x0=-span/2;const px=y=>((y-x0)/span)*W;let sum='',ln=[];
  for(let j=-1;j<=1;j++){let d='';for(let i=0;i<=120;i++){const y=x0+span*i/120;d+=(i?'L':'M')+px(y).toFixed(1)+','+(H-12-f(y-j*S)*34).toFixed(1)}ln.push(`<path d="${d}" fill="none" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>`)}
  let mx=0;const pts=[];for(let i=0;i<=160;i++){const y=x0+span*i/160;let v=0;for(let j=-6;j<=6;j++)v+=f(y-j*S);pts.push([y,v]);mx=Math.max(mx,v)}
@@ -5471,10 +5474,10 @@ function spEdgeHUD(r,sN){const sd=UI.spSide&&r.edge[UI.spSide]?UI.spSide:'out',E
  lk=r.edge.lk||[],cell=(lab,v,u,k)=>`<div class="hud-c${k&&lk.includes(k)?' lk':''}${String(v).length>=4?' long':''}"><span>${lab}${k&&lk.includes(k)?' 🔒':''}</span><b>${v}</b><em>${u}</em></div>`,diff=r.edge.out!==r.edge.in&&(r.edge.out.e!==r.edge.in.e||r.edge.out.rpm!==r.edge.in.rpm);
  return `${diff?`<div class="hud-side"><span>ลมเทียบคันนาด้านที่จะบิน</span>${['out','par','in'].map(k=>`<button class="${sd===k?'on':''}" data-act="spSide" data-v="${k}">${SIDE_N[k]}</button>`).join('')}</div>`:''}
  <div class="hud-g">${cell('ห่าง'+spBundN(),fmt(E.e,1),'ม.','e')}${cell('สูงจากยอด',fmt(E.h,1),'ม.','h')}${cell('รอบจาน',E.rpm,'rpm','rpm')}${cell('ความเร็ว',spdN(E.v),SU_LAB(),'v')}${cell('ใส่ในแอป',fmt(sN||r.hr,1),'กก./ไร่')}${cell('ระยะร่อง',fmt(E.WE,1),'ม.','WE')}</div>
- <div class="hud-f hud-l"><div>${E.loss<=0.0051?'✅':E.loss<=0.02?'⚠️':'⛔'} ${r.m.k==='seed'?'เมล็ด':'ปุ๋ย'}ตก${spBundN()} ~<b>${pc(E.loss)}%</b> <span>${E.loss>E.loss0+0.0005?'(ลมพัดเข้าแปลง ตกคันนาน้อยอยู่แล้ว — บินขอบเพื่อเติมแถบริมคันนาให้เต็ม)':`(บินชิดขอบด้วยค่ากลางแปลง ~${pc(E.loss0)}%)`}</span></div>
+ <div class="hud-f hud-l"><div>${E.loss<=0.0051?'✅':E.loss<=0.05?'⚠️':'⛔'} ${r.m.k==='seed'?'เมล็ด':'ปุ๋ย'}ตก${spBundN()} ~<b>${pc(E.loss)}%</b> <span>${E.loss>E.loss0+0.0005?'(ลมพัดเข้าแปลง ตกคันนาน้อยอยู่แล้ว — บินขอบเพื่อเติมแถบริมคันนาให้เต็ม)':`(บินชิดขอบด้วยค่ากลางแปลง ~${pc(E.loss0)}%)`}</span></div>
  <div>📐 ใส่ในแอปเท่ากลางแปลง แต่ “ระยะร่อง” ของเส้นขอบตั้ง <b>${fmt(E.WE,1)} ม.</b> (กลางแปลง ${fmt(r.S,1)} ม.) — แอปปล่อยน้อยลงตามร่องที่แคบกว่าเอง</div>
  <div>↔️ เส้นกลางแปลง ตั้งระยะขอบ <b>${fmt(E.m,1)} ม.</b> ให้เส้นขอบรับช่วงชิดคันนา</div>
- <div>ℹ️ ชิดคันนา ~${fmt(E.und,1)} ม. ได้น้อยกว่าครึ่ง — แลกกับไม่ให้ตกคันนา</div>
+ <div>ℹ️ ชิด${spBundN()} ~${fmt(E.und,1)} ม. ได้น้อยกว่าเป้า — แลกกับไม่ให้ตก${spBundN()}${r.edge.eMin>0?` · 🌳 บินห่างขอบ ≥ ${fmt(r.edge.eMin,1)} ม. (ต้นไม้/เสา)`:''}</div>
  ${diff&&sd!=='in'?`<div>➡️ ด้านที่ลมพัดเข้าแปลง บินห่าง ${fmt(r.edge.in.e,1)} ม. · ${r.edge.in.rpm} rpm · สูง ${fmt(r.edge.in.h,1)} ม. ได้</div>`:''}
  ${E.lowQ?`<div>⚠️ เส้นขอบไหลแค่ ${fmt(E.Q,1)} กก./นาที ต่ำกว่าช่วงแม่นยำของ${esc(r.fd.n)} — อาจออกเป็นจังหวะเล็กน้อย</div>`:''}
  <div>${spWindTxt(r,E.h)}</div><div>${spWzHTML()}</div></div>
@@ -5489,15 +5492,18 @@ function spRecHTML0(){const s=UI.sp;const r=spRun(s);const lk=s.lk||[];
  return `<div class="hud ${r.stop?'stop':''}"><div class="hud-h"><span>${r.stop?'⛔ ไม่ควรหว่านตอนนี้':lk.length?'ค่าดีที่สุดเมื่อล็อก '+lk.map(k=>SP_N[k]).join(' + '):'ค่าหว่านที่ดีที่สุดตอนนี้'}</span>${lk.length?'<button class="hud-x" data-act="spReset">ปลดล็อก</button>':''}</div>
  ${r.edge?`<div class="hud-tabs"><button class="${tab==='mid'?'on':''}" data-act="spTab" data-v="mid">🌾 บินกลางแปลง</button><button class="${tab==='edge'?'on':''}" data-act="spTab" data-v="edge">🧱 บินเก็บขอบ</button></div>`:''}
  ${tab==='edge'?spEdgeHUD(r,sN):`<div class="hud-g">${cell('h','สูงจากยอด',fmt(r.h,1),'ม.')}${cell('rpm','รอบจาน',r.rpm,'rpm')}${cell('S','ระยะร่อง',fmt(r.S,1),'ม.')}${cell('v','ความเร็ว',spdN(r.v),SU_LAB())}${cell('rate','ใส่ในแอป',fmt(sN||r.hr,1),'กก./ไร่')}${cell('fd','เกลียวป้อน',esc(r.fd.n.replace('เกลียว','')),r.fd.std?'มาตรฐาน':'เสริม','txt')}</div>
- <div class="hud-f">${sN?`“ใส่ในแอป” ปรับตามที่บันทึกการบินแล้ว = การ์ด “▶ เที่ยวต่อไป” · `:(typeof budHudNote==='function'&&budHudNote('adv'))||(r.wfU>1.001?`“ใส่ในแอป” = เมล็ดแห้ง ${fmt(r.rate,1)} กก./ไร่ × ${fmt(r.wfU,2)} (งอกแล้วหนักขึ้น โดรนชั่งน้ำหนักเปียก) · `:'')}ความสม่ำเสมอ CV <b>${Math.round(r.cv*100)}%</b> (เกณฑ์ ≤${Math.round(r.cvT*100)}%) · เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง${r.edge?`<br>ระยะขอบของเส้นกลางแปลง: ตั้ง <b>${fmt(r.edge.out.m,1)} ม.</b> ถ้าบินเก็บขอบแยก (ไม่ตกคันนา) · ไม่บินเก็บขอบ ตั้ง ${fmt(r.S/2,1)} ม. แต่ตกคันนา ~${pcx(r.edge.out.loss0)}%`:''}<br>${spWindTxt(r)} ${spWzHTML()}</div>`}</div>
+ <div class="hud-f">${sN?`“ใส่ในแอป” ปรับตามที่บันทึกการบินแล้ว = การ์ด “▶ เที่ยวต่อไป” · `:(typeof budHudNote==='function'&&budHudNote('adv'))||(r.wfU>1.001?`“ใส่ในแอป” = เมล็ดแห้ง ${fmt(r.rate,1)} กก./ไร่ × ${fmt(r.wfU,2)} (งอกแล้วหนักขึ้น โดรนชั่งน้ำหนักเปียก) · `:'')}ความสม่ำเสมอ CV <b>${Math.round(r.cv*100)}%</b> (เกณฑ์ ≤${Math.round(r.cvT*100)}%) · เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง${r.edge?`<br>ระยะขอบของเส้นกลางแปลง: ตั้ง <b>${fmt(r.edge.out.m,1)} ม.</b> ถ้าบินเก็บขอบแยก (ไม่ตกคันนา) · ไม่บินเก็บขอบ ตั้ง ${fmt(Math.max(r.S/2,r.edge.eMin||0),1)} ม.${r.edge.eMin>r.S/2?' (ต้นไม้/เสา)':''} แต่ตกคันนา ~${pcx(r.edge.out.loss0)}%`:''}<br>${spWindTxt(r)} ${spWzHTML()}</div>`}</div>
  ${crit.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}
  <details class="fold why" ${UI.whyOpen?'open':''} data-tog="why"><summary><span>💡 ทำไมได้ค่านี้</span><em>${rest.length} ข้อ</em></summary>${rest.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}</details>`}
 const SP_N={h:'ความสูง',rpm:'รอบจาน',S:'ร่อง',v:'ความเร็ว',rate:'อัตรา'};
 function spEdgeOutHTML(r){const sd=UI.spSide&&r.edge[UI.spSide]?UI.spSide:'out',E=r.edge[sd],nm=r.m.k==='seed'?'เมล็ด':'ปุ๋ย',bn=spBundN(),pc=x=>x<0.005?'<1':x<0.095?(x*100).toFixed(1):Math.round(x*100);
- const wi=Math.round((E.wi||0)*100),st=E.loss<=0.0051&&wi>=70?'ok':E.loss<=0.02?'warn':'bad',sN=typeof budSetNow==='function'?budSetNow('adv',r.rate,r.m):null,lk=r.edge.lk||[],L=k=>lk.includes(k)?' 🔒':'';
+ const wi=Math.round((E.wi||0)*100),st=E.loss<=0.0051&&wi>=70?'ok':E.loss<=0.05?'warn':'bad',sN=typeof budSetNow==='function'?budSetNow('adv',r.rate,r.m):null,lk=r.edge.lk||[],L=k=>lk.includes(k)?' 🔒':'';
  return `<div class="fden ${st}"><div class="fden-h">📦 คาดการณ์ผลเส้นขอบ (ค่าที่ตั้ง + อากาศ)${r.edge.out!==r.edge.in?` · ${SIDE_N[sd]}`:''}</div>
- <div class="fcov"><div><span>${nm}ตก${bn}</span><b>${pc(E.loss)}%</b></div><div class="tiny muted">${E.loss>E.loss0+0.0005?'ลมพัดเข้าแปลง ตกน้อยอยู่แล้ว — เส้นขอบช่วยเติมริม'+bn+'ให้เต็ม':`ถ้าไม่บินเก็บขอบ (เส้นกลางแปลงห่าง${bn}ครึ่งร่อง) ตก ~${pc(E.loss0)}%`}</div></div>
- <div class="fcov"><div><span>ริม${bn}ได้ใกล้อัตราเป้า (±25%)</span><b>${wi}%</b></div><i><em style="width:${wi}%"></em></i><div class="tiny muted">นับจาก${bn}ถึงเส้นกลางแปลงเส้นแรก + ครึ่งร่อง (${fmt(E.m+r.S/2,1)} ม.) · ชิด${bn} ~${fmt(E.und,1)} ม. ได้น้อยกว่าเป้า (แลกกับไม่ให้ตก${bn})</div></div>
+ <div class="fcov"><div><span>${nm}ตก${bn}</span><b class="${E.loss<=0.0051?'':E.loss<=0.05?'wv':'bv'}">${pc(E.loss)}%</b></div><div class="tiny muted">${E.loss>E.loss0+0.0005?'ลมพัดเข้าแปลง ตกน้อยอยู่แล้ว — เส้นขอบช่วยเติมริม'+bn+'ให้เต็ม':`ถ้าไม่บินเก็บขอบ (เส้นกลางแปลงห่าง${bn}ครึ่งร่อง) ตก ~${pc(E.loss0)}%`}</div></div>
+ <div class="fcov"><div><span>ริม${bn}ได้ใกล้อัตราเป้า (±25%)</span><b class="${wi>=70?'':'wv'}">${wi}%</b></div><i><em style="width:${wi}%"></em></i><div class="tiny muted">นับจาก${bn}ถึงเส้นกลางแปลงเส้นแรก + ครึ่งร่อง (${fmt(E.m+r.S/2,1)} ม.)${E.und>=0.1?` · ชิด${bn} ~${fmt(E.und,1)} ม. ได้น้อยกว่าเป้า (แลกกับไม่ให้ตก${bn})`:''}</div></div>
+ ${(()=>{const R=r.edge.rec&&r.edge.rec[sd];if(!R)return '';const better=R.loss<=E.loss+0.001&&(R.wi||0)>=(E.wi||0)-0.02;return `<div class="edcmp ${better?'':'same'}"><b>เทียบค่าแนะนำ (ไม่ล็อก)</b> ตก${bn} ${pc(R.loss)}% · ตามเป้า ${Math.round((R.wi||0)*100)}% — ห่าง ${fmt(R.e,1)} ม. · สูง ${fmt(R.h,1)} ม. · ${R.rpm} rpm · ร่อง ${fmt(R.WE,1)} ม.${better?'':' · ค่าที่ล็อกไว้ดีเท่ากันหรือดีกว่า'}</div>`})()}
+ ${E.WE<0.6?`<div class="fadj warn">💡 เส้นขอบช่วยได้น้อย (ระยะร่องแค่ ${fmt(E.WE,1)} ม. = ข้าวไม่กี่ กก.) — ข้ามได้: ตั้ง “ข้าวที่แบ่งไว้บินเส้นขอบ” = 0% แล้วบินแค่กลางแปลง ตั้งระยะห่าง${bn} ${fmt(Math.max(r.S/2,r.edge.eMin||0),1)} ม.</div>`:''}
+ ${r.edge.eMin>0?`<div class="tiny">🌳 บินห่างขอบอย่างน้อย ${fmt(r.edge.eMin,1)} ม. (ต้นไม้/เสา) — ชิด${bn}จึงได้น้อยกว่าเป้า ~${fmt(E.und,1)} ม.</div>`:''}
  <div class="edst"><b>ตั้งในแอป DJI — เส้นบินขอบ (สร้างเป็นอีกเส้นทาง 1 รอบรอบแปลง)</b>
  <div class="edst-g"><div><span>ใส่ในแอป</span><b>${fmt(sN||r.hr,1)}</b><em>กก./ไร่ (เท่ากลางแปลง)</em></div><div><span>ระยะร่อง${L('WE')}</span><b>${fmt(E.WE,1)}</b><em>ม. (กลางแปลง ${fmt(r.S,1)})</em></div><div><span>ห่าง${bn}${L('e')}</span><b>${fmt(E.e,1)}</b><em>ม.</em></div><div><span>สูงจากยอด${L('h')}</span><b>${fmt(E.h,1)}</b><em>ม.</em></div><div><span>รอบจาน${L('rpm')}</span><b>${E.rpm}</b><em>rpm</em></div><div><span>ความเร็ว${L('v')}</span><b>${spdN(E.v)}</b><em>${SU_LAB()}</em></div></div>
  <div class="tiny">เส้นกลางแปลง (แท็บ 🌾) ตั้ง ระยะร่อง <b>${fmt(r.S,1)} ม.</b> · ระยะห่าง${bn} <b>${fmt(E.m,1)} ม.</b> — สองเส้นทางใช้ “ใส่ในแอป” เท่ากัน ต่างกันที่ระยะร่อง แอปจึงปล่อยเส้นขอบน้อยลงเอง</div>
@@ -5521,8 +5527,10 @@ function spSlHTML(f,s){
  if(UI.spTab==='edge'){const E=s.E||{};if(!(E.h>0)){spApply();}const X=s.E||{},kmh=SU()==='kmh';
   const lkE=k=>`<button class="flk${(s.elk||[]).includes(k)?' on':''}" id="splkE-${k}" data-act="spLockE" data-k="${k}"></button>`;
   const slE=(k,l,min,max,st,val,lab)=>`<div class="fsl"><div class="fsl-h"><span>${lkE(k)}${l}</span><b id="splE-${k}">${lab}</b></div><input type="range" data-spe="${k}" min="${min}" max="${max}" step="${st}" value="${val}"></div>`;
-  return `<div class="sl-scope e"><b>🧱 ค่าเส้นขอบ (บินรอบแปลง 1 รอบ)</b><span>เลื่อนค่าไหน ค่านั้นจะถูก 🔒 ล็อก แล้วค่าอื่นของเส้นขอบคำนวณใหม่ (ล็อกได้ 2 ค่า) · ค่ากลางแปลงอยู่แท็บ 🌾</span></div>
- ${rateSl}${slE('e','ห่าง'+spBundN()+' (เส้นขอบ)',0.5,6,0.1,X.e,fmt(X.e,1)+' ม.')}${slE('h','ความสูงจากยอดพืช',1.5,8,0.5,X.h,fmt(X.h,1)+' ม.')}${slE('rpm','รอบจานหว่าน',400,1300,50,X.rpm,X.rpm+' rpm')}${slE('WE','ระยะร่องเส้นขอบ (Route spacing)',0.3,6,0.1,Math.round((X.WE||0)*10)/10,fmt(X.WE,1)+' ม.')}
+  return `<div class="sl-scope e"><b>🧱 ค่าเส้นขอบ (บินรอบแปลง 1 รอบ)</b><span>เลื่อนค่าไหน ค่านั้นจะถูก 🔒 ล็อก แล้วค่าที่เหลือของเส้นขอบคำนวณใหม่ (ล็อกได้ทุกค่า — ระยะเส้นกลางแปลงแอปหาให้) · ค่ากลางแปลงอยู่แท็บ 🌾</span></div>
+ <div class="sl-opt"><span>🌳 ริมแปลงมีต้นไม้/เสา บินห่างขอบอย่างน้อย</span>${[0,1.5,2,3,4].map(v=>`<button class="fchip sm ${(num(s.eMin)||0)===v?'on':''}" data-act="spEmin" data-v="${v}">${v?v+' ม.':'ไม่มี'}</button>`).join('')}</div>
+ <div class="sl-opt"><span>ลองค่าที่บินกันทั่วไป แล้วดูผลเทียบ</span><button class="fchip sm" data-act="spEdgeTry" data-v="500,2,4,1">500 rpm · สูง 2 · ร่อง 4 · ห่าง 1 ม.</button></div>
+ ${rateSl}${slE('e','ห่าง'+spBundN()+' (เส้นขอบ)',Math.max(0.5,num(s.eMin)||0),6,0.1,X.e,fmt(X.e,1)+' ม.')}${slE('h','ความสูงจากยอดพืช',1.5,8,0.5,X.h,fmt(X.h,1)+' ม.')}${slE('rpm','รอบจานหว่าน',400,1300,50,X.rpm,X.rpm+' rpm')}${slE('WE','ระยะร่องเส้นขอบ (Route spacing)',0.3,6,0.1,Math.round((X.WE||0)*10)/10,fmt(X.WE,1)+' ม.')}
  ${slE('v','ความเร็วบิน',kmh?4:1,kmh?36:10,kmh?1:0.1,kmh?Math.round((X.v||0)*3.6):X.v,spd(X.v||0))}
  <div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" data-fly="wind" min="0" max="8" step="0.1" value="${f.wind}"></div><div id="spUnE" style="margin:4px 0 6px;${(s.elk||[]).length?'':'display:none'}"><button class="btn sm" data-act="spUnlockE">↺ ปลดล็อกเส้นขอบ (กลับค่าที่ดีที่สุด)</button></div>`}
  return `<div class="sl-scope"><b>🌾 ค่าเส้นกลางแปลง</b><span>เลื่อนค่าไหน ค่านั้นจะถูก 🔒 ล็อก แล้วค่าอื่นคำนวณใหม่ให้ดีที่สุด (ล็อกได้ 2 ค่า) · ค่าเส้นขอบอยู่แท็บ 🧱</span></div>
@@ -5553,7 +5561,7 @@ function spRefresh(skip,live,anc){if(!UI.sp)return;anc=anc||(skip?document.query
 document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset)return;
  if(t.dataset.sp&&UI.sp){const s=UI.sp,k=t.dataset.sp;s[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:k==='rate'?Math.round(+t.value/spWfU(s)*1000)/1000:+t.value;if(k==='rate'&&typeof budOwn==='function')budOwn('adv');
   if(k!=='rate'){s.lk=(s.lk||[]).filter(x=>x!==k);s.lk.push(k);if(s.lk.length>2)s.lk.shift()}spRefresh(k,true,t);return}
- if(t.dataset.spe&&UI.sp){const s=UI.sp,k=t.dataset.spe;s.E=s.E||{};s.E[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:+t.value;s.elk=(s.elk||[]).filter(x=>x!==k);s.elk.push(k);if(s.elk.length>2)s.elk.shift();spRefresh(null,true,t);return}
+ if(t.dataset.spe&&UI.sp){const s=UI.sp,k=t.dataset.spe;s.E=s.E||{};s.E[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:+t.value;s.elk=(s.elk||[]).filter(x=>x!==k);s.elk.push(k);spRefresh(null,true,t);return}
  if(t.dataset.spi&&UI.sp){const v=num(t.value);if(!v)return;UI.sp[t.dataset.spi]=v;if(['tgw','germ'].includes(t.dataset.spi)&&UI.fly.crop==='rice'&&MAT[UI.sp.mat].k==='seed')UI.sp.rate=seedRate(UI.sp.mat,UI.sp.tgtP,UI.sp.tgw,UI.sp.germ);if(t.dataset.spi==='trees'){const n=fertNow(UI.fly.crop,UI.fly.stg,UI.sp)[0];if(n&&n.tree&&n.it[0])UI.sp.rate=r1(n.it[0][1]*v)}spRefresh(null,false,t)}});
 document.addEventListener('change',e=>{const t=e.target;if(t&&t.dataset&&(t.dataset.sp||t.dataset.spe)&&UI.sp)keepPos(t,()=>{const r=$('#sp-rec');if(r){r.innerHTML=spRecHTML();r.classList.remove('stale')}})});
 /* ---------- งานบริการ: แนะนำในฟอร์ม ---------- */
@@ -5576,7 +5584,9 @@ Object.assign(ACT,{
  spLock:a=>{const s=spState(),k=a.dataset.k;s.lk=s.lk||[];if(s.lk.includes(k))s.lk=s.lk.filter(x=>x!==k);else{s.lk.push(k);if(s.lk.length>2)s.lk.shift()}spRefresh(null,false,a)},
  spTgt:a=>{const s=spState();s.tgtP=num(a.dataset.v);s.rate=seedRate(s.mat,s.tgtP,s.tgw,s.germ);spApply();render()},
  spReset:()=>{const s=spState();s.lk=[];s.elk=[];spApply();render()},
- spLockE:a=>{const s=spState(),k=a.dataset.k;s.elk=s.elk||[];if(s.elk.includes(k))s.elk=s.elk.filter(x=>x!==k);else{s.elk.push(k);if(s.elk.length>2)s.elk.shift()}spRefresh(null,false,a)},
+ spLockE:a=>{const s=spState(),k=a.dataset.k;s.elk=s.elk||[];if(s.elk.includes(k))s.elk=s.elk.filter(x=>x!==k);else s.elk.push(k);spRefresh(null,false,a)},
+ spEdgeTry:a=>{const s=spState(),[rpm,h,WE,e]=a.dataset.v.split(',').map(Number);s.E=s.E||{};Object.assign(s.E,{rpm,h,WE,e:Math.max(e,num(s.eMin)||0)});s.elk=['rpm','h','WE','e'];spRefresh(null,false,a);const sl=$('#sp-sl');if(sl)keepPos(a,()=>{sl.innerHTML=spSlHTML(UI.fly,s)})},
+ spEmin:a=>{const s=spState();s.eMin=num(a.dataset.v)||0;if(s.E&&s.elk&&s.elk.includes('e')&&s.E.e<s.eMin)s.E.e=s.eMin;spRefresh(null,false,a);const sl=$('#sp-sl');if(sl)keepPos(a,()=>{sl.innerHTML=spSlHTML(UI.fly,s)})},
  spUnlockE:a=>{const s=spState();s.elk=[];spRefresh(null,false,a);const sl=$('#sp-sl');if(sl)keepPos(a,()=>{sl.innerHTML=spSlHTML(UI.fly,s)})},
  spTab:a=>{UI.spTab=a.dataset.v;const el=$('#sp-rec');if(el)keepPos(a,()=>{const s=spState();spApply();el.innerHTML=spRecHTML();const sl=$('#sp-sl');if(sl)sl.innerHTML=spSlHTML(UI.fly,s);const o=$('#sp-out');if(o)o.innerHTML=spOutHTML()});if(a.dataset.go&&el)el.scrollIntoView({behavior:'smooth',block:'start'})},
  spSide:a=>{UI.spSide=a.dataset.v;const el=$('#sp-rec');if(el)keepPos(a,()=>{spApply();el.innerHTML=spRecHTML();spSyncE();const o=$('#sp-out');if(o)o.innerHTML=spOutHTML()})},
@@ -6395,20 +6405,21 @@ function budSumHTML(c,b){const o=budCalc(b,c),t=o.tr;if(!t||!o.A||!o.rate)return
 function budEdgeSet(c){const E=c.r&&c.r.edge;return E?{...E.out,inE:E.in.e,inRpm:E.in.rpm,diff:E.out.e!==E.in.e||E.out.rpm!==E.in.rpm}:null}
 /* ตารางค่าตั้งบิน: แถว = ค่าที่ตั้งในแอป · คอลัมน์ = กลางแปลง / เก็บขอบ (ดูเทียบกันได้ทันที) */
 function budSetTab(c,kinds,o){const r=c.r,E=budEdgeSet(c);if(!r||!r.h)return '';const K=kinds.filter(k=>k!=='edge'||E);if(!K.length)return '';
- const orch=r.PW&&r.PW.base===0&&r.hcF>2,u=(v,un)=>`<b>${v}</b><em>${un}</em>`,mg=E&&o&&o.res>0?E.m:r.S/2;
+ const orch=r.PW&&r.PW.base===0&&r.hcF>2,u=(v,un)=>`<b>${v}</b><em>${un}</em>`,mg=E&&o&&o.res>0?E.m:Math.max(r.S/2,(r.edge&&r.edge.eMin)||0);
  const col={mid:{h:'🌾 กลางแปลง',v:[u(fmt(mg,1),'ม.'),u(fmt(r.h,1),'ม.'),u(r.rpm,'rpm'),u(fmt(r.S,1),'ม.'),u(spdN(r.v),SU_LAB())]},
   edge:E&&{h:'🧱 เก็บขอบ',v:[u(fmt(E.e,1),'ม.'),u(fmt(E.h,1),'ม.'),u(E.rpm,'rpm'),u(fmt(E.WE,1),'ม.'),u(spdN(E.v),SU_LAB())]}};
  const L=[orch?'ห่างขอบแปลง':'ห่างคันนา','สูงจากยอด'+(orch?'ต้นไม้':''),'รอบจาน','ระยะร่อง','ความเร็ว'];
  return `<table class="bset-t${K.length>1?' two':''}"><thead><tr><th></th>${K.map(k=>`<th class="${k}">${col[k].h}</th>`).join('')}</tr></thead><tbody>${L.map((l,i)=>`<tr><td>${l}</td>${K.map(k=>`<td class="${k}">${col[k].v[i]}</td>`).join('')}</tr>`).join('')}</tbody></table>${K.includes('edge')&&E.diff?`<div class="bset-n">ด้านที่ลมพัดเข้าแปลง เส้นขอบห่าง ${fmt(E.inE,1)} ม. · ${E.inRpm} rpm ได้</div>`:''}`}
 function budEdgeLine(c,pre){const E=budEdgeSet(c);if(!E)return '';return `${pre||''}ห่างคันนา <b>${fmt(E.e,1)} ม.</b> · สูงจากยอด ${fmt(E.h,1)} ม. · ${E.rpm} rpm · ระยะร่อง <b>${fmt(E.WE,1)} ม.</b> · ${spd(E.v)}${E.diff?` (ด้านลมพัดเข้าแปลง ห่าง ${fmt(E.inE,1)} ม. ได้)`:''}`}
 /* เก็บขอบแปลง — ขอบยาว · แถบเส้นขอบ · % ที่เก็บไว้ (พิมพ์/เลื่อน) */
-function budResTxt(c,b){const o=budCalc(b,c),base=o.tr?o.tr.prep:o.totIn*(o.notSoak?o.wf:1);return `${fmt(o.res,1)}% = ${fmt(base*o.res/100,1)} กก.`}
-function budResHTML(c,b,where){const live=!!(b.log||[]).length;if((where==='live')!==live)return '';const o=budCalc(b,c);if(!o.A)return '';const rr=o.rr,ctx=c.ctx,r=o.res;
- return `<div class="bud-res"><div class="bud-res-h"><span>🧱 เก็บขอบแปลง (บินเส้นขอบแยก)</span><b data-resv>${budResTxt(c,b)}</b></div>
- <div class="bud-in"><label>ขอบที่ต้องเก็บยาว <input class="spnum" data-bud="per" data-ctx="${ctx}" inputmode="decimal" placeholder="${rr&&rr.est?Math.round(rr.est):'ม.'}" value="${esc(String(b.per||''))}" style="width:64px"> ม.</label><span class="tiny muted">${rr?(rr.src==='poly'?'จากรูปแปลงที่วาดไว้':rr.src==='est'?'ประมาณจากพื้นที่ (ผืนผ้า 1:2) — แก้ได้':'ตามที่กรอก'):''}</span></div>
- ${rr?`<div class="tiny">แถบเส้นขอบกว้าง ~${fmt(rr.WE,1)} ม. × ขอบ ${fmt(rr.L,0)} ม. = ${fmt(rr.Ae,2)} ไร่ → แนะนำเก็บ <b>${fmt(rr.pct,1)}%</b>${b.resM&&Math.abs(r-rr.pct)>0.05?` <button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="resM" data-v="0">ใช้ค่าแนะนำ</button>`:''}</div>`:''}
- <div class="bud-res-c"><input type="range" min="0" max="25" step="0.5" value="${r}" data-bud="res" data-ctx="${ctx}" aria-label="เปอร์เซ็นต์ที่เก็บไว้บินเก็บขอบ"><input class="spnum" inputmode="decimal" value="${r||''}" placeholder="0" data-bud="res" data-ctx="${ctx}" style="width:56px" aria-label="เปอร์เซ็นต์ที่เก็บไว้"><span>%</span></div>
- <div class="tiny muted">${r?`กลางแปลง ${fmt(o.Ai,2)} ไร่ ใช้ ~${fmt(o.midP||0,1)} กก. · เส้นขอบ ${fmt(o.Ae,2)} ไร่${rr&&Math.abs(o.Ae/rr.Ae-1)>0.15?` (≈ ${fmt(o.Ae/rr.Ae,1)} รอบขอบ)`:''} ใช้ ~${fmt(o.edgeP||0,1)} กก. — ใส่ในแอปเท่ากันทั้งสองแบบ`:'0% = ไม่บินเก็บขอบแยก (เส้นกลางแปลงห่างคันนาครึ่งร่อง ข้าวตกคันนาบ้าง)'}</div></div>`}
+function budResTxt(c,b){const o=budCalc(b,c),base=o.tr?o.tr.prep:o.totIn*(o.notSoak?o.wf:1);return `${fmt(base*o.res/100,1)} กก. (${fmt(o.res,1)}%)`}
+/* ข้าวที่แบ่งไว้บินเส้นขอบ: ไม่ใช้ตอนบินกลางแปลง → เที่ยวท้ายบินรอบแปลง 1 รอบ (พิมพ์/เลื่อนเองได้) */
+function budResHTML(c,b,where){const live=!!(b.log||[]).length;if((where==='live')!==live)return '';const o=budCalc(b,c);if(!o.A)return '';const rr=o.rr,ctx=c.ctx,r=o.res,E=budEdgeSet(c),nm=c.m&&c.m.k==='seed'?'ข้าว':'ปุ๋ย',bn=typeof spBundN==='function'&&ctx==='adv'?spBundN():'คันนา';
+ return `<div class="bud-res"><div class="bud-res-h"><span>🧱 ${nm}ที่แบ่งไว้บินเส้นขอบ</span><b data-resv>${budResTxt(c,b)}</b></div>
+ <div class="bud-res-why">${r?`${nm}ส่วนนี้<b>ไม่ใช้ตอนบินกลางแปลง</b> — เก็บไว้เที่ยวท้าย บินรอบแปลง 1 รอบด้วยค่าเก็บขอบ${E?` (จาน ${E.rpm} rpm · สูง ${fmt(E.h,1)} ม. · ร่อง ${fmt(E.WE,1)} ม.)`:''}${E?(E.loss<=0.006?` ${nm}แทบไม่ตก${bn}`:` ⚠️ ตก${bn} ~${fmt(E.loss*100,1)}%`):''} · ที่เหลือ ~${fmt(o.midP||0,1)} กก. หว่านกลางแปลง`:`ตั้ง 0% = ไม่บินเส้นขอบแยก: เส้นกลางแปลงบินห่าง${bn}ครึ่งร่อง ${nm}ตก${bn}บ้าง${E&&E.loss0?` (~${Math.round(E.loss0*100)}% ของแถบริม${bn})`:''}`}</div>
+ <div class="bud-in"><label>คิดจาก: ขอบแปลงยาว <input class="spnum" data-bud="per" data-ctx="${ctx}" inputmode="decimal" placeholder="${rr&&rr.est?Math.round(rr.est):'ม.'}" value="${esc(String(b.per||''))}" style="width:64px"> ม.</label>${rr?`<span class="tiny">× แถบที่เส้นขอบหว่าน ~${fmt(rr.WE,1)} ม. = ${fmt(rr.Ae,2)} ไร่ (${fmt(rr.pct,1)}% ของแปลง)</span>`:''}<span class="tiny muted">${rr?(rr.src==='poly'?'ความยาวจากรูปแปลงที่วาดไว้':rr.src==='est'?'ความยาวประมาณจากพื้นที่ — แก้ได้':'ความยาวตามที่กรอก'):''}</span></div>
+ <div class="bud-res-c"><span class="small">ปรับเอง</span><input type="range" min="0" max="25" step="0.5" value="${r}" data-bud="res" data-ctx="${ctx}" aria-label="เปอร์เซ็นต์ที่แบ่งไว้บินเส้นขอบ"><input class="spnum" inputmode="decimal" value="${r||''}" placeholder="0" data-bud="res" data-ctx="${ctx}" style="width:56px" aria-label="เปอร์เซ็นต์ที่แบ่งไว้"><span>%</span>${rr&&b.resM&&Math.abs(r-rr.pct)>0.05?` <button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="resM" data-v="0">ใช้ค่าแนะนำ ${fmt(rr.pct,1)}%</button>`:''}</div>
+ <div class="tiny muted">${r&&rr&&Math.abs(o.Ae/rr.Ae-1)>0.15?`${fmt(r,1)}% ≈ ${fmt(o.Ae/rr.Ae,1)} รอบขอบ · `:''}“ใส่ในแอป” เท่ากันทั้งกลางแปลงและเส้นขอบ · ไม่บินเส้นขอบแยก ตั้ง 0%</div></div>`}
 /* ระหว่างหว่าน ②: การ์ดเที่ยวต่อไป — เลขเดียวที่ต้องใส่ในแอป */
 function budNxHTML(c,b){const o=budCalc(b,c),t=o.tr;if(!t||!o.A||!o.rate)return '';
  const m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001,ctx=c.ctx,uD=wet?' แห้ง':'',av=t.next?t.av:t.phys-t.resLeft,E=budEdgeSet(c),isE=t.next==='edge';
