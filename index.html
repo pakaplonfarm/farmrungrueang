@@ -1577,6 +1577,8 @@ h3{font-size:16px;font-weight:700}
 .sl-opt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 2px 8px;font-size:12.5px}.sl-opt>span{color:#5B6B60;width:100%}.edcmp{margin-top:8px;padding:8px 10px;border-radius:10px;background:#EEF6FF;font-size:13px;line-height:1.5}.edcmp.same{background:#F1F7F2}.edcmp b{margin-right:4px}
 .bud-res-why{font-size:13px;line-height:1.5;margin:4px 0 6px;color:#4A3B12}.bud-res-c .small{color:#6B5B3A}
 .fcov b.wv{color:#B45309}.fcov b.bv{color:#B91C1C}
+.bres-row{display:flex;gap:10px;align-items:center;margin:6px 0 8px}.bres-pic{width:96px;flex:none}.bres-tx{font-size:13px;line-height:1.55;color:#3F3416;min-width:0}.bres-k{font-size:13px}.bres-k.mid{color:#6FA65A}.bres-k.edg{color:#B4532A}.bres-src{margin-top:4px;font-size:13px}.bres-src summary{cursor:pointer;color:#6B5B3A}
+.bres-ord{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:2px 0 6px;font-size:12.5px}.bres-ord>span{color:#6B5B3A}
 .bud-act{margin:10px 0 8px}.bud-act .hud-f b{color:#FFD27A}.bud-det{margin-top:8px}.bud-det>summary{color:#3d6b52;font-weight:600}
 .bud-new{margin:8px 0}
 </style>
@@ -6114,7 +6116,7 @@ Object.assign(ACT,{
   const t=document.querySelector('.atabs');if(t){const y=t.getBoundingClientRect().top+window.scrollY-(parseFloat(getComputedStyle(t).top)||0)-2;if(window.scrollY>y+4)window.scrollTo({top:y})}},
  jfJump:a=>{const el=document.getElementById(a.dataset.id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
 });
-document.addEventListener('toggle',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.tog)return;const k={fm:'fmOpen',cal:'calOpen',tray:'trayOpen',src:'srcOpen',why:'whyOpen',man:'manOpen',cmp:'cmpOpen',note:'noteOpen'}[t.dataset.tog];if(k)UI[k]=t.open},true);
+document.addEventListener('toggle',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.tog)return;const k={fm:'fmOpen',cal:'calOpen',tray:'trayOpen',src:'srcOpen',why:'whyOpen',man:'manOpen',cmp:'cmpOpen',note:'noteOpen',res:'resOpen'}[t.dataset.tog];if(k)UI[k]=t.open},true);
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target&&e.target.classList&&e.target.classList.contains('actx-wx')){e.preventDefault();e.target.click()}});
 
 
@@ -6245,6 +6247,7 @@ function budPerEst(ctx,A){let poly=null;try{const pid=ctx==='job'?(typeof F!=='u
 function budEdgeW(c){const E=c.r&&c.r.edge;if(!E)return null;const ws=['out','par','in'].map(k=>E[k]&&E[k].WE).filter(x=>x>0);return ws.length?ws.reduce((a,x)=>a+x,0)/ws.length:null}
 /* เก็บขอบ 1 รอบ: เส้นขอบห่างคันนา e ระยะร่อง WE · เส้นกลางแปลงเริ่มที่ m (ร่อง S)
    แอป DJI นับพื้นที่ = ความยาวเส้นบิน × ระยะร่อง → กลางแปลงนับได้ A − แถบกว้าง (m − S/2) รอบแปลง · ขอบนับได้ (L − 8e) × WE */
+function budOrder(b){return b.order==='mid1'?'mid1':'edge1'}
 function budResRec(c,b){const A=num(c.area);if(!(A>0))return null;const E=c.r&&c.r.edge,WE=budEdgeW(c);if(!WE||!E)return null;const est=budPerEst(c.ctx,A),own=num(b.per)>0,Lm=own?num(b.per):(est?est.L:0);if(!(Lm>0))return null;
  const av=k=>{const v=['out','par','in'].map(s=>E[s]&&E[s][k]).filter(x=>x>0);return v.length?v.reduce((a,x)=>a+x,0)/v.length:0},S=num(c.r.S)||0,mm=av('m'),ee=av('e'),d=Math.max(0,mm-S/2);
  const Ai=Math.max(0,A-(Lm*d-4*d*d)/1600),Ae=Math.max(0,Lm-8*ee)*WE/1600,AD=Ai+Ae;if(!(AD>0))return null;
@@ -6271,13 +6274,14 @@ function budCalc(b,c){const m=c.m,r=c.r,A=num(c.area)||0;
  o.edgeP=o.spendP*res/100;o.midP=o.spendP-o.edgeP;
  o.nTripM=o.midP>0.3?Math.max(1,Math.ceil(o.midP/L-1e-9)):0;o.lastPM=o.nTripM?o.midP-(o.nTripM-1)*L:0;
  o.nTripE=o.edgeP>0.3?Math.max(1,Math.ceil(o.edgeP/L-1e-9)):0;o.lastPE=o.nTripE?o.edgeP-(o.nTripE-1)*L:0;
- o.nTrip=Math.max(1,o.nTripM+o.nTripE);o.lastP=o.nTripM?o.lastPM:o.lastPE;o.raiTrip=L/o.setP;o.saveL=saveL(o.midP,o.nTripM);o.merge=!o.saveL&&o.nTripM>=1&&o.nTripE===1&&o.lastPM+o.lastPE<=L+0.05?o.lastPM+o.lastPE:0;
+ o.nTrip=Math.max(1,o.nTripM+o.nTripE);o.lastP=o.nTripM?o.lastPM:o.lastPE;o.raiTrip=L/o.setP;o.saveL=saveL(o.midP,o.nTripM);o.ord=budOrder(b);
+ if(o.ord==='edge1'&&o.nTripE){o.nTrip=Math.max(1,Math.ceil(o.spendP/L-1e-9));o.first=Math.min(L,o.spendP);o.lastP=o.spendP-(o.nTrip-1)*L;o.saveL=saveL(o.spendP,o.nTrip)}o.merge=o.ord!=='edge1'&&!o.saveL&&o.nTripM>=1&&o.nTripE===1&&o.lastPM+o.lastPE<=L+0.05?o.lastPM+o.lastPE:0;
  o.bagP=wIn?kgBag:kgBag*wf;o.nbTrip=Math.floor((L+1e-9)/o.bagP);if(o.nbTrip>=1)o.tripBag=Math.ceil(o.spendP/(o.nbTrip*o.bagP)-1e-9);
  if(r&&r.raiHr)o.min=(o.spendD/o.planD)/r.raiHr*60;
  if(r&&r.seeds)o.seeds=r.seeds*rate/rC;if(r&&r.plants)o.plants=r.plants*rate/rC;
  const Lg=b.log||[];
- if(Lg.length){let sp=0,ar=0,setA=0,loss=0,w0s=0,tgA=0,pA=0,pAr=0,spE=0,arE=0,lossE=0;
-  Lg.forEach(x=>{const ra=num(x.ra),s1=Math.max(0,num(x.w0)-num(x.w1));sp+=s1;ar+=ra;setA+=(num(x.set)||o.setP)*ra;loss+=num(x.loss);w0s+=num(x.w0);tgA+=(num(x.rt)||rate)*ra;if(num(x.p)){pA+=num(x.p)*ra;pAr+=ra}if(x.kind==='edge'){spE+=s1;arE+=ra;lossE+=num(x.loss)}});
+ if(Lg.length){let sp=0,ar=0,setA=0,loss=0,w0s=0,tgA=0,pA=0,pAr=0,spE=0,arE=0,lossE=0;const spK={mid:0,edge:0},sAK={mid:0,edge:0};
+  Lg.forEach(x=>{const ra=num(x.ra),s1=Math.max(0,num(x.w0)-num(x.w1));sp+=s1;ar+=ra;setA+=(num(x.set)||o.setP)*ra;loss+=num(x.loss);w0s+=num(x.w0);tgA+=(num(x.rt)||rate)*ra;if(num(x.p)){pA+=num(x.p)*ra;pAr+=ra}if(x.kind==='edge'){spE+=s1;arE+=ra;lossE+=num(x.loss)}const kk=x.kind||'mid';spK[kk]+=s1;sAK[kk]+=(num(x.set)||o.setP)*ra});
   const last=Lg[Lg.length-1],hop=Math.max(0,num(last.w1)-num(last.ret));
   const t={n:Lg.length,sp,ar,loss,hop,spE,arE,spM:sp-spE,arM:ar-arE,w0avg:w0s/Lg.length,actP:ar>0?sp/ar:null,setAvg:ar>0?setA/ar:null,tgtD:ar>0?tgA/ar:rate,pAvg:pAr>0?pA/pAr:null};
   /* เทียบกับเป้าตอนที่บินเที่ยวนั้น (เปลี่ยนแผนกลางงาน ไม่ทำให้เที่ยวเก่าดูผิด) */
@@ -6286,20 +6290,25 @@ function budCalc(b,c){const m=c.m,r=c.r,A=num(c.area)||0;
   const wetS=wf>1.001;t.prepD=wetS?(wIn&&totD?totD:(num(b.prepD)>0?num(b.prepD):o.spendD)):null;
   t.prep=wetS?t.prepD*wf:(totD?totD:o.spendP);t.dryLeft=wetS&&totD&&!wIn?Math.max(0,totD-t.prepD):0;
   /* ข้าวที่เก็บไว้บินเก็บขอบ และที่ยังไม่ได้ใช้ */
-  t.resQ=totD?t.prep*res/100:o.edgeP;t.remE0=b.doneE?0:Math.max(0,Ae-arE);t.resLeft=t.remE0>0.01?Math.max(0,t.resQ-spE-lossE):0;
+  t.resQ=totD?t.prep*res/100:o.edgeP;/* รอบแปลงเป็นเส้นปิด: บันทึกแล้วเกิน 85% หรือเปลี่ยนไปบินกลางแปลงแล้ว (ขอบก่อน) = ครบ · กลางแปลงก่อน: เริ่มบินขอบแล้ว = กลางแปลงครบ */
+  const ordL=budOrder(b),kinds=Lg.map(x=>x.kind||'mid'),fE=kinds.indexOf('edge'),fM=kinds.indexOf('mid'),midAfterE=fE>=0&&kinds.slice(fE+1).includes('mid'),edgeAfterM=fM>=0&&kinds.slice(fM+1).includes('edge');
+  const eDone=!!b.doneE||(ordL==='edge1'&&midAfterE)||(arE>0&&Ae-arE<0.15*Ae),mDone=!!b.doneM||(ordL==='mid1'&&edgeAfterM);t.eDone=eDone;t.mDone=mDone;
+  t.remE0=eDone?0:Math.max(0,Ae-arE);t.resLeft=t.remE0>0.01?Math.max(0,t.resQ-spE-lossE):0;
   t.phys=t.prep-sp-loss;t.stock=t.phys-hop;t.lossPct=sp+loss>0?loss/(sp+loss):0;
-  t.doneM=!!b.doneM;t.doneE=!!b.doneE;t.remM=t.doneM?0:Math.max(0,Ai-t.arM);t.remE=t.doneE?0:Math.max(0,Ae-arE);t.remA=t.remM+t.remE;
+  t.doneM=!!b.doneM;t.doneE=!!b.doneE;t.remM=mDone?0:Math.max(0,Ai-t.arM);t.remE=eDone?0:Math.max(0,Ae-arE);t.remA=t.remM+t.remE;
   /* เที่ยวต่อไป: กลางแปลงจนครบ (ไม่แตะข้าวที่เก็บไว้ทำขอบ) → แล้วค่อยบินเก็บขอบด้วยที่เหลือทั้งหมด */
   const avM=t.phys-t.resLeft;t.avM=avM;
-  t.next=t.remM>0.01&&avM>0.5?'mid':t.remE>0.01&&t.phys>0.5?'edge':null;t.midShort=t.next==='edge'&&t.remM>0.01?t.remM:0;
-  if(t.next){const remN=t.next==='mid'?t.remM:t.remE,av=t.next==='mid'?avM:t.phys,tgtP=rate*wf,canP=av/remN;t.remN=remN;t.av=av;
+  const ord=budOrder(b);t.ord=ord;
+  t.next=ord==='edge1'?(t.remE>0.01&&t.phys>0.5?'edge':t.remM>0.01&&t.phys>0.5?'mid':null):(t.remM>0.01&&avM>0.5?'mid':t.remE>0.01&&t.phys>0.5?'edge':null);t.midShort=ord!=='edge1'&&t.next==='edge'&&t.remM>0.01?t.remM:0;
+  if(t.next){const remN=t.next==='mid'?t.remM:t.remE,tgtP=rate*wf,av=t.next==='mid'?avM:ord==='edge1'&&t.remM>0.01?Math.min(t.phys,Math.max(t.resLeft,tgtP*remN)):t.phys,canP=av/remN;t.remN=remN;t.av=av;
    t.needP=mode==='all'?canP:Math.min(tgtP,canP);t.short=mode!=='all'&&canP<tgtP*0.98;
    t.addQ=Math.max(0,tgtP*remN-av);t.prepMore=wetS?t.addQ/wf:0;t.coverT=av/tgtP;
-   t.needD=t.needP/wf;t.newSet=t.k?t.needP/t.k:t.needP;t.tgtSet=t.k?tgtP/t.k:tgtP;t.dev2=t.needD/rate-1;
+   t.kN=sAK[t.next]>0&&spK[t.next]>0?spK[t.next]/sAK[t.next]:null;t.needD=t.needP/wf;t.newSet=t.kN?t.needP/t.kN:t.needP;t.tgtSet=t.kN?tgtP/t.kN:tgtP;t.dev2=t.needD/rate-1;
    t.needQ=t.needP*remN;t.nTrip=Math.max(1,Math.ceil(t.needQ/L-1e-9));t.lastP=t.needQ-(t.nTrip-1)*L;t.saveL=saveL(t.needQ,t.nTrip);
    t.endLeft=av-t.needQ;t.allD=av/remN/wf;
    /* เที่ยวที่เหลือของอีกแบบ (ขอบ) เพื่อบอกจำนวนเที่ยวรวม */
-   t.nTripE2=t.next==='mid'&&t.remE>0.01&&t.resLeft>0.3?Math.ceil(t.resLeft/L-1e-9):0;
+   t.nAll=ord==='edge1'&&t.next==='edge'?Math.max(1,Math.ceil(t.phys/L-1e-9)):0;
+   t.nTripE2=ord!=='edge1'&&t.next==='mid'&&t.remE>0.01&&t.resLeft>0.3?Math.ceil(t.resLeft/L-1e-9):0;
    t.merge=t.nTrip===1&&t.nTripE2===1&&t.lastP+t.resLeft<=L+0.05?t.lastP+t.resLeft:0}
   o.tr=t}
  return o}
@@ -6355,17 +6364,18 @@ function budOutHTML(c,b){const o=budCalc(b,c),m=c.m,seed=m&&m.k==='seed',nm=seed
    :`<div class="fadj ok">🟢 กำลังหว่าน — บันทึกแล้ว ${t.n} เที่ยว · เลขที่ต้องใส่ในแอปตอนนี้ ดูการ์ด <b>“▶ เที่ยวต่อไป”</b> ด้านล่าง</div>`}
  else{
   /* การ์ดสั่งงาน: ใส่ในแอป · เติมถึงกี่กก. · กี่เที่ยว — "เติมถึง" ใช้ค่าที่ผู้ใช้กำหนดเสมอ */
-  const nM=o.nTripM,L1=nM>1?o.L:(nM?o.lastPM:o.lastPE),Wt=o.useD*o.wf,E=budEdgeSet(c);
+  const nM=o.nTripM,L1=o.ord==='edge1'&&o.nTripE?o.first:nM>1?o.L:(nM?o.lastPM:o.lastPE),Wt=o.useD*o.wf,E=budEdgeSet(c);
   const fillM=!nM?'':nM===1?`เที่ยว 1 ${o.nTripE?'🌾 กลางแปลง ':''}เติม ${fmt(o.lastPM,1)} กก.`:o.L-o.lastPM>0.5?`เที่ยว 1${nM>2?'–'+(nM-1):''} ${o.nTripE?'🌾 ':''}เติมถึง ${fmt(o.L,1)} กก. · เที่ยว ${nM} เติมแค่ ${fmt(o.lastPM,1)} กก.`:`เที่ยว 1–${nM} ${o.nTripE?'🌾 ':''}เติมถึง ${fmt(o.L,1)} กก.`;
   const fillE=o.nTripE?`เที่ยว ${nM+1}${o.nTripE>1?'–'+(nM+o.nTripE):''} 🧱 เก็บขอบ เติม ${fmt(o.nTripE>1?o.L:o.lastPE,1)} กก.`:'';
-  const fill=o.nTrip===1&&!o.nTripE?`เติม ${fmt(o.lastPM,1)} กก. เที่ยวเดียวจบ`:[fillM,fillE].filter(Boolean).join(' → ');
+  const fill=o.ord==='edge1'&&o.nTripE?(o.edgeP<=o.first+0.05?`เที่ยว 1 เติม ${fmt(o.first,1)} กก.: 🧱 บินเก็บขอบก่อน (~${fmt(o.edgeP,1)} กก.) → 🌾 บินกลางแปลงต่อด้วยที่เหลือในถัง${o.nTrip>1?` · เที่ยว 2${o.nTrip>2?'–'+o.nTrip:''} 🌾 เติมถึง ${fmt(o.L,1)} กก.${o.L-o.lastP>0.5?` (เที่ยวสุดท้ายแค่ ${fmt(o.lastP,1)} กก.)`:''}`:''}`:`🧱 บินเก็บขอบก่อน (~${fmt(o.edgeP,1)} กก.) → 🌾 ที่เหลือบินกลางแปลง · เติมถึง ${fmt(o.L,1)} กก. ทุกเที่ยว`)
+   :o.nTrip===1&&!o.nTripE?`เติม ${fmt(o.lastPM,1)} กก. เที่ยวเดียวจบ`:[fillM,fillE].filter(Boolean).join(' → ');
   /* เลขนี้มาจากไหน — บรรทัดเดียวตามวิธีหว่าน */
   const src=o.mode==='all'&&o.totIn>0?`<div>${fmt(o.setP,1)} = ${o.notSoak?`เมล็ดแห้ง ${fmt(o.totD,1)} กก. แช่แล้ว ~${fmt(o.totD*o.wf,1)} กก.`:`${nm}ที่มี ${fmt(o.totIn,1)} กก.`} ÷ ${fmt(o.AD,2)} ไร่${budADn(o)} — หว่านให้หมดพอดีแปลง</div>`
    :o.mode==='own'?`<div>${fmt(o.setP,1)} = ค่าที่คุณกำหนดเอง</div>`
    :wet?`<div>ค่าแนะนำเป็นน้ำหนักเมล็ดแห้ง ${fmt(o.rate,1)} แต่${nm}งอกดูดน้ำ หนักกว่าตอนแห้ง ${fmt(o.wf,2)} เท่า → ${fmt(o.rate,1)} × ${fmt(o.wf,2)} = <b>${fmt(o.setP,1)}</b></div>`:`<div>${fmt(o.setP,1)} = ค่าแนะนำ</div>`;
   h+=`<div class="hud bud-act"><div class="hud-h"><span>✅ ตั้งค่าแบบนี้ (แอป DJI)</span></div>
   <div class="hud-g bud-g"><div class="hud-c"><span>ใส่ในแอป</span><b>${fmt(o.setP,1)}</b><em>กก./ไร่</em></div><div class="hud-c"><span>เติมถึง</span><b>${fmt(L1,1)}</b><em>กก./เที่ยว</em></div><div class="hud-c"><span>ต้องบิน</span><b>${o.nTrip}</b><em>เที่ยว${o.min?` ~${fmt(o.min,0)} นาที`:''}</em></div></div>
-  <div class="hud-f"><b>${fill}</b>${o.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(o.saveL*10)/10,1)} กก. จะเหลือ ${o.nTrip-1} เที่ยว</div>`:''}${o.merge?`<div>💡 เที่ยว ${nM} เติม ${fmt(o.merge,1)} กก. ทีเดียวได้ — บินกลางแปลงที่เหลือ (${fmt(o.lastPM,1)}) จบ แล้วสลับเป็นเส้นขอบ (${fmt(o.lastPE,1)}) ไม่ต้องเติมใหม่ → ${o.nTrip-1} เที่ยว</div>`:''}${E&&o.nTripE?budSetTab(c,['mid','edge'],o):E&&c.r.edge?`<div>ℹ️ ไม่ได้เก็บขอบแยก: เส้นกลางแปลงห่างคันนาครึ่งร่อง → ${nm}ตกคันนา ~${Math.round(E.loss0*100)}% (ตั้ง “เก็บขอบแปลง” ด้านบนเพื่อแก้)</div>`:''}${o.nbTrip>=1&&o.tripBag&&o.tripBag!==o.nTrip?`<div>หรือเทครั้งละ ${o.nbTrip} กระสอบ = ${o.tripBag} เที่ยว</div>`:''}
+  <div class="hud-f"><b>${fill}</b>${o.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(o.saveL*10)/10,1)} กก. จะเหลือ ${o.nTrip-1} เที่ยว</div>`:''}${o.merge?`<div>💡 เที่ยว ${nM} เติม ${fmt(o.merge,1)} กก. ทีเดียวได้ — บินกลางแปลงที่เหลือ (${fmt(o.lastPM,1)}) จบ แล้วสลับเป็นเส้นขอบ (${fmt(o.lastPE,1)}) ไม่ต้องเติมใหม่ → ${o.nTrip-1} เที่ยว</div>`:''}${E&&o.nTripE?budSetTab(c,o.ord==='edge1'?['edge','mid']:['mid','edge'],o):E&&c.r.edge?`<div>ℹ️ ไม่ได้เก็บขอบแยก: เส้นกลางแปลงห่างคันนาครึ่งร่อง → ${nm}ตกคันนา ~${Math.round(E.loss0*100)}% (ตั้ง “เก็บขอบแปลง” ด้านบนเพื่อแก้)</div>`:''}${o.nbTrip>=1&&o.tripBag&&o.tripBag!==o.nTrip?`<div>หรือเทครั้งละ ${o.nbTrip} กระสอบ = ${o.tripBag} เที่ยว</div>`:''}
   ${src}<div>เติมมากหรือน้อยกว่านี้ก็ได้ ไม่ต้องตักออก (ไม่เกิน ${fmt(o.capM,1)} กก.) — โดรนปล่อยตาม กก./ไร่ ที่ใส่ในแอป เติมมากแค่บินได้ไกลขึ้นต่อเที่ยว</div></div></div>`;
   /* พอไหม — ประโยคเดียว (หว่านให้หมด = พอดีอยู่แล้ว) */
   if(o.mode==='all'&&o.totIn>0){if(o.notSoak)h+=`<div class="fadj ok">✅ แช่ทั้งหมด ${fmt(o.useD,0)} กก. → หนัก ~${fmt(Wt,0)} กก. แล้วหว่านให้หมด</div>`}
@@ -6412,14 +6422,18 @@ function budSetTab(c,kinds,o){const r=c.r,E=budEdgeSet(c);if(!r||!r.h)return '';
  return `<table class="bset-t${K.length>1?' two':''}"><thead><tr><th></th>${K.map(k=>`<th class="${k}">${col[k].h}</th>`).join('')}</tr></thead><tbody>${L.map((l,i)=>`<tr><td>${l}</td>${K.map(k=>`<td class="${k}">${col[k].v[i]}</td>`).join('')}</tr>`).join('')}</tbody></table>${K.includes('edge')&&E.diff?`<div class="bset-n">ด้านที่ลมพัดเข้าแปลง เส้นขอบห่าง ${fmt(E.inE,1)} ม. · ${E.inRpm} rpm ได้</div>`:''}`}
 function budEdgeLine(c,pre){const E=budEdgeSet(c);if(!E)return '';return `${pre||''}ห่างคันนา <b>${fmt(E.e,1)} ม.</b> · สูงจากยอด ${fmt(E.h,1)} ม. · ${E.rpm} rpm · ระยะร่อง <b>${fmt(E.WE,1)} ม.</b> · ${spd(E.v)}${E.diff?` (ด้านลมพัดเข้าแปลง ห่าง ${fmt(E.inE,1)} ม. ได้)`:''}`}
 /* เก็บขอบแปลง — ขอบยาว · แถบเส้นขอบ · % ที่เก็บไว้ (พิมพ์/เลื่อน) */
-function budResTxt(c,b){const o=budCalc(b,c),base=o.tr?o.tr.prep:o.totIn*(o.notSoak?o.wf:1);return `${fmt(base*o.res/100,1)} กก. (${fmt(o.res,1)}%)`}
+function budResTxt(c,b){const o=budCalc(b,c),base=o.tr?o.tr.prep:o.totIn*(o.notSoak?o.wf:1);return o.res?`${budOrder(b)==='edge1'?'เก็บขอบใช้':'เก็บไว้'} ${fmt(base*o.res/100,1)} กก.`:'0%'}
 /* ข้าวที่แบ่งไว้บินเส้นขอบ: ไม่ใช้ตอนบินกลางแปลง → เที่ยวท้ายบินรอบแปลง 1 รอบ (พิมพ์/เลื่อนเองได้) */
-function budResHTML(c,b,where){const live=!!(b.log||[]).length;if((where==='live')!==live)return '';const o=budCalc(b,c);if(!o.A)return '';const rr=o.rr,ctx=c.ctx,r=o.res,E=budEdgeSet(c),nm=c.m&&c.m.k==='seed'?'ข้าว':'ปุ๋ย',bn=typeof spBundN==='function'&&ctx==='adv'?spBundN():'คันนา';
- return `<div class="bud-res"><div class="bud-res-h"><span>🧱 ${nm}ที่แบ่งไว้บินเส้นขอบ</span><b data-resv>${budResTxt(c,b)}</b></div>
- <div class="bud-res-why">${r?`${nm}ส่วนนี้<b>ไม่ใช้ตอนบินกลางแปลง</b> — เก็บไว้เที่ยวท้าย บินรอบแปลง 1 รอบด้วยค่าเก็บขอบ${E?` (จาน ${E.rpm} rpm · สูง ${fmt(E.h,1)} ม. · ร่อง ${fmt(E.WE,1)} ม.)`:''}${E?(E.loss<=0.006?` ${nm}แทบไม่ตก${bn}`:` ⚠️ ตก${bn} ~${fmt(E.loss*100,1)}%`):''} · ที่เหลือ ~${fmt(o.midP||0,1)} กก. หว่านกลางแปลง`:`ตั้ง 0% = ไม่บินเส้นขอบแยก: เส้นกลางแปลงบินห่าง${bn}ครึ่งร่อง ${nm}ตก${bn}บ้าง${E&&E.loss0?` (~${Math.round(E.loss0*100)}% ของแถบริม${bn})`:''}`}</div>
- <div class="bud-in"><label>คิดจาก: ขอบแปลงยาว <input class="spnum" data-bud="per" data-ctx="${ctx}" inputmode="decimal" placeholder="${rr&&rr.est?Math.round(rr.est):'ม.'}" value="${esc(String(b.per||''))}" style="width:64px"> ม.</label>${rr?`<span class="tiny">× แถบที่เส้นขอบหว่าน ~${fmt(rr.WE,1)} ม. = ${fmt(rr.Ae,2)} ไร่ (${fmt(rr.pct,1)}% ของแปลง)</span>`:''}<span class="tiny muted">${rr?(rr.src==='poly'?'ความยาวจากรูปแปลงที่วาดไว้':rr.src==='est'?'ความยาวประมาณจากพื้นที่ — แก้ได้':'ความยาวตามที่กรอก'):''}</span></div>
- <div class="bud-res-c"><span class="small">ปรับเอง</span><input type="range" min="0" max="25" step="0.5" value="${r}" data-bud="res" data-ctx="${ctx}" aria-label="เปอร์เซ็นต์ที่แบ่งไว้บินเส้นขอบ"><input class="spnum" inputmode="decimal" value="${r||''}" placeholder="0" data-bud="res" data-ctx="${ctx}" style="width:56px" aria-label="เปอร์เซ็นต์ที่แบ่งไว้"><span>%</span>${rr&&b.resM&&Math.abs(r-rr.pct)>0.05?` <button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="resM" data-v="0">ใช้ค่าแนะนำ ${fmt(rr.pct,1)}%</button>`:''}</div>
- <div class="tiny muted">${r&&rr&&Math.abs(o.Ae/rr.Ae-1)>0.15?`${fmt(r,1)}% ≈ ${fmt(o.Ae/rr.Ae,1)} รอบขอบ · `:''}“ใส่ในแอป” เท่ากันทั้งกลางแปลงและเส้นขอบ · ไม่บินเส้นขอบแยก ตั้ง 0%</div></div>`}
+function budResHTML(c,b,where){const live=!!(b.log||[]).length;if((where==='live')!==live)return '';const o=budCalc(b,c);if(!o.A)return '';const rr=o.rr,ctx=c.ctx,r=o.res,E=budEdgeSet(c),nm=c.m&&c.m.k==='seed'?'ข้าว':'ปุ๋ย',bn=typeof spBundN==='function'&&ctx==='adv'?spBundN():'คันนา',eKg=(o.tr?o.tr.prep:o.totIn*(o.notSoak?o.wf:1))*r/100;
+ /* ภาพย่อ: แปลง (เขียว) + แถบรอบแปลง (สีอิฐ) = ข้าวที่เก็บไว้เที่ยวสุดท้าย */
+ const pic=`<svg class="bres-pic" viewBox="0 0 120 84" aria-hidden="true"><rect x="3" y="3" width="114" height="78" rx="3" fill="#C9A47A"/><rect x="${r?13:5}" y="${r?13:5}" width="${r?94:110}" height="${r?58:74}" rx="2" fill="#9CC98A"/>${r?'<rect x="8" y="8" width="104" height="68" rx="2" fill="none" stroke="#B4532A" stroke-width="3" stroke-dasharray="6 4"/>':''}</svg>`;
+ return `<div class="bud-res"><div class="bud-res-h"><span>🧱 ${r?(budOrder(b)==='edge1'?'เที่ยวแรก บินเก็บขอบก่อน':'เที่ยวสุดท้าย บินเก็บขอบ'):'ไม่บินเก็บขอบแยก'}</span><b data-resv>${budResTxt(c,b)}</b></div>
+ <div class="bres-row">${pic}<div class="bres-tx">${r?(budOrder(b)==='edge1'?`<div><span class="bres-k edg">■</span> เก็บขอบ (บินก่อน ได้กรอบแปลง) ใช้ <b>~${fmt(eKg,1)} กก.</b></div><div><span class="bres-k mid">■</span> กลางแปลง (ตามหลัง) ใช้<b>ที่เหลือทั้งหมด ~${fmt(o.midP||0,1)} กก.</b> — เก็บขอบเสร็จแล้วแอปคิดอัตราใหม่ให้</div>`:`<div><span class="bres-k mid">■</span> กลางแปลง (เที่ยวแรก ๆ) ใช้ <b>~${fmt(o.midP||0,1)} กก.</b></div><div><span class="bres-k edg">■</span> เก็บขอบ (เที่ยวสุดท้าย) <b>เก็บไว้ ${fmt(eKg,1)} กก.</b> ห้ามใช้หมดตอนบินกลางแปลง</div>`)+`<div class="tiny">บินรอบแปลง 1 รอบด้วยค่าเก็บขอบ${E?` (จาน ${E.rpm} rpm · สูง ${fmt(E.h,1)} ม. · ร่อง ${fmt(E.WE,1)} ม.)`:''}${E?(E.loss<=0.006?` ${nm}แทบไม่ตก${bn}`:` ⚠️ ตก${bn} ~${fmt(E.loss*100,1)}%`):''} · “ใส่ในแอป” เท่ากลางแปลง</div>`:`<div>บินแค่กลางแปลง ใช้${nm}ทั้งหมด — เส้นแรกห่าง${bn}ครึ่งร่อง${E&&E.loss0?` ${nm}ตก${bn}ราว ${Math.round(E.loss0*100)}% ของแถบริม${bn}`:''}</div>`}</div></div>
+ <div class="bud-res-c"><span class="small">ปรับเอง</span><input type="range" min="0" max="25" step="0.5" value="${r}" data-bud="res" data-ctx="${ctx}" aria-label="เปอร์เซ็นต์ที่เก็บไว้บินรอบแปลง"><input class="spnum" inputmode="decimal" value="${r||''}" placeholder="0" data-bud="res" data-ctx="${ctx}" style="width:56px" aria-label="เปอร์เซ็นต์ที่เก็บไว้"><span>%</span>${rr&&b.resM&&Math.abs(r-rr.pct)>0.05?` <button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="resM" data-v="0">ใช้ค่าแนะนำ ${fmt(rr.pct,1)}%</button>`:''}</div>
+ ${r?`<div class="bres-ord"><span>ลำดับ</span><button class="fchip sm ${budOrder(b)==='edge1'?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="order" data-v="edge1">🧱 เก็บขอบก่อน</button><button class="fchip sm ${budOrder(b)==='mid1'?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="order" data-v="mid1">🌾 กลางแปลงก่อน</button></div>`:''}
+ <div class="tiny muted">0% = ไม่บินเก็บขอบแยก${r&&rr&&Math.abs(o.Ae/rr.Ae-1)>0.15?` · ${fmt(r,1)}% ≈ ${fmt(o.Ae/rr.Ae,1)} รอบ`:''}</div>
+ <details class="bres-src" ${UI.resOpen?'open':''} data-tog="res"><summary>ที่มาของ ${fmt(eKg,1)} กก.</summary>
+ <div class="bud-in"><label>ขอบแปลงยาว <input class="spnum" data-bud="per" data-ctx="${ctx}" inputmode="decimal" placeholder="${rr&&rr.est?Math.round(rr.est):'ม.'}" value="${esc(String(b.per||''))}" style="width:64px"> ม.</label>${rr?`<span class="tiny">× แถบที่เส้นรอบแปลงหว่าน ~${fmt(rr.WE,1)} ม. = ${fmt(rr.Ae,2)} ไร่ (${fmt(rr.pct,1)}% ของแปลง) × อัตราเดียวกับกลางแปลง</span>`:''}<span class="tiny muted">${rr?(rr.src==='poly'?'ความยาวจากรูปแปลงที่วาดไว้':rr.src==='est'?'ความยาวประมาณจากพื้นที่ — รู้ความยาวจริงพิมพ์แก้ได้':'ความยาวตามที่กรอก'):''}</span></div></details></div>`}
 /* ระหว่างหว่าน ②: การ์ดเที่ยวต่อไป — เลขเดียวที่ต้องใส่ในแอป */
 function budNxHTML(c,b){const o=budCalc(b,c),t=o.tr;if(!t||!o.A||!o.rate)return '';
  const m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001,ctx=c.ctx,uD=wet?' แห้ง':'',av=t.next?t.av:t.phys-t.resLeft,E=budEdgeSet(c),isE=t.next==='edge';
@@ -6429,14 +6443,14 @@ function budNxHTML(c,b){const o=budCalc(b,c),t=o.tr;if(!t||!o.A||!o.rate)return 
   h+=t.phys>0.5?`<div class="fadj bad">⛔ ข้าวกลางแปลงหมดแล้ว เหลือแค่ที่เก็บไว้ทำขอบ ${fmt(t.phys,1)} กก. แต่กลางแปลงยังเหลือ ${fmt(t.remM,2)} ไร่ — ลด % เก็บขอบ หรือเตรียม${nm}เพิ่ม</div>`
    :wet?`<div class="fadj bad">⛔ เมล็ดที่แช่ไว้หมดแล้ว ยังเหลือ ${fmt(t.remA,2)} ไร่ — ต้องแช่เพิ่ม ~${fmt(need,1)} กก. แห้ง (ใช้เวลา 1–3 วัน)${o.wIn||!o.totD?'':t.dryLeft+0.05<need?` · เมล็ดแห้งเหลือ ${fmt(t.dryLeft,1)} กก. ต้องซื้อเพิ่ม ${fmt(need-t.dryLeft,1)} กก.`:` · มีเมล็ดแห้งเหลือ ${fmt(t.dryLeft,1)} กก. พอ`}</div>`
    :`<div class="fadj bad">⛔ ${nm}หมดแล้ว ยังเหลือ ${fmt(t.remA,2)} ไร่ — ต้องใช้เพิ่ม ~${fmt(need,0)} กก. (${fmt(need/o.bagD,1)} กระสอบ)</div>`}
- else if(t.newSet){const F1=t.nTrip>1?o.L:t.lastP;
-  const fill=t.nTrip===1?`เที่ยวนี้เที่ยวสุดท้าย — เติมให้ถึง ${fmt(t.lastP,1)} กก. ก็พอ`:o.L-t.lastP>0.5?`เติมถึง ${fmt(o.L,1)} กก. อีก ${t.nTrip-1} เที่ยว · เที่ยวสุดท้ายเติมแค่ ${fmt(t.lastP,1)} กก.`:`เติมถึง ${fmt(o.L,1)} กก. ทุกเที่ยว`;
+ else if(t.newSet){const eF=t.ord==='edge1'&&isE&&t.remM>0.01,F1=eF?Math.min(o.L,t.phys):t.nTrip>1?o.L:t.lastP;
+  const fill=eF?`เติมถึง ${fmt(F1,1)} กก. → 🧱 บินเก็บขอบก่อน (ใช้ ~${fmt(t.needQ,1)} กก.) แล้ว 🌾 บินกลางแปลงต่อด้วยที่เหลือในถัง`:t.nTrip===1?`เที่ยวนี้เที่ยวสุดท้าย — เติมให้ถึง ${fmt(t.lastP,1)} กก. ก็พอ`:o.L-t.lastP>0.5?`เติมถึง ${fmt(o.L,1)} กก. อีก ${t.nTrip-1} เที่ยว · เที่ยวสุดท้ายเติมแค่ ${fmt(t.lastP,1)} กก.`:`เติมถึง ${fmt(o.L,1)} กก. ทุกเที่ยว`;
   const why=[o.mode==='all'?`${!isE&&t.resLeft>0.05?`(${fmt(t.phys,1)} − เก็บไว้ทำขอบ ${fmt(t.resLeft,1)})`:`เหลือ ${fmt(t.phys,1)} กก.`} ÷ ${isE?'แถบขอบ ':''}${fmt(t.remN,2)} ไร่ = ${fmt(t.needP,1)} กก./ไร่`:wet?`ต้องลง ${fmt(t.needD,1)} แห้ง × ${fmt(o.wf,2)} = ${fmt(t.needP,1)} กก./ไร่ (ในถัง)`:`ต้องลง ${fmt(t.needP,1)} กก./ไร่`];
-  if(t.k&&Math.abs(t.k-1)>0.02)why.push(`ที่ผ่านมาเครื่องจ่ายจริง ${Math.round(t.k*100)}% ของค่าที่ใส่ → ใส่ ${fmt(t.newSet,1)} เพื่อชดเชย`);
-  else if(t.k)why.push('เครื่องจ่ายตรงค่าที่ใส่ ✅');
-  h+=`<div class="hud bud-act bud-nx"><div class="hud-h"><span>▶ เที่ยวต่อไป (เที่ยวที่ ${t.n+1})${o.res>0||t.arE?` · ${isE?'🧱 บินเก็บขอบ':'🌾 บินกลางแปลง'}`:''}</span></div>
-  <div class="hud-g bud-g"><div class="hud-c"><span>ใส่ในแอป</span><b>${fmt(t.newSet,1)}</b><em>กก./ไร่</em></div><div class="hud-c"><span>เติมถึง</span><b>${fmt(F1,1)}</b><em>กก.</em></div><div class="hud-c"><span>เหลืออีก</span><b>${t.nTrip+(t.nTripE2||0)}</b><em>เที่ยว</em></div></div>
-  <div class="hud-f"><b>${fill}${t.nTripE2?` → แล้ว 🧱 เก็บขอบอีก ${t.nTripE2} เที่ยว (${fmt(t.resLeft,1)} กก.)`:''}</b>${t.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(t.saveL*10)/10,1)} กก. จะเหลือ ${t.nTrip-1} เที่ยว</div>`:''}${t.merge?`<div>💡 เติม ${fmt(t.merge,1)} กก. ทีเดียวได้ — บินกลางแปลงที่เหลือ (${fmt(t.lastP,1)}) จบ แล้วสลับเป็นเส้นขอบ (${fmt(t.resLeft,1)}) ไม่ต้องเติมใหม่ · บันทึกแยก 2 แถว</div>`:''}${t.midShort?`<div class="warn-t">⚠️ กลางแปลงยังเหลือ ${fmt(t.midShort,2)} ไร่ แต่${nm}ที่เหลือคือส่วนเก็บขอบ — บินขอบตามนี้ หรือจะเอาไปลงกลางแปลง ตั้ง % เก็บขอบ = 0</div>`:''}${E&&(isE||o.res>0)?budSetTab(c,[isE?'edge':'mid'],o):''}<div>${why.join(' · ')}</div>${t.hop>0.05?`<div>ในถังยังค้าง ${fmt(t.hop,1)} กก. — เติมเพิ่มจนจอแอป DJI ขึ้น ${fmt(F1,1)} กก.</div>`:''}${(isE?t.arE:t.arM)>0&&t.remN<=Math.max(0.3,0.15*(isE?o.Ae:o.Ai))?`<div class="bud-done"><button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="${isE?'doneE':'doneM'}" data-v="1">✓ แอป DJI บิน${isE?'เส้นขอบ':'เส้นกลางแปลง'}ครบแล้ว</button><span>กดเมื่อแอปจบเส้น แต่ตรงนี้ยังเหลือพื้นที่</span></div>`:''}</div></div>`;
+  if(t.kN&&Math.abs(t.kN-1)>0.02)why.push(`เที่ยว${isE?'เก็บขอบ':'กลางแปลง'}ที่ผ่านมาเครื่องจ่ายจริง ${Math.round(t.kN*100)}% ของค่าที่ใส่ → ใส่ ${fmt(t.newSet,1)} เพื่อชดเชย`);
+  else if(t.kN)why.push('เครื่องจ่ายตรงค่าที่ใส่ ✅');
+  h+=`<div class="hud bud-act bud-nx"><div class="hud-h"><span>▶ เที่ยวต่อไป (เที่ยวที่ ${t.n+1})${o.res>0||t.arE?` · ${eF?'🧱 เก็บขอบ → 🌾 กลางแปลง':isE?'🧱 บินเก็บขอบ':'🌾 บินกลางแปลง'}`:''}</span></div>
+  <div class="hud-g bud-g"><div class="hud-c"><span>ใส่ในแอป</span><b>${fmt(t.newSet,1)}</b><em>กก./ไร่</em></div><div class="hud-c"><span>เติมถึง</span><b>${fmt(F1,1)}</b><em>กก.</em></div><div class="hud-c"><span>เหลืออีก</span><b>${t.nAll||t.nTrip+(t.nTripE2||0)}</b><em>เที่ยว</em></div></div>
+  <div class="hud-f"><b>${fill}${t.nTripE2?` → แล้ว 🧱 เก็บขอบอีก ${t.nTripE2} เที่ยว (${fmt(t.resLeft,1)} กก.)`:''}</b>${t.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(t.saveL*10)/10,1)} กก. จะเหลือ ${t.nTrip-1} เที่ยว</div>`:''}${t.merge?`<div>💡 เติม ${fmt(t.merge,1)} กก. ทีเดียวได้ — บินกลางแปลงที่เหลือ (${fmt(t.lastP,1)}) จบ แล้วสลับเป็นเส้นขอบ (${fmt(t.resLeft,1)}) ไม่ต้องเติมใหม่ · บันทึกแยก 2 แถว</div>`:''}${t.midShort?`<div class="warn-t">⚠️ กลางแปลงยังเหลือ ${fmt(t.midShort,2)} ไร่ แต่${nm}ที่เหลือคือส่วนเก็บขอบ — บินขอบตามนี้ หรือจะเอาไปลงกลางแปลง ตั้ง % เก็บขอบ = 0</div>`:''}${E&&(isE||o.res>0)?budSetTab(c,eF?['edge','mid']:[isE?'edge':'mid'],o):''}<div>${why.join(' · ')}</div>${t.hop>0.05?(!isE&&(b.log[b.log.length-1].kind==='edge')&&t.hop>0.5?`<div>ในถังยังค้าง ${fmt(t.hop,1)} กก. จากเที่ยวเก็บขอบ — บินกลางแปลงต่อได้เลย หรือลงเติมให้ถึง ${fmt(F1,1)} กก. ก็ได้</div>`:`<div>ในถังยังค้าง ${fmt(t.hop,1)} กก. — เติมเพิ่มจนจอแอป DJI ขึ้น ${fmt(F1,1)} กก.</div>`):''}${(isE?t.arE:t.arM)>0&&t.remN<=Math.max(0.3,0.15*(isE?o.Ae:o.Ai))?`<div class="bud-done"><button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="${isE?'doneE':'doneM'}" data-v="1">✓ แอป DJI บิน${isE?'เส้นขอบ':'เส้นกลางแปลง'}ครบแล้ว</button><span>กดเมื่อแอปจบเส้น แต่ตรงนี้ยังเหลือพื้นที่</span></div>`:''}</div></div>`;
   if(t.short){const big=t.dev2<-0.15;
    h+=`<div class="fadj ${big?'bad':'warn'}">⚠️ ${wet&&o.notSoak?'เมล็ดที่แช่ไว้':nm+'ที่เหลือ'}ไม่พอตามอัตรา${c.rs} — เลขในการ์ดนี้เกลี่ยที่มีให้ทั่ว ได้ ${fmt(t.needP,1)} กก./ไร่ (${budPc(t.dev2)})${wet&&o.notSoak?` · ถ้าจะให้ได้ตามอัตรา ต้องแช่เพิ่มอีก ${fmt(t.prepMore,1)} กก. แห้ง (ใช้เวลา 1–3 วัน)${o.totD&&t.dryLeft+0.05<t.prepMore?` — เมล็ดแห้งเหลือแค่ ${fmt(t.dryLeft,1)} กก. ต้องซื้อเพิ่ม ${fmt(t.prepMore-t.dryLeft,1)} กก.`:''}`:` · ถ้าจะให้ได้ตามอัตรา ต้องเพิ่มอีก ${fmt(t.addQ,0)} กก.`}${big?`<div>หรือใส่ ${fmt(t.tgtSet,1)} ตามอัตรา → หว่านได้ ~${fmt(t.coverT,2)} ไร่ ที่เหลือ ${fmt(t.remA-t.coverT,2)} ไร่ ค่อยหว่านเมื่อมี${nm}เพิ่ม</div>`:''}</div>`}
   else if(t.endLeft>Math.max(1,0.05*t.needQ)){const sA=t.allD*o.wf/(t.k||1);
@@ -6446,7 +6460,7 @@ function budTbHTML(c,b){const o=budCalc(b,c),L=b.log||[];if(!L.length)return '';
  const rows=L.map((x,i)=>{const sp=Math.max(0,num(x.w0)-num(x.w1)),ra=num(x.ra),a=ra>0?sp/ra:0,s=num(x.set)||o.setP,d=s?a/s-1:null;
   return `<tr><td>${i+1}${x.kind==='edge'?'<small>🧱</small>':''}</td><td>${fmt(num(x.w0),1)}<small>→ ${fmt(num(x.w1),1)}</small></td><td><b>${fmt(sp,1)}</b></td><td>${fmt(ra,2)}</td><td>${fmt(a,1)}<small>ใส่ ${fmt(s,1)}</small></td><td><span class="${budLv(d,0.05,0.1)}">${d==null?'-':budPc(d)}</span></td></tr>${num(x.loss)||num(x.ret)?`<tr class="sub"><td></td><td colspan="5">${num(x.loss)?`หก/ทิ้ง ${fmt(num(x.loss),1)} กก. `:''}${num(x.ret)?`นำออกคืนกอง ${fmt(num(x.ret),1)} กก.`:''}</td></tr>`:''}`}).join('');
  return `<div class="bud-t2">📜 ประวัติแต่ละเที่ยว</div><div class="bio-tw bud-tw"><table class="budtb"><tr><th>#</th><th>เติม→เหลือ</th><th>หว่าน</th><th>ไร่</th><th>ได้/ไร่</th><th>คลาด</th></tr>${rows}</table></div><div class="tiny muted">หน่วย กก. · คลาด = ที่ได้จริงเทียบค่าที่ใส่ในแอป (เครื่องจ่ายแม่นไหม) ไม่เกิน ±5% ถือว่าดี</div>`}
-function budDraftHTML(c,b){const o=budCalc(b,c),d=b.d||{},ctx=c.ctx,t=o.tr,n=(b.log||[]).length,kd=d.kind||(t&&t.next)||'mid',KC=(v,l)=>`<button class="fchip sm ${kd===v?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="dkind" data-v="${v}">${l}</button>`;
+function budDraftHTML(c,b){const o=budCalc(b,c),d=b.d||{},ctx=c.ctx,t=o.tr,n=(b.log||[]).length,kd=d.kind||(t&&t.next)||(budOrder(b)==='edge1'&&o.res>0?'edge':'mid'),KC=(v,l)=>`<button class="fchip sm ${kd===v?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="dkind" data-v="${v}">${l}</button>`;
  const defSet=t&&t.newSet?t.newSet:o.setP;
  const D=(k,ph,w)=>`<input class="spnum" data-bud="d.${k}" data-ctx="${ctx}" inputmode="decimal" placeholder="${ph}" value="${esc(String(d[k]??''))}" style="width:${w||58}px">`;
  const C=(k,v,l)=>`<button class="fchip sm ${b[k]===v?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="${k}" data-v="${v}">${l}</button>`;
@@ -6532,6 +6546,7 @@ Object.assign(ACT,{
   if(k==='plan'){const v=a.dataset.v;b.plan=v;budPersist(ctx);if(v==='rec'){const c=budCtx(ctx);if(c.rec)budSetRateD(ctx,c.rec.rate)}else if(v==='all')budSync(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
   if(k==='kgBag'){b.s1=b.s2=b.s3=''}
   if(k==='doneM'||k==='doneE'){b[k]=a.dataset.v==='1'?1:0;budPersist(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
+  if(k==='order'){b.order=a.dataset.v;b.d=b.d||{};delete b.d.kind;budPersist(ctx);budRefresh(ctx,'full',a);return}
   if(k==='dkind'){b.d=b.d||{};b.d.kind=a.dataset.v;budPersist(ctx);budRefresh(ctx,'full',a);return}
   if(k==='resM'){b.resM=0;b.res=0;budPersist(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
   if(k==='mode'&&a.dataset.v==='all'){const c=budCtx(ctx),o=budCalc({...b,mode:'tgt'},c),t=o.tr,v0=t&&t.remA>0.01?t.allD:o.availD;if(v0){const v=Math.round(v0*100)/100;if(ctx==='job')budJobRate(v);else UI.sp.rate=v}b.mode='tgt';budPersist(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
@@ -6541,7 +6556,7 @@ Object.assign(ACT,{
   if(!(av>0)){toast('ใส่พื้นที่จากแอป DJI ก่อน');return}
   if(w1>w0){toast('น้ำหนักหลังลงมากกว่าก่อนบิน — เช็กตัวเลข');return}
   if(ret>w1+1e-9){toast('นำออกได้ไม่เกินน้ำหนักหลังลง');return}
-  const kind=d.kind||(t&&t.next)||'mid',lastK=L.filter(x=>(x.kind||'mid')===kind).slice(-1)[0],lastA=L[L.length-1];let prevC=lastK?(lastK.rc!=null?lastK.rc:0):0,ra,rc;
+  const kind=d.kind||(t&&t.next)||(budOrder(b)==='edge1'&&o.res>0?'edge':'mid'),lastK=L.filter(x=>(x.kind||'mid')===kind).slice(-1)[0],lastA=L[L.length-1];let prevC=lastK?(lastK.rc!=null?lastK.rc:0):0,ra,rc;
   if(b.am==='cum'&&lastA&&(lastA.kind||'mid')!==kind&&lastA.rc!=null&&Math.abs(lastA.rc-prevC)>0.001){const s0=num(d.set)||r1(t&&t.newSet?t.newSet:o.setP),ex=s0>0?(w0-w1)/(s0*(t&&t.k||1)):0,c1=av-prevC,c2=av-lastA.rc;if(c2>0.001&&ex>0&&Math.abs(c2-ex)<Math.abs(c1-ex))prevC=lastA.rc}
   if(b.am==='cum'){ra=av-prevC;rc=av;if(!(ra>0.001)){toast(`พื้นที่สะสมต้องมากกว่าครั้งก่อน (${fmt(prevC,2)} ไร่) — หรือเปลี่ยนเป็น "ต่อเที่ยว"`);return}}else{ra=av;rc=prevC+av}
   const defSet=t&&t.newSet?t.newSet:o.setP,set=num(d.set)||r1(defSet);
