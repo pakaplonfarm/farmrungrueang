@@ -1557,6 +1557,21 @@ h3{font-size:16px;font-weight:700}
 .bt.all span{font-weight:700}.bt.all b{color:var(--ink)}
 .bt.lim{display:block;color:var(--ink-2,#3d4a42);font-size:13.5px;background:#FFF8E8;margin:6px -12px -6px;padding:9px 12px;border-top:1px solid #F1DDB0;border-radius:0 0 14px 14px}.bt.lim b{font-family:inherit;font-size:13.5px;color:#8A5A00;white-space:normal}
 .ben-tips>.bt.lim:first-child{border-top:0;border-radius:14px}
+.bud{margin:10px 0;padding:10px 12px;border:1px solid #D5E3D9;border-radius:16px;background:#fff}
+.bud-in{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0}.bud-in label{display:flex;align-items:center;gap:4px}
+.bud-plan{margin:8px 0;padding:8px 10px;border-radius:12px;background:var(--sprout,#DDF3E5)}
+.bud-tr{margin-top:10px;padding-top:8px;border-top:1px dashed #C9D8CE}
+.budtb{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}.budtb th,.budtb td{padding:4px 6px;text-align:right;border-bottom:1px solid #EEF2EF;white-space:nowrap}.budtb th:first-child,.budtb td:first-child{text-align:center}.budtb th{font-weight:600;color:#5B6B61;font-size:12px}.budtb td.neg{color:var(--soil,#C2452D);font-weight:600}
+.bud-g .hud-c b{font-size:26px}.bud-g .hud-c em{display:block;font-size:11px;white-space:nowrap}
+.bud-sec{margin:8px 0 4px}.bud-t{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px;margin:6px 0 2px}.bud-t i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--night,#0F2A1D);color:#fff;font-size:12px}
+.bud-box{margin:8px 0;padding:8px 10px;border:1px solid #E1EAE4;border-radius:12px;background:#FAFCFA}
+.bud-dr{margin:6px 0;padding:8px 10px;border-radius:12px;background:#F4F7F5}.bud-more summary{cursor:pointer;color:#3d6b52;margin:4px 0}
+.budtb td small{display:block;font-size:10px;color:#6B7B71}.budtb tr.sub td{font-size:11px;color:#8A5A00;text-align:left;border-bottom:1px solid #EEF2EF}.budtb td.ok{color:#047857;font-weight:600}.budtb td.warn{color:#B45309;font-weight:600}.budtb td.bad{color:var(--soil,#C2452D);font-weight:700}
+.bud-qc{display:block;border-left:1px solid #E1EAE4}.bq-r{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:baseline;padding:6px 0;border-bottom:1px dashed #E3EAE5;font-size:13.5px}.bq-r span{color:#4B5B51;white-space:nowrap;text-align:left}.bq-r b{text-align:right;font-weight:600}.bq-r.ok b{color:#047857}.bq-r.warn b{color:#B45309}.bq-r.bad b{color:var(--soil,#C2452D)}.budtb td span.ok,.budtb td small.ok{color:#047857;font-weight:600}.budtb td span.warn,.budtb td small.warn{color:#B45309;font-weight:600}.budtb td span.bad,.budtb td small.bad{color:var(--soil,#C2452D);font-weight:700}
+.bq-fix{margin-top:6px}.bq-fix>span{font-size:13.5px;color:#4B5B51}.bud-ol{margin:4px 0 0 18px;padding:0}.fchip.sm{padding:3px 9px;font-size:12px;min-height:0}
+.bud-rec{padding:8px 10px;border-radius:12px;background:var(--sprout,#DDF3E5)}.bud-rec-v{display:flex;align-items:baseline;gap:6px}.bud-rec-v span{font-size:12px;font-weight:700;color:#fff;background:var(--canopy,#1E7A4C);border-radius:999px;padding:1px 8px}.bud-rec-v b{font-family:'Bai Jamjuree',sans-serif;font-size:28px;line-height:1.1;color:var(--night,#0F2A1D)}.bud-rec-v em{font-style:normal;font-size:13px;color:#3d4a42}.bud-rec .fadj{margin:6px 0 2px}
+.bud-g .hud-c span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25}.bud-bal .bud-eq{font-size:15px;margin:6px 0 2px;line-height:1.5}.bud-act .hud-f>div{margin-top:4px}.bud-act{margin:10px 0 8px}.bud-act .hud-f b{color:#FFD27A}.bud-det{margin-top:8px}.bud-det>summary{color:#3d6b52;font-weight:600}
+.bud-new{margin:8px 0}
 </style>
 </head>
 <body>
@@ -3078,7 +3093,7 @@ CBP.prod={items:(inp,q)=>{const i=+inp.dataset.cbi;const mine=S.products.map(p=>
  reset:inp=>{const l=F?.chems[+inp.dataset.cbi];if(l)inp.value=l.product||''}};
 
 function renderJobForm(){
- const j=F;const cdef=CROPS[cropOf(j)];
+ if(typeof budMigJob==='function')budMigJob(F);const j=F;const cdef=CROPS[cropOf(j)];
  $('#jf').innerHTML=`<nav class="jnav" aria-label="ไปยังส่วนของฟอร์ม">${[['js-info','ลูกค้า'],['js-pest','ศัตรูพืช'],['js-chem','สารและการบิน'],['js-wx','อากาศ'],['js-pay','ค่าบริการ'],['js-etc','หมายเหตุ']].map(([id,n],i)=>`<button type="button" data-act="jfJump" data-id="${id}"><i>${i+1}</i>${n}</button>`).join('')}</nav>
  <div class="sec jstat"><div class="seg wide"><button class="${!isQ(j)?'on':''}" data-act="jfStatus" data-s="done">✅ งานที่ทำแล้ว</button><button class="${isQ(j)?'on':''}" data-act="jfStatus" data-s="queued">📅 จองคิว / นัดหมาย</button></div>${isQ(j)?`<div class="seg wide qsseg">${[['pending','⏳ รอดำเนินการ'],['doing','🔄 กำลังดำเนินการ'],['cancelled','✕ ยกเลิก']].map(x=>`<button class="${(j.qstate||'pending')===x[0]?'on':''}" data-act="jfQs" data-s="${x[0]}">${x[1]}</button>`).join('')}</div>`:''}
   ${isQ(j)?'<div class="tiny muted" style="margin-top:6px">คิวจะยังไม่นับเป็นรายรับ เมื่อทำงานเสร็จกด “✓ เสร็จ” ที่กล่องคิวงาน หรือสลับเป็น “งานที่ทำแล้ว” แล้วบันทึก</div>':''}
@@ -3111,8 +3126,8 @@ function renderJobForm(){
   <div id="jf-chems"></div>
   <div class="row"><button class="btn sm" data-act="addLine" data-c="ins">+ ยาแมลง</button><button class="btn sm" data-act="addLine" data-c="fun">+ ยารา</button><button class="btn sm" data-act="addLine" data-c="her">+ ยาหญ้า</button><button class="btn sm" data-act="addLine" data-c="fer">+ ปุ๋ย</button><button class="btn sm" data-act="addLine" data-c="pgr">+ ฮอร์โมน</button><button class="btn sm" data-act="addLine" data-c="adj">+ สารจับใบ</button></div>
   <div class="grid g3" style="margin-top:10px"><div class="field"><label>อัตราน้ำ (ลิตร/ไร่)</label><input data-f="waterRate" inputmode="decimal" value="${esc(j.waterRate)}" placeholder="เช่น 5"></div><div class="field"><label>จำนวนเที่ยวบิน</label><input data-f="flights" inputmode="numeric" value="${esc(j.flights)}"></div><div class="field"><label>ผู้บิน</label><input data-f="operator" value="${esc(j.operator)}"></div></div>
-  <div class="grid g3" style="margin-top:8px"><div class="field"><label>สูงจากยอดพืช (ม.)</label><input data-f="flyH" inputmode="decimal" value="${esc(j.flyH??'')}" placeholder="เช่น 2.5"></div><div class="field"><label>ระยะร่อง (ม.)</label><input data-f="swath" inputmode="decimal" value="${esc(j.swath??'')}" placeholder="เช่น 6"></div>${j.service==='fert'||j.service==='seed'?`<div class="field"><label>รอบจาน (rpm)</label><input data-f="spin" inputmode="numeric" value="${esc(j.spin??'')}" placeholder="เช่น 900"></div><div class="field"><label>อัตราหว่าน (กก./ไร่)</label><input data-f="kgRai" inputmode="decimal" value="${esc(j.kgRai??'')}" placeholder="เช่น 25"></div><div class="field"><label>วัสดุที่หว่าน</label><select data-f="spMat"><option value="">— อัตโนมัติตามระยะพืช —</option>${Object.entries(MAT).filter(([k,m])=>j.service==='seed'?m.k==='seed':m.k!=='seed').map(([k,m])=>`<option value="${k}" ${j.spMat===k?'selected':''}>${esc(m.n)}</option>`).join('')}</select></div>`:`<div class="field"><label>ละออง (µm)</label><input data-f="drop" inputmode="numeric" value="${esc(j.drop??'')}" placeholder="เช่น 150"></div>`}<div class="field"><label>ความเร็ว ${speedUnitSeg()}</label><input data-spd="1" inputmode="decimal" value="${esc(spdShow(j.speed??''))}" placeholder="${SU()==='kmh'?'เช่น 18':'เช่น 5'}"></div></div>
-  <div class="row" style="gap:6px;margin-top:4px"><button class="btn sm" data-act="jfFly" data-free="1">✈️ ใช้ค่าแนะนำตามพืช</button><span class="tiny muted">กรอกค่าไหนเอง ค่านั้นจะถูกล็อก แล้วกล่องด้านล่างคำนวณค่าอื่นให้ดีที่สุด</span></div><div id="jf-fly"></div>${teamPicker(j)}
+  <div class="grid g3" style="margin-top:8px"><div class="field"><label>สูงจากยอดพืช (ม.)</label><input data-f="flyH" inputmode="decimal" value="${esc(j.flyH??'')}" placeholder="เช่น 2.5"></div><div class="field"><label>ระยะร่อง (ม.)</label><input data-f="swath" inputmode="decimal" value="${esc(j.swath??'')}" placeholder="เช่น 6"></div>${j.service==='fert'||j.service==='seed'?`<div class="field"><label>รอบจาน (rpm)</label><input data-f="spin" inputmode="numeric" value="${esc(j.spin??'')}" placeholder="เช่น 900"></div><div class="field"><label>อัตราหว่าน = ใส่ในแอป (กก./ไร่)</label><input data-f="kgRai" inputmode="decimal" value="${esc(j.kgRai??'')}" placeholder="เช่น 25"></div><div class="field"><label>วัสดุที่หว่าน</label><select data-f="spMat"><option value="">— อัตโนมัติตามระยะพืช —</option>${Object.entries(MAT).filter(([k,m])=>j.service==='seed'?m.k==='seed':m.k!=='seed').map(([k,m])=>`<option value="${k}" ${j.spMat===k?'selected':''}>${esc(m.n)}</option>`).join('')}</select></div>`:`<div class="field"><label>ละออง (µm)</label><input data-f="drop" inputmode="numeric" value="${esc(j.drop??'')}" placeholder="เช่น 150"></div>`}<div class="field"><label>ความเร็ว ${speedUnitSeg()}</label><input data-spd="1" inputmode="decimal" value="${esc(spdShow(j.speed??''))}" placeholder="${SU()==='kmh'?'เช่น 18':'เช่น 5'}"></div></div>
+  <div class="row" style="gap:6px;margin-top:4px"><button class="btn sm" data-act="jfFly" data-free="1">✈️ ใช้ค่าแนะนำตามพืช</button><span class="tiny muted">กรอกค่าไหนเอง ค่านั้นจะถูกล็อก แล้วกล่องด้านล่างคำนวณค่าอื่นให้ดีที่สุด</span></div><div id="jf-fly"></div><div id="jf-bud"></div>${teamPicker(j)}
   <div id="jf-tank" class="small" style="margin-top:8px"></div>
  </div>
 
@@ -3195,7 +3210,7 @@ function jfLock(k,val){let L=(UI.jfLk||[]).filter(x=>x!==k);if(String(val).trim(
 function jfFix(){const o={};(UI.jfLk||[]).forEach(k=>{if(num(F[k]))o[JF_K[k]]=num(F[k])});return o}
 function jfFlyLive(){const el=$('#jf-fly');if(!el||!F)return;const cr=FLY[F.crop]?F.crop:'other';const stg=stageGroup(cr,F.stage);const wx=F.wx||{};
  const a=flyAdj(cr,F.service||'spray','m',stg,{temp:wx.temp,rh:wx.rh,wind:wx.wind,cond:wx.cond||[]},tgtFromChems(F),jfFix(),mobFromChems(F));
- if(a.S.spread){el.innerHTML=spJobHTML(F);return}
+ if(a.S.spread){el.innerHTML=spJobHTML(F);budMount('job');return}budMount('job',true);
  const hv=num(F.flyH),sv=num(F.swath),vv=num(F.speed),wv=num(F.waterRate);const c=hv&&sv&&vv&&wv?flyCalc(hv,sv,vv,wv,cr,stg):null;const mj=hv&&wv?flyModel({crop:cr,stg,can:'m',tgt:a.tgt,mob:a.mob,h:hv,sw:sv,w:wv,d:num(F.drop)||a.d,wind:a.wind,dt:a.dt,v:vv||a.v,env:envOf({temp:wx.temp,rh:wx.rh,wind:wx.wind,cond:wx.cond||[]})}):null;
  el.innerHTML=spTxt(`<div class="jfly"><div class="frec2-h"><b>✈️ ${(UI.jfLk||[]).length?'ค่าที่ดีที่สุดเมื่อล็อกค่าที่กรอก':'ค่าแนะนำ'}: ${esc(a.P.n)}${F.stage?' · '+esc(stageName(cr,F.stage)):''} · ${esc(FLY_SVC[F.service]?.n||'')}</b><button class="btn sm primary" data-act="jfFly">ใช้ค่านี้</button></div>
  <div class="frec2-v"><span>สูง <b>${fmt(a.h,1)}</b> ม.</span><span>ร่อง <b>${fmt(a.sw,1)}</b> ม.</span><span>เร็ว <b>${spdN(a.v)}</b> ${SU_LAB()}</span><span>น้ำ <b>${fmt(a.w,1)}</b> ล./ไร่</span><span>ละออง <b>${a.drop}</b> µm</span></div>
@@ -3517,7 +3532,7 @@ const NUMF=['area','pricePerRai','extraFee','discount','paidAmount','waterRate',
 function onFormInput(e){
  const t=e.target;if(!F)return;
  if(t.classList.contains('cb-in'))return;
- if(t.dataset.f){const k=t.dataset.f;F[k]=t.value;
+ if(t.dataset.f){const k=t.dataset.f;F[k]=t.value;if(k==='kgRai'){F.kgRaiU='tank';if(typeof budOwn==='function')budOwn('job')}
   if(k==='crop'){F.stage='';F.pricePerRai=priceFor(F.service,F.crop)||F.pricePerRai;renderJobForm();return}
   if(k==='service'){F.pricePerRai=priceFor(F.service,F.crop)||F.pricePerRai;renderJobForm();return}
   if(k==='stage'||k==='payStatus'){renderJobForm();return}
@@ -5239,7 +5254,7 @@ const MAT={
  mop:{n:'0-0-60',k:'fert',d:2.5,rho:1980,bulk:1.05,cd:0.6,sl:0.95,crh:84,rpmMax:1200,npk:[0,0,60]},
  as:{n:'21-0-0 แอมโมเนียมซัลเฟต',k:'fert',d:1.2,rho:1770,bulk:0.98,cd:0.6,sl:0.9,crh:79,rpmMax:1100,npk:[21,0,0]},
  org:{n:'ปุ๋ยอินทรีย์อัดเม็ด',k:'fert',d:4.0,rho:1100,bulk:0.65,cd:0.6,sl:0.85,crh:95,rpmMax:900,npk:[2,2,2],note:'เม็ดเปราะ รอบสูงแตกเป็นผง'},
- riceWet:{n:'เมล็ดข้าวงอก (น้ำตม)',k:'seed',d:3.8,fd:5,rho:1150,bulk:0.62,cd:0.85,sl:0.55,crh:999,rpmMax:900,tgw:28,wetF:1.25,germ:0.9,est:0.65,note:'รากยาวไม่เกิน 1–2 มม. (ตุ่มตา)'},
+ riceWet:{n:'เมล็ดข้าวงอก (น้ำตม)',k:'seed',d:3.8,fd:5,rho:1150,bulk:0.62,cd:0.85,sl:0.55,crh:999,rpmMax:900,tgw:28,wetF:1.30,germ:0.9,est:0.65,note:'รากยาวไม่เกิน 1–2 มม. (ตุ่มตา)'},
  riceDry:{n:'เมล็ดข้าวแห้ง',k:'seed',d:3.6,fd:5,rho:1180,bulk:0.56,cd:0.8,sl:0.6,crh:999,rpmMax:1100,tgw:28,germ:0.85,est:0.55},
  sunn:{n:'ปอเทือง (ปุ๋ยพืชสด)',k:'seed',d:3.5,fd:4,rho:1250,bulk:0.75,cd:0.7,sl:0.8,crh:999,rpmMax:1100,tgw:30,germ:0.8,est:0.7},
  gran:{n:'สารเม็ด (ยาแมลง/ยาคุม)',k:'chem',d:1.0,rho:1500,bulk:0.9,cd:0.5,sl:0.9,crh:999,rpmMax:1100}};
@@ -5290,7 +5305,7 @@ const seedRate=(mat,tgtP,tgw,germ)=>{const m=MAT[mat];return r1(tgtP/((germ||90)
 const seedDefault={rice:['riceWet',15],other:['sunn',6],sugarcane:['sunn',6],corn:['sunn',6],veg:['sunn',6]};
 /* ---------- ตัวหาค่าที่ดีที่สุดของการหว่าน: ค่าที่ล็อก = เงื่อนไข ค่าอื่นคำนวณใหม่ทั้งหมด ---------- */
 function spOpt(o){const m=MAT[o.mat]||MAT.c16168,env=o.env||envOf({}),fix=o.fix||{},has=x=>x!==''&&x!=null&&!isNaN(parseFloat(x));
- const P=FLY[o.crop]||FLY.other,orch=!!P.orchard,seed=m.k==='seed',W=env.windE==null?1.5:env.windE,rate=Math.max(0.3,num(o.rate)||10),hr=rate*(m.wetF||1),tgw=m.tgw?(num(o.tgw)||m.tgw):null,germ=num(o.germ)?num(o.germ)/100:m.germ;
+ const P=FLY[o.crop]||FLY.other,orch=!!P.orchard,seed=m.k==='seed',W=env.windE==null?1.5:env.windE,rate=Math.max(0.3,num(o.rate)||10),hr=rate*(num(o.wf)||m.wetF||1),tgw=m.tgw?(num(o.tgw)||m.tgw):null,germ=num(o.germ)?num(o.germ)/100:m.germ;
  /* เมล็ด: ช่องว่าง/กระจุกปลูกซ่อมยาก → เป้าสม่ำเสมอเข้มกว่า (CV ≤12%) */const cvT=m.k==='chem'?0.20:seed?0.12:0.15,adj=[];let stop=false;
  const hR=orch?[2.5,5]:seed?[2.5,4.5]:[2,4.5],rpmTop=Math.min(1300,m.rpmMax);
  const cH=orch?(num(o.treeH)||treeHdef(o.crop,o.stg)):0,F=k=>has(fix[k])?num(fix[k]):null,rowS=orch?(num(o.row)||ORCH_ROW[o.crop]||8):null;
@@ -5323,7 +5338,7 @@ function spOpt(o){const m=MAT[o.mat]||MAT.c16168,env=o.env||envOf({}),fix=o.fix|
  const inset=S/2+Math.max(0,th.drift);const lossN=spLoss(th.X,th.drift,S/2);let rE=rpm;for(let r=rpm;r>=400;r-=50){const t=spThrow(m,r,h,W,cH);if(t.X<=S/2+0.4){rE=r;break}rE=r}
  const thE=spThrow(m,rE,h,W,cH),lossE=spLoss(thE.X,thE.drift,inset);
  /* บรรทุก/ผลงาน */
- const load=Math.min(T55S.pay,T55S.vol*m.bulk),raiLoad=load/hr,tFly=raiLoad*1600/(S*v)*1.15/60,raiHr=raiLoad/((tFly+2.5)/60);
+ const capV=T55S.vol*(num(o.bulk)||m.bulk),capM=Math.min(T55S.pay,capV),load=Math.max(5,Math.min(capM,num(o.loadU)||capM)),raiLoad=load/hr,tFly=raiLoad*1600/(S*v)*1.15/60,raiHr=raiLoad/((tFly+2.5)/60);
  /* ชีววิทยา/เคมี: การสูญเสียไนโตรเจนจากยูเรีย · ใบเปียก · ฝน */
  /* เรือนยอดดัก: ทึบมากติดมาก · ผลัดใบติดน้อย */const intc=orch?Math.min(0.12,0.025*((FLY_LAI[o.crop]||{})[o.stg]??2.5)):0;
  let nLoss=0;if(m.urea||o.mat==='as'){nLoss=m.urea?0.12:0.05;if(env.T!=null&&env.T>32)nLoss+=0.06;if(env.sun>0.7)nLoss+=0.03;if(W>3)nLoss+=0.02;if(env.wetLeaf&&o.crop!=='rice')nLoss+=0.04;if(env.rainSoon)nLoss-=0.06;nLoss=Math.max(0.02,Math.min(0.35,nLoss))}
@@ -5348,17 +5363,17 @@ function spOpt(o){const m=MAT[o.mat]||MAT.c16168,env=o.env||envOf({}),fix=o.fix|
  if(rpm>m.rpmMax)adj.push(['warn',`รอบจาน ${rpm} rpm เกินที่ ${m.n} ทนได้ (~${m.rpmMax}) — เม็ดแตก/ผง ปลิว`]);
  const npk=m.npk?m.npk.map(x=>rate*x/100):null,seeds=tgw?625*rate/tgw:null;
  const eff=within*(1-(lossN+lossE)/4)*(1-nLoss)*(1-intc);
- return {m,mat:o.mat,rate,h,rpm,S,v,Q,fr,cv,cvAlt,within,th,fd,inset,rE,lossN,lossE,load,raiLoad,raiHr,tFly,nLoss,npk,seeds,plants:seeds?seeds*germ*m.est:null,hr,tgw,germ,eff,adj,stop,vWhy,orch,rowS,cvT,W,fix,cH,intc}}
+ return {m,mat:o.mat,rate,h,rpm,S,v,Q,fr,cv,cvAlt,within,capV,capM,wfU:hr/rate,th,fd,inset,rE,lossN,lossE,load,raiLoad,raiHr,tFly,nLoss,npk,seeds,plants:seeds?seeds*germ*m.est:null,hr,tgw,germ,eff,adj,stop,vWhy,orch,rowS,cvT,W,fix,cH,intc}}
 /* ---------- สถานะ + การ์ด ---------- */
 function spState(){const f=flyState();let s=UI.sp;const key=f.crop+'|'+f.stg+'|'+f.svc;
  if(!s||s.key!==key){const seed=f.svc==='seed';let mat,rate;if(seed){[mat,rate]=seedDefault[f.crop]||seedDefault.other;if(f.crop==='rice')rate=seedRate(mat,190,28,90)}else{const n=fertNow(f.crop,f.stg,s||{})[0];const it=n&&n.it[0];mat=it?it[0]:'c151515';rate=it?(n.tree?it[1]*(s&&s.trees||ORCH_TREES[f.crop]||25):it[1]):25}
   s=UI.sp={key,mat,rate,soil:s?.soil||'sand',rtype:s?.rtype||'sens',trees:s?.trees||ORCH_TREES[f.crop]||null,treeH:treeHdef(f.crop,f.stg),row:s?.row||ORCH_ROW[f.crop]||null,lcc:s?.lcc||'',tgtP:s?.tgtP||190,tgw:s?.tgw||28,germ:s?.germ||90,area:s?.area||num(plotById(UI.adv?.plotId)?.area)||10,lk:[],h:3,rpm:900,S:6,v:7};spApply()}
  return s}
 const spFix=s=>{const o={};(s.lk||[]).forEach(k=>o[k]=s[k]);return o};
-function spRun(s){s=s||UI.sp;const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),fix:spFix(s),row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH})}
+function spRun(s){s=s||UI.sp;const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),fix:spFix(s),row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
 function spApply(){const s=UI.sp;const r=spRun(s);['h','rpm','S','v'].forEach(k=>{if(!(s.lk||[]).includes(k))s[k]=r[k]});return r}
 /* ผลจากค่าที่ตั้งจริงบนแถบเลื่อน (ไม่ใช่ค่าที่แนะนำ) */
-function spEval(s){const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),fix:{h:s.h,rpm:s.rpm,S:s.S,v:s.v},row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH})}
+function spEval(s){const f=UI.fly;return spOpt({crop:f.crop,stg:f.stg,mat:s.mat,rate:s.rate,env:envOf(flyWx()),fix:{h:s.h,rpm:s.rpm,S:s.S,v:s.v},row:s.row,tgw:s.tgw,germ:s.germ,treeH:s.treeH,...budPhysM('adv',MAT[s.mat])})}
 function spPatSVG(r){const W=340,H=96,S=r.S,X=r.th.X,f=spPat(X,r.th.drift),span=S*3.2,x0=-span/2;const px=y=>((y-x0)/span)*W;let sum='',ln=[];
  for(let j=-1;j<=1;j++){let d='';for(let i=0;i<=120;i++){const y=x0+span*i/120;d+=(i?'L':'M')+px(y).toFixed(1)+','+(H-12-f(y-j*S)*34).toFixed(1)}ln.push(`<path d="${d}" fill="none" stroke="#94A3B8" stroke-width="1" stroke-dasharray="3 3"/>`)}
  let mx=0;const pts=[];for(let i=0;i<=160;i++){const y=x0+span*i/160;let v=0;for(let j=-6;j<=6;j++)v+=f(y-j*S);pts.push([y,v]);mx=Math.max(mx,v)}
@@ -5377,9 +5392,10 @@ function spRecHTML(){const s=UI.sp;const r=spRun(s);const lk=s.lk||[];
  const items=[[r.fd.inRange?'ok':'warn',`⚙️ ${r.fd.n}${r.fd.std?' (มาตรฐาน T55)':' (อุปกรณ์เสริม)'} — อัตราไหล ${fmt(r.Q,1)} กก./นาที (ช่วงแม่นยำ ${fmt(r.fr[0],0)}–${fmt(r.fr[1],0)} กก./นาที)`],
   ['ok',`🌀 ${r.rpm} rpm ที่สูง ${fmt(r.h,1)} ม. → เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง · ลอย ${fmt(r.th.t,2)} วิ. → ร่อง ${fmt(r.S,1)} ม. ให้ CV ${Math.round(r.cv*100)}% (เป้า ≤${Math.round(r.cvT*100)}%)${r.orch?(r.rowS&&r.S<r.rowS-0.01?` · สวน: เม็ดเหวี่ยงไม่ถึงครึ่งแถว → บิน 2 เที่ยวต่อแถว (ร่อง ${fmt(r.S,1)} ม.)`:' · สวน: ร่อง = ระยะแถว'):''}`],
   ...(r.vWhy?[['ok',`💨 ${r.vWhy}`]]:[]),...r.adj],crit=items.filter(x=>x[0]==='bad'||x[0]==='warn'),rest=items.filter(x=>x[0]!=='bad'&&x[0]!=='warn');
+ const sN=typeof budSetNow==='function'?budSetNow('adv',r.rate,r.m):null;
  return `<div class="hud ${r.stop?'stop':''}"><div class="hud-h"><span>${r.stop?'⛔ ไม่ควรหว่านตอนนี้':lk.length?'ค่าดีที่สุดเมื่อล็อก '+lk.map(k=>SP_N[k]).join(' + '):'ค่าหว่านที่ดีที่สุดตอนนี้'}</span>${lk.length?'<button class="hud-x" data-act="spReset">ปลดล็อก</button>':''}</div>
- <div class="hud-g">${cell('h','สูงจากยอด',fmt(r.h,1),'ม.')}${cell('rpm','รอบจาน',r.rpm,'rpm')}${cell('S','ระยะร่อง',fmt(r.S,1),'ม.')}${cell('v','ความเร็ว',spdN(r.v),SU_LAB())}${cell('rate','อัตรา',fmt(r.rate,1),'กก./ไร่')}${cell('fd','เกลียวป้อน',esc(r.fd.n.replace('เกลียว','')),r.fd.std?'มาตรฐาน':'เสริม','txt')}</div>
- <div class="hud-f">ความสม่ำเสมอ CV <b>${Math.round(r.cv*100)}%</b> (เป้า ≤${Math.round(r.cvT*100)}%) · เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง</div></div>
+ <div class="hud-g">${cell('h','สูงจากยอด',fmt(r.h,1),'ม.')}${cell('rpm','รอบจาน',r.rpm,'rpm')}${cell('S','ระยะร่อง',fmt(r.S,1),'ม.')}${cell('v','ความเร็ว',spdN(r.v),SU_LAB())}${cell('rate','ใส่ในแอป',fmt(sN||r.hr,1),'กก./ไร่')}${cell('fd','เกลียวป้อน',esc(r.fd.n.replace('เกลียว','')),r.fd.std?'มาตรฐาน':'เสริม','txt')}</div>
+ <div class="hud-f">${sN?`“ใส่ในแอป” ปรับตามที่บันทึกการบินแล้ว = การ์ด “▶ เที่ยวต่อไป” · `:(typeof budHudNote==='function'&&budHudNote('adv'))||(r.wfU>1.001?`“ใส่ในแอป” = เมล็ดแห้ง ${fmt(r.rate,1)} กก./ไร่ × ${fmt(r.wfU,2)} (งอกแล้วหนักขึ้น โดรนชั่งน้ำหนักเปียก) · `:'')}ความสม่ำเสมอ CV <b>${Math.round(r.cv*100)}%</b> (เกณฑ์ ≤${Math.round(r.cvT*100)}%) · เหวี่ยงได้ ~${fmt(r.th.X,1)} ม./ข้าง</div></div>
  ${crit.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}
  <details class="fold why" ${UI.whyOpen?'open':''} data-tog="why"><summary><span>💡 ทำไมได้ค่านี้</span><em>${rest.length} ข้อ</em></summary>${rest.map(([c,t])=>`<div class="fadj ${c}">${esc(t)}</div>`).join('')}</details>`}
 const SP_N={h:'ความสูง',rpm:'รอบจาน',S:'ร่อง',v:'ความเร็ว',rate:'อัตรา'};
@@ -5391,7 +5407,7 @@ function spOutHTML(){const s=UI.sp;const r=spEval(s);const pc=Math.round(r.eff*1
  <div class="spgrid">${g('ความสม่ำเสมอ CV',Math.round(r.cv*100)+'%',r.cv<=0.15?'ok':r.cv<=0.25?'warn':'bad')}${g('ลมพาเบี่ยง',fmt(Math.abs(r.th.drift),1)+' ม.',Math.abs(r.th.drift)>0.12*r.S?'warn':'')}${g('อัตราไหล',fmt(r.Q,1)+' กก./นาที',r.fd.inRange?'':'warn')}
  ${g('บรรทุก/เที่ยว',fmt(r.load,0)+' กก.')}${g('ไร่/เที่ยว',fmt(r.raiLoad,1))}${g('ไร่/ชม. (รวมเติม)',fmt(r.raiHr,0))}
  ${r.npk?g('ธาตุ N-P₂O₅-K₂O',r.npk.map(x=>fmt(x,1)).join('-')+' กก./ไร่'):''}${r.seeds?g('เมล็ด/ตร.ม.',Math.round(r.seeds)+` (ต้นตั้งตัว ~${Math.round(r.plants)})`,r.seeds<150?'warn':r.seeds>400?'warn':'ok'):''}</div>
- ${nutriUseHTML(r,s,UI.fly)}${(()=>{const A=num(s.area)||0;if(!A)return '';const tot=r.rate*A,hop=r.hr*A,bag=r.m.k==='seed'?25:50;return `<div class="spedge" style="margin-bottom:6px"><b>📋 งานนี้ ${fmt(A,1)} ไร่</b><div class="small">${r.m.k==='seed'?'เมล็ดแห้ง':'ปุ๋ย'}รวม <b>${fmt(tot,0)} กก.</b> (${fmt(tot/bag,1)} กระสอบ ${bag} กก.)${r.hr!==r.rate?` · หลังแช่งอก ~${fmt(hop,0)} กก.`:''} · <b>${Math.ceil(hop/r.load-1e-9)} เที่ยว</b> (เที่ยวละ ≤${fmt(r.load,0)} กก.) · เวลาประมาณ <b>${fmt(A/r.raiHr*60,0)} นาที</b>${r.npk?` · N-P₂O₅-K₂O รวม ${r.npk.map(x=>fmt(x*A,0)).join('-')} กก.`:''}</div><div class="tiny muted">อัตราต่อไร่กำหนดตามความต้องการของพืช ไม่เปลี่ยนตามขนาดแปลง — ขนาดแปลงเปลี่ยนแค่ปริมาณรวม/จำนวนเที่ยว</div></div>`})()}
+ ${nutriUseHTML(r,s,UI.fly)}
  <div class="spedge"><b>🧱 เก็บขอบแปลง</b><div class="small">บินแนวขอบห่างคันนา/รั้ว <b>${fmt(r.inset,1)} ม.</b> · ลดรอบจานเหลือ <b>${r.rE} rpm</b> → ${r.m.k==='seed'?'เมล็ด':'ปุ๋ย'}ออกนอกแปลง ${Math.round(r.lossN*100)}% → <b>${Math.round(r.lossE*100)}%</b>${Math.abs(r.th.drift)>0.3?` · ด้านใต้ลมห่างเพิ่ม ${fmt(Math.abs(r.th.drift),1)} ม.`:''}</div></div>
  <div class="tiny muted" style="margin-top:6px">สมมติฐาน: เม็ด ${esc(r.m.n)} ขนาด ~${r.m.d} มม. ความหนาแน่น ${r.m.rho} กก./ม³ ตกสุดที่ ${fmt(r.th.vt,1)} ม./วิ. · เทียบกับสเปก DJI (3 ม. 1100 rpm กว้าง 10 ม.) — ยืนยันด้วยถาดเก็บตัวอย่างขวางแนวบิน</div></div>`}
 function spCardHTML(f){const s=spState();const r=spEval(s);const P=FLY[f.crop]||FLY.other;
@@ -5404,21 +5420,20 @@ function spCardHTML(f){const s=spState();const r=spEval(s);const P=FLY[f.crop]||
  <div class="row" style="gap:10px;margin:6px 0;flex-wrap:wrap"><label class="small">น้ำหนัก 1000 เมล็ด (ก.) <input class="spnum" data-spi="tgw" inputmode="decimal" value="${s.tgw}"></label><label class="small">ความงอก (%) <input class="spnum" data-spi="germ" inputmode="numeric" value="${s.germ}"></label></div>
  <div class="small">→ ใช้เมล็ดแห้ง <b>${fmt(seedRate(s.mat,s.tgtP,s.tgw,s.germ),1)} กก./ไร่</b> = ${Math.round(625*seedRate(s.mat,s.tgtP,s.tgw,s.germ)/s.tgw)} เมล็ด/ตร.ม. × งอก ${s.germ}% × รอดตั้งตัว ${Math.round((MAT[s.mat].est||0.65)*100)}%</div>
  <div class="tiny muted">กรมการข้าวใช้ 15 กก./ไร่ เป็นค่ามาตรฐาน · ต้นหนาเกินแตกกอน้อย ล้มง่าย โรคมาก · บางเกินวัชพืชแทรก — ทดสอบความงอกก่อนแช่ (นับ 100 เมล็ด)</div></div>`:''}
- <div class="row" style="gap:10px;margin:6px 0"><label class="small">พื้นที่งานนี้ (ไร่) <input class="spnum" data-spi="area" inputmode="decimal" value="${s.area}"></label><span class="tiny muted">ใช้คำนวณปุ๋ย/เมล็ดรวม จำนวนเที่ยว และเวลา</span></div>
  <div class="fstg" style="margin-top:6px"><span class="small muted">วัสดุ:</span>${mats.map(([k,m])=>`<button class="fchip ${s.mat===k?'on':''}" data-act="spMat" data-m="${k}">${esc(m.n)}</button>`).join('')}</div>
  <div id="sp-rec">${spRecHTML()}</div>
  <div class="tiny muted" style="margin:2px 2px 8px">เลื่อนค่าไหน ค่านั้นจะถูก 🔒 ล็อก แล้วค่าอื่นคำนวณใหม่ให้ดีที่สุด (ล็อกได้ 2 ค่า)</div>
- ${sl('rate','อัตราหว่าน',0.5,120,0.5,s.rate,fmt(s.rate,1)+' กก./ไร่')}${sl('h','ความสูงจากยอดพืช',1.5,8,0.5,s.h,fmt(s.h,1)+' ม.')}${sl('rpm','รอบจานหว่าน',400,1300,50,s.rpm,s.rpm+' rpm')}${sl('S','ระยะร่อง (Route spacing)',3,10,0.25,s.S,fmt(s.S,2)+' ม.')}
+ ${(()=>{const w=spWfU(s);return sl('rate','อัตราหว่าน = ใส่ในแอป',0.5,w>1.001?150:120,0.5,Math.round(s.rate*w*2)/2,fmt(s.rate*w,1)+' กก./ไร่')})()}${sl('h','ความสูงจากยอดพืช',1.5,8,0.5,s.h,fmt(s.h,1)+' ม.')}${sl('rpm','รอบจานหว่าน',400,1300,50,s.rpm,s.rpm+' rpm')}${sl('S','ระยะร่อง (Route spacing)',3,10,0.25,s.S,fmt(s.S,2)+' ม.')}
  ${sl('v','ความเร็วบิน',SU()==='kmh'?4:1,SU()==='kmh'?36:10,SU()==='kmh'?1:0.1,SU()==='kmh'?Math.round(s.v*3.6):s.v,spd(s.v))}
  <div class="fsl"><div class="fsl-h"><span>ลมขณะบิน</span><b id="fsl-wind">${windTxt(f.wind)}</b></div><input type="range" data-fly="wind" min="0" max="8" step="0.1" value="${f.wind}"></div>
- <div id="sp-out">${spOutHTML()}</div>${r.m.k==='fert'?burnBoxSp(r):''}<div id="sp-tray">${trayHTML()}</div></div>`}
+ <div id="sp-out">${spOutHTML()}</div><div id="sp-bud">${budHTML('adv')}</div>${r.m.k==='fert'?burnBoxSp(r):''}<div id="sp-tray">${trayHTML()}</div></div>`}
 function burnBoxSp(r){return ''}
-function spSync(skip){const s=UI.sp;const lab={rate:fmt(s.rate,1)+' กก./ไร่',h:fmt(s.h,1)+' ม.',rpm:s.rpm+' rpm',S:fmt(s.S,2)+' ม.',v:spd(s.v)};
- ['rate','h','rpm','S','v'].forEach(k=>{if(k!==skip){const el=document.querySelector(`[data-sp="${k}"]`);if(el)el.value=k==='v'&&SU()==='kmh'?Math.round(s.v*3.6):s[k]}const l=$('#spl-'+k);if(l)l.textContent=lab[k];const b=$('#splk-'+k);if(b)b.className='flk'+((s.lk||[]).includes(k)?' on':'')})}
+function spSync(skip){const s=UI.sp;const wU=spWfU(s),lab={rate:fmt(s.rate*wU,1)+' กก./ไร่',h:fmt(s.h,1)+' ม.',rpm:s.rpm+' rpm',S:fmt(s.S,2)+' ม.',v:spd(s.v)};
+ ['rate','h','rpm','S','v'].forEach(k=>{if(k!==skip){const el=document.querySelector(`[data-sp="${k}"]`);if(el)el.value=k==='v'&&SU()==='kmh'?Math.round(s.v*3.6):k==='rate'?Math.round(s.rate*wU*2)/2:s[k]}const l=$('#spl-'+k);if(l)l.textContent=lab[k];const b=$('#splk-'+k);if(b)b.className='flk'+((s.lk||[]).includes(k)?' on':'')})}
 function spRefresh(skip,live,anc){if(!UI.sp)return;anc=anc||(skip?document.querySelector(`[data-sp="${skip}"]`):document.activeElement);
- keepPos(anc,()=>{spApply();spSync(skip);const r=$('#sp-rec');if(r){if(live)r.classList.add('stale');else{r.innerHTML=spRecHTML();r.classList.remove('stale')}}const o=$('#sp-out');if(o)o.innerHTML=spOutHTML()})}
+ keepPos(anc,()=>{spApply();spSync(skip);const r=$('#sp-rec');if(r){if(live)r.classList.add('stale');else{r.innerHTML=spRecHTML();r.classList.remove('stale')}}const o=$('#sp-out');if(o)o.innerHTML=spOutHTML();if(typeof budRefresh==='function')budRefresh('adv','part')})}
 document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset)return;
- if(t.dataset.sp&&UI.sp){const s=UI.sp,k=t.dataset.sp;s[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:+t.value;
+ if(t.dataset.sp&&UI.sp){const s=UI.sp,k=t.dataset.sp;s[k]=k==='v'&&SU()==='kmh'?Math.round(+t.value/3.6*100)/100:k==='rate'?Math.round(+t.value/spWfU(s)*1000)/1000:+t.value;if(k==='rate'&&typeof budOwn==='function')budOwn('adv');
   if(k!=='rate'){s.lk=(s.lk||[]).filter(x=>x!==k);s.lk.push(k);if(s.lk.length>2)s.lk.shift()}spRefresh(k,true,t);return}
  if(t.dataset.spi&&UI.sp){const v=num(t.value);if(!v)return;UI.sp[t.dataset.spi]=v;if(['tgw','germ'].includes(t.dataset.spi)&&UI.fly.crop==='rice'&&MAT[UI.sp.mat].k==='seed')UI.sp.rate=seedRate(UI.sp.mat,UI.sp.tgtP,UI.sp.tgw,UI.sp.germ);if(t.dataset.spi==='trees'){const n=fertNow(UI.fly.crop,UI.fly.stg,UI.sp)[0];if(n&&n.tree&&n.it[0])UI.sp.rate=r1(n.it[0][1]*v)}spRefresh(null,false,t)}});
 document.addEventListener('change',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.sp&&UI.sp)keepPos(t,()=>{const r=$('#sp-rec');if(r){r.innerHTML=spRecHTML();r.classList.remove('stale')}})});
@@ -5427,9 +5442,11 @@ function spJob(F){const cr=FLY[F.crop]?F.crop:'other',stg=stageGroup(cr,F.stage)
  let mat=F.spMat,rate=num(F.kgRai);if(!mat||!MAT[mat]){if(seed)mat=(seedDefault[cr]||seedDefault.other)[0];else{const n=fertNow(cr,stg,{})[0];mat=n&&n.it[0]?n.it[0][0]:'c151515'}}
  if(!rate){if(seed)rate=cr==='rice'&&mat!=='sunn'?seedRate(mat,190,28,90):(seedDefault[cr]||seedDefault.other)[1];else{const n=fertNow(cr,stg,{})[0];rate=n&&n.it[0]?(n.tree?n.it[0][1]*(ORCH_TREES[cr]||25):n.it[0][1]):25}}
  const env=envOf({temp:wx.temp,rh:wx.rh,wind:wx.wind,cond:wx.cond||[]});const fix={};(UI.jfLk||[]).forEach(k=>{const m={flyH:'h',swath:'S',speed:'v',spin:'rpm'}[k];if(m&&num(F[k]))fix[m]=num(F[k])});
- return spOpt({crop:cr,stg,mat,rate,env,fix})}
-function spJobHTML(F){const r=spJob(F);const pc=Math.round(r.eff*100);
- return `<div class="jfly"><div class="row between"><b>✈️ ${(UI.jfLk||[]).length?'ค่าที่ดีที่สุดเมื่อล็อกค่าที่กรอก':'แนะนำการหว่าน'}: ${esc(r.m.n)} ${fmt(r.rate,1)} กก./ไร่</b><button class="btn sm primary" data-act="spJf">ใช้ค่านี้</button></div>
+ /* อัตราในฟอร์ม = เลขที่ใส่ในแอป (น้ำหนักในถัง) → แปลงเป็นเมล็ดแห้งสำหรับคำนวณเมล็ด/ต้น */
+ const ph=budPhysM('job',MAT[mat]);if(num(F.kgRai)&&F.kgRaiU==='tank'&&ph.wf>1.001)rate=num(F.kgRai)/ph.wf;
+ return spOpt({crop:cr,stg,mat,rate,env,fix,...ph})}
+function spJobHTML(F){const r=spJob(F),sN=typeof budSetNow==='function'?budSetNow('job',r.rate,r.m):null;const pc=Math.round(r.eff*100);
+ return `<div class="jfly"><div class="row between"><b>✈️ ${(UI.jfLk||[]).length?'ค่าที่ดีที่สุดเมื่อล็อกค่าที่กรอก':'แนะนำการหว่าน'}: ${esc(r.m.n)} · ใส่ในแอป DJI ${fmt(sN||r.hr,1)} กก./ไร่</b><button class="btn sm primary" data-act="spJf">ใช้ค่านี้</button></div>
  <div class="frec2-v small"><span>สูง <b>${fmt(r.h,1)}</b> ม.</span><span>รอบจาน <b>${r.rpm}</b></span><span>ร่อง <b>${fmt(r.S,1)}</b> ม.</span><span>เร็ว <b>${spd(r.v)}</b></span><span>${esc(r.fd.n)}</span></div>
  <div class="small">ลงพื้นที่ตามเป้า ~<b>${pc}%</b> · CV ${Math.round(r.cv*100)}% · ${fmt(r.raiLoad,1)} ไร่/เที่ยว · ขอบแปลง: ห่าง ${fmt(r.inset,1)} ม. ${r.rE} rpm${r.npk?` · N-P-K ${r.npk.map(x=>fmt(x,1)).join('-')} กก./ไร่`:''}${r.seeds?` · ${Math.round(r.seeds)} เมล็ด/ตร.ม.`:''}</div>
  ${r.adj.filter(a=>a[0]!=='info').slice(0,3).map(a=>`<div class="tiny ${a[0]==='bad'?'neg':''}">${esc(a[1])}</div>`).join('')}</div>`}
@@ -5440,7 +5457,7 @@ Object.assign(ACT,{
  spLock:a=>{const s=spState(),k=a.dataset.k;s.lk=s.lk||[];if(s.lk.includes(k))s.lk=s.lk.filter(x=>x!==k);else{s.lk.push(k);if(s.lk.length>2)s.lk.shift()}spRefresh(null,false,a)},
  spTgt:a=>{const s=spState();s.tgtP=num(a.dataset.v);s.rate=seedRate(s.mat,s.tgtP,s.tgw,s.germ);spApply();render()},
  spReset:()=>{const s=spState();s.lk=[];spApply();render()},
- spJf:()=>{const r=spJob(F);F.flyH=r.h;F.swath=r.S;F.speed=Math.round(r.v*100)/100;F.spin=r.rpm;F.kgRai=r1(r.rate);F.spMat=r.mat;renderJobForm()}
+ spJf:()=>{const r=spJob(F);F.flyH=r.h;F.swath=r.S;F.speed=Math.round(r.v*100)/100;F.spin=r.rpm;F.kgRai=Math.round(r.hr*100)/100;F.kgRaiU='tank';F.spMat=r.mat;renderJobForm()}
 });
 
 
@@ -6016,6 +6033,332 @@ function benAdv(f,wx,o={}){const F2={...f,...(o.f||{})},W2={...wx,...(o.wx||{})}
 function advTips(f,wx,b,bio,md){const tk=md.T.key||f.tgt||defTgt(f.svc),forms=f.forms||[],pf=Object.fromEntries(b.parts.map(p=>[p[2]||'',p[1]]));
  let alt=null;if((pf.dose??1)<0.9&&!(f.lk||[]).length){const cg=CG();try{localStorage.setItem('covGoal','max');const a=flyAdj(f.crop,f.svc,f.can,f.stg,wx,f.tgt,{},f.mob);if(!a.S.spread&&(Math.abs(a.w-f.w)>0.4||Math.abs(a.v-f.v)>0.2))alt=a}catch(e){}finally{try{localStorage.setItem('covGoal',cg)}catch(e){}}}
  return benefitTips(o=>benAdv(f,wx,o),b.tot,{tk,bio,hasAdj:forms.includes('ADJ'),d:f.d,env:envOf(wx),wx,alt,burnF:pf.burn??1,w:f.w,water:f.water||'tap'})}
+
+/* ========== ส่วนที่ 15 (v2): วัสดุที่มี ↔ พื้นที่ · เมล็ดแห้ง→เปียก · น้ำหนักต่อเที่ยว · บันทึกคุมคุณภาพ (QC) ระหว่างหว่าน ==========
+   หน่วย 2 แบบ:  "แห้ง"  = น้ำหนักตามกระสอบ → ใช้คิดอัตราเป้า จำนวนเมล็ด ธาตุอาหาร
+                 "ในถัง" = น้ำหนักที่โดรนชั่งได้ตอนเติม (เมล็ดแช่/งอก = แห้ง × wf) → ใช้ตั้งอัตราในแอป DJI และบันทึกก่อน/หลังบิน
+   wf = (100 − ความชื้นเดิม) ÷ (100 − ความชื้นหลังแช่)  เมล็ดแห้ง ~13% (11–14%) → แช่ ~30% = ×1.24 → งอกตุ่มตา ~33% = ×1.30
+   หรือชั่งจริง: เมล็ดแห้ง a กก. แช่/งอก สะเด็ดน้ำแล้วชั่งได้ b กก. → wf = b ÷ a (ล็อตต่างกันดูดน้ำต่างกัน)
+   น้ำหนักต่อเที่ยว: สเปก DS80L 55 กก. / 80 ลิตร → ถังเต็มได้จริง = 80 × ความหนาแน่นรวม (กก./ลิตร) → พิกัด = ค่าที่น้อยกว่า
+                    ผู้ใช้กำหนดเองให้น้อยกว่าพิกัดได้ (เผื่อปลอดภัย/แบต/ลม)
+   บันทึก QC ต่อเที่ยว: ก่อนขึ้นบิน (W0) · หลังลง (W1) · พื้นที่ · ค่าตั้ง · หก/ทิ้ง · นำออกคืนกอง
+     จ่ายจริง = W0 − W1 · อัตราจริง = จ่ายจริง ÷ ไร่ · เครื่องคลาด k = Σจ่ายจริง ÷ Σ(ค่าตั้ง × ไร่)
+     ค้างถัง = W1(ล่าสุด) − นำออก(ล่าสุด) · คงเหลือในกอง = ที่เตรียมไว้ − Σจ่ายจริง − ค้างถัง − Σหก/ทิ้ง
+     อัตราที่ต้องตั้งใหม่ = (กอง + ค้างถัง) ÷ ไร่ที่เหลือ ÷ k */
+const SEEDST={soak:{n:'แช่น้ำแล้ว ยังไม่งอก',mc:30},germ:{n:'งอกตุ่มตา 1–2 มม.',mc:33},meas:{n:'ชั่งจริง'}},SEED_MC0=13;
+const wfMc=mc=>(100-SEED_MC0)/(100-mc);
+const BUD0=()=>({bags:'',kgBag:50,loose:'',s1:'',s2:'',s3:'',res:0,mode:'tgt',plan:'',seedSt:'',mDry:'',mWet:'',bulkKg:'',loadU:'',wState:'',prepD:'',prepAuto:0,au:'rai',am:'cum',log:[],d:{}});
+function budMig(b){b={...BUD0(),...(b||{}),mode:'tgt'};b.d=b.d&&typeof b.d==='object'?b.d:{};
+ b.log=(b.log||[]).map(x=>x&&x.w0!=null?x:{w0:num(x.kg),w1:0,ra:num(x.rai),rc:null,set:num(x.set)||null,loss:0,ret:0,at:x&&x.at});return b}
+function budOf(ctx){if(ctx==='job'){if(typeof F==='undefined'||!F)return BUD0();if(!F.spBud||!F.spBud.d)F.spBud=budMig(F.spBud);return F.spBud}
+ const s=UI.sp;if(!s)return BUD0();if(!s.bud){let b=null;try{b=JSON.parse(localStorage.getItem('spBud')||'null')}catch(e){}s.bud=budMig(b&&typeof b==='object'?b:{})}return s.bud}
+function budPersist(ctx){if(ctx==='job')return;try{localStorage.setItem('spBud',JSON.stringify(budOf('adv')))}catch(e){}}
+const wetable=m=>!!(m&&m.k==='seed'&&m.wetF);
+function budSt(b,m){return wetable(m)?(SEEDST[b.seedSt]?b.seedSt:'germ'):'dry'}
+function budWFm(b){const d=num(b.mDry),w=num(b.mWet);return d>0&&w>=d&&w<=d*1.8?w/d:null}
+function budWF(b,m){const st=budSt(b,m);if(st==='dry')return 1;if(st==='meas')return budWFm(b)||wfMc(SEEDST.germ.mc);return wfMc(SEEDST[st].mc)}
+function budBulk(b,m){const k=num(b.bulkKg);return k>=2&&k<=15?k/10:(m?m.bulk:1)}
+function budPhysM(ctx,m){const b=budOf(ctx);return {wf:budWF(b,m),bulk:budBulk(b,m),loadU:num(b.loadU)||0}}
+/* ---------- วิธีหว่าน + น้ำหนักตามที่ชั่งหน้างาน ----------
+   all = หว่านให้หมดพอดีแปลง (ค่าเริ่มต้นเมื่อกรอกจำนวนกระสอบ): ใส่ในแอป = น้ำหนักที่ชั่ง ÷ ไร่ — ไม่ต้องคูณอะไร
+   rec = ตามค่าแนะนำ (ค่าแนะนำเป็นเมล็ดแห้ง → ข้าวงอกต้องคูณตัวคูณเปียก) · own = กำหนดเลขที่ใส่ในแอปเอง */
+const budTotIn=b=>(num(b.bags)||0)*(num(b.kgBag)||50)+(num(b.loose)||0);
+function budMode(b,totIn){const p=b.plan;if(p==='rec'||p==='own')return p;return totIn>0?'all':'rec'}
+function budMat(ctx){if(ctx==='job')return typeof F!=='undefined'&&F?(spJob(F)||{}).m:null;return UI.sp?MAT[UI.sp.mat]:null}
+function budArea(ctx){return ctx==='job'?num(typeof F!=='undefined'&&F?F.area:0):num(UI.sp&&UI.sp.area)}
+/* น้ำหนักที่จะเทลงถังทั้งหมด (หักที่กันเผื่อ) ÷ ไร่ → อัตราเมล็ดแห้ง (หน่วยภายในของแอป) */
+function budAllD(ctx){const b=budOf(ctx),m=budMat(ctx),A=budArea(ctx),kg=budTotIn(b);if(!m||!(kg>0)||!(A>0))return null;
+ const wf=budWF(b,m),asIs=wetable(m)&&b.wState!=='dry',res=Math.min(20,Math.max(0,num(b.res)||0));return (asIs?kg/wf:kg)*(1-res/100)/A}
+function budRateD(ctx){return ctx==='job'?(spJob(F)||{}).rate:(UI.sp&&UI.sp.rate)}
+function budSetRateD(ctx,v){v=Math.round(v*1000)/1000;if(ctx==='job')budJobRate(v);else if(UI.sp)UI.sp.rate=v}
+/* โหมดหว่านให้หมด: ผูกอัตรากับน้ำหนัก/พื้นที่ — การ์ดค่าหว่าน แถบเลื่อน และฟอร์มงาน จะได้เลขเดียวกัน */
+function budSync(ctx){const b=budOf(ctx);if(budMode(b,budTotIn(b))!=='all')return false;const v=budAllD(ctx);if(v==null)return false;
+ if(Math.abs(num(budRateD(ctx))-v)<0.01)return false;budSetRateD(ctx,v);return true}
+/* ผู้ใช้กำหนดอัตราเอง (แถบเลื่อน/ช่องอัตราในฟอร์มงาน) → เลิกผูกกับ "หว่านให้หมด" */
+function budOwn(ctx){const b=budOf(ctx);if(b.plan==='own')return;b.plan='own';budPersist(ctx);setTimeout(()=>budRefresh(ctx,'full'),0)}
+function budPhysSoon(ctx){clearTimeout(budPhysSoon._t);budPhysSoon._t=setTimeout(()=>budPhysRefresh(ctx),250)}
+/* ตัวคูณจากเมล็ดแห้ง → น้ำหนักในถัง (ใช้แปลงแถบเลื่อนให้เป็นเลขที่ใส่ในแอป) */
+function spWfU(s){return s&&MAT[s.mat]?budPhysM('adv',MAT[s.mat]).wf:1}
+/* บรรทัดอธิบายเลข "ใส่ในแอป" บนการ์ดค่าหว่าน */
+function budHudNote(ctx){try{const b=budOf(ctx),tot=budTotIn(b),mode=budMode(b,tot);if((b.log||[]).length)return '';
+ if(mode==='all'){const A=budArea(ctx),m=budMat(ctx);if(!m||!(A>0)||!(tot>0))return '';const wf=budWF(b,m),ns=wetable(m)&&b.wState==='dry',res=Math.min(20,Math.max(0,num(b.res)||0)),W=(ns?tot*wf:tot)*(1-res/100);
+  return `“ใส่ในแอป” = ${fmt(W,1)} กก. ÷ ${fmt(A,2)} ไร่ (หว่านให้หมดพอดีแปลง) · `}
+ if(mode==='own')return '“ใส่ในแอป” = ค่าที่กำหนดเอง · ';return ''}catch(e){return ''}}
+/* งานเก่า: อัตราในฟอร์มเคยเก็บเป็นเมล็ดแห้ง → แปลงเป็นเลขที่ใส่ในแอป (ครั้งเดียว) */
+function budMigJob(J){if(!J||J.kgRaiU||!num(J.kgRai))return;try{const r=spJob(J);J.kgRai=r1(r.hr);J.kgRaiU='tank'}catch(e){}}
+/* ค่าที่ตั้งอยู่จริงในฟอร์มงาน (ถ้ากรอก) — ใช้ประเมินความสม่ำเสมอของค่าที่ใช้บินจริง */
+function spJobNow(F){const sv=UI.jfLk;UI.jfLk=['flyH','swath','speed','spin'].filter(k=>num(F[k]));try{return spJob(F)}finally{UI.jfLk=sv}}
+/* อัตราแนะนำ — ระบบคำนวณให้ ผู้ใช้ไม่ต้องกรอก: เมล็ดข้าวจากเป้าต้นตั้งตัว · ปุ๋ยจากแผนปุ๋ยตามระยะพืช */
+function budRec(c){const job=c.ctx==='job',m=c.m;if(!m)return null;const mat=(c.opt&&c.opt.mat)||(job?F.spMat:UI.sp.mat);
+ const crop=job?(FLY[F.crop]?F.crop:'other'):UI.fly.crop,stg=job?stageGroup(crop,F.stage):UI.fly.stg,s=job?{}:UI.sp;
+ if(m.k==='seed'){
+  if(crop==='rice'&&mat!=='sunn'){const tg=job?190:(s.tgtP||190),tw=job?28:(s.tgw||m.tgw||28),ge=job?90:(s.germ||90);
+   return {rate:seedRate(mat,tg,tw,ge),seed:1,tgtP:tg,why:`ต้องการต้นตั้งตัว ${tg} ต้น/ตร.ม. ÷ (งอก ${ge}% × รอดตั้งตัว ${Math.round((m.est||0.65)*100)}%) × น้ำหนัก 1,000 เมล็ด ${tw} ก.`,note:`มาตรฐานกรมการข้าว 15 กก./ไร่ (เกษตรกรทั่วไปใช้ ~25)${job?'':' · ปรับจำนวนต้น/น้ำหนักเมล็ด/ความงอกได้ที่ "อัตราเมล็ด" ด้านบน'}`}}
+  const d=seedDefault[crop]||seedDefault.other;return d[0]===mat?{rate:d[1],seed:1,why:`อัตราทั่วไปของ${m.n}`}:null}
+ const find=L=>{let h=null;L.some(x=>x.it.some(([k,q])=>{if(k===mat&&q){h={x,q};return true}return false}));return h};
+ let h=find(fertNow(crop,stg,s)),other=0;if(!h){h=find(fertProg(crop,s));other=!!h}if(!h)return null;
+ const tr=h.x.tree?(s.trees||ORCH_TREES[crop]||25):0;
+ return {rate:h.x.tree?r1(h.q*tr):h.q,why:`${other?'(แผนของระยะอื่น) ':''}${h.x.t}${h.x.tree?` · ${fmt(h.q,1)} กก./ต้น × ${tr} ต้น/ไร่`:''}`,note:'แผนปุ๋ยตามระยะ อ้างอิงกรมการข้าว/กรมวิชาการเกษตร — ถ้ามีผลวิเคราะห์ดิน ให้ปรับตามนั้น'}}
+function budCtxX(c){c.rec=budRec(c);c.isOv=!c.rec||Math.abs(c.rate-c.rec.rate)>0.05;c.rs=c.rec&&!c.isOv?'แนะนำ':'ที่เลือก';c.rl=c.rec&&!c.isOv?'อัตราแนะนำ':'อัตราที่เลือก';return c}
+function budCtx(ctx){if(budSync(ctx))budPhysSoon(ctx);
+ if(ctx==='job'){const opt=spJob(F),r=spJobNow(F);return budCtxX({ctx,area:num(F.area),areaRaw:F.area??'',rate:opt.rate,r,opt,m:opt.m})}
+ const s=UI.sp,r=spEval(s),opt=spRun(s);return budCtxX({ctx,area:num(s.area),areaRaw:s.area??'',rate:r.rate,r,opt,m:r.m})}
+function budCalc(b,c){const m=c.m,r=c.r,A=num(c.area)||0;
+ const wf=budWF(b,m),bulk=budBulk(b,m),capV=T55S.vol*bulk,capS=T55S.pay,capM=Math.min(capS,capV),uL=num(b.loadU),L=Math.max(5,Math.min(capM,uL||capM));
+ /* น้ำหนักที่กรอก = ตามที่ชั่งหน้างาน = ที่จะเทลงถัง → ใช้ตรง ๆ ไม่คูณ
+    (คูณตัวคูณเปียกเฉพาะเมื่อติ๊ก "ตอนชั่งยังไม่ได้แช่") · หน่วยภายในของแอปคือเมล็ดแห้ง จึงหารกลับเพื่อเก็บค่า */
+ const kgBag=num(b.kgBag)||50,totIn=budTotIn(b),wetM=wetable(m),notSoak=wetM&&b.wState==='dry',wIn=wetM&&!notSoak,bagD=wIn?kgBag/wf:kgBag;
+ const totD=wIn?totIn/wf:totIn,res=Math.min(20,Math.max(0,num(b.res)||0)),useD=totD*(1-res/100),mode=budMode(b,totIn);
+ /* หว่านให้หมด: อัตรา = ที่มี ÷ พื้นที่ (ไม่รอให้ค่าในแถบเลื่อนตามทัน) */
+ const rate=mode==='all'&&useD>0&&A>0?useD/A:c.rate,rC=c.rate||rate;
+ const o={wf,st:budSt(b,m),wfM:budWFm(b),bulk,bulkM:num(b.bulkKg)>=2,capV,capS,capM,uL,L,over:uL>capM+0.05,kgBag,bagD,totIn,wIn,notSoak,mode,totD,totP:totD*wf,useD,res,A,rate,needD:rate*A,needP:rate*A*wf};
+ if(!A||!rate)return o;
+ o.planD=rate;
+ if(totD){o.availD=useD/A;o.diff=useD-o.needD;o.diffBag=o.diff/bagD;o.pct=o.availD/rate-1;o.coverA=Math.min(A,useD/rate)}
+ o.setP=o.planD*wf;o.spendD=totD?Math.min(useD,o.planD*A):o.planD*A;o.spendP=o.spendD*wf;
+ o.nTrip=Math.max(1,Math.ceil(o.spendP/L-1e-9));o.lastP=o.spendP-(o.nTrip-1)*L;o.raiTrip=L/o.setP;
+ /* เติมเพิ่มนิดเดียว (≤15% และไม่เกินที่ถังรับได้) แล้วลดได้ 1 เที่ยว */
+ const saveL=(Q,n)=>{if(n<2)return null;const l2=Q/(n-1);return l2<=Math.min(capM,L*1.15)+1e-9?l2:null};o.saveL=saveL(o.spendP,o.nTrip);
+ o.bagP=wIn?kgBag:kgBag*wf;o.nbTrip=Math.floor((L+1e-9)/o.bagP);if(o.nbTrip>=1)o.tripBag=Math.ceil(o.spendP/(o.nbTrip*o.bagP)-1e-9);
+ if(r&&r.raiHr)o.min=(o.spendD/o.planD)/r.raiHr*60;
+ if(r&&r.seeds)o.seeds=r.seeds*rate/rC;if(r&&r.plants)o.plants=r.plants*rate/rC;
+ const Lg=b.log||[];
+ if(Lg.length){let sp=0,ar=0,setA=0,loss=0,w0s=0,tgA=0,pA=0,pAr=0;
+  Lg.forEach(x=>{const ra=num(x.ra);sp+=Math.max(0,num(x.w0)-num(x.w1));ar+=ra;setA+=(num(x.set)||o.setP)*ra;loss+=num(x.loss);w0s+=num(x.w0);tgA+=(num(x.rt)||rate)*ra;if(num(x.p)){pA+=num(x.p)*ra;pAr+=ra}});
+  const last=Lg[Lg.length-1],hop=Math.max(0,num(last.w1)-num(last.ret));
+  const t={n:Lg.length,sp,ar,loss,hop,w0avg:w0s/Lg.length,actP:ar>0?sp/ar:null,setAvg:ar>0?setA/ar:null,tgtD:ar>0?tgA/ar:rate,pAvg:pAr>0?pA/pAr:null};
+  /* เทียบกับเป้าตอนที่บินเที่ยวนั้น (เปลี่ยนแผนกลางงาน ไม่ทำให้เที่ยวเก่าดูผิด) */
+  t.actD=t.actP!=null?t.actP/wf:null;t.k=setA>0&&sp>0?sp/setA:null;t.devT=t.actD!=null&&t.tgtD?t.actD/t.tgtD-1:null;
+  /* เมล็ดเปียก: แช่ไปเท่าไร (ล็อกตอนบันทึกเที่ยวแรก แก้ได้) ส่วนที่เหลือยังเป็นเมล็ดแห้ง · ปุ๋ย/เมล็ดแห้ง: ทั้งหมดพร้อมใช้ */
+  const wetS=wf>1.001;t.prepD=wetS?(wIn&&totD?useD:(num(b.prepD)>0?num(b.prepD):o.spendD)):null;
+  t.prep=wetS?t.prepD*wf:(totD?useD:o.spendP);t.dryLeft=wetS&&totD&&!wIn?Math.max(0,useD-t.prepD):0;
+  t.phys=t.prep-sp-loss;t.stock=t.phys-hop;t.remA=A-ar;t.lossPct=sp+loss>0?loss/(sp+loss):0;
+  /* พื้นที่ที่เหลือต้องได้อัตราเป้า (ถ้าของพอ) — ไม่โปะชดเชยส่วนที่หว่านไปแล้ว
+     ของที่ใช้ได้วันนี้ = ที่อยู่ในมือจริง (เมล็ดเปียก: เฉพาะที่แช่แล้ว เมล็ดแห้งต้องแช่อีก 1–3 วัน) · ไม่พอ → เกลี่ยที่มีให้ทั่ว */
+  if(t.remA>0.01&&t.phys>0.5){const tgtP=rate*wf,canP=t.phys/t.remA;t.needP=mode==='all'?canP:Math.min(tgtP,canP);t.short=mode!=='all'&&canP<tgtP*0.98;
+   t.addQ=Math.max(0,tgtP*t.remA-t.phys);t.prepMore=wetS?t.addQ/wf:0;t.coverT=t.phys/tgtP;
+   t.needD=t.needP/wf;t.newSet=t.k?t.needP/t.k:t.needP;t.tgtSet=t.k?tgtP/t.k:tgtP;t.dev2=t.needD/rate-1;
+   t.needQ=t.needP*t.remA;t.nTrip=Math.max(1,Math.ceil(t.needQ/L-1e-9));t.lastP=t.needQ-(t.nTrip-1)*L;t.saveL=saveL(t.needQ,t.nTrip);
+   t.endLeft=t.phys-t.needQ;t.allD=t.phys/t.remA/wf}
+  o.tr=t}
+ return o}
+/* น้ำหนักที่ควรเติมเที่ยวนี้ (ตามแผน หรือตามการ์ดเที่ยวต่อไป) */
+function budFillNow(o){const t=o.tr;return t?(t.remA>0.01&&t.newSet?(t.nTrip>1?o.L:t.lastP):o.L):(o.nTrip>1?o.L:o.lastP)||o.L}
+/* เลขที่ต้องใส่ในแอป DJI ตอนนี้ — ให้การ์ดค่าหว่านด้านบนโชว์เลขเดียวกับการ์ด "เที่ยวต่อไป" */
+function budSetNow(ctx,rate,m){try{const b=budOf(ctx);if(!(b.log||[]).length)return null;const area=ctx==='job'?num(F&&F.area):num(UI.sp&&UI.sp.area);
+ const t=budCalc(b,{ctx,area,rate,m,r:null}).tr;return t&&t.newSet&&t.remA>0.01?t.newSet:null}catch(e){return null}}
+/* ---------- แสดงผล ---------- */
+const budPc=x=>(x>=0?'+':'')+Math.round(x*100)+'%';
+const budLv=(x,a,b)=>x==null?'':Math.abs(x)<=a?'ok':Math.abs(x)<=b?'warn':'bad';
+function budHTML(ctx){const c=budCtx(ctx),b=budOf(ctx),m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=wetable(m),st=budSt(b,m);
+ const I=(k,ph,w,v)=>`<input class="spnum" data-bud="${k}" data-ctx="${ctx}" inputmode="decimal" placeholder="${ph}" value="${esc(String(v!==undefined?v:(b[k]??'')))}" style="width:${w||60}px">`;
+ const C=(k,v,l)=>`<button class="fchip ${String(b[k])===String(v)?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="${k}" data-v="${v}">${l}</button>`;
+ let n=1;const T=t=>`<div class="bud-t"><i>${n++}</i>${t}</div>`;
+ return `<div class="bud" id="bud-${ctx}" data-mk="${esc((m&&m.n||'')+'|'+wet)}"><div class="fden-h">🎒 ${nm}ที่มี ↔ พื้นที่ · คุมคุณภาพงานหว่าน</div>
+ <div class="bud-sec">${T('ข้อมูลงาน')}
+  <div class="bud-in"><label>พื้นที่ ${I('area','ไร่',64,c.areaRaw)} ไร่</label></div>
+  <div class="bud-in"><label>นับได้ ${I('bags','0',52)} กระสอบ</label><span>×</span><label>${I('kgBag','กก.',56)} กก./กระสอบ</label><label>+ เศษ ${I('loose','0',50)} กก.</label></div>
+  <div class="bud-in"><span class="tiny muted">ชั่งสุ่ม 3 กระสอบ</span>${I('s1','กก.',52)}${I('s2','กก.',52)}${I('s3','กก.',52)}<span class="tiny muted">→ เฉลี่ยใส่ให้เอง · ถุงมาตรฐาน</span>${[25,50].map(v=>C('kgBag',v,v)).join('')}</div>
+  <div class="small" id="bud-${ctx}-tot">${budTotTxt(c,b)}</div>
+  ${wet?`<div class="bud-in"><button class="fchip sm ${b.wState==='dry'?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="wState" data-v="${b.wState==='dry'?'':'dry'}">${b.wState==='dry'?'☑':'☐'} ตอนชั่งข้าวยังไม่ได้แช่ (จะแช่ก่อนหว่าน)</button></div>`:''}
+  <div class="bud-in"><span class="muted small">เผื่อหก/เก็บตก</span>${[0,3,5].map(v=>C('res',v,v+'%')).join('')}</div></div>
+ <div class="bud-sec">${T('หว่านแบบไหน')}<div id="bud-${ctx}-rec">${budRecHTML(c,b)}</div></div>
+ <div class="bud-sec">${T('น้ำหนักต่อเที่ยว')}
+  <div class="bud-in"><label>เติมเที่ยวละ ${I('loadU','เต็มพิกัด',70)} กก.</label><span class="tiny muted">เว้นว่าง = เต็มพิกัด · ใส่น้อยกว่าได้เพื่อเผื่อความปลอดภัย</span></div>
+  <div class="bud-in"><label class="small">ตวง${nm} 10 ลิตร (ปาดเรียบ) ชั่งได้ ${I('bulkKg','กก.',52)} กก.</label><span class="tiny muted">ไม่กรอก = ค่ามาตรฐาน ${fmt(m?m.bulk:1,2)} กก./ลิตร</span></div></div>
+ <div id="bud-${ctx}-o">${budOutHTML(c,b)}</div>
+ <div class="bud-sec bud-tr">${T('บันทึกระหว่างหว่าน (ทุกเที่ยว)')}
+  <div id="bud-${ctx}-tb">${budTbHTML(c,b)}</div><div id="bud-${ctx}-nx">${budNxHTML(c,b)}</div>${budDraftHTML(c,b)}
+  <div id="bud-${ctx}-qc">${budQcHTML(c,b)}</div></div></div>`}
+function budTotTxt(c,b){const kg=budTotIn(b);if(!kg)return '';const t=`รวม <b>${fmt(kg,1)} กก.</b>`;if(wetable(c.m)&&b.wState==='dry')return `${t} เมล็ดแห้ง → แช่แล้วจะหนัก ~${fmt(kg*budWF(b,c.m),0)} กก.`;return `${t} <span class="muted">ตามที่ชั่งหน้างาน = ที่จะเทลงถัง</span>`}
+function budRecHTML(c,b){const R=c.rec,ctx=c.ctx,m=c.m,wet=wetable(m),seed=m&&m.k==='seed',o=budCalc(b,c),mode=o.mode==='rec'&&!R?'own':o.mode,wf=o.wf;
+ const chip=(v,l)=>`<button class="fchip ${mode===v?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="plan" data-v="${v}">${l}</button>`;
+ let h=`<div class="bud-in">${chip('all','🎯 หมดพอดีแปลง')}${R?chip('rec','📘 ตามค่าแนะนำ'):''}${chip('own','✏️ กำหนดเอง')}</div>`;
+ /* เทียบกับค่าแนะนำ — ข้อมูลประกอบ ไม่ได้บังคับ */
+ const cmp=()=>{if(!R||!o.rate)return '';const d=o.rate/R.rate-1;
+  const eff=seed?(d>0.5?' — ต้นแน่นเกิน แตกกอน้อย ล้มง่าย':d<-0.25?' — ต้นบาง วัชพืชแทรก':''):(d>0.3?' — เปลือง เสี่ยงเค็ม/ใบไหม้':d<-0.25?' — ธาตุอาหารไม่พอ':'');
+  return `<div class="tiny ${eff?'neg':'muted'}">เทียบค่าแนะนำ: ${wet?`${o.wIn?'ถ้าเป็นข้าวงอก ':''}≈ เมล็ดแห้ง ${fmt(o.rate,1)} กก./ไร่ · ค่าแนะนำ ${fmt(R.rate,1)}`:`${fmt(o.rate,1)} กก./ไร่ · ค่าแนะนำ ${fmt(R.rate,1)}`} (${budPc(d)})${eff}</div>`};
+ if(mode==='all'){const Wt=o.useD*wf;
+  h+=o.totIn>0&&o.A?`<div class="small">${o.notSoak?`เมล็ดแห้ง ${fmt(o.useD,1)} กก. แช่แล้ว ~${fmt(Wt,1)} กก.`:`${fmt(Wt,1)} กก.`} ÷ ${fmt(o.A,2)} ไร่ = <b>${fmt(o.setP,1)} กก./ไร่</b> → ใส่ในแอป</div>${cmp()}`:`<div class="small muted">ใส่พื้นที่ จำนวนกระสอบ และน้ำหนักในข้อ ① ก่อน</div>`}
+ else if(mode==='rec'&&R)h+=`<div class="small">ค่าแนะนำ ${wet?`เมล็ดแห้ง ${fmt(R.rate,1)} กก./ไร่ = ข้าวงอกในถัง <b>${fmt(R.rate*wf,1)}</b> → ใส่ในแอป`:`<b>${fmt(R.rate,1)} กก./ไร่</b> → ใส่ในแอป`}</div><div class="tiny">${esc(R.why)}</div>${R.note?`<div class="tiny muted">${esc(R.note)}</div>`:''}`;
+ else h+=`<div class="bud-in"><label>ใส่ในแอป <input class="spnum" data-bud="ownP" data-ctx="${ctx}" inputmode="decimal" placeholder="กก." value="${o.rate?esc(String(Math.round(o.setP*10)/10)):''}" style="width:64px"> กก./ไร่</label><span class="tiny muted">เช่น ลูกค้าสั่ง</span></div>${cmp()}`;
+ if(wet&&(mode==='rec'||o.notSoak)){const st=budSt(b,m),I=(k,w)=>`<input class="spnum" data-bud="${k}" data-ctx="${ctx}" inputmode="decimal" placeholder="กก." value="${esc(String(b[k]??''))}" style="width:${w}px">`;
+  h+=`<div class="bud-box"><div class="tiny"><b>ข้าวในถังหนักกว่าเมล็ดแห้งกี่เท่า</b> <span class="muted">(ใช้แปลง${o.notSoak?'น้ำหนักตอนยังไม่แช่':'ค่าแนะนำ'}เท่านั้น)</span></div><div class="bud-in">${['soak','germ','meas'].map(k=>`<button class="fchip sm ${st===k?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="seedSt" data-v="${k}">${SEEDST[k].n}${k!=='meas'?` ×${fmt(wfMc(SEEDST[k].mc),2)}`:''}</button>`).join('')}</div>${st==='meas'?`<div class="bud-in"><label>เมล็ดแห้ง ${I('mDry',54)} กก.</label><span>แช่/งอก สะเด็ดน้ำแล้วชั่งได้</span><label>${I('mWet',54)} กก.</label></div>`:''}</div>`}
+ return h}
+function budOutHTML(c,b){const o=budCalc(b,c),m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001,ctx=c.ctx,uD=wet?' แห้ง':'';
+ const g=(l,v,cl)=>`<div class="spm ${cl||''}"><span>${l}</span><b>${v}</b></div>`;
+ if(!o.A||!o.rate)return `<div class="fadj warn">${!o.A?'ใส่พื้นที่ (ไร่) จำนวนกระสอบ และน้ำหนักต่อกระสอบ แล้วระบบจะคำนวณทั้งหมดให้':'ใส่อัตราหว่าน (วัสดุนี้ยังไม่มีค่าแนะนำ)'}</div>`;
+ const t=o.tr;let h='';
+ if(t){
+  /* เริ่มหว่านแล้ว: เลขที่ต้องใส่ในแอปมีที่เดียว = การ์ด "เที่ยวต่อไป" (ไม่โชว์เลขแผนเดิมซ้อน) */
+  h+=t.remA<=0.01?`<div class="fadj ok">✅ ครบพื้นที่แล้ว (บันทึก ${t.n} เที่ยว) — เริ่มงานใหม่ กด “ล้างทั้งหมด” ในหัวข้อบันทึกด้านล่าง</div>`
+   :`<div class="fadj ok">🟢 กำลังหว่าน — บันทึกแล้ว ${t.n} เที่ยว · เลขที่ต้องใส่ในแอปตอนนี้ ดูการ์ด <b>“▶ เที่ยวต่อไป”</b> ด้านล่าง</div>`}
+ else{
+  /* การ์ดสั่งงาน: ใส่ในแอป · เติมถึงกี่กก. · กี่เที่ยว — "เติมถึง" ใช้ค่าที่ผู้ใช้กำหนดเสมอ */
+  const L1=o.nTrip>1?o.L:o.lastP,Wt=o.useD*o.wf;
+  const fill=o.nTrip===1?`เติม ${fmt(o.lastP,1)} กก. เที่ยวเดียวจบ`:o.L-o.lastP>0.5?`เที่ยว 1${o.nTrip>2?'–'+(o.nTrip-1):''} เติมถึง ${fmt(o.L,1)} กก. · เที่ยวสุดท้ายเติมแค่ ${fmt(o.lastP,1)} กก.`:`ทุกเที่ยวเติมถึง ${fmt(o.L,1)} กก.`;
+  /* เลขนี้มาจากไหน — บรรทัดเดียวตามวิธีหว่าน */
+  const src=o.mode==='all'&&o.totIn>0?`<div>${fmt(o.setP,1)} = ${o.notSoak?`เมล็ดแห้ง ${fmt(o.useD,1)} กก. แช่แล้ว ~${fmt(Wt,1)} กก.`:`${nm}ที่มี ${fmt(Wt,1)} กก.`} ÷ ${fmt(o.A,2)} ไร่ — หว่านให้หมดพอดีแปลง</div>`
+   :o.mode==='own'?`<div>${fmt(o.setP,1)} = ค่าที่คุณกำหนดเอง</div>`
+   :wet?`<div>ค่าแนะนำเป็นน้ำหนักเมล็ดแห้ง ${fmt(o.rate,1)} แต่${nm}งอกดูดน้ำ หนักกว่าตอนแห้ง ${fmt(o.wf,2)} เท่า → ${fmt(o.rate,1)} × ${fmt(o.wf,2)} = <b>${fmt(o.setP,1)}</b></div>`:`<div>${fmt(o.setP,1)} = ค่าแนะนำ</div>`;
+  h+=`<div class="hud bud-act"><div class="hud-h"><span>✅ ตั้งค่าแบบนี้ (แอป DJI)</span></div>
+  <div class="hud-g bud-g"><div class="hud-c"><span>ใส่ในแอป</span><b>${fmt(o.setP,1)}</b><em>กก./ไร่</em></div><div class="hud-c"><span>เติมถึง</span><b>${fmt(L1,1)}</b><em>กก./เที่ยว</em></div><div class="hud-c"><span>ต้องบิน</span><b>${o.nTrip}</b><em>เที่ยว${o.min?` ~${fmt(o.min,0)} นาที`:''}</em></div></div>
+  <div class="hud-f"><b>${fill}</b>${o.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(o.saveL*10)/10,1)} กก. จะเหลือ ${o.nTrip-1} เที่ยว</div>`:''}${o.nbTrip>=1&&o.tripBag&&o.tripBag!==o.nTrip?`<div>หรือเทครั้งละ ${o.nbTrip} กระสอบ = ${o.tripBag} เที่ยว</div>`:''}
+  ${src}<div>เติมมากหรือน้อยกว่านี้ก็ได้ ไม่ต้องตักออก (ไม่เกิน ${fmt(o.capM,1)} กก.) — โดรนปล่อยตาม กก./ไร่ ที่ใส่ในแอป เติมมากแค่บินได้ไกลขึ้นต่อเที่ยว</div></div></div>`;
+  /* พอไหม — ประโยคเดียว (หว่านให้หมด = พอดีอยู่แล้ว) */
+  if(o.mode==='all'&&o.totIn>0){if(o.notSoak)h+=`<div class="fadj ok">✅ แช่ทั้งหมด ${fmt(o.useD,0)} กก. → หนัก ~${fmt(Wt,0)} กก. แล้วหว่านให้หมด</div>`}
+  else if(!o.totD)h+=`<div class="fadj">ต้องใช้${nm} ~<b>${fmt(o.needP,0)} กก.</b>${wet?` (ข้าวงอก) = เมล็ดแห้ง ~${fmt(o.needD,0)} กก.`:''} — ใส่จำนวนกระสอบด้านบน เพื่อเช็กว่าพอไหม</div>`;
+  else{const left=o.totD-o.spendD,short=o.diff<-0.5,eq=!short&&left<0.5,rs=o.res?` (รวมที่กันเผื่อ ${o.res}%)`:'';let cl='ok',tx='';
+   if(short){cl='bad';tx=o.notSoak?`⛔ ${nm}ไม่พอ ขาด ${fmt(-o.diff,0)} กก. แห้ง (${Math.ceil(-o.diffBag-1e-9)} กระสอบ) — ที่มีพอแค่ ${fmt(o.coverA,1)} จาก ${fmt(o.A,1)} ไร่`:`⛔ ${nm}ไม่พอ ขาด ${fmt(-o.diff*o.wf,0)} กก. — ที่มีพอแค่ ${fmt(o.coverA,1)} จาก ${fmt(o.A,1)} ไร่`}
+   else if(o.notSoak)tx=eq?`✅ เมล็ดพอดี — แช่ทั้งหมด ${fmt(o.spendD,0)} กก. → หนัก ~${fmt(o.spendP,0)} กก.`:`✅ เมล็ดพอ — <b>แช่แค่ ${fmt(o.spendD,0)} กก.</b> (${fmt(o.spendD/o.bagD,1)} กระสอบ) → หนัก ~${fmt(o.spendP,0)} กก. · อีก ${fmt(left,0)} กก.${rs} ไม่ต้องแช่ เก็บไว้ครั้งหน้า`;
+   else tx=eq?`✅ ${nm}พอดี ${fmt(Wt,0)} กก.`:`✅ ${nm}พอ — ใช้ ${fmt(o.spendP,0)} จาก ${fmt(o.totIn,0)} กก. · เหลือ ${fmt(left*o.wf,0)} กก.${rs}${wet?' (ข้าวงอกเก็บไม่ได้)':' เก็บไว้ครั้งหน้า'}`;
+   h+=`<div class="fadj ${cl}">${tx}</div>`;
+   if(!eq&&o.availD)h+=`<div class="bud-in"><button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="plan" data-v="all">🎯 หว่านให้หมดพอดีแปลง → ใส่ในแอป ${fmt(o.availD*o.wf,1)}</button></div>`}}
+ if(o.over)h+=`<div class="fadj bad">⛔ เติม ${fmt(o.uL,1)} กก. เกินที่ถังรับได้ ${fmt(o.capM,1)} กก. — แอปคิดที่ ${fmt(o.L,1)} กก.</div>`;
+ /* ที่มาของตัวเลข — พับไว้ */
+ const bind=o.capV<o.capS-0.05?`ถังเต็มก่อนถึงน้ำหนักสเปก (${nm}เบา ${fmt(o.bulk,2)} กก./ลิตร × 80 ลิตร)`:`ถึงน้ำหนักสเปกก่อนถังเต็ม`;
+ h+=`<details class="bud-more bud-det" data-tog="budDet"${UI.budDetOpen?' open':''}><summary class="small">📊 ที่มาของตัวเลข (ไม่ดูก็หว่านได้)</summary>
+ ${wet?`<div class="bud-box"><b>💧 เมล็ดแห้ง ↔ ข้าวงอกในถัง ×${fmt(o.wf,2)}</b> <span class="tiny muted">${o.st==='meas'?(o.wfM?'จากที่ชั่งจริง':'ยังไม่ได้ชั่ง ใช้ค่ามาตรฐาน ×1.30 ไปก่อน'):`ความชื้น ~${SEED_MC0}% → ~${SEEDST[o.st].mc}%`}</span>
+  <div class="small">ใช้แปลงค่าแนะนำ (เมล็ดแห้ง) เป็นน้ำหนักในถังเท่านั้น — ${o.notSoak?'กรอกน้ำหนักตอนยังไม่แช่ แอปจึงคูณให้':'น้ำหนักที่ชั่งหน้างานใช้ตรง ๆ ไม่ต้องคูณ'} · ${fmt(o.setP,1)} กก./ไร่ ในถัง ≈ เมล็ดแห้ง ${fmt(o.rate,1)}</div>
+  ${o.st==='meas'&&o.wfM&&(o.wfM<1.15||o.wfM>1.45)?`<div class="tiny neg">ค่าที่ชั่ง ×${fmt(o.wfM,2)} ${o.wfM<1.15?'ต่ำกว่าปกติ — แช่ยังไม่พอ งอกไม่สม่ำเสมอ':'สูงกว่าปกติ — ยังมีน้ำเกาะผิว ให้สะเด็ดน้ำ/ผึ่งอีก เมล็ดจะจับก้อนในถัง'}</div>`:''}</div>`:''}
+ <div class="bud-box"><b>⚖️ ถังรับได้เท่าไร</b><div class="spgrid">${g('สเปก DS80L',`${o.capS} กก. / 80 ลิตร`)}${g('ถังเต็มได้',`${fmt(o.capV,1)} กก.`)}${g('พิกัดจริง',`${fmt(o.capM,1)} กก.`)}${g(o.uL?'คุณกำหนด':'ใช้เติม',`${fmt(o.L,1)} กก.`,o.over?'bad':'ok')}</div>
+  <div class="tiny muted">${bind}${o.bulkM?' · ความหนาแน่นจากที่ตวงจริง':''} · ถ้าแอป DJI แนะนำน้ำหนักน้อยกว่านี้ (ตามแบต/ลม/อุณหภูมิ) ให้ใช้ค่าของ DJI</div></div>
+ <div class="tiny muted">ได้ ~${fmt(o.raiTrip,2)} ไร่/เที่ยว${o.seeds?` · เมล็ดลงพื้น ~${Math.round(o.seeds)} เมล็ด/ตร.ม. → ต้นตั้งตัว ~${Math.round(o.plants||0)} ต้น/ตร.ม.`:''}${c.r&&c.r.npk&&c.r.rate?` · ธาตุอาหารลงจริง N-P₂O₅-K₂O ${c.r.npk.map(x=>fmt(x*o.rate/c.r.rate,1)).join('-')} กก./ไร่`:''} · ${fmt(o.setP*6.25,0)} กก./เฮกตาร์ ถ้าแอปตั้งเป็นเฮกตาร์</div></details>`;
+ return h}
+/* ระหว่างหว่าน: การ์ดเที่ยวต่อไป (เลขเดียวที่ต้องใส่ในแอป) + เหลือเท่าไร (สมการบวกลบ) */
+function budNxHTML(c,b){const o=budCalc(b,c),t=o.tr;if(!t||!o.A||!o.rate)return '';
+ const m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001,ctx=c.ctx,uD=wet?' แห้ง':'',ph=Math.max(0,t.phys);
+ let h='';
+ if(t.remA<=0.01)h+=`<div class="fadj ok">✅ ครบพื้นที่แล้ว — ${ph>0.5?`เหลือ${wet?'เมล็ดที่แช่แล้ว':''} ${fmt(ph,1)} กก.`:t.phys<-0.5?`ใช้เกินที่มี ${fmt(-t.phys,1)} กก. (เช็กตัวเลขที่บันทึก)`:'ใช้พอดี'}${wet&&t.dryLeft>0.05?` · เมล็ดแห้งยังไม่แช่ ${fmt(t.dryLeft,1)} กก. เก็บไว้ได้`:''}</div>`;
+ else if(t.phys<=0.5){const need=t.remA*o.rate;h+=wet?`<div class="fadj bad">⛔ เมล็ดที่แช่ไว้หมดแล้ว ยังเหลือ ${fmt(t.remA,2)} ไร่ — ต้องแช่เพิ่ม ~${fmt(need,1)} กก. แห้ง (ใช้เวลา 1–3 วัน)${o.wIn||!o.totD?'':t.dryLeft+0.05<need?` · เมล็ดแห้งเหลือ ${fmt(t.dryLeft,1)} กก. ต้องซื้อเพิ่ม ${fmt(need-t.dryLeft,1)} กก.`:` · มีเมล็ดแห้งเหลือ ${fmt(t.dryLeft,1)} กก. พอ`}</div>`:`<div class="fadj bad">⛔ ${nm}หมดแล้ว ยังเหลือ ${fmt(t.remA,2)} ไร่ — ต้องใช้เพิ่ม ~${fmt(need,0)} กก. (${fmt(need/o.bagD,1)} กระสอบ)</div>`}
+ else if(t.newSet){const F1=t.nTrip>1?o.L:t.lastP;
+  const fill=t.nTrip===1?`เที่ยวนี้เที่ยวสุดท้าย — เติมให้ถึง ${fmt(t.lastP,1)} กก. ก็พอ`:o.L-t.lastP>0.5?`เติมถึง ${fmt(o.L,1)} กก. อีก ${t.nTrip-1} เที่ยว · เที่ยวสุดท้ายเติมแค่ ${fmt(t.lastP,1)} กก.`:`เติมถึง ${fmt(o.L,1)} กก. ทุกเที่ยว`;
+  const why=[o.mode==='all'?`เหลือ ${fmt(t.phys,1)} กก. ÷ ${fmt(t.remA,2)} ไร่ = ${fmt(t.needP,1)} กก./ไร่`:wet?`ต้องลง ${fmt(t.needD,1)} แห้ง × ${fmt(o.wf,2)} = ${fmt(t.needP,1)} กก./ไร่ (ในถัง)`:`ต้องลง ${fmt(t.needP,1)} กก./ไร่`];
+  if(t.k&&Math.abs(t.k-1)>0.02)why.push(`ที่ผ่านมาเครื่องจ่ายจริง ${Math.round(t.k*100)}% ของค่าที่ใส่ → ใส่ ${fmt(t.newSet,1)} เพื่อชดเชย`);
+  else if(t.k)why.push('เครื่องจ่ายตรงค่าที่ใส่ ✅');
+  h+=`<div class="hud bud-act bud-nx"><div class="hud-h"><span>▶ เที่ยวต่อไป (เที่ยวที่ ${t.n+1})</span></div>
+  <div class="hud-g bud-g"><div class="hud-c"><span>ใส่ในแอป</span><b>${fmt(t.newSet,1)}</b><em>กก./ไร่</em></div><div class="hud-c"><span>เติมถึง</span><b>${fmt(F1,1)}</b><em>กก.</em></div><div class="hud-c"><span>เหลืออีก</span><b>${t.nTrip}</b><em>เที่ยว</em></div></div>
+  <div class="hud-f"><b>${fill}</b>${t.saveL?`<div>💡 เติมเที่ยวละ ${fmt(Math.ceil(t.saveL*10)/10,1)} กก. จะเหลือ ${t.nTrip-1} เที่ยว</div>`:''}<div>${why.join(' · ')}</div>${t.hop>0.05?`<div>ในถังยังค้าง ${fmt(t.hop,1)} กก. — เติมเพิ่มจนจอแอป DJI ขึ้น ${fmt(F1,1)} กก.</div>`:''}</div></div>`;
+  if(t.short){const big=t.dev2<-0.15;
+   h+=`<div class="fadj ${big?'bad':'warn'}">⚠️ ${wet?'เมล็ดที่แช่ไว้':nm+'ที่เหลือ'}ไม่พอตามอัตรา${c.rs} — เลขในการ์ดนี้เกลี่ยที่มีให้ทั่ว ได้ ${fmt(t.needD,1)} กก./ไร่${uD} (${budPc(t.dev2)})${wet?` · ถ้าจะให้ได้ตามอัตรา ต้องแช่เพิ่มอีก ${fmt(t.prepMore,1)} กก. แห้ง (ใช้เวลา 1–3 วัน)${!o.wIn&&o.totD&&t.dryLeft+0.05<t.prepMore?` — เมล็ดแห้งเหลือแค่ ${fmt(t.dryLeft,1)} กก. ต้องซื้อเพิ่ม ${fmt(t.prepMore-t.dryLeft,1)} กก.`:''}`:` · ถ้าจะให้ได้ตามอัตรา ต้องเพิ่มอีก ${fmt(t.addQ,0)} กก.`}${big?`<div>หรือใส่ ${fmt(t.tgtSet,1)} ตามอัตรา → หว่านได้ ~${fmt(t.coverT,2)} ไร่ ที่เหลือ ${fmt(t.remA-t.coverT,2)} ไร่ ค่อยหว่านเมื่อ${wet?'แช่เมล็ดเพิ่มแล้ว':'มี'+nm+'เพิ่ม'}</div>`:''}</div>`}
+  else if(t.endLeft>Math.max(1,0.05*t.needQ)){const sA=t.allD*o.wf/(t.k||1);
+   h+=`<div class="fadj">ℹ️ จบงานจะเหลือ${wet?'เมล็ดที่แช่แล้ว':nm} ~${fmt(t.endLeft,1)} กก.${wet?' (เก็บไม่ได้ — ใช้หว่านซ่อม หรือใช้ให้หมด)':' เก็บไว้ใช้ครั้งหน้าได้'}<div class="bud-in"><button class="btn sm" data-act="budSet" data-ctx="${ctx}" data-k="plan" data-v="all">ใช้ให้หมดกับ ${fmt(t.remA,2)} ไร่ที่เหลือ → ใส่ในแอป ${fmt(sA,1)} (ได้ ${fmt(t.allD,1)}${uD} ${budPc(t.allD/o.rate-1)})</button></div></div>`}}
+ /* เหลือเท่าไร — เขียนเป็นสมการให้บวกลบตามได้ */
+ const pv=v=>String(Math.round(v*10)/10);
+ h+=`<div class="bud-box bud-bal"><b>🧮 ${nm}เหลือเท่าไร</b>
+ ${wet&&!o.wIn?`<div class="bud-in"><label>แช่ไป <input class="spnum" data-bud="prepD" data-ctx="${ctx}" inputmode="decimal" value="${esc(pv(t.prepD))}" style="width:60px"> กก. แห้ง</label><span>→ หนัก ${fmt(t.prep,1)} กก.</span><span class="tiny muted">แช่มาก/น้อยกว่านี้ แก้ตัวเลขได้</span></div>`:''}
+ <div class="bud-eq">${wet&&!o.wIn?fmt(t.prep,1):`${o.totD?'มี':'แผนใช้'} ${fmt(t.prep,1)}`} − หว่านไป ${fmt(t.sp,1)}${t.loss?` − หก/ทิ้ง ${fmt(t.loss,1)}`:''} = <b>เหลือ ${fmt(ph,1)} กก.</b>${wet&&!o.wIn?` <span class="muted small">(≈ แห้ง ${fmt(ph/o.wf,1)})</span>`:''}${o.res&&o.totD?` <span class="tiny muted">(ไม่รวมที่กันเผื่อ ${o.res}%)</span>`:''}</div>
+ <div class="small muted">อยู่ในถังโดรน ${fmt(t.hop,1)} กก. · อยู่ข้างนอก ${fmt(Math.max(0,t.stock),1)} กก.${wet&&t.dryLeft>0.05?` · เมล็ดแห้งยังไม่แช่ ${fmt(t.dryLeft,1)} กก.`:''}</div>
+ <div class="small">พื้นที่เหลือ <b>${fmt(Math.max(0,t.remA),2)}</b> จาก ${fmt(o.A,1)} ไร่</div>
+ ${wet&&!o.wIn?`<div class="tiny muted">โดรนชั่งน้ำหนักเปียก — หว่านไป ${fmt(t.sp,1)} กก. = เมล็ดแห้งแค่ ${fmt(t.sp/o.wf,1)} กก.</div>`:''}</div>`;
+ return h}
+function budTbHTML(c,b){const o=budCalc(b,c),L=b.log||[];if(!L.length)return '';const wet=o.wf>1.001;
+ const rows=L.map((x,i)=>{const sp=Math.max(0,num(x.w0)-num(x.w1)),ra=num(x.ra),a=ra>0?sp/ra:0,s=num(x.set)||o.setP,d=s?a/s-1:null;
+  return `<tr><td>${i+1}</td><td>${fmt(num(x.w0),1)}→${fmt(num(x.w1),1)}<small>หว่าน ${fmt(sp,1)}</small></td><td>${fmt(ra,2)}</td><td><b>${fmt(a,1)}</b>${wet?`<small>แห้ง ${fmt(a/o.wf,1)}</small>`:''}</td><td>${fmt(s,1)}</td><td><span class="${budLv(d,0.05,0.1)}">${d==null?'-':budPc(d)}</span></td></tr>${num(x.loss)||num(x.ret)?`<tr class="sub"><td></td><td colspan="5">${num(x.loss)?`หก/ทิ้ง ${fmt(num(x.loss),1)} กก. `:''}${num(x.ret)?`นำออกคืนกอง ${fmt(num(x.ret),1)} กก.`:''}</td></tr>`:''}`}).join('');
+ return `<div class="bio-tw"><table class="budtb"><tr><th>#</th><th>ก่อน→หลัง กก.</th><th>ไร่</th><th>ได้ กก./ไร่</th><th>ใส่ในแอป</th><th>คลาด</th></tr>${rows}</table></div><div class="tiny muted">คลาด = ที่ได้จริงเทียบกับค่าที่ใส่ในแอป (เครื่องจ่ายแม่นไหม) · ไม่เกิน ±5% ถือว่าดี</div>`}
+function budDraftHTML(c,b){const o=budCalc(b,c),d=b.d||{},ctx=c.ctx,t=o.tr,n=(b.log||[]).length;
+ const defSet=t&&t.newSet?t.newSet:o.setP;
+ const D=(k,ph,w)=>`<input class="spnum" data-bud="d.${k}" data-ctx="${ctx}" inputmode="decimal" placeholder="${ph}" value="${esc(String(d[k]??''))}" style="width:${w||58}px">`;
+ const C=(k,v,l)=>`<button class="fchip sm ${b[k]===v?'on':''}" data-act="budSet" data-ctx="${ctx}" data-k="${k}" data-v="${v}">${l}</button>`;
+ const prevC=t?(b.log[n-1].rc!=null?b.log[n-1].rc:t.ar):0;
+ return `<div class="bud-dr"><div class="small"><b>บันทึกเที่ยวที่ ${n+1}</b> <span class="muted">— กรอกหลังลงจอด อ่านน้ำหนักจากจอแอป DJI (ระบบชั่งในถัง) พื้นที่ดูจากความคืบหน้าในแอป</span></div>
+ <div class="bud-in"><label>ก่อนขึ้นบิน ${D('w0',o.A&&o.rate?fmt(budFillNow(o),1):'กก.')} กก.</label><label>หลังลง ${D('w1','0')} กก.</label></div>
+ <div class="bud-in"><label>พื้นที่${b.am==='cum'?'สะสม':'เที่ยวนี้'} ${D('a',b.am==='cum'&&n?'>'+fmt(prevC/(b.au==='ha'?6.25:1),2):'0',64)} ${b.au==='ha'?'เฮกตาร์':'ไร่'}</label>${C('am','cum','สะสม')}${C('am','trip','ต่อเที่ยว')}${C('au','rai','ไร่')}${C('au','ha','เฮกตาร์')}</div>
+ <div class="bud-in"><label>ค่าที่ใส่ในแอปเที่ยวนี้ ${D('set',o.setP?fmt(defSet,1):'',58)} กก./ไร่</label></div>
+ <details class="bud-more"><summary class="tiny">+ หก/ทิ้ง · นำออกจากถัง</summary><div class="bud-in"><label>หก/ทิ้ง ${D('loss','0',52)} กก.</label><label>นำออกคืนกอง ${D('ret','0',52)} กก.</label></div><div class="tiny muted">หก/ทิ้ง = เสียไปจริง (หกตอนเท ก้อนที่ทิ้ง) · นำออกคืนกอง = ตักออกจากถังแล้วเก็บไว้ใช้ต่อ</div></details>
+ <div class="bud-in"><button class="btn sm primary" data-act="budAdd" data-ctx="${ctx}">+ บันทึกเที่ยวที่ ${n+1}</button>${n?`<button class="btn sm" data-act="budDel" data-ctx="${ctx}">ลบล่าสุด</button><button class="btn sm" data-act="budClr" data-ctx="${ctx}">ล้างทั้งหมด</button>`:''}</div></div>`}
+function budFix(c,o){const t=o.tr,r=c.r,opt=c.opt,out=[],seed=c.m&&c.m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001;
+ const nx=t&&t.newSet&&t.remA>0.01?` → เที่ยวต่อไปใส่ ${fmt(t.newSet,1)}`:'';
+ /* 1) อัตราจ่าย: ค่าที่ใส่ตรงกับที่แอปบอกไหม + เครื่องจ่ายตรงค่าที่ใส่ไหม (ความสูง รอบจาน ร่อง ไม่เปลี่ยนค่าเฉลี่ย ถ้าร่องในแอปตรงกับที่บินจริง) */
+ if(t&&t.actP!=null&&t.ar>=0.3){const kd=t.k!=null?t.k-1:0;let any=false;
+  if(t.pAvg&&t.setAvg&&Math.abs(t.setAvg/t.pAvg-1)>0.05){any=true;const dry=wet&&Math.abs(t.setAvg*o.wf/t.pAvg-1)<0.04;
+   out.push(['warn',`ค่าที่ใส่ในแอป: ใส่ ${fmt(t.setAvg,1)} แต่แอปนี้บอกให้ใส่ ${fmt(t.pAvg,1)}${dry?' (น่าจะใส่น้ำหนักแห้ง — ต้องใส่น้ำหนักเปียก)':''}${nx}`])}
+  if(t.k!=null&&Math.abs(kd)>0.05){any=true;out.push([Math.abs(kd)>0.1?'bad':'warn',`เครื่องจ่าย: ปล่อยออก${kd>0?'มากกว่า':'น้อยกว่า'}ค่าที่ใส่ ${Math.round(Math.abs(kd)*100)}% → ทำ Flow Calibration ของ${nm}ล็อตนี้ในแอป DJI · ระหว่างนี้ชดเชยให้แล้ว${nx}`])}
+  if(!any)out.push(['ok',`เครื่องจ่าย: ตรงค่าที่ใส่ (คลาด ${t.k!=null?budPc(kd):'-'}) ไม่ต้องแก้`])}
+ /* 2) ความสม่ำเสมอ: น้ำหนักบอกไม่ได้ ต้องดูรูปกระจาย (ถาด) หรือประเมินจากค่าที่ตั้ง */
+ const tr=c.ctx==='adv'?UI.trayRes:null,cvT=r.cvT;
+ if(tr&&!tr.err&&tr.cv0!=null){if(tr.cv0>cvT)out.push(['bad',`ระยะห่างแนวบิน: ถาดวัด CV ${Math.round(tr.cv0*100)}% ที่ร่อง ${fmt(tr.S0,2)} ม. (เกณฑ์ ≤${Math.round(cvT*100)}%) → ${tr.bBF?`ปรับร่องเป็น ${fmt(tr.bBF.S,2)} ม. (CV ${Math.round(tr.bBF.bf*100)}%)`:'ลดร่องลง/เพิ่มรอบจาน แล้ววัดซ้ำ'}`]);
+  else out.push(['ok',`ความสม่ำเสมอ: ถาดวัด CV ${Math.round(tr.cv0*100)}% ผ่านเกณฑ์ ≤${Math.round(cvT*100)}%`])}
+ else if(r.cv>cvT+0.005){const ch=[];if(opt){if(Math.abs(opt.S-r.S)>0.1)ch.push(`ระยะห่างแนวบิน ${fmt(r.S,1)} → ${fmt(opt.S,1)} ม.`);if(Math.abs(opt.rpm-r.rpm)>=50)ch.push(`รอบจาน ${r.rpm} → ${opt.rpm} rpm`);if(Math.abs(opt.h-r.h)>0.2)ch.push(`ความสูง ${fmt(r.h,1)} → ${fmt(opt.h,1)} ม.`)}
+  out.push(['warn',`ความสม่ำเสมอ (ประเมินจากค่าที่ตั้ง): CV ${Math.round(r.cv*100)}% เกินเกณฑ์ ≤${Math.round(cvT*100)}% → ${ch.length?ch.join(' · ')+(opt?` (CV ${Math.round(opt.cv*100)}%)`:''):'ลมคือตัวจำกัด รอลมเบา'} · ยืนยันด้วยทดสอบถาด`])}
+ else out.push(['ok',`ความสม่ำเสมอ (ประเมินจากค่าที่ตั้ง): CV ${Math.round(r.cv*100)}% ผ่านเกณฑ์ ≤${Math.round(cvT*100)}% · ยืนยันด้วยทดสอบถาด`]);
+ if(seed&&r.rpm>(c.m.rpmMax||1100))out.push(['warn',`รอบจาน ${r.rpm} rpm สูงเกินสำหรับ${c.m.n} (≤${c.m.rpmMax}) — เมล็ด/ราก${c.m.wetF?'งอก':''}ช้ำหัก`]);
+ if(t&&t.lossPct>0.02)out.push(['warn',`หก/ทิ้ง ${Math.round(t.lossPct*100)}% ของที่ใช้ — ${seed?'เมล็ดเปียกจับก้อน: สะเด็ดน้ำให้ดี เทผ่านตะแกรง':'ใช้กรวย/ถุงเท ระวังปุ๋ยชื้นจับก้อน'}`]);
+ return out}
+function budQcHTML(c,b){const o=budCalc(b,c),t=o.tr,m=c.m,seed=m&&m.k==='seed',nm=seed?'เมล็ด':'ปุ๋ย',wet=o.wf>1.001,uD=wet?' แห้ง':'';
+ if(!o.A||!o.rate)return '';
+ if(!t)return `<div class="bud-box"><b>✅ เช็กก่อนเริ่ม</b><ol class="small bud-ol"><li>ทำ Tare calibration ตอนถังว่าง — น้ำหนักบนจอจะได้ไม่คลาด</li><li>ทำ Flow Calibration ของ${nm}ชนิด/ล็อตนี้ แล้วบันทึกเป็นเทมเพลต</li>${wet?'<li>รากงอกไม่เกิน 1–2 มม. สะเด็ดน้ำจนไม่มีน้ำหยด แล้วชั่งเทียบแห้ง/เปียก</li>':''}<li>ตั้งร่องตามผลทดสอบถาด (ถ้ามี) แล้วบันทึกทุกเที่ยว</li></ol></div>`;
+ const g=(q,a,cl)=>`<div class="bq-r ${cl||''}"><span>${q}</span><b>${a}</b></div>`;
+ const tr=c.ctx==='adv'?UI.trayRes:null,trOk=tr&&!tr.err&&tr.cv0!=null,cv=trOk?tr.cv0:c.r.cv;
+ let h=`<div class="bud-box bud-qc"><b>📋 สรุปคุณภาพงาน (${t.n} เที่ยว)</b>
+ ${wet&&o.wIn?g('1. เมล็ดแช่แล้วที่มี',o.totD?`${fmt(o.totIn,1)} กก. (≈ แห้ง ${fmt(o.totD,1)})`:`แผนใช้ ${fmt(o.spendP,1)} กก.`):wet?g(`1. ${nm}แห้ง → แช่แล้วหนัก`,`${fmt(t.prepD,1)} → ${fmt(t.prep,1)} กก. (×${fmt(o.wf,2)}${o.st==='meas'&&o.wfM?' ชั่งจริง':''})`):g(`1. ${nm}ที่มี`,o.totD?`${fmt(o.totD,0)} กก. · แผนใช้ ${fmt(o.spendD,0)}`:`แผนใช้ ${fmt(o.spendD,0)} กก.`)}
+ ${g('2. เติมถังจริง',`เฉลี่ย ${fmt(t.w0avg,1)} กก./เที่ยว`)}
+ ${g('3. หว่านออกไปจริง',`${fmt(t.sp,1)} กก.${wet?` (แห้ง ${fmt(t.sp/o.wf,1)})`:''}${t.loss?` · หก/ทิ้ง ${fmt(t.loss,1)}`:''}`)}
+ ${g('4. พื้นที่หว่านจริง',`${fmt(t.ar,2)} จาก ${fmt(o.A,1)} ไร่ (${Math.round(t.ar/o.A*100)}%)`,t.ar>o.A*1.03?'bad':'')}
+ ${g('5. ได้จริงเฉลี่ย',t.actP!=null?`${fmt(t.actP,1)} กก./ไร่${wet?` = แห้ง ${fmt(t.actD,1)}`:''} · เป้า ${fmt(t.tgtD,1)}${uD} (${budPc(t.devT)})`:'-',budLv(t.devT,0.05,0.1))}
+ ${g('6. กระจายสม่ำเสมอ',trOk?`ถาดวัด CV ${Math.round(tr.cv0*100)}% (เกณฑ์ ≤${Math.round(c.r.cvT*100)}%)`:`ประเมิน CV ${Math.round(c.r.cv*100)}% (เกณฑ์ ≤${Math.round(c.r.cvT*100)}%) · ยังไม่ได้วัดถาด`,cv<=c.r.cvT+0.005?'ok':'warn')}
+ <div class="bq-fix"><span>7. ถ้าคลาด แก้ที่</span>${budFix(c,o).map(([cl,tx])=>`<div class="fadj ${cl}">${esc(tx)}</div>`).join('')}</div></div>`;
+ if(t.ar>o.A*1.03)h+=`<div class="fadj bad">⚠️ พื้นที่ที่บันทึกเกินพื้นที่งาน ${Math.round((t.ar/o.A-1)*100)}% — เช็กหน่วย (ไร่/เฮกตาร์) หรือพื้นที่สะสม/ต่อเที่ยว</div>`;
+ return h}
+function g2(l,v,cl){return `<div class="spm ${cl||''}"><span>${l}</span><b>${v}</b></div>`}
+/* ---------- อัปเดต ---------- */
+function budMount(ctx,hide){if(ctx!=='job')return;const el=document.getElementById('jf-bud');if(!el)return;if(hide){el.innerHTML='';return}
+ const m=(budCtx('job').m)||{},mk=(m.n||'')+'|'+wetable(m),root=el.firstElementChild;
+ if(!root||root.dataset.mk!==mk)el.innerHTML=budHTML('job');else budRefresh('job','part')}
+function budRefresh(ctx,mode,anc){const go=()=>{const c=budCtx(ctx),b=budOf(ctx);
+  if(mode==='full'){const el=document.getElementById('bud-'+ctx);if(el)el.outerHTML=budHTML(ctx);return}
+  const s=(id,f)=>{const el=document.getElementById('bud-'+ctx+'-'+id);if(el&&!el.contains(document.activeElement))el.innerHTML=f(c,b)};s('tot',budTotTxt);s('rec',budRecHTML);s('o',budOutHTML);s('tb',budTbHTML);s('nx',budNxHTML);s('qc',budQcHTML);
+  const o=budCalc(b,c),t=o.tr,root=document.getElementById('bud-'+ctx);if(root&&o.A&&o.rate){const e1=root.querySelector('[data-bud="d.set"]'),e2=root.querySelector('[data-bud="d.w0"]');if(e1)e1.placeholder=fmt(t&&t.newSet?t.newSet:o.setP,1);if(e2)e2.placeholder=fmt(budFillNow(o),1)}};
+ if(anc&&typeof keepPos==='function')keepPos(anc,go);else go()}
+/* ค่าที่เปลี่ยนฟิสิกส์ (อัตรา ความชื้น ความหนาแน่น น้ำหนักต่อเที่ยว) → คำนวณค่าบินใหม่ทั้งการ์ด */
+function budPhysRefresh(ctx,anc){if(ctx==='job'){if(typeof jfFlyLive==='function')jfFlyLive();return}if(typeof spRefresh==='function')spRefresh(null,false,anc);else render()}
+document.addEventListener('toggle',e=>{const t=e.target;if(t&&t.dataset&&t.dataset.tog==='budDet')UI.budDetOpen=t.open},true);
+const BUD_PHYS=['rate','mDry','mWet','bulkKg','loadU','seedSt','wState'];
+document.addEventListener('input',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.bud)return;const ctx=t.dataset.ctx,k=t.dataset.bud,b=budOf(ctx),v=t.value;
+ if(k.startsWith('d.')){b.d[k.slice(2)]=v;budPersist(ctx);return}
+ /* ชั่งสุ่ม 3 กระสอบ → น้ำหนักเฉลี่ยต่อกระสอบ */
+ if(k==='s1'||k==='s2'||k==='s3'){b[k]=v;const xs=[b.s1,b.s2,b.s3].map(num).filter(x=>x>0);if(xs.length){b.kgBag=String(Math.round(xs.reduce((a,x)=>a+x,0)/xs.length*100)/100);const el=document.querySelector(`#bud-${ctx} [data-bud="kgBag"]`);if(el)el.value=b.kgBag;budChipSync(ctx,'kgBag',num(b.kgBag))}budPersist(ctx);budRefresh(ctx,'part');return}
+ /* กำหนดเลขที่ใส่ในแอปเอง → เก็บเป็นอัตราเมล็ดแห้งภายในแอป */
+ if(k==='ownP'){const x=num(v);if(!(x>0))return;b.plan='own';const mm=budMat(ctx);budSetRateD(ctx,x/(mm?budWF(b,mm):1));budPersist(ctx);budRefresh(ctx,'part');budPhysSoon(ctx);return}
+ if(k==='area'){if(ctx==='job'){F.area=v;const el=document.querySelector('[data-f="area"]');if(el&&el!==t)el.value=v}else UI.sp.area=num(v)||v}
+ else if(k==='rate'){const x=num(v);if(!(x>0))return;if(ctx==='job')budJobRate(x);else UI.sp.rate=x}
+ else b[k]=v;
+ if(k==='prepD')b.prepAuto=0;
+ if(k==='kgBag'){budChipSync(ctx,'kgBag',num(v)||'');b.s1=b.s2=b.s3='';document.querySelectorAll(`#bud-${ctx} [data-bud^="s"]`).forEach(el=>{if(/^s[123]$/.test(el.dataset.bud))el.value=''})}
+ budPersist(ctx);budRefresh(ctx,'part')});
+document.addEventListener('change',e=>{const t=e.target;if(!t||!t.dataset||!t.dataset.bud||t.dataset.bud.startsWith('d.'))return;const ctx=t.dataset.ctx,k=t.dataset.bud;
+ /* หน่วง 0.35 วิ. — ถ้าพิมพ์แล้วแตะปุ่มทันที ปุ่มจะไม่ถูกวาดใหม่ระหว่างนิ้วกด */
+ if(BUD_PHYS.includes(k)||k==='area'||k==='prepD'){clearTimeout(budPhysRefresh._t);budPhysRefresh._t=setTimeout(()=>{budPhysRefresh(ctx,t);budRefresh(ctx,'part')},350)}
+ else setTimeout(()=>budRefresh(ctx,'part'),0)});
+/* ปุ่มลัดน้ำหนักกระสอบ: อัปเดตไฮไลต์เฉย ๆ ห้ามวาดกล่องใหม่ (ไม่งั้นช่องที่กำลังจะพิมพ์ต่อหลุดโฟกัส) */
+function budJobRate(v){const m=(spJob(F)||{}).m,p=Math.round(v*(m?budWF(budOf('job'),m):1)*100)/100;F.kgRai=p;F.kgRaiU='tank';const el=document.querySelector('[data-f="kgRai"]');if(el&&el!==document.activeElement)el.value=p}
+function budChipSync(ctx,k,v){document.querySelectorAll(`#bud-${ctx} [data-act="budSet"][data-k="${k}"]`).forEach(el=>el.classList.toggle('on',String(el.dataset.v)===String(v)))}
+Object.assign(ACT,{
+ budSet:a=>{const ctx=a.dataset.ctx,b=budOf(ctx),k=a.dataset.k;
+  /* วิธีหว่าน: หมดพอดีแปลง / ตามค่าแนะนำ / กำหนดเอง */
+  if(k==='plan'){const v=a.dataset.v;b.plan=v;budPersist(ctx);if(v==='rec'){const c=budCtx(ctx);if(c.rec)budSetRateD(ctx,c.rec.rate)}else if(v==='all')budSync(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
+  if(k==='kgBag'){b.s1=b.s2=b.s3=''}
+  if(k==='mode'&&a.dataset.v==='all'){const c=budCtx(ctx),o=budCalc({...b,mode:'tgt'},c),t=o.tr,v0=t&&t.remA>0.01?t.allD:o.availD;if(v0){const v=Math.round(v0*100)/100;if(ctx==='job')budJobRate(v);else UI.sp.rate=v}b.mode='tgt';budPersist(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a);return}
+  b[k]=a.dataset.v;budPersist(ctx);if(BUD_PHYS.includes(k))budPhysRefresh(ctx,a);budRefresh(ctx,'full',a)},
+ budAdd:a=>{const ctx=a.dataset.ctx,b=budOf(ctx),c=budCtx(ctx),o=budCalc(b,c),d=b.d||{},L=b.log||[],t=o.tr;
+  const w0=num(d.w0)||budFillNow(o),w1=num(d.w1)||0,loss=num(d.loss)||0,ret=num(d.ret)||0,f=b.au==='ha'?6.25:1,av=num(d.a)*f;
+  if(!(av>0)){toast('ใส่พื้นที่จากแอป DJI ก่อน');return}
+  if(w1>w0){toast('น้ำหนักหลังลงมากกว่าก่อนบิน — เช็กตัวเลข');return}
+  if(ret>w1+1e-9){toast('นำออกได้ไม่เกินน้ำหนักหลังลง');return}
+  const prevC=L.length?(L[L.length-1].rc!=null?L[L.length-1].rc:t.ar):0;let ra,rc;
+  if(b.am==='cum'){ra=av-prevC;rc=av;if(!(ra>0.001)){toast(`พื้นที่สะสมต้องมากกว่าครั้งก่อน (${fmt(prevC,2)} ไร่) — หรือเปลี่ยนเป็น "ต่อเที่ยว"`);return}}else{ra=av;rc=prevC+av}
+  const defSet=t&&t.newSet?t.newSet:o.setP,set=num(d.set)||r1(defSet);
+  if(!L.length&&o.notSoak&&!(num(b.prepD)>0)){b.prepD=String(Math.round(o.spendD*10)/10);b.prepAuto=1}
+  b.log=L.concat([{w0,w1,ra:Math.round(ra*1000)/1000,rc:Math.round(rc*1000)/1000,set,p:r1(defSet),rt:Math.round(o.rate*1000)/1000,loss,ret,at:new Date().toISOString()}]);b.d={};budPersist(ctx);
+  const sp=w0-w1,act=sp/ra,dS=act/set-1,dT=act/o.wf/o.rate-1;
+  toast(`เที่ยว ${b.log.length}: จ่าย ${fmt(sp,1)} กก. / ${fmt(ra,2)} ไร่ = ${fmt(act,1)} กก./ไร่${Math.abs(dT)>0.1?` ⚠️ คลาดค่า${c.rs} ${budPc(dT)}`:Math.abs(dS)>0.1?` ⚠️ คลาดค่าตั้ง ${budPc(dS)}`:' ✅'}`,Math.abs(dT)>0.1||Math.abs(dS)>0.1?'':'ok');
+  budPhysRefresh(ctx,a);budRefresh(ctx,'full',a)},
+ budDel:a=>{const ctx=a.dataset.ctx,b=budOf(ctx);b.log=(b.log||[]).slice(0,-1);if(!b.log.length&&b.prepAuto){b.prepD='';b.prepAuto=0}budPersist(ctx);budPhysRefresh(ctx,a);budRefresh(ctx,'full',a)},
+ budClr:async a=>{const ctx=a.dataset.ctx;if(!await confirmBox('ล้างบันทึกทุกเที่ยวของงานนี้?','ล้าง'))return;const b=budOf(ctx);b.log=[];b.d={};if(b.prepAuto){b.prepD='';b.prepAuto=0}budPersist(ctx);budPhysRefresh(ctx);budRefresh(ctx,'full')},
+ budRecUse:a=>{const ctx=a.dataset.ctx,c=budCtx(ctx);if(!c.rec)return;const b0=budOf(ctx);b0.plan='rec';budPersist(ctx);if(ctx==='job'){budJobRate(c.rec.rate);jfFlyLive()}else{UI.sp.rate=c.rec.rate;budPhysRefresh(ctx,a)}budRefresh(ctx,'full',a)},
+ budUse:a=>{const ctx=a.dataset.ctx,b=budOf(ctx),c=budCtx(ctx),o=budCalc(b,c);if(!o.planD)return;b.mode='tgt';budPersist(ctx);
+  if(ctx==='job'){budJobRate(r1(o.planD));jfFlyLive()}else{UI.sp.rate=r1(o.planD);spApply();render()}}
+});
 
 </script>
 </body>
