@@ -803,6 +803,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .cb-item.on,.cb-item:hover{background:var(--brand-l)}
 .cb-item .ico{width:16px;height:16px;vertical-align:-3px}
 .cb-empty{padding:10px;color:var(--muted);font-size:13px}
+#pf .cb-list{position:static;margin-top:4px;max-height:300px;box-shadow:0 6px 18px rgba(20,40,25,.12)}#pf .cb-item{padding:9px 10px;border-bottom:1px solid #f0f3ee}#pf .cb-item:last-child{border-bottom:0}
 mark{background:#fde68a;color:inherit;border-radius:3px;padding:0 1px}
 .tg{display:inline-block;background:#f1f4ee;border-radius:6px;padding:0 6px;margin:1px 2px 1px 0;font-size:12.5px}
 #mapwrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:14px;align-items:start}
@@ -2110,7 +2111,7 @@ function mergeSettings(s){const o=clone(DEFAULTS);Object.assign(o,s||{});if(!o.b
 
 /* ---------- Firebase (เวอร์ชัน GitHub / เว็บทั่วไป) ---------- */
 let FB=null,FBMODE=false,FBERR='';
-const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม pakaplonfarm.github.io ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)','auth/admin-restricted-operation':'ยังไม่ได้เปิดการเข้าแบบไม่ล็อกอิน — Firebase › Authentication › Sign-in method › เพิ่ม Anonymous แล้วกด Enable'};
+const FB_ERR={'auth/unauthorized-domain':'โดเมนนี้ยังไม่ได้รับอนุญาต — เพิ่ม '+location.hostname+' ใน Firebase › Authentication › Settings › Authorized domains','auth/popup-closed-by-user':'ปิดหน้าต่างล็อกอินก่อนเสร็จ ลองใหม่อีกครั้ง','auth/network-request-failed':'เชื่อมต่ออินเทอร์เน็ตไม่ได้','auth/operation-not-allowed':'ยังไม่ได้เปิดล็อกอินด้วย Google ใน Firebase › Authentication › Sign-in method','permission-denied':'บัญชีนี้ไม่มีสิทธิ์เข้าถึงข้อมูลฟาร์ม — ตรวจอีเมลในกฎ Firestore (Rules)','auth/admin-restricted-operation':'ยังไม่ได้เปิดการเข้าแบบไม่ล็อกอิน — Firebase › Authentication › Sign-in method › เพิ่ม Anonymous แล้วกด Enable'};
 const USER_DOMAIN=()=>(window.FARM_ID||'farm')+'.farm';
 const userEmail=u=>{u=String(u||'').trim().toLowerCase();return u.includes('@')?u:u+'@'+USER_DOMAIN()};
 const userLabel=e=>String(e||'').replace('@'+USER_DOMAIN(),'');
@@ -2381,12 +2382,13 @@ const jobFields=j=>[custById(j.customerId)?.name,plotById(j.plotId)?.name,plotBy
 let CBS=null;
 const CBP={}; // ผู้ให้รายการแนะนำของแต่ละช่อง
 function cbOpen(inp){const prov=CBP[inp.dataset.cb];if(!prov)return;const items=(prov.items(inp,inp.value)||[]).slice(0,40);
- const list=inp.parentElement.querySelector('.cb-list');if(!list)return;
- list.innerHTML=items.length?items.map((it,k)=>`<div class="cb-item ${k===0?'on':''}" data-k="${k}">${it.html}</div>`).join(''):`<div class="cb-empty">ไม่พบ “${esc(inp.value)}” ลองพิมพ์คำอื่นหรือสะกดใหม่</div>`;
- list.classList.remove('hidden');CBS={inp,items,idx:0,list}}
+ const list=inp.parentElement.querySelector('.cb-list');if(!list)return;if(!items.length&&!String(inp.value||'').trim()){list.classList.add('hidden');if(CBS&&CBS.inp===inp)CBS=null;return}
+ const auto=!prov.noAuto; // noAuto: ไม่เลือกรายการแรกให้เอง กด Enter/เสร็จ = ใช้ตามที่พิมพ์
+ list.innerHTML=items.length?items.map((it,k)=>`<div class="cb-item ${auto&&k===0?'on':''}" data-k="${k}">${it.html}</div>`).join(''):`<div class="cb-empty">ไม่พบ “${esc(inp.value)}” ลองพิมพ์คำอื่นหรือสะกดใหม่</div>`;
+ list.classList.remove('hidden');CBS={inp,items,idx:auto?0:-1,list}}
 function cbClose(picked){if(!CBS)return;const s=CBS;CBS=null;s.list.classList.add('hidden');if(!picked){const p=CBP[s.inp.dataset.cb];if(p&&p.reset)p.reset(s.inp)}}
 function cbPick(k){const s=CBS;if(!s)return;const it=s.items[k];cbClose(true);if(it)CBP[s.inp.dataset.cb].pick(s.inp,it)}
-function cbMove(d){if(!CBS||!CBS.items.length)return;CBS.idx=(CBS.idx+d+CBS.items.length)%CBS.items.length;$$('.cb-item',CBS.list).forEach((el,k)=>el.classList.toggle('on',k===CBS.idx));const on=$('.cb-item.on',CBS.list);if(on)on.scrollIntoView({block:'nearest'})}
+function cbMove(d){if(!CBS||!CBS.items.length)return;const n=CBS.items.length;CBS.idx=CBS.idx<0?(d>0?0:n-1):(CBS.idx+d+n)%n;$$('.cb-item',CBS.list).forEach((el,k)=>el.classList.toggle('on',k===CBS.idx));const on=$('.cb-item.on',CBS.list);if(on)on.scrollIntoView({block:'nearest'})}
 const cbHTML=(key,val,ph,extra='')=>`<div class="cb"><input class="cb-in" data-cb="${key}" ${extra} value="${esc(val)}" placeholder="${esc(ph)}" autocomplete="off" spellcheck="false"><div class="cb-list hidden"></div></div>`;
 
 /* ---------- ค้นหาทั้งหมด ---------- */
@@ -3140,11 +3142,11 @@ CBP.active={items:(inp,q)=>{const i=+inp.dataset.cbi,l=F.chems[i];if(!l)return[]
   if(l.cat==='fer'&&l.unit==='ซีซี')l.unit='กก.';renderChemLines();updateJobComputed()},
  reset:inp=>{const l=F?.chems[+inp.dataset.cbi];if(l)inp.value=l.activeId==='__custom'?l.active:(lineChem(l)?.th||'')}};
 CBP.prod={items:(inp,q)=>{const i=+inp.dataset.cbi;const mine=S.products.map(p=>({p,name:p.name,f:[p.name,CHEMMAP[p.activeId]?.th||p.active]}));
-  const tn=Object.entries(TN).map(([id,s])=>({id,name:s,f:[s,CHEMMAP[id]?.th]}));
+  const tn=pfSrc().filter(x=>x.t==='tn').map(x=>({id:x.c.id,name:x.name,f:x.f}));
   const r=fzRank([...mine,...tn],q,x=>x.f,15).map(x=>x.p?{x,html:`⭐ <b>${hl(x.p.name,q)}</b> <span class="tiny muted">${esc(CHEMMAP[x.p.activeId]?.th||x.p.active||'')}</span>`}:{x,html:`<b>${hl(x.name,q)}</b> <span class="tiny muted">→ ${esc(CHEMMAP[x.id]?.th||'')} (${esc(gLabel(CHEMMAP[x.id]?.cat,CHEMMAP[x.id]?.g))})</span>`});
   if(q.trim())r.push({typed:q.trim(),html:`<b>ใช้ชื่อ “${esc(q.trim())}”</b>`});return r},
  pick:(inp,it)=>{const i=+inp.dataset.cbi,l=F.chems[i];if(it.typed){l.product=it.typed}else if(it.x.p){const p=it.x.p;l.product=p.name;if(!l.activeId||l.activeId.startsWith('p:')){l.activeId='p:'+p.id;l.cat=p.cat;l.g=p.g||'';l.active=CHEMMAP[p.activeId]?.th||p.active||''}tmJobFill(l,p,F)}
-  else{const c=CHEMMAP[it.x.id];l.product=it.x.name.split(' ')[0];if(!l.activeId&&c){l.activeId=c.id;l.cat=c.cat;l.g=c.g;l.active=c.th}}renderChemLines();updateJobComputed()},
+  else{const c=CHEMMAP[it.x.id];l.product=it.x.name;if(!l.activeId&&c){l.activeId=c.id;l.cat=c.cat;l.g=c.g;l.active=c.th}}renderChemLines();updateJobComputed()},
  reset:inp=>{const l=F?.chems[+inp.dataset.cbi];if(l)inp.value=l.product||''}};
 
 function renderJobForm(){
@@ -3726,12 +3728,12 @@ function openProd(p,opt){
    ${F.activeId==='__custom'?`<div class="grid g2"><div class="field"><label>ชื่อสารสำคัญ</label><input data-e="active" value="${esc(F.active)}"></div><div class="field"><label>กลุ่ม (เลข IRAC/FRAC/HRAC)</label><input data-e="g" value="${esc(F.g)}"></div></div>`:''}
    <div class="field"><label>สูตร (ตัวอักษรท้ายชื่อบนขวด)</label><div class="fstg">${PFORMS.map(f=>ch('form',f,fLab(f))).join('')}</div><div class="tiny muted">ใช้จัดลำดับเทลงถัง ${formDetect(F.name)&&!F.form?'· จากชื่อน่าจะเป็น '+formDetect(F.name):''}</div></div>
    <div class="field"><label>การออกฤทธิ์</label><div class="fstg">${ch('act','sys','ดูดซึม')}${ch('act','con','สัมผัส')}${ch('act','','ไม่แน่ใจ')}</div></div>`;
-  else if(k==='flake'||k==='liq')sp=`<div class="field"><label>สูตรปุ๋ย</label><input data-e="npk" value="${esc(F.npk||'')}" placeholder="เช่น 13-0-46" data-rer="1"></div>`;
+  else if(k==='flake'||k==='liq')sp=`<div class="field"><label>สูตรปุ๋ย</label>${cbHTML('pfnpk',F.npk||'','เช่น 13-0-46','inputmode="text" autocorrect="off" autocapitalize="off" name="pfn'+uid().slice(-4)+'"')}</div>`;
   else if(k==='sec'||k==='secE')sp=`<div class="field"><label>ธาตุหลัก</label><div class="fstg">${Object.entries(SEC_EL).filter(([e])=>k==='sec'||e!=='S').map(([e,n])=>ch('el',e,n)).join('')}</div></div>`;
   else if(k==='micro')sp=`<div class="field"><label>ธาตุ</label><div class="fstg">${Object.entries(MICRO_EL).map(([e,n])=>ch('el',e,n)).join('')}</div></div><div class="field"><label>รูปแบบ</label><div class="fstg">${ch('chel','true','คีเลต (EDTA)')}${ch('chel','false','ซัลเฟต')}</div><div class="tiny muted">ซัลเฟตนับรวมในเพดานปุ๋ยเกลือ และห้ามผสมกับแคลเซียม</div></div>`;
   else if(k==='bio')sp=`<div class="field"><label>ชนิด (ไม่ใส่ก็ได้)</label><div class="fstg">${Object.entries(BIO_T).map(([e,n])=>ch('bio',e,n)).join('')}</div></div>`;
   else if(k==='adj')sp=`<div class="field"><label>ชนิด</label><div class="fstg">${Object.entries(ADJ_T).map(([e,n])=>ch('adj',e,n)).join('')}</div></div>`;
-  return `<div class="field"><label>ชื่อการค้า/ยี่ห้อ *</label><input data-e="name" value="${esc(F.name)}" placeholder="ชื่อบนกล่องหรือขวด"></div>
+  return `<div class="field"><label>ชื่อการค้า/ยี่ห้อ *</label>${cbHTML('pfname',F.name,'พิมพ์ชื่อบนกล่อง ยี่ห้อ หรือสารสำคัญ','enterkeyhint="done" autocorrect="off" autocapitalize="off" name="pfq'+uid().slice(-4)+'"')}<div class="tiny muted" id="pf-dup">${pfDupHTML()}</div></div>
  <div class="field"><label>ประเภท</label><div class="pk-g">${PK_KEYS.map(x=>`<button type="button" class="pk ${k===x?'on':''}" data-act="pfKind" data-k="${x}" aria-pressed="${k===x}"><i>${PK[x].ic}</i><span>${PK[x].n}</span></button>`).join('')}</div>${K.ex?`<div class="tiny muted">เช่น ${esc(K.ex)}</div>`:''}</div>
  ${sp}
  <div class="field"><label>อัตราข้างกล่อง</label><div class="pf-rate"><input data-e="r1" inputmode="decimal" value="${esc(F.r1||'')}" placeholder="ค่าต่ำ" aria-label="อัตราต่ำ"><span>–</span><input data-e="r2" inputmode="decimal" value="${esc(F.r2||'')}" placeholder="ค่าสูง (ถ้ามี)" aria-label="อัตราสูง"><div class="seg">${['g','cc'].map(u=>`<button type="button" class="${F.unit===u?'on':''}" data-act="pfSet" data-k="unit" data-v="${u}">${u==='g'?'กรัม':'ซีซี'}</button>`).join('')}</div></div>
@@ -3749,7 +3751,7 @@ function openProd(p,opt){
 const pfRe=()=>{const b=$('#pf');if(b&&F&&F._body){const y=b.scrollTop;b.innerHTML=F._body();b.scrollTop=y}};
 Object.assign(ACT,{
  pfKind:a=>{const k=a.dataset.k;if(!PK[k]||!F)return;const oc=F.cat;F.kind=k;F.cat=PK[k].cat;if(oc!==F.cat){F.activeId='';F.form=''}if(!F._uT)F.unit=PK[k].u;if(k==='micro'&&F.chel==null)F.chel=true;F.el=(k==='micro'&&!MICRO_EL[F.el])||((k==='sec'||k==='secE')&&!SEC_EL[F.el])?'':F.el;pfRe()},
- pfSet:a=>{if(!F)return;const k=a.dataset.k;let v=a.dataset.v;if(k==='chel')v=v==='true';else if(['el','form','bio','adj','act'].includes(k)&&String(F[k])===v)v='';if(k==='unit'){F._uT=1;F.pkU=''}F[k]=v;pfRe()},
+ pfSet:a=>{if(!F)return;const k=a.dataset.k;let v=a.dataset.v;if(k==='chel')v=v==='true';else if(['el','form','bio','adj','act'].includes(k)&&String(F[k])===v)v='';if(k==='unit'){F._uT=1;F.pkU=''}F[k]=v;if(k==='form')pfFormU();pfRe()},
  tmToggle:a=>{const st=tmState(),id=a.dataset.id;const add=!st.items.some(x=>x.id===id);if(!add)st.items=st.items.filter(x=>x.id!==id);else st.items.push({id,dose:'rec'});tmSave();tmSyncFly();const y=window.scrollY;render();window.scrollTo(0,y);if(a.dataset.toast)toast(add?'ใส่ในถังผสมแล้ว':'เอาออกจากถังแล้ว')},
  tmNewFrom:a=>{const c=CHEMMAP[a.dataset.c];if(!c)return;openProd({id:uid(),name:'',cat:c.cat,kind:({ins:'ins',fun:'fun',her:'her',pgr:'bio',adj:'adj'})[c.cat]||'flake',activeId:c.id,active:c.th,g:c.g,note:''},{toMix:1,isNew:1})},
  tmDose:a=>{const st=tmState(),it=st.items.find(x=>x.id===a.dataset.id);if(it){it.dose=a.dataset.d;tmSave();tmRefresh()}},
@@ -3773,6 +3775,80 @@ function tmJobInfo(l,j){if(!l.activeId||!l.activeId.startsWith('p:'))return '';c
  const u=o.u,r=num(l.rate),maxR=o.K.adj?o.tMax/X.tank*X.w:o.max;const over=r&&r>maxR*1.02;const pct=r&&o.cap?r*o.dens/X.w/10:0;
  return `<div class="tiny" style="margin-top:4px">📦 ฉลาก ${esc(pLabel(p))} → แนะนำ <b>${qf(o.K.adj?o.tRec/X.tank*X.w:o.rec,u)}/ไร่</b> ไม่เกิน ${qf(maxR,u)}/ไร่ <span class="muted">(${esc(X.cropN)} ×${X.mult}${X.wSet?'':' · น้ำยังไม่กรอก ใช้ค่ากลาง '+fmt(X.w,1)+' ล.'})</span>${pct?` · เข้ม ${pctf(pct)}${pct>o.cap*1.001?` <b style="color:var(--red)">เกินเพดาน ${fmt(o.cap,1)}%</b>`:''}`:''}${over?` <b style="color:var(--red)">· เกินที่แนะนำ</b>`:''}</div>`}
 
+/* ---------- ช่องพิมพ์ชื่อยา/ปุ๋ย: มีรายการให้เลือกตามตัวอักษรที่พิมพ์ ----------
+   ที่มา: ยี่ห้อที่เคยบันทึก (⭐) · ชื่อการค้าที่รู้จัก · สารสำคัญ (IRAC/FRAC/HRAC) · ปุ๋ยทางใบ ธาตุรอง สารเสริม สารช่วยผสม */
+const FER_KIND={calnit:['sec',{el:'Ca'}],cab:['secE',{el:'Ca'}],zinc:['micro',{el:'Zn',chel:true}],mg:['sec',{el:'Mg'}],te:['micro',{el:'mix',chel:true}]};
+const BIO_KIND={amino:'amino',seaweed:'sea',humic:'humic',chitosan:''};
+const ADJ_KIND={stick:'stick',silicone:'stick',antidrift:'drift',mso:'stick'};
+function kindFromChem(c){if(!c)return null;if(c.cat==='ins'||c.cat==='fun'||c.cat==='her')return [c.cat,{}];
+ if(c.cat==='pgr')return ['bio',{bio:c.id in BIO_KIND?BIO_KIND[c.id]:'horm'}];if(c.cat==='adj')return ['adj',{adj:ADJ_KIND[c.id]||'stick'}];
+ if(c.cat==='fer'){if(FER_KIND[c.id])return FER_KIND[c.id];if(c.g==='ทางใบ'||c.id==='f46'||c.id==='f21')return ['flake',{}]}return null}
+/* ชื่อการค้าในตาราง เช่น 'Exalt Radiant เอ็กซอลท์ เรดิแอนท์' → ['เอ็กซอลท์ (Exalt)','เรดิแอนท์ (Radiant)'] */
+const BR_MOD=/^(gold|top|plus|pro|max|extra|xtra|ultra|super|duo|forte|prime|power|neo|combi|\d+)$/i;
+function brandsOf(str){const isEn=x=>/^[A-Za-z0-9][A-Za-z0-9.\-+]*$/.test(x);const en=[],th=[];let prevEn=false;
+ String(str||'').split(/\s+/).filter(Boolean).forEach(x=>{if(isEn(x)){if(prevEn&&en.length&&BR_MOD.test(x))en[en.length-1]+=' '+x;else en.push(x);prevEn=true}else{th.push(x);prevEn=false}});
+ const out=[];for(let i=0;i<Math.max(en.length,th.length);i++)out.push(th[i]&&en[i]?th[i]+' ('+en[i]+')':(th[i]||en[i]));return out}
+let PF_SRC=null;
+function pfSrc(){if(PF_SRC)return PF_SRC;const out=[];
+ Object.entries(TN).forEach(([id,str])=>{const c=CHEMMAP[id];if(!c)return;brandsOf(str).forEach(b=>out.push({t:'tn',c,name:b,f:[b,c.th,c.en]}))});
+ CHEM.forEach(c=>{const k=kindFromChem(c);if(!k)return;if(['ins','fun','her'].includes(c.cat))out.push({t:'act',c,name:c.th,f:[c.th,c.en,gLabel(c.cat,c.g)]});else out.push({t:'fer',c,name:c.th,f:[c.th,c.en,PK[k[0]].n]})});
+ return PF_SRC=out}
+const FORM_U={WP:'g',WG:'g',SP:'g',SC:'cc',CS:'cc',EC:'cc',EW:'cc',ME:'cc',OD:'cc',SE:'cc',SL:'cc',OIL:'cc'};
+const pfFormU=()=>{if(F&&F.form&&FORM_U[F.form]&&!F._uT)F.unit=FORM_U[F.form]};
+const pfKey=t=>String(t||'').toLowerCase().replace(/\s+/g,'');
+const CAT_KIND={ins:'ins',fun:'fun',her:'her',pgr:'bio',adj:'adj',fer:'flake'};
+function pfHist(){const lib=new Set(S.products.map(p=>pfKey(p.name))),seen=new Set(),out=[];
+ (S.jobs||[]).slice().sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))).forEach(j=>(j.chems||[]).forEach(l=>{const nm=String(l.product||'').trim(),k=pfKey(nm);
+  if(!nm||lib.has(k)||seen.has(k)||String(l.activeId||'').startsWith('p:'))return;seen.add(k);const c=CHEMMAP[l.activeId]||null;
+  out.push({t:'hist',name:nm,c,l,date:j.date,f:[nm,c?c.th:l.active,c?c.en:'']})}));return out}
+const histKind=it=>it.c?kindFromChem(it.c):[CAT_KIND[it.l.cat]||'flake',{}];
+function pfDupHTML(){if(!F||!F.name)return '';const k=pfKey(F.name);const d=S.products.find(p=>p.id!==F.id&&pfKey(p.name)===k);return d?`มีชื่อนี้ในคลังแล้ว <button type="button" class="lnk" data-act="pfOpen" data-id="${d.id}">เปิดของเดิม</button>`:''}
+CBP.pfname={noAuto:true,items:(inp,q)=>{if(F){F.name=inp.value;const d=$('#pf-dup');if(d)d.innerHTML=pfDupHTML()}q=String(q||'').trim();
+  const mineAll=S.products.filter(p=>!F||p.id!==F.id),hist=pfHist(),src=pfSrc();
+  const mineF=p=>[p.name,CHEMMAP[p.activeId]?.th||p.active,p.npk,pSub(p)];
+  let mineL,histL,restL;
+  if(!q){mineL=mineAll.slice(-6).reverse();histL=hist.slice(0,3);restL=[]}
+  else if(/^[\d\s.\-–]+$/.test(q)){ /* พิมพ์ตัวเลขสูตร เช่น 13-0 → เทียบตัวอักษรตรงๆ */
+   const sub=x=>String(x||'').toLowerCase().replace(/–/g,'-').replace(/\s+/g,''),qs=sub(q),hit=fs=>fs.some(f=>sub(f).includes(qs));
+   mineL=mineAll.filter(p=>hit([p.name,p.npk])).slice(0,5);histL=hist.filter(x=>hit(x.f)).slice(0,4);restL=src.filter(x=>hit(x.f)).slice(0,10)}
+  else{ /* ถ้ามีรายการที่ตรงตัวอักษร ตัดรายการที่คล้ายแบบหลวมๆ ออกทั้งหมด */
+   const sc=(list,g)=>list.map(x=>[x,fz(q,g(x))]).filter(r=>r[1]>0).sort((m,n)=>n[1]-m[1]);
+   const A=sc(mineAll,mineF),B=sc(hist,x=>x.f),C=sc(src,x=>x.f);
+   const top=Math.max(A[0]?A[0][1]:0,B[0]?B[0][1]:0,C[0]?C[0][1]:0),th=top>=.93?.93:0,keep=(L,n)=>L.filter(r=>r[1]>=th).slice(0,n).map(r=>r[0]);
+   mineL=keep(A,5);histL=keep(B,4);restL=keep(C,14)}
+  const mine=mineL.map(p=>{const K=PK[pkOf(p)];return {t:'mine',p,html:`⭐ <b>${hl(p.name,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)}${pLabel(p)?' · '+esc(pLabel(p)):' · ยังไม่มีอัตรา'} · เคยบันทึกแล้ว แตะเพื่อเปิด</span>`}});
+  const histI=histL.map(x=>{const K=PK[histKind(x)[0]];return {...x,html:`🕘 <b>${hl(x.name,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)}${x.c?' · '+esc(x.c.th):x.l.active?' · '+esc(x.l.active):''} · เคยใช้ในงาน ${esc(fdate(x.date))}</span>`}});
+  if(!q)return mine.concat(histI);
+  const seen=new Set(mine.map(m=>pfKey(m.p.name)).concat(histI.map(h=>pfKey(h.name))));
+  const rest=restL.filter(x=>{const k=pfKey(x.name);if(seen.has(k))return false;seen.add(k);return true}).slice(0,10).map(x=>{const c=x.c,k=kindFromChem(c),K=PK[k[0]];
+   return {...x,html:x.t==='tn'?`<b>${hl(x.name,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)} · ${esc(c.th)}${c.g?' · '+esc(gLabel(c.cat,c.g)):''}</span>`:x.t==='act'?`<b>${hl(c.th,q)}</b> <span class="tiny muted">${K.ic} สารสำคัญ${K.n?' '+esc(K.n):''} · ${esc(gLabel(c.cat,c.g))}</span>`:`<b>${hl(c.th,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)}</span>`}});
+  const out=mine.concat(histI,rest);if(!mineAll.some(p=>pfKey(p.name)===pfKey(q)))out.push({t:'typed',html:`<span class="muted">✓ ใช้ชื่อ “${esc(q)}” ตามที่พิมพ์</span>`});return out},
+ pick:(inp,it)=>{if(!F)return;
+  if(it.t==='mine'){const keep=F._toMix;openProd(it.p,{toMix:keep});toast('เปิดข้อมูลที่บันทึกไว้แล้ว');return}
+  if(it.t==='typed'){F.name=inp.value;return}
+  if(it.t==='hist'&&!it.c){const k=histKind(it);F.name=it.name;const oc=F.cat;F.kind=k[0];F.cat=PK[k[0]].cat;if(!F._uT)F.unit=PK[k[0]].u;
+   if(PK[k[0]].pest&&(it.l.active||it.l.g)){F.activeId='__custom';F.active=it.l.active||'';F.g=it.l.g||''}else if(oc!==F.cat){F.activeId='';F.form=''}
+   if(!F.form)F.form=formDetect(it.name)||'';pfFormU();if(k[0]==='flake'||k[0]==='liq'){const n=npkOf(it.name);if(n&&!F.npk)F.npk=n.join('-')}pfRe();const r=$('#pf [data-e="r1"]');if(r)r.focus();return}
+  const c=it.c,k=kindFromChem(c);if(!k)return;const typed=String(inp.value||'').trim().toLowerCase();
+  if(it.t==='tn'||it.t==='hist')F.name=it.name;else if(!typed||String(c.th).toLowerCase().includes(typed)||String(c.en).toLowerCase().includes(typed))F.name=c.th;
+  const oc=F.cat;F.kind=k[0];F.cat=PK[k[0]].cat;if(!F._uT)F.unit=PK[k[0]].u;Object.assign(F,k[1]);
+  if(['ins','fun','her'].includes(c.cat)){F.activeId=c.id;F.active=c.th;F.g=c.g;if(!F.form)F.form=formDetect(it.name)||''}else if(oc!==F.cat){F.activeId='';F.form=''}
+  if(['ins','fun','her'].includes(c.cat)&&it.t==='hist'&&!F.form)F.form=formDetect(it.name)||'';pfFormU();
+  if(k[0]==='flake'||k[0]==='liq'){const n=npkOf(it.t==='hist'?it.name:c.th)||npkOf(c.th);if(n&&!F.npk)F.npk=n.join('-')}
+  pfRe();const r=$('#pf [data-e="r1"]');if(r)r.focus()},
+ reset:inp=>{if(F)F.name=inp.value}};
+const NPK_COMMON=['46-0-0','21-0-0','13-0-46','0-52-34','12-61-0','0-0-50','0-0-60','10-52-17','21-21-21','20-20-20','16-16-16','15-15-15','30-20-10','10-20-30','13-13-21','6-12-26','4-24-24','8-24-24','16-20-0','16-16-8','20-8-20','15-0-0'];
+CBP.pfnpk={noAuto:true,items:(inp,q)=>{if(F){F.npk=inp.value;if(F._live)F._live()}q=String(q||'').trim();
+  const mine=[...new Set(S.products.map(p=>String(p.npk||'').trim()).filter(Boolean))];
+  const all=[...new Set(mine.concat(NPK_COMMON))];
+  const qq=q.replace(/\s+/g,'');const list=qq?all.filter(x=>x.replace(/\s+/g,'').includes(qq)).concat(all.filter(x=>!x.replace(/\s+/g,'').includes(qq)&&fz(q,[x])>0.9)):all.slice(0,12);
+  return [...new Set(list)].slice(0,12).map(x=>({x,html:`<b>${hl(x,q)}</b>${mine.includes(x)?' <span class="tiny muted">⭐ เคยใช้</span>':''}`}))},
+ pick:(inp,it)=>{if(!F)return;F.npk=it.x;pfRe()},
+ reset:inp=>{if(F){F.npk=inp.value;if(F._live)F._live()}}};
+Object.assign(ACT,{pfOpen:a=>{const p=S.products.find(x=>x.id===a.dataset.id);if(p){const keep=F&&F._toMix;openProd(p,{toMix:keep})}}});
+/* ==== จบ: คลังยา/ปุ๋ยของฉัน + ถังผสม ==== */
+
+
 document.addEventListener('click',e=>{
  const it=e.target.closest('.cb-item');if(it&&CBS){cbPick(+it.dataset.k);return}
  const a=e.target.closest('[data-act]');if(!a)return;
@@ -3786,7 +3862,7 @@ document.addEventListener('input',e=>{if(e.target.classList&&e.target.classList.
 document.addEventListener('mousedown',e=>{const it=e.target.closest('.cb-item');if(it&&CBS){e.preventDefault()}});
 document.addEventListener('focusout',e=>{if(CBS&&e.target===CBS.inp)setTimeout(()=>{if(CBS&&document.activeElement!==CBS.inp)cbClose(false)},180)});
 document.addEventListener('keydown',e=>{
- if(CBS&&e.target===CBS.inp){if(e.key==='ArrowDown'){e.preventDefault();cbMove(1);return}if(e.key==='ArrowUp'){e.preventDefault();cbMove(-1);return}if(e.key==='Enter'){e.preventDefault();cbPick(CBS.idx);return}if(e.key==='Escape'){e.stopPropagation();cbClose(false);return}}
+ if(CBS&&e.target===CBS.inp){if(e.key==='ArrowDown'){e.preventDefault();cbMove(1);return}if(e.key==='ArrowUp'){e.preventDefault();cbMove(-1);return}if(e.key==='Enter'){e.preventDefault();if(CBS.idx<0){const t=CBS.inp;cbClose(false);t.blur();return}cbPick(CBS.idx);return}if(e.key==='Escape'){e.stopPropagation();cbClose(false);return}}
  if(e.key==='Enter'&&e.target.classList&&e.target.classList.contains('kc')){ACT.kpi(e.target);return}
  if(e.key==='Escape'&&!$('#picker').classList.contains('hidden')){closePicker();return}
  if(e.key==='Escape'&&!$('#modal').classList.contains('hidden'))closeModal();
