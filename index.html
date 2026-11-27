@@ -1099,7 +1099,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .gbtn{width:100%;justify-content:center;margin-top:18px;min-height:50px;font-size:16px;background:#fff!important;color:var(--ink)!important;border:1px solid #DADCE0!important;gap:10px}
 .gbtn:hover{background:#F8FAF8!important}
 .is-login .fab,.is-login #bottom,.is-login .gs,.is-login #mbar{display:none!important}
-.ro .fab,.ro .bn-plus,.ro [data-act=newJob],.ro [data-act=newQueue],.ro [data-act=quickAdd],.ro [data-act=navIncome],.ro [data-act=navExpense],.ro [data-act=newCust],.ro [data-act=newWorker],.ro [data-act=payWorker],.ro [data-act=finPaid],.ro [data-act=saveJob],.ro [data-act=saveExp],.ro [data-act=vcOk]{display:none!important}
+.ro .fab,.ro .bn-plus,.ro [data-act=newJob],.ro [data-act=newQueue],.ro [data-act=quickAdd],.ro [data-act=navIncome],.ro [data-act=navExpense],.ro [data-act=newCust],.ro [data-act=newWorker],.ro [data-act=payWorker],.ro [data-act=finPaid],.ro [data-act=saveJob],.ro [data-act=saveExp],.ro [data-act=vcOk],.ro [data-act=preOpen],.ro [data-act=preAdd]{display:none!important}
 .ih{margin:4px 0 0;padding-left:22px;line-height:1.9;font-size:15px}.ih li{margin-bottom:4px}
 .shl{border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#F8FAF8}.shl-h{display:flex;flex-direction:column;margin-bottom:8px}.shl-h span{font-size:12.5px;color:var(--muted)}.shl-u{display:flex;gap:6px;flex-wrap:wrap}.shl-u input{flex:1;min-width:200px;font-size:13px;min-height:38px}
 /* ===== v4: หน้าตาแบบแอป ===== */
@@ -1330,7 +1330,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .ta-st{font-weight:700;font-size:13.5px;padding:5px 11px;border-radius:99px}.ta-st.ok{background:#DCFCE7;color:#166534}.ta-st.warn{background:#FEF3C7;color:#92400E}.ta-st.bad{background:#FEE2E2;color:#991B1B}
 .tm-ana h3{font-size:14.5px;margin:16px 0 6px;padding-top:12px;border-top:1px solid var(--line)}.tm-ana h3 small{font-weight:500;font-size:11.5px}
 .ta-t{width:100%;border-collapse:collapse;font-size:13px}.ta-t th{font-size:11.5px;font-weight:600;color:var(--muted);text-align:left;padding:4px 4px;border-bottom:1px solid var(--line)}.ta-t td{padding:6px 4px;border-bottom:1px dashed var(--line);vertical-align:top}
-.ta-t .n{text-align:right;white-space:nowrap}.ta-t .c{text-align:center}.ta-t td small{display:block;font-size:11px;color:var(--muted);font-weight:500}.ta-t td i{font-style:normal}.ta-t b.bad{color:#B91C1C}.ta-t b.hi{color:#B45309}.ta-t b.salt{color:#9A3412;font-weight:700}.ta-t small.cut{color:#B45309;display:inline;margin-left:3px}
+.ta-t .n{text-align:right;white-space:nowrap}.ta-t .c{text-align:center}.ta-t td small{display:block;font-size:11px;color:var(--muted);font-weight:500}.ta-t td i{font-style:normal}.ta-t b.bad{color:#B91C1C}.ta-t b.hi{color:#B45309}.ta-t b.salt{color:#9A3412;font-weight:700}.ta-t small.cut{color:#B45309;display:block;white-space:nowrap}.ta-t .n small{white-space:normal}.ta-t .n small.nw,.ta-t .n small.cut{white-space:nowrap}.ta-t td:first-child{min-width:7.5em}
 .ta-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.ta-g>div{border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;background:#fff}.ta-g>div.hi{background:#FFFBEB;border-color:#FDE68A}.ta-g>div.bad{background:#FEF2F2;border-color:#FCA5A5}
 .ta-g span{font-size:11.5px;color:var(--muted)}.ta-g b{font-size:20px;line-height:1.3}.ta-g small{font-size:11px;color:#92400E}
 .ta-l{list-style:none;margin:0;padding:0;font-size:13px}.ta-l li{padding:6px 8px;border-radius:9px;margin-bottom:5px;line-height:1.5}.ta-l li.bad{background:#FEF2F2;color:#7F1D1D}.ta-l li.warn{background:#FFFBEB;color:#78350F}.ta-l li.info{background:#F0F9FF;color:#0C4A6E}.ta-l li.ok{background:#F0FDF4;color:#14532D}
@@ -1512,6 +1512,12 @@ h3{font-size:16px;font-weight:700}
 .tm-area{display:flex;align-items:center;gap:6px;font-size:13.5px}.tm-area input{width:78px;border:1px solid var(--line);border-radius:9px;padding:6px 8px;text-align:right}
 .tm-pick{display:flex;flex-wrap:wrap;gap:6px}.tm-pc{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px 6px 8px;display:inline-flex;gap:6px;align-items:center;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--ink);max-width:100%}
 .tm-pc i{font-style:normal}.tm-pc span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tm-pc em{font-style:normal;font-size:11px;font-weight:500;color:var(--amber)}.tm-pc.on{background:var(--brand-l);border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand)}
+.tm-pc .tm-ck{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#E5E7EB;color:#475569;font-size:13px;font-weight:800;line-height:1;flex:none}.tm-pc.on .tm-ck{background:var(--brand);color:#fff}
+.pre-g{margin:10px 0 4px}.pre-gh{font-weight:700;font-size:13px;color:#64748B;margin:0 0 4px}.pre-it{display:flex;gap:10px;align-items:flex-start;padding:8px 4px;border-bottom:1px solid #EEF2F7;cursor:pointer}.pre-it input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--brand)}.pre-it span{display:flex;flex-direction:column;gap:2px;min-width:0}.pre-it small{color:#64748B;font-size:12px;line-height:1.35}.pre-it.has{opacity:.55;cursor:default}.pane-btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tm-hint{margin-top:10px;padding:10px 12px;border-radius:12px;background:#FFFBEB;border:1px solid #FDE68A;font-size:13.5px;line-height:1.55;color:#78350F}.tm-hint .btn{display:block;width:100%;margin-top:8px}
+.tm-jump{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;margin-top:10px;padding:10px 12px;border-radius:12px;border:1.5px solid;text-align:left;cursor:pointer;font:inherit}.tm-jump span{font-weight:700;font-size:14px;line-height:1.4}.tm-jump small{font-size:12px;line-height:1.45}
+.tm-jump.ok{background:#F0FDF4;border-color:#86EFAC;color:#14532D}.tm-jump.warn{background:#FFFBEB;border-color:#FCD34D;color:#78350F}.tm-jump.bad{background:#FEF2F2;border-color:#FCA5A5;color:#7F1D1D}
+#tm-ana{scroll-margin-top:150px}.tm-ana-ph{border:2px dashed var(--line);box-shadow:none}.tm-ana-ph h2{margin:0 0 4px}
 .tm-r{padding:10px 0;border-bottom:1px solid var(--line)}.tm-r:first-child{padding-top:0}.tm-r:last-of-type{border-bottom:0}
 .tm-rh{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}.tm-rh>i{font-style:normal;font-size:20px;line-height:1.3}.tm-rh>div{flex:1;min-width:0}.tm-rh .btn.sm{padding:4px 9px}
 .tm-qs{display:grid;grid-template-columns:1fr 1fr;gap:6px}.tm-q{border:1px solid var(--line);background:#fff;border-radius:12px;padding:7px 10px;text-align:left;cursor:pointer;display:grid;gap:0;color:var(--ink);font:inherit}
@@ -1680,7 +1686,7 @@ const MONTHS=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','ม�
 const MONTHS_FULL=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 const clone=o=>JSON.parse(JSON.stringify(o??null));
 const isQ=j=>j&&j.status==='queued'; // งานที่จองคิวไว้ ยังไม่นับเป็นรายรับ
-const APP_VER='v71';
+const APP_VER='v74';
 const STANDALONE=!(window.claude&&typeof window.claude.use==='function')&&!/claude|anthropic/i.test(location.hostname); // เปิดจาก GitHub Pages / เว็บทั่วไป
 function toast(t,type){const el=$('#toast');const err=type==='err'||(type!=='ok'&&/ไม่สำเร็จ|ไม่ได้|กรุณา|ไม่มีสิทธิ์|ไม่พบ|เต็ม/.test(t));el.className='';el.innerHTML=(err?'⚠️ ':'✓ ')+esc(t);void el.offsetWidth;el.classList.add('on',err?'err':'ok');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('on'),2800)}
 
@@ -3597,7 +3603,7 @@ const ACT={
      (กด “แก้” ที่สินค้าเดิมโดยตรง = ตั้งใจแก้ → บันทึกทันที) · ถามที่แถบปุ่มด้านล่าง เห็นแน่นอน */
   {const o=S.products.find(x=>x.id===F.id),ft=$('#modal .sh-f');if(o&&F._fromStar&&!F._ow&&ft&&(pfKey(o.name)!==pfKey(F.name)||pkOf(o)!==pkOf(F))){F._ft=F._ft||ft.innerHTML;
    ft.innerHTML=`<div class="pf-ask"><div class="small"><b>ฟอร์มนี้เปิดจากสินค้าเดิม “${esc(o.name)}” (${esc(PK[pkOf(o)].n)})</b> — ถ้าเป็นสินค้าอีกตัว ให้บันทึกเป็นตัวใหม่ ตัวเดิมจะยังอยู่</div><div class="pf-ask-b"><button class="btn" data-act="saveProdBack">กลับไปแก้</button><button class="btn" data-act="saveProdOver">แก้ตัวเดิม</button><button class="btn primary" data-act="saveProdNew">บันทึกเป็นตัวใหม่</button></div></div>`;return}}
-  const toMix=F._toMix;const p=clone(F);['_body','_live','_toMix','_uT','_ow','_fromStar','_ft'].forEach(k=>delete p[k]);if(p.kind&&p.kind!=='flake'&&p.kind!=='liq')delete p.npk;
+  const toMix=F._toMix;const p=clone(F);['_body','_live','_toMix','_uT','_ow','_fromStar','_ft'].forEach(k=>delete p[k]);if(p.kind&&p.kind!=='flake'&&p.kind!=='liq')delete p.npk;if(p.osm!=null&&String(p.osm).trim()!==''){const o=num(p.osm);if(o>0&&o<=3)p.osm=String(p.osm).trim();else delete p.osm}else delete p.osm;if(p.chem&&(typeof OSM_CHEM==='undefined'||!OSM_CHEM[p.chem]))delete p.chem;
   /* ธาตุตามฉลาก: เก็บเฉพาะค่า 0–100% ของประเภทปุ๋ย · ปุ๋ยเกล็ด/น้ำคิด N P K จากสูตร */
   if(p.nut){const n={},npkK=p.kind==='flake'||p.kind==='liq';Object.entries(p.nut).forEach(([e,v])=>{const x=num(v);if(x>0&&x<=100&&!(npkK&&['N','P2O5','K2O'].includes(e)))n[e]=String(v).trim()});if(Object.keys(n).length&&typeof NUT_KINDS!=='undefined'&&NUT_KINDS.includes(p.kind))p.nut=n;else delete p.nut}
   if(!p.nut||!p.nutEl)delete p.nutEl;if(typeof PK!=='undefined'&&PK[p.kind])p.cat=PK[p.kind].cat;if(PK[p.kind]&&PK[p.kind].pest&&!p.form)p.form=formDetect(p.name)||'';const ch=CHEMMAP[p.activeId];if(ch){p.g=ch.g;p.active=ch.th}if(toMix)tmAdd(p.id);if(await save('products',p)){if(tmState().items.some(x=>x.id===p.id))setTimeout(()=>{tmSyncFly();render()},50);closeModal();toast(toMix?'บันทึกแล้ว ใส่ในถังผสมให้แล้ว':'บันทึกแล้ว')}},
@@ -3637,9 +3643,13 @@ const npkOf=t=>{const m=String(t||'').match(/(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)
 /* ช่องสูตรปุ๋ยใช้ได้เฉพาะปุ๋ยเกล็ด/ปุ๋ยน้ำ — ประเภทอื่นดูจากชื่ออย่างเดียว (กันค่าค้างจากตอนเปลี่ยนประเภท) */
 const npkP=p=>npkOf((pkOf(p)==='flake'||pkOf(p)==='liq')&&p.npk?p.npk:p.name);
 const isSOP=p=>{const n=npkP(p);return !!n&&n[0]===0&&n[1]===0&&n[2]>=48&&n[2]<=52};
-function pFlags(p){const k=pkOf(p),nm=String(p.name||'')+' '+String(p.note||''),n=npkP(p),nu=typeof pNut==='function'?pNut(p):{};
- const ca=((k==='sec'||k==='secE')&&p.el==='Ca')||/แคลเซียม|calcium|แคลเซี่ยม/i.test(nm)||(['flake','liq','sec','secE'].includes(k)&&nu.CaO>0);
- const so4=(k==='micro'&&p.chel===false)||(k==='sec'&&(p.el==='Mg'||p.el==='S'))||/ซัลเฟต|sulfate|sulphate|ดีเกลือ/i.test(nm)||isSOP(p)||(!!n&&n[0]===21&&n[1]===0&&n[2]===0);
+const NITR=/ไนเตรต|ไนเตรท|nitrate/i;
+const npkIs=(n,a,b,c)=>!!n&&n[0]===a&&n[1]===b&&n[2]===c;
+/* ไอออนในสินค้า: อ่านจากชื่อ ประเภท และธาตุตามฉลากเท่านั้น — ไม่อ่านหมายเหตุ เพราะหมายเหตุมักเป็นข้อห้าม เช่น “ห้ามผสมกับแคลเซียม” จะทำให้เตือนผิดตัว */
+function pFlags(p){const k=pkOf(p),nm=String(p.name||''),n=npkP(p),nu=typeof pNut==='function'?pNut(p):{},nit=NITR.test(nm)||(k==='sec'&&nu.N>0);
+ const ca=((k==='sec'||k==='secE')&&p.el==='Ca')||/แคล|calcium/i.test(nm)||(['flake','liq','sec','secE'].includes(k)&&nu.CaO>0);
+ /* แมกนีเซียมไนเตรตไม่ใช่ซัลเฟต: ธาตุรองแมกนีเซียมนับเป็นซัลเฟต (ดีเกลือ) เมื่อชื่อ/ฉลากไม่ใช่ไนเตรต */
+ const so4=(k==='micro'&&p.chel===false)||(k==='sec'&&p.el==='S')||(k==='sec'&&p.el==='Mg'&&!nit)||/ซัลเฟต|sulfate|sulphate|ดีเกลือ/i.test(nm)||isSOP(p)||npkIs(n,21,0,0)||(['flake','sec'].includes(k)&&nu.S>0);
  const po4=(k==='flake'||k==='liq')&&!!n&&n[1]>0||/ฟอสเฟต|phosphate|ฟอสฟอรัส/i.test(nm)||nu.P2O5>0;
  /* แมกนีเซียมแบบเกลือ (ดีเกลือ/แมกนีเซียมไนเตรต) และโลหะซัลเฟต (สังกะสี เหล็ก แมงกานีส ทองแดง) — ตกตะกอนกับฟอสเฟต */
  const mgS=k!=='secE'&&((k==='sec'&&p.el==='Mg')||(['flake','liq','sec'].includes(k)&&nu.MgO>0)||/ดีเกลือ|แมกนีเซียมซัลเฟต|magnesium sulfate|epsom/i.test(nm));
@@ -3654,6 +3664,8 @@ const MICRO_CAP={salt:{Zn:0.5,Fe:0.5,Mn:0.5,Cu:0.2,B:0.2,Mo:0.1,mix:0.5},chel:{Z
 function pCap(p,sens){const k=pkOf(p),K=PK[k];if(num(p.cap)>0)return num(p.cap);if(!K.cap)return 0;let c=K.cap;if((k==='flake'||k==='liq')&&isSOP(p))c=3;
  if(k==='micro'){const t=p.chel===false?MICRO_CAP.salt:MICRO_CAP.chel;if(t[p.el]!=null)c=t[p.el]}
  if(k==='sec'&&p.el==='Ca')c=1;
+ /* แคลเซียมไนเตรตที่บันทึกเป็นปุ๋ยเกล็ด (สูตร 15-0-0 หรือกรอก CaO) — เกลือแคลเซียมทางใบ 0.5–1% เท่ากับธาตุรองแคลเซียม */
+ if(k==='flake'&&(npkIs(npkP(p),15,0,0)||npkIs(npkP(p),15.5,0,0)||(typeof pNut==='function'&&pNut(p).CaO>0)))c=1;
  if(sens&&(pIsSalt(p)||k==='secE'))c=Math.min(c,1);return c}
 function pForm(p){const k=pkOf(p),K=PK[k];if(K.pest)return p.form||formDetect(p.name)||'';if(K.adj)return p.adj==='drift'?'DRT':p.adj==='ph'||p.adj==='foam'?'':'ADJ';return pUnit(p)==='g'?'FOLS':'FOL'}
 const HERB_PRE=new Set(['pendi','alach','pretil','butac','clomaz','oxadiaz','smetol']);
@@ -3691,35 +3703,72 @@ function tmCtx(){const f=flyState(),st=tmState(),P=FLY[f.crop]||FLY.other||{};co
  return {f,crop:f.crop,cropN:P.n||'พืช',w:num(f.w),tank:TANK,mult:st.mult||multA,multA,multAuto:!st.mult,sens:st.sens==null?sensA:!!st.sens,sensAuto:st.sens==null,area:st.area!==''&&st.area!=null?num(st.area):areaA,areaA,svc:f.svc}}
 /* ตกตะกอนในถัง (L = รายการที่มี .p): แคลเซียมกับซัลเฟต/ฟอสเฟต · แมกนีเซียมแบบเกลือกับฟอสเฟต · โลหะซัลเฟตกับฟอสเฟต */
 function precipPairs(L){const warn=[],bad=[],fl=L.map(o=>({o,f:pFlags(o.p)}));const caI=fl.filter(x=>x.f.ca),soI=fl.filter(x=>x.f.so4||x.f.po4);
- caI.forEach(c=>{const other=soI.filter(x=>x.o!==c.o);if(other.length){const ph=other.some(x=>x.f.po4),su=other.some(x=>x.f.so4);(c.f.caChel?warn:bad).push(`${c.o.p.name} (แคลเซียม) กับ ${other.map(x=>x.o.p.name).join(', ')} (${[su?'ซัลเฟต':'',ph?'ฟอสเฟต':''].filter(Boolean).join('/')}): ${c.f.caChel?'แคลเซียมคีเลตตกตะกอนยากกว่า แต่ถังโดรนเข้มข้น ควรลองในขวดก่อน':`ตกตะกอนเป็น${[su?'ยิปซัม':'',ph?'แคลเซียมฟอสเฟต':''].filter(Boolean).join('และ')} อุดหัวฉีด ให้แยกฉีดคนละรอบ`}`)}});
- fl.filter(x=>x.f.mgS&&!x.f.ca).forEach(m=>{const P=fl.filter(x=>x.o!==m.o&&x.f.po4);if(P.length)warn.push(`${m.o.p.name} (แมกนีเซียม) กับ ${P.map(x=>x.o.p.name).join(', ')} (ฟอสเฟต): อาจตกตะกอนเป็นแมกนีเซียมฟอสเฟต ยิ่งน้ำ/ถัง pH สูงยิ่งเกิดง่าย — ลองในขวดก่อน หรือแยกถัง`)});
- fl.filter(x=>x.f.metS).forEach(m=>{const P=fl.filter(x=>x.o!==m.o&&x.f.po4);if(P.length)bad.push(`${m.o.p.name} (โลหะแบบซัลเฟต) กับ ${P.map(x=>x.o.p.name).join(', ')} (ฟอสเฟต): ตกตะกอนเป็นฟอสเฟตของโลหะ ธาตุใช้ไม่ได้และอุดหัวฉีด — ใช้แบบคีเลตแทน หรือแยกถัง`)});
+ caI.forEach(c=>{const other=soI.filter(x=>x.o!==c.o);if(other.length){const ph=other.some(x=>x.f.po4),su=other.some(x=>x.f.so4);(c.f.caChel?warn:bad).push(`${pNm(c.o.p)} (แคลเซียม) กับ ${other.map(x=>pNm(x.o.p)).join(', ')} (${[su?'ซัลเฟต':'',ph?'ฟอสเฟต':''].filter(Boolean).join('/')}): ${c.f.caChel?'แคลเซียมคีเลตตกตะกอนยากกว่า แต่ถังโดรนเข้มข้น ควรลองในขวดก่อน':`ตกตะกอนเป็น${[su?'ยิปซัม':'',ph?'แคลเซียมฟอสเฟต':''].filter(Boolean).join('และ')} อุดหัวฉีด ให้แยกฉีดคนละรอบ`}`)}});
+ fl.filter(x=>x.f.mgS&&!x.f.ca).forEach(m=>{const P=fl.filter(x=>x.o!==m.o&&x.f.po4);if(P.length)warn.push(`${pNm(m.o.p)} (แมกนีเซียม) กับ ${P.map(x=>pNm(x.o.p)).join(', ')} (ฟอสเฟต): อาจตกตะกอนเป็นแมกนีเซียมฟอสเฟต ยิ่งน้ำ/ถัง pH สูงยิ่งเกิดง่าย — ลองในขวดก่อน หรือแยกถัง`)});
+ fl.filter(x=>x.f.metS).forEach(m=>{const P=fl.filter(x=>x.o!==m.o&&x.f.po4);if(P.length)bad.push(`${pNm(m.o.p)} (โลหะแบบซัลเฟต) กับ ${P.map(x=>pNm(x.o.p)).join(', ')} (ฟอสเฟต): ตกตะกอนเป็นฟอสเฟตของโลหะ ธาตุใช้ไม่ได้และอุดหัวฉีด — ใช้แบบคีเลตแทน หรือแยกถัง`)});
  return {warn,bad}}
+/* ---------- งบความเข้มในถังผสม: แยกตามกลไกที่ทำให้ใบไหม้ ----------
+   1) เพดานของแต่ละตัว (pCap) — ข้อจำกัดตามชนิดปุ๋ยและพิษเฉพาะตัว
+   2) ค่าเกลือรวม = แรงดันออสโมซิสที่ดึงน้ำออกจากเซลล์ใบ ขึ้นกับจำนวนอนุภาคที่ละลายรวมกัน จึงบวกกันทุกตัว (Neumann et al. 1981:
+      สารปุ๋ยที่มีแรงดันออสโมซิสทุกชนิดทำให้เซลล์ใบเสียน้ำได้เมื่อเข้มพอ) — คิดเทียบปุ๋ยเกลือต่อกรัม (กฎ van 't Hoff: แรงดัน ∝ โมลอนุภาค)
+      แม่ปุ๋ยที่รู้สูตรเคมี = (อนุภาค ÷ มวลโมเลกุล) ÷ (2 ÷ 101.10) เช่น KH₂PO₄ 0.74 · MgSO₄·7H₂O 0.41 · KCl 1.36 (OSM_CHEM)
+      ปุ๋ยผสม/ปุ๋ยน้ำที่ไม่รู้องค์ประกอบ ×1 · คีเลต EDTA ×0.4 (ค่าจริง Fe-EDTA 0.24 ถึง Zn-EDTA 0.38) · สารเสริมอินทรีย์ ×0.2
+      พิษเฉพาะไอออน (K₂HPO₄ ไหม้ที่ 0.05 M แต่ KH₂PO₄ ที่ 0.5 M — Neumann 1981) คุมด้วยเพดานของแต่ละตัว ไม่ใช่ค่าเกลือรวม
+   3) พิษเฉพาะธาตุ (Zn Cu B Mn Fe Mo Ca Mg) บวกกันเฉพาะสินค้าที่เป็นธาตุเดียวกัน
+   ต่างกลไกไม่บวกข้ามกัน — หลักพิษวิทยาสารผสม: บวกความเข้ม (concentration addition) ใช้กับสารกลไกเดียวกัน ต่างกลไกใช้ independent action
+   ถ้าเกินงบ ลดตัวที่กินงบมากที่สุดก่อน ตัวที่ใช้น้อยคงเต็มฉลาก (water-filling) */
+const OSM_W={salt:1,chel:0.4,bio:0.2};
+/* สารที่รู้สูตรเคมี: [จำนวนอนุภาคที่แตกตัว, มวลโมเลกุล g/mol, สูตร] → แรงดันต่อกรัมเทียบ KNO₃ = (อนุภาค ÷ มวล) ÷ (2 ÷ 101.10) (van 't Hoff) */
+const OSM_CHEM={kno3:[2,101.10,'KNO₃'],mkp:[2,136.09,'KH₂PO₄'],map:[2,115.03,'NH₄H₂PO₄'],sop:[3,174.26,'K₂SO₄'],urea:[1,60.06,'CO(NH₂)₂'],as:[3,132.14,'(NH₄)₂SO₄'],kcl:[2,74.55,'KCl'],dap:[3,132.06,'(NH₄)₂HPO₄'],an:[2,80.04,'NH₄NO₃'],
+ can:[17,1080.6,'5Ca(NO₃)₂·NH₄NO₃·10H₂O'],mgn:[3,256.41,'Mg(NO₃)₂·6H₂O'],mgs:[2,246.47,'MgSO₄·7H₂O'],caedta:[3,410.3,'Na₂CaEDTA·2H₂O'],mgedta:[3,430.6,'Na₂MgEDTA·4H₂O'],znedta:[3,399.6,'Na₂ZnEDTA'],feedta:[2,421.1,'NaFeEDTA·3H₂O']};
+const osmOf=key=>{const c=OSM_CHEM[key];return c?Math.round(c[0]/c[1]/(2/101.10)*100)/100:0};
+/* สารหลักของสินค้า: ที่บันทึกไว้ (chem) หรือเดาจากประเภท + สูตร/ชื่อ เฉพาะแม่ปุ๋ยที่สูตรบอกสารได้ชัด · ปุ๋ยผสม/ปุ๋ยน้ำไม่รู้องค์ประกอบ → null */
+function osmChem(p){if(p.chem&&OSM_CHEM[p.chem])return p.chem;const k=pkOf(p);if(k!=='flake'&&k!=='sec')return null;
+ const nm=String(p.name||''),nu=typeof pNut==='function'?pNut(p):{},nit=NITR.test(nm)||nu.N>0;
+ if(k==='sec'){if(p.el==='Ca'&&nit)return 'can';if(p.el==='Mg'&&nit)return 'mgn';if(p.el==='Mg'&&(/ดีเกลือ|ซัลเฟต|sulfate|epsom/i.test(nm)||nu.S>0))return 'mgs';return null}
+ const n=npkP(p);if(!n)return null;const [a,b,c]=n;
+ if(a>=12&&a<=14&&b===0&&c>=44&&c<=47)return 'kno3';if(a===0&&b>=50&&b<=53&&c>=32&&c<=35)return 'mkp';if(a>=11&&a<=12&&b>=60&&b<=62&&c===0)return 'map';if(isSOP(p))return 'sop';
+ if(a===46&&!b&&!c)return 'urea';if(a===21&&!b&&!c)return 'as';if(!a&&!b&&c>=60&&c<=62)return 'kcl';if(a===18&&b===46&&!c)return 'dap';if(a>=33&&a<=35&&!b&&!c)return 'an';
+ if((a===15||a===15.5)&&!b&&!c)return 'can';if(a>=10&&a<=11&&!b&&!c&&(nu.MgO>0||/แมกนีเซียม|magnesium/i.test(nm)))return 'mgn';return null}
+/* ค่าเกลือต่อกรัม: ที่ผู้ใช้กรอก → สารที่รู้สูตร → ค่ากลางของประเภท (เกลือ 1 · คีเลต 0.4 · สารเสริม 0.2) */
+function pOsmW(p){const k=pkOf(p),K=PK[k];if(!K||K.pest||K.adj)return 0;const o=num(p.osm);if(o>0&&o<=3)return o;
+ const c=osmChem(p);if(c)return osmOf(c);if(pIsSalt(p))return OSM_W.salt;if(k==='secE'||k==='micro')return OSM_W.chel;if(k==='bio')return OSM_W.bio;return 0}
+function pEls(p){const k=pkOf(p);if(!['micro','sec','secE'].includes(k)||!p.el||p.el==='S')return [];return [p.el]}
+function wfill(v){const s=v.map((x,i)=>[x,i]).sort((a,b)=>a[0]-b[0]);let B=1,T=Infinity;for(let k=0;k<s.length;k++){const r=s.length-k;if(s[k][0]*r<=B+1e-12)B-=s[k][0];else{T=B/r;break}}return v.map(x=>Math.min(x,T))}
+function osmCapOf(L,sens){const sl=L.filter(x=>x.salt);let c=sens?1:2;if(sl.length===1&&sl[0].cap>c)c=sl[0].cap;return c}
+function elGroups(L){const m={};L.forEach(x=>{if(x.cap&&x.els.length)(m[x.els[0]]=m[x.els[0]]||[]).push(x)});return Object.values(m)}
+/* L: [{cap,salt,w,els,pct}] pct = ความเข้มตามฉลากที่น้ำตอนนี้ → เติม pctA (ใส่ได้จริง) และ why (own · el · osm) */
+function budAlloc(L,sens){const oc=osmCapOf(L,sens);
+ L.forEach(x=>{x.pctA=x.cap?Math.min(x.pct,x.cap):x.pct;x.why=x.pctA<x.pct-1e-12?'own':''});
+ const G=elGroups(L);G.forEach(g=>{if(g.length<2)return;const tu=g.map(x=>x.pctA/x.cap);if(tu.reduce((a,b)=>a+b,0)>1+1e-9){const t=wfill(tu);g.forEach((x,i)=>{const np=t[i]*x.cap;if(np<x.pctA-1e-12){x.pctA=np;x.why='el'}})}});
+ const os=L.map(x=>x.w*x.pctA/oc);if(os.reduce((a,b)=>a+b,0)>1+1e-9){const t=wfill(os);L.forEach((x,i)=>{if(!x.w)return;const np=t[i]*oc/x.w;if(np<x.pctA-1e-12){x.pctA=np;x.why='osm'}})}
+ return {oc,G}}
+/* น้ำต่อไร่ที่ทำให้ทุกตัวในชุด L ใส่เต็มฉลากได้ (ความเข้มแปรผกผันกับน้ำต่อไร่) — L.pct คือความเข้มที่น้ำ w */
+function budNeedW(L,w,sens){if(!L.length||!w)return 0;const oc=osmCapOf(L,sens);let n=0;
+ L.forEach(x=>{if(x.cap)n=Math.max(n,w*x.pct/x.cap)});
+ elGroups(L).forEach(g=>{n=Math.max(n,w*g.reduce((a,x)=>a+x.pct/x.cap,0))});
+ return Math.max(n,w*L.reduce((a,x)=>a+x.w*x.pct,0)/oc)}
 function tmMix(X){const st=tmState();
  const rows=st.items.map(it=>{const p=S.products.find(x=>x.id===it.id);if(!p)return null;const o=tmCalc(p,X);o.dose=it.dose==='max'?'max':'rec';o.use=o.ok?(o.dose==='max'?o.max:o.rec):0;o.tUse=o.use*o.rpt;o.pct=X.w&&!o.K.adj?o.use*o.dens/X.w/10:0;o.pct0=o.pct;return o}).filter(Boolean);
  const ok=rows.filter(o=>o.ok);const salts=ok.filter(o=>o.salt);
- const saltCap=salts.length===1?salts[0].cap:(X.sens?1:2);
- const saltPct0=salts.reduce((a,o)=>a+o.pct,0);const fct=saltPct0>saltCap*1.001&&salts.length>1?saltCap/saltPct0:1;if(fct<1)salts.forEach(o=>{o.fs=fct;o.f=fct;o.use*=fct;o.tUse=o.use*o.rpt;o.pct*=fct});
- /* เพดานรวมทั้งถัง (บวกสะสม): ปุ๋ย ธาตุรอง จุลธาตุ สารเสริม แต่ละตัวใช้เพดานของตัวเองไปกี่ส่วน รวมกันต้องไม่เกิน 100%
-    เพราะเมื่อหยดแห้งบนใบ สารทุกตัวเข้มข้นขึ้นพร้อมกัน — ตัวละ 60% ของเพดาน 2 ตัว = 120% เกินจุดที่ใบไหม้ได้
-    ถ้าเกิน ลดทุกตัวตามสัดส่วนเดียวกัน (สูตรผสมยังเหมือนเดิม) แล้วบอกน้ำต่อไร่ที่ใส่ได้เต็มอัตรา */
+ /* งบความเข้มแยกตามกลไกที่ทำให้ใบไหม้ (ดู budAlloc): ไม่บวกข้ามกลไก — ใส่จุลธาตุคีเลตเพิ่ม ไม่ทำให้ปุ๋ยหลักถูกลดครึ่ง */
  const nut=ok.filter(o=>o.cap>0&&!o.K.pest&&!o.K.adj);
- const hiFull=nut.reduce((a,o)=>a+(X.w?(o.dose==='max'?o.L2:o.L1)*o.dens/(X.w*10)/o.cap:0),0),hi0=nut.reduce((a,o)=>a+o.pct/o.cap,0),fh=nut.length>1&&hi0>1.001?1/hi0:1;
- if(fh<1)nut.forEach(o=>{o.fh=fh;o.f=(o.f||1)*fh;o.use*=fh;o.tUse=o.use*o.rpt;o.pct*=fh});
- const hi=nut.reduce((a,o)=>a+o.pct/o.cap,0),saltPct=salts.reduce((a,o)=>a+o.pct,0);
- const saltNeed=salts.length>1?salts.reduce((a,o)=>a+(o.dose==='max'?o.L2:o.L1)*o.dens,0)/(saltCap*10):0;
- const hiNeed=nut.length>1?nut.reduce((a,o)=>a+(o.dose==='max'?o.L2:o.L1)*o.dens/(10*o.cap),0):0;
- const needW=Math.max(0,saltNeed,hiNeed,...ok.map(o=>o.dose==='max'&&o.cap?o.L2*o.dens/(o.cap*10):o.needW));
+ const L=nut.map(o=>{const lab=o.dose==='max'?o.L2:o.L1,pl=X.w?lab*o.dens/(X.w*10):0;return {o,p:o.p,cap:o.cap,salt:o.salt,w:pOsmW(o.p),els:pEls(o.p),pct:pl}});
+ const B=budAlloc(L,X.sens);
+ L.forEach(x=>{const o=x.o,own=Math.min(x.pct,x.cap);o.f=own>0&&x.pctA<own-1e-12?x.pctA/own:1;o.why2=x.why;if(o.f<1){o.use*=o.f;o.tUse=o.use*o.rpt}o.pct=x.pctA;o.osmW=x.w;o.osm=x.w*x.pctA;o.pctLab=x.pct});
+ const saltCap=B.oc,saltPct=L.reduce((a,x)=>a+x.w*x.pctA,0),saltPct0=L.reduce((a,x)=>a+x.w*x.pct,0),hi=saltCap?saltPct/saltCap:0,hiFull=saltCap?saltPct0/saltCap:0;
+ const groups=B.G.filter(g=>g.length>1).map(g=>({el:g[0].els[0],its:g.map(x=>x.o),use:g.reduce((a,x)=>a+x.pctA/x.cap,0),full:g.reduce((a,x)=>a+x.pct/x.cap,0)}));
+ const needW=Math.max(0,budNeedW(L,X.w,X.sens)),saltNeed=X.w*hiFull,hiNeed=Math.max(0,...groups.map(g=>X.w*g.full));
  const pctNut=nut.reduce((a,o)=>a+o.pct,0),pctPest=ok.filter(o=>o.K.pest).reduce((a,o)=>a+o.pct,0),pctAdj=ok.filter(o=>o.K.adj).reduce((a,o)=>a+o.tUse*o.dens/(X.tank*10),0);
  const warn=[],bad=[];
  {const pp=precipPairs(ok);warn.push(...pp.warn);bad.push(...pp.bad)}
- const grp={};ok.filter(o=>o.K.pest&&o.p.g).forEach(o=>{const key=o.K.n+' กลุ่ม '+o.p.g;(grp[key]=grp[key]||[]).push(o.p.name)});
+ const grp={};ok.filter(o=>o.K.pest&&o.p.g).forEach(o=>{const key=o.K.n+' กลุ่ม '+o.p.g;(grp[key]=grp[key]||[]).push(pNm(o.p))});
  Object.entries(grp).forEach(([g,ns])=>{if(ns.length>1)warn.push(`${ns.join(' กับ ')} เป็น${g} เดียวกัน ผสมกันไม่ช่วยและเร่งการดื้อยา เลือกตัวเดียว`)});
- ok.filter(o=>o.p.el==='B'||o.p.el==='Cu').forEach(o=>warn.push(`${o.p.name}: ${MICRO_EL[o.p.el]} ช่วงที่พอดีกับที่เป็นพิษใกล้กัน ห้ามเกินฉลาก และไม่ควรฉีดซ้ำถี่`));
+ ok.filter(o=>o.p.el==='B'||o.p.el==='Cu').forEach(o=>warn.push(`${pNm(o.p)}: ${MICRO_EL[o.p.el]} ช่วงที่พอดีกับที่เป็นพิษใกล้กัน ห้ามเกินฉลาก และไม่ควรฉีดซ้ำถี่`));
  if(X.svc==='fert'||X.svc==='seed')warn.push('ตอนนี้ตั้งค่าบินเป็นงานหว่าน ตัวเลขนี้ใช้น้ำต่อไร่จากงานพ่น ให้เลือกงานพ่นในแท็บตั้งค่าบินก่อน');
  const P=FLY[X.crop]||FLY.other||{w:[3,8]};const wMax=Math.max(10,(P.w?P.w[1]:8)*2);
  let cov=null;try{if(X.svc!=='fert'&&X.svc!=='seed'&&ok.some(o=>!o.K.adj)){const {md}=flyMd(X.f);cov={wNeed:md.wNeed,D:md.T.D,n:md.T.n,depth:md.depth,c:md.cov}}}catch(e){}
- return {rows,ok,salts,saltCap,saltPct,saltPct0,fct,needW,wMax,warn,bad,cov,nut,hi,hiFull,fh,hiNeed,saltNeed,pctNut,pctPest,pctAdj}}
+ return {rows,ok,salts,saltCap,saltPct,saltPct0,needW,wMax,warn,bad,cov,nut,hi,hiFull,groups,hiNeed,saltNeed,pctNut,pctPest,pctAdj}}
 /* ถังนี้ต้องการค่าบินแบบไหน: งาน เป้า การเคลื่อนที่ของสาร สูตร (ใช้ชุดเดียวกับแท็บตั้งค่าบิน) */
 function tmFlyTarget(){const st=tmState();const ps=st.items.map(it=>S.products.find(x=>x.id===it.id)).filter(Boolean);if(!ps.length)return null;
  const ks=ps.map(pkOf),has=k=>ks.includes(k);let svc,tgt,mob=null;
@@ -3737,20 +3786,20 @@ function tmOrder(M,X){const items=M.ok.map(o=>({o,form:pForm(o.p)}));
  const last=items.filter(x=>x.form&&NOTPROD(x.form)).sort((a,b)=>(FORMS[a.form].ord)-(FORMS[b.form].ord));
  const amt=x=>`<b>${qf(x.o.tUse,x.o.u)}</b>`;
  const st=[`เติมน้ำ ${Math.round(X.tank*0.5)}–${Math.round(X.tank*0.75)} ล. แล้วเปิดกวน อย่าเทยาลงถังเปล่า`];
- if(cond.length)st.push(cond.map(x=>`${esc(x.o.p.name)} ${amt(x)}`).join(' · ')+' <span class="muted">ปรับน้ำก่อนใส่ยา</span>');
- main.concat(noForm).forEach(x=>{const F_=FORMS[x.form];st.push(`${esc(x.o.p.name)} ${amt(x)} <span class="muted">${x.o.K.pest?(x.form?fLab(x.form):'ยังไม่ระบุสูตร'):x.o.K.n}${F_&&F_.tip?' · '+esc(F_.tip.split(' · ')[0]):''}</span>`)});
+ if(cond.length)st.push(cond.map(x=>`${esc(pNm(x.o.p))} ${amt(x)}`).join(' · ')+' <span class="muted">ปรับน้ำก่อนใส่ยา</span>');
+ main.concat(noForm).forEach(x=>{const F_=FORMS[x.form];st.push(`${esc(pNm(x.o.p))} ${amt(x)} <span class="muted">${x.o.K.pest?(x.form?fLab(x.form):'ยังไม่ระบุสูตร'):x.o.K.n}${F_&&F_.tip?' · '+esc(F_.tip.split(' · ')[0]):''}</span>`)});
  st.push(`เติมน้ำจนเกือบเต็ม ${X.tank} ล.`);
- last.forEach(x=>st.push(`${esc(x.o.p.name)} ${amt(x)} <span class="muted">${x.form==='DRT'?'ใส่หลังสุด กวนเบาๆ':'ใส่หลังเติมน้ำ ฟองน้อยลง'}</span>`));
+ last.forEach(x=>st.push(`${esc(pNm(x.o.p))} ${amt(x)} <span class="muted">${x.form==='DRT'?'ใส่หลังสุด กวนเบาๆ':'ใส่หลังเติมน้ำ ฟองน้อยลง'}</span>`));
  st.push('กวนต่อ แล้วเทเข้าถังโดรนผ่านตะแกรงกรอง พ่นให้หมดภายใน 2–4 ชม.');
- const mp=mixPlan(items.filter(x=>x.form).map(x=>({form:x.form,name:x.o.p.name,cat:x.o.p.cat,g:x.o.p.g,el:x.o.p.el||'',activeId:x.o.p.activeId||''})),X.w,(UI.fly&&UI.fly.water)||'tap',items.map(x=>x.o.p.g).filter(Boolean));
- const doa=doaPairs(M.ok.filter(o=>o.K.pest).map(o=>({name:o.p.name,activeId:o.p.activeId,active:o.p.active,cat:o.p.cat})),X.crop);
+ const mp=mixPlan(items.filter(x=>x.form).map(x=>({form:x.form,name:pNm(x.o.p),cat:x.o.p.cat,g:x.o.p.g,el:x.o.p.el||'',activeId:x.o.p.activeId||''})),X.w,(UI.fly&&UI.fly.water)||'tap',items.map(x=>x.o.p.g).filter(Boolean));
+ const doa=doaPairs(M.ok.filter(o=>o.K.pest).map(o=>({name:pNm(o.p),activeId:o.p.activeId,active:o.p.active,cat:o.p.cat})),X.crop);
  return {st,warn:mp.warn.filter(t=>!/^โดรนใช้น้ำ/.test(t)),noForm,doa}}
 /* ---------- หน้าจอ ---------- */
 function tmPaneHTML(){const X=tmCtx(),st=tmState();
  const multB=MULTS.map(([m,l])=>`<button type="button" class="${X.mult===m?'on':''}" data-act="tmMult" data-m="${m}">×${m}<small>${l}</small></button>`).join('');
  const mine=S.products.slice().sort((a,b)=>PK_KEYS.indexOf(pkOf(a))-PK_KEYS.indexOf(pkOf(b))||String(a.name).localeCompare(String(b.name),'th'));
  const nmN={};mine.forEach(p=>{const k=pfKey(p.name);nmN[k]=(nmN[k]||0)+1});
- const pick=mine.length?`<div class="tm-pick">${mine.map(p=>{const on=st.items.some(x=>x.id===p.id);return `<button type="button" class="tm-pc ${on?'on':''}" data-act="tmToggle" data-id="${p.id}" aria-pressed="${on}"><i>${PK[pkOf(p)].ic}</i><span>${esc(p.name)}${nmN[pfKey(p.name)]>1?`<small> · ${esc(PK[pkOf(p)].n)}${pSub(p)?' '+esc(pSub(p)):''}</small>`:''}</span>${num(p.r1)?'':'<em>ยังไม่มีอัตรา</em>'}</button>`}).join('')}</div>`:'';
+ const pick=mine.length?`<div class="tm-pick">${mine.map(p=>{const on=st.items.some(x=>x.id===p.id);return `<button type="button" class="tm-pc ${on?'on':''}" data-act="tmToggle" data-id="${p.id}" aria-pressed="${on}"><b class="tm-ck" aria-hidden="true">${on?'✓':'+'}</b><i>${PK[pkOf(p)].ic}</i><span>${esc(p.name)}${nmN[pfKey(p.name)]>1?`<small> · ${esc(PK[pkOf(p)].n)}${pSub(p)?' '+esc(pSub(p)):''}</small>`:''}</span>${num(p.r1)?'':'<em>ยังไม่มีอัตรา</em>'}</button>`}).join('')}</div>`:'';
  return `<div class="card tm">
  <div class="pane-h"><h2>🧪 ผสมถัง</h2><span>คิดจากอัตราข้างกล่อง × ค่าบินตอนนี้</span></div>
  <div class="tm-ctx"><div><span>พืช</span><b>${esc(X.cropN)}</b></div><div><span>น้ำ</span><b>${fmt(X.w,1)} <small>ล./ไร่</small></b><button class="lnk" data-act="advTab" data-t="fly">ปรับ</button></div><div><span>ถัง ${X.tank} ล.</span><b>${fmt(X.w?X.tank/X.w:0,1)} <small>ไร่/ถัง</small></b></div></div>
@@ -3760,9 +3809,10 @@ function tmPaneHTML(){const X=tmCtx(),st=tmState();
  <div class="tm-2"><label class="tm-sw"><input type="checkbox" data-tm="sens" ${X.sens?'checked':''}><span>ใบอ่อน ออกดอก หรือกล้าเล็ก <small>ปุ๋ยเกลือไม่เกิน 1%${X.sensAuto?' · ตั้งตามระยะพืช':''}</small></span></label>
  <label class="tm-area"><span>พื้นที่</span><input data-tm="area" inputmode="decimal" value="${X.area?esc(String(X.area)):''}" placeholder="${X.areaA?fmt(X.areaA,1):'—'}"><span>ไร่</span></label></div>
  </div>
- <div class="card"><div class="pane-h"><h2>ยาและปุ๋ยในถัง</h2><button class="btn sm" data-act="tmNew">+ เพิ่มยา/ปุ๋ยใหม่</button></div>
- ${pick||`<div class="empty-cta small">ยังไม่มียาหรือปุ๋ยในคลัง กด “เพิ่มยา/ปุ๋ยใหม่” แล้วใส่อัตราตามข้างกล่อง ระบบจะคิดให้ว่าใส่ต่อไร่และต่อถังเท่าไหร่</div>`}
- <div class="tiny muted" style="margin-top:6px">${mine.length?'แตะเพื่อใส่หรือเอาออกจากถัง · ':''}แอปรุ่น ${APP_VER}</div></div>
+ <div class="card"><div class="pane-h"><h2>เลือกยา/ปุ๋ยใส่ถัง</h2><span class="pane-btns"><button class="btn sm" data-act="preOpen">⚡ ชุดดวงตะวันเพชร</button><button class="btn sm" data-act="tmNew">+ เพิ่มยา/ปุ๋ยใหม่</button></span></div>
+ ${pick||`<div class="empty-cta small">ยังไม่มียาหรือปุ๋ยในคลัง กด “เพิ่มยา/ปุ๋ยใหม่” แล้วใส่อัตราตามข้างกล่อง ระบบจะคิดให้ว่าใส่ต่อไร่และต่อถังเท่าไหร่ หรือแตะ “⚡ ชุดดวงตะวันเพชร” เพื่อเพิ่มปุ๋ยยี่ห้อนี้พร้อม % ธาตุและอัตราตามฉลาก</div>`}
+ <div id="tm-sum">${tmSumHTML(X)}</div>
+ <div class="tiny muted" style="margin-top:6px">${mine.length?`✓ = อยู่ในถัง (${st.items.length} รายการ) · แตะชื่อเพื่อใส่หรือเอาออก · `:''}แอปรุ่น ${APP_VER}</div></div>
  <div id="tm-body">${tmBodyHTML(X)}</div>`}
 /* ชื่อ/สูตรมี N-P-K แต่ตั้งประเภทเป็นกลุ่มที่ไม่ใช่เกลือ → ความเข้มและปุ๋ยเกลือรวมจะคิดผิด */
 function pKindHint(p){const k=pkOf(p);if(!['secE','micro','bio'].includes(k))return '';const n=npkOf(p.name);if(!n||n[0]+n[1]+n[2]<10)return '';return `ชื่อหรือสูตรมี ${n.join('-')} แต่ตั้งประเภทเป็น “${PK[k].n}” — ปุ๋ยสูตร N-P-K เป็นปุ๋ยเกลือ ต้องเลือก ปุ๋ยน้ำ หรือ ปุ๋ยเกล็ด ถึงจะคิดปุ๋ยเกลือรวมให้`}
@@ -3771,22 +3821,22 @@ function tmRowHTML(o,X,M_){const p=o.p,u=o.u,K=o.K;
  if(!o.ok)return `<div class="tm-r">${head}<div class="note warn small">ยังไม่มีอัตราข้างกล่อง <button class="lnk" data-act="editProd" data-id="${p.id}">ใส่อัตรา</button></div></div>`;
  const fx=o.f||1;const box=(t,a0,b0,on,extra)=>{const a=a0*fx,b=b0*fx;return `<button type="button" class="tm-q ${on?'on':''}" data-act="tmDose" data-id="${p.id}" data-d="${t==='แนะนำ'?'rec':'max'}"><span>${t}</span><b>${K.adj?qf(b,u)+'<small>/ถัง</small>':qf(a,u)+'<small>/ไร่</small>'}</b><em>${K.adj?'':qf(b,u)+'/ถัง'}</em>${extra||''}</button>`};
  const cap=o.cap,pr=o.pct,pm=X.w?o.max*o.dens/X.w/10:0;
- const bar=cap?`<div class="tm-bar"><i style="width:${Math.min(100,pr/cap*100)}%" class="${pr>cap*1.001?'bad':pr>cap*0.85?'hi':''}"></i></div><div class="tiny tm-pct">เข้ม ${pctf(pr)} <span class="muted">· เพดาน ${fmt(cap,1)}%${o.salt?' (นับรวมปุ๋ยเกลือ)':''}</span></div>`:'';
+ const bar=cap?`<div class="tm-bar"><i style="width:${Math.min(100,pr/cap*100)}%" class="${pr>cap*1.001?'bad':pr>cap*0.85?'hi':''}"></i></div><div class="tiny tm-pct">เข้ม ${pctf(pr)} <span class="muted">· เพดาน ${fmt(cap,1)}%${o.osmW?` · ค่าเกลือ${o.osmW===1?'เต็ม':' ×'+fmt(o.osmW,2)}`:''}</span></div>`:'';
  const mb=pMob(p);const st=K.pest?`<div class="tiny muted">ยาไม่เช็ก % ห้ามใส่เกินฉลาก${mb&&MOB[mb].D?` · ${MOB[mb].n} ต้องการละออง ≥${MOB[mb].D} จุด/ตร.ซม. ค่าบินคิดน้ำให้แล้ว`:''}</div>`:K.adj?'':'';
- const scl=fx<1?`<div class="tiny tm-scl">↓ ลดเหลือ ${Math.round(fx*100)}% ของอัตรา เพราะ${o.fh<1?'ใช้เพดานรวมทั้งถังเกิน':'ปุ๋ยเกลือรวมเกินเพดาน '+fmt(M_.saltCap,1)+'%'} — ดู “รวมทั้งถัง” ด้านล่าง</div>`:'';
+ const scl=fx<1?`<div class="tiny tm-scl">↓ ลดเหลือ ${Math.round(fx*100)}% ของอัตรา เพราะ${o.why2==='el'?`${MICRO_EL[p.el]||SEC_EL[p.el]||'ธาตุ'}ซ้ำกับตัวอื่นในถัง รวมกันเกินเพดาน`:`ค่าเกลือรวมทั้งถังเกินเพดาน ${fmt(M_.saltCap,1)}% (ลดตัวที่กินค่าเกลือมากที่สุดก่อน)`} — ดู “ผลวิเคราะห์ถังผสม” ด้านล่าง</div>`:'';
  const shortN=!scl&&o.short?`<div class="note warn small">ใส่ตามฉลากต่ำสุด ${qf(o.L1,u)}/ไร่ ต้องใช้น้ำ <b>${fmt(Math.ceil(o.needW*2)/2,1)} ล./ไร่</b> ขึ้นไป ตอนนี้ใส่ได้ไม่เกิน ${qf(o.capRai,u)}/ไร่</div>`:'';
  const kh=pKindHint(p)?`<div class="note warn small">${esc(pKindHint(p))} <button class="lnk" data-act="editProd" data-id="${p.id}">แก้ประเภท</button></div>`:'';
  return `<div class="tm-r">${head}${kh}<div class="tm-qs">${box('แนะนำ',o.rec,o.tRec,o.dose==='rec')}${box('ไม่เกิน',o.max,o.tMax,o.dose==='max')}</div>${bar}${st}${scl}${shortN}<div class="tiny muted tm-why">${esc(o.why||'')}</div></div>`}
-function tmBodyHTML(X){X=X||tmCtx();const M=tmMix(X);if(!M.rows.length)return '';
+function tmBodyHTML(X){X=X||tmCtx();const M=tmMix(X);if(!M.rows.length)return S.products.length?`<div class="card tm-ana-ph"><h2>📊 ผลวิเคราะห์ถังผสม</h2><div class="small muted">ยังไม่มีอะไรในถัง — เลือกยา/ปุ๋ยในช่องด้านบน แล้วค่าเกลือรวม ธาตุอาหาร ความเข้ากันได้ และกลุ่มยา จะขึ้นตรงนี้</div></div>`:'';
  const O=tmOrder(M,X);const cW=M.cov&&M.cov.wNeed>X.w*1.1&&M.cov.wNeed<=60?M.cov.wNeed:0;const nW=Math.max(M.needW,cW),wOk=nW<=X.w*1.001;const wSet=Math.ceil(nW*2)/2;
  const split=nW>M.wMax?`<div class="tiny" style="margin-top:6px">น้ำ ${fmt(wSet,1)} ล./ไร่ มากเกินกว่าจะบินคุ้ม แนะนำแบ่งเป็น 2 ถัง/2 รอบ เช่น ปุ๋ยเกลือถังหนึ่ง ยากับจุลธาตุอีกถัง</div>`:'';
- const area=X.area>0?M.ok.filter(o=>o.use>0).map(o=>{const tot=o.use*X.area;const pk=num(o.p.pk)*(o.p.pkU==='kg'||o.p.pkU==='l'?1000:1);const n=pk?tot/pk:0;const cost=n&&num(o.p.price)?n*num(o.p.price):0;return `<tr><td>${esc(o.p.name)}</td><td class="n">${qf(tot,o.u)}</td><td class="n">${n?fmt(Math.ceil(n*10)/10,1)+' '+(o.u==='g'?'ถุง':'ขวด'):'—'}</td><td class="n">${cost?baht(cost):'—'}</td></tr>`}).join(''):'';
+ const area=X.area>0?M.ok.filter(o=>o.use>0).map(o=>{const tot=o.use*X.area;const pk=num(o.p.pk)*(o.p.pkU==='kg'||o.p.pkU==='l'?1000:1);const n=pk?tot/pk:0;const cost=n&&num(o.p.price)?n*num(o.p.price):0;return `<tr><td>${esc(pNm(o.p))}</td><td class="n">${qf(tot,o.u)}</td><td class="n">${n?fmt(Math.ceil(n*10)/10,1)+' '+(o.u==='g'?'ถุง':'ขวด'):'—'}</td><td class="n">${cost?baht(cost):'—'}</td></tr>`}).join(''):'';
  const tCost=X.area>0?M.ok.reduce((a,o)=>{const pk=num(o.p.pk)*(o.p.pkU==='kg'||o.p.pkU==='l'?1000:1);return a+(pk&&num(o.p.price)?o.use*X.area/pk*num(o.p.price):0)},0):0;
  return `${!wOk?`<div class="note warn tm-w"><div>ถังนี้ต้องใช้น้ำอย่างน้อย <b>${fmt(wSet,1)} ล./ไร่</b> ตอนนี้ตั้งไว้ ${fmt(X.w,1)} ล./ไร่${M.needW>X.w*1.001?` · ความเข้ม: ${M.hiNeed>=M.needW-1e-9&&M.nut.length>1?'ใส่ครบตามฉลากทุกตัวโดยเพดานรวมไม่เกิน 100% ':'ตัวที่ชนเพดาน'}ต้องการ ${fmt(Math.ceil(M.needW*2)/2,1)} ล./ไร่`:''}${cW?` · ละออง: ให้ได้ ≥${M.cov.D} จุด/ตร.ซม. ที่ระดับเป้าต้องการ ~${fmt(Math.ceil(cW*2)/2,1)} ล./ไร่`:''}${split}</div><button class="btn primary sm" data-act="tmUseW" data-w="${wSet}">ใช้ ${fmt(wSet,1)} ล./ไร่ ในค่าบิน</button></div>`:''}
  <div class="card">${M.rows.map(o=>tmRowHTML(o,X,M)).join('')}</div>
  ${tmAnaHTML(M,X,O)}
  <div class="card"><h2>เทลงถัง ${X.tank} ลิตร ตามลำดับ</h2><ol class="tm-ord">${O.st.map(t=>`<li>${t}</li>`).join('')}</ol>
- ${O.noForm.length?`<div class="tiny muted">ยังไม่ระบุสูตรยา (WP SC EC…) ของ ${O.noForm.map(x=>esc(x.o.p.name)).join(', ')} ลำดับอาจไม่ตรง แตะ “แก้” เพื่อเลือกสูตรตามข้างขวด</div>`:''}
+ ${O.noForm.length?`<div class="tiny muted">ยังไม่ระบุสูตรยา (WP SC EC…) ของ ${O.noForm.map(x=>esc(pNm(x.o.p))).join(', ')} ลำดับอาจไม่ตรง แตะ “แก้” เพื่อเลือกสูตรตามข้างขวด</div>`:''}
  <div class="small" style="margin-top:8px">🧫 ผสมครั้งแรก ลองในขวดใส 1 ลิตรก่อน ใส่ตามลำดับเดียวกัน ตั้งทิ้ง 30 นาที ถ้าแยกชั้น เป็นก้อน หรือตกตะกอน ให้แยกฉีด</div></div>
  ${area?`<div class="card"><h2>ทั้งแปลง ${fmt(X.area,1)} ไร่</h2><table class="tm-t"><tr><th>สินค้า</th><th class="n">ต้องใช้</th><th class="n">จำนวน</th><th class="n">ค่ายา</th></tr>${area}${tCost?`<tr class="b"><td>รวม</td><td></td><td></td><td class="n">${baht(tCost)}</td></tr>`:''}</table><div class="tiny muted">${fmt(Math.ceil(X.area/(X.tank/X.w)*10)/10,1)} ถัง · ใส่ขนาดบรรจุและราคาในหน้าแก้สินค้า เพื่อดูจำนวนขวด/ถุงและค่ายา</div></div>`:''}
  <div class="tiny muted" style="margin:0 2px 12px">ตัวเลขคิดจากฉลากแบบเครื่องพ่นสะพาย แปลงเป็นโดรน ถ้าฉลากมีอัตราโดรนหรือต่อไร่ ให้เลือก “ต่อไร่” ในหน้าแก้สินค้า · ใช้ครั้งแรกลองแปลงเล็กก่อน</div>`}
@@ -3794,7 +3844,7 @@ function tmBodyHTML(X){X=X||tmCtx();const M=tmMix(X);if(!M.rows.length)return ''
 function tmFlyNote(){try{const st=tmState();if(!st.items.length)return '';const X=tmCtx();const M=tmMix(X);if(!M.ok.length)return '';const wSet=Math.ceil(M.needW*2)/2;
  if(M.needW>X.w*1.001)return `<div class="note warn small tm-fn">🧪 ถังผสม ${M.ok.length} ตัว ต้องใช้น้ำ ≥ <b>${fmt(wSet,1)} ล./ไร่</b> <button class="btn sm" data-act="tmUseW" data-w="${wSet}">ใช้ค่านี้</button> <button class="lnk" data-act="advTab" data-t="mix">ดูถัง</button></div>`;
  return `<div class="tiny muted tm-fn">🧪 ถังผสม ${M.ok.length} ตัว ความเข้มผ่านที่ ${fmt(X.w,1)} ล./ไร่ <button class="lnk" data-act="advTab" data-t="mix">ดูปริมาณต่อถัง</button></div>`}catch(e){return ''}}
-function tmRefresh(full){const pn=full&&$('#tm-pane');if(pn)pn.innerHTML=tmPaneHTML();else{const b=$('#tm-body');if(b)b.innerHTML=tmBodyHTML()}const fn=$('#tm-fn');if(fn)fn.innerHTML=tmFlyNote()}
+function tmRefresh(full){const pn=full&&$('#tm-pane');if(pn)pn.innerHTML=tmPaneHTML();else{const b=$('#tm-body');if(b)b.innerHTML=tmBodyHTML();const sm=$('#tm-sum');if(sm)sm.innerHTML=tmSumHTML()}const fn=$('#tm-fn');if(fn)fn.innerHTML=tmFlyNote()}
 /* ---------- ฟอร์มสินค้า ---------- */
 function pfCalcHTML(){if(!F)return '';const X=tmCtx();const o=tmCalc(F,X);const K=PK[pkOf(F)];
  const ctx=`<div class="tiny muted">คิดกับค่าบินตอนนี้: ${esc(X.cropN)} · น้ำ ${fmt(X.w,1)} ล./ไร่ · ถัง ${X.tank} ล.${K.adj?'':' · ตัวคูณ ×'+X.mult}</div>`;
@@ -3824,8 +3874,8 @@ function openProd(p,opt){
  <div class="field"><label>อัตราข้างกล่อง</label><div class="pf-rate"><input data-e="r1" inputmode="decimal" value="${esc(F.r1||'')}" placeholder="ค่าต่ำ" aria-label="อัตราต่ำ"><span>–</span><input data-e="r2" inputmode="decimal" value="${esc(F.r2||'')}" placeholder="ค่าสูง (ถ้ามี)" aria-label="อัตราสูง"><div class="seg">${['g','cc'].map(u=>`<button type="button" class="${F.unit===u?'on':''}" data-act="pfSet" data-k="unit" data-v="${u}">${u==='g'?'กรัม':'ซีซี'}</button>`).join('')}</div></div>
  <div class="fstg">${Object.entries(PER).map(([x,v])=>ch('per',x,v[0])).join('')}</div><div class="tiny muted">ใส่ตามที่ข้างกล่องเขียน ถ้าเขียนเป็นช่วง เช่น 20–40 ใส่ทั้งสองช่อง${K.adj?' · สารช่วยผสมคิดตามลิตรน้ำในถัง ไม่คูณต่อไร่':''}</div></div>
  <div id="pf-calc">${pfCalcHTML()}</div>
- <details class="fold" ${F.cap||F.pk||F.price||F.dens?'open':''}><summary><span>ขั้นสูง: เพดาน ขนาดบรรจุ ราคา</span></summary>
- <div class="grid g2">${K.cap?`<div class="field"><label>เพดานความเข้ม % (เว้นว่าง = ${fmt(K.cap,1)}%)</label><input data-e="cap" inputmode="decimal" value="${esc(F.cap||'')}" placeholder="${fmt(pCap({...F,cap:''},false),1)}"></div>`:''}${F.unit==='cc'&&!K.pest&&!K.adj?`<div class="field"><label>น้ำหนัก กรัม/ซีซี (เว้นว่าง = ${fmt(PK[k].dens||1,2)})</label><input data-e="dens" inputmode="decimal" value="${esc(F.dens||'')}"></div>`:''}
+ <details class="fold" ${F.cap||F.pk||F.price||F.dens||F.osm?'open':''}><summary><span>ขั้นสูง: เพดาน ค่าเกลือ ขนาดบรรจุ ราคา</span></summary>
+ <div class="grid g2">${K.cap?`<div class="field"><label>เพดานความเข้ม % (เว้นว่าง = ${fmt(pCap({...F,cap:''},false),1)}%)</label><input data-e="cap" inputmode="decimal" value="${esc(F.cap||'')}" placeholder="${fmt(pCap({...F,cap:''},false),1)}"></div>`:''}${!K.pest&&!K.adj?(()=>{const d=pOsmW({...F,osm:''}),c=osmChem(F);return `<div class="field"><label>ค่าเกลือต่อกรัม เทียบ 13-0-46 (เว้นว่าง = ${fmt(d,2)}${c?' จาก '+OSM_CHEM[c][2]:''})</label><input data-e="osm" inputmode="decimal" value="${esc(F.osm||'')}" placeholder="${fmt(d,2)}"></div>`})():''}${F.unit==='cc'&&!K.pest&&!K.adj?`<div class="field"><label>น้ำหนัก กรัม/ซีซี (เว้นว่าง = ${fmt(PK[k].dens||1,2)})</label><input data-e="dens" inputmode="decimal" value="${esc(F.dens||'')}"></div>`:''}
  <div class="field"><label>ขนาดบรรจุ</label><div class="pf-rate"><input data-e="pk" inputmode="decimal" value="${esc(F.pk||'')}" placeholder="เช่น 1"><div class="seg">${(F.unit==='g'?[['g','กรัม'],['kg','กก.']]:[['cc','ซีซี'],['l','ลิตร']]).map(([u,l])=>`<button type="button" class="${(F.pkU||(F.unit==='g'?'kg':'l'))===u?'on':''}" data-act="pfSet" data-k="pkU" data-v="${u}">${l}</button>`).join('')}</div></div></div>
  <div class="field"><label>ราคาต่อขวด/ถุง (บาท)</label><input data-e="price" inputmode="decimal" value="${esc(F.price||'')}"></div></div></details>
  <div class="field"><label>หมายเหตุ (ร้านที่ซื้อ ข้อควรระวัง)</label><textarea data-e="note">${esc(F.note||'')}</textarea></div>`};
@@ -3835,13 +3885,15 @@ function openProd(p,opt){
 }
 const pfRe=()=>{const b=$('#pf');if(b&&F&&F._body){const y=b.scrollTop;b.innerHTML=F._body();b.scrollTop=y}};
 Object.assign(ACT,{
- pfKind:a=>{const k=a.dataset.k;if(!PK[k]||!F)return;const oc=F.cat;F.kind=k;F.cat=PK[k].cat;if(oc!==F.cat){F.activeId='';F.form=''}if(!F._uT)F.unit=PK[k].u;if(k==='micro'&&F.chel==null)F.chel=true;F.el=(k==='micro'&&!MICRO_EL[F.el])||((k==='sec'||k==='secE')&&!SEC_EL[F.el])?'':F.el;pfRe()},
+ pfKind:a=>{const k=a.dataset.k;if(!PK[k]||!F)return;const oc=F.cat;if(F.kind!==k)delete F.chem;F.kind=k;F.cat=PK[k].cat;if(oc!==F.cat){F.activeId='';F.form=''}if(!F._uT)F.unit=PK[k].u;if(k==='micro'&&F.chel==null)F.chel=true;F.el=(k==='micro'&&!MICRO_EL[F.el])||((k==='sec'||k==='secE')&&!SEC_EL[F.el])?'':F.el;pfRe()},
  pfSet:a=>{if(!F)return;const k=a.dataset.k;let v=a.dataset.v;if(k==='chel')v=v==='true';else if(['el','form','bio','adj','act'].includes(k)&&String(F[k])===v)v='';if(k==='unit'){F._uT=1;F.pkU=''}F[k]=v;if(k==='form')pfFormU();pfRe()},
  tmToggle:a=>{const st=tmState(),id=a.dataset.id;const add=!st.items.some(x=>x.id===id);if(!add)st.items=st.items.filter(x=>x.id!==id);else st.items.push({id,dose:'rec'});tmSave();tmSyncFly();const y=window.scrollY;render();window.scrollTo(0,y);if(a.dataset.toast)toast(add?'ใส่ในถังผสมแล้ว':'เอาออกจากถังแล้ว')},
  tmNewFrom:a=>{const c=CHEMMAP[a.dataset.c];if(!c)return;openProd({id:uid(),name:'',cat:c.cat,kind:({ins:'ins',fun:'fun',her:'her',pgr:'bio',adj:'adj'})[c.cat]||'flake',activeId:c.id,active:c.th,g:c.g,note:''},{toMix:1,isNew:1})},
  tmDose:a=>{const st=tmState(),it=st.items.find(x=>x.id===a.dataset.id);if(it){it.dose=a.dataset.d;tmSave();tmRefresh()}},
  tmMult:a=>{const st=tmState();st.mult=+a.dataset.m||0;tmSave();const y=window.scrollY;render();window.scrollTo(0,y)},
  tmNew:()=>openProd(null,{toMix:1}),
+ tmAll:()=>{const st=tmState();S.products.forEach(p=>{if(!st.items.some(x=>x.id===p.id))st.items.push({id:p.id,dose:'rec'})});tmSave();tmSyncFly();const y=window.scrollY;render();window.scrollTo(0,y);toast(`ใส่ทั้ง ${st.items.length} รายการลงถังแล้ว`);setTimeout(()=>ACT.tmJump(),120)},
+ tmJump:()=>{const e=$('#tm-ana');if(e)e.scrollIntoView({behavior:'smooth',block:'start'})},
  tmUseW:a=>{const f=flyState(),w=+a.dataset.w;if(!w)return;f.w=w;f.touched=true;f.lk=(f.lk||[]).filter(x=>x!=='w');f.lk.push('w');if(f.lk.length>2)f.lk.shift();flyApply(true);const y=window.scrollY;render();window.scrollTo(0,y);toast(`ตั้งน้ำ ${fmt(w,1)} ล./ไร่ แล้ว ค่าบินอื่นคำนวณตามให้`)},
  goMix:()=>{closeModal();UI.advTab='mix';go('advisor')}
 });
@@ -3864,16 +3916,17 @@ function tmJobInfo(l,j){if(!l.activeId||!l.activeId.startsWith('p:'))return '';c
 function jobMixSum(j){const X=tmJobCtx(j),R=[];let skip=0;
  (j.chems||[]).forEach(l=>{const r=num(l.rate);if(!r||l.unit==='ซอง')return;const p=l.activeId&&l.activeId.startsWith('p:')?S.products.find(x=>'p:'+x.id===l.activeId):null;
   if(!p){if(l.cat==='fer'||l.cat==='pgr')skip++;return}const K=PK[pkOf(p)];if(K.pest||K.adj)return;const cap=pCap(p,X.sens);if(!cap)return;
-  const amt=r*({'กก.':1000,'ลิตร':1000}[l.unit]||1),pct=amt*pDens(p)/X.w/10;R.push({p,pct,cap,salt:pIsSalt(p)})});
- const hi=R.reduce((a,x)=>a+x.pct/x.cap,0),S_=R.filter(x=>x.salt),sPct=S_.reduce((a,x)=>a+x.pct,0),sCap=S_.length===1?S_[0].cap:(X.sens?1:2);
- return {X,R,skip,hi,tot:R.reduce((a,x)=>a+x.pct,0),sPct,sCap,nS:S_.length,wNeed:X.w*Math.max(hi,S_.length>1?sPct/sCap:0)}}
+  const amt=r*({'กก.':1000,'ลิตร':1000}[l.unit]||1),pct=amt*pDens(p)/X.w/10;R.push({p,pct,cap,salt:pIsSalt(p),w:pOsmW(p),els:pEls(p)})});
+ const B=budAlloc(R,X.sens),oc=B.oc,osm=R.reduce((a,x)=>a+x.w*x.pct,0),hi=oc?osm/oc:0;
+ const groups=B.G.filter(g=>g.length>1).map(g=>({el:g[0].els[0],its:g,use:g.reduce((a,x)=>a+x.pct/x.cap,0)})),own=R.filter(x=>x.cap&&x.pct>x.cap*1.001);
+ return {X,R,skip,hi,osm,oc,groups,own,over:hi>1.001||own.length>0||groups.some(g=>g.use>1.001),tot:R.reduce((a,x)=>a+x.pct,0),wNeed:budNeedW(R,X.w,X.sens)}}
 function jobMixSumHTML(j){if(j.service==='fert'||j.service==='seed')return '';const M=jobMixSum(j),cmp=jobCompatHTML(j,M),cBad=/<li class="bad/.test(cmp),cWarn=/<li class="warn/.test(cmp);if(!M.R.length&&!M.skip)return cmp?`<div class="tm-tot lv-${cBad?'warn':cWarn?'hi':'ok'}" style="margin:8px 0">${cmp}</div>`:'';
- const over=M.hi>1.001,sOver=M.nS>0&&M.sPct>M.sCap*1.001,lvH=over||sOver?'warn':M.hi>0.85?'hi':'ok',lv=lvH==='warn'||cBad?'warn':lvH==='hi'||cWarn?'hi':'ok';
+ const near=M.hi>0.85||M.groups.some(g=>g.use>0.85)||M.R.some(x=>x.pct>x.cap*0.85),lvH=M.over?'warn':near?'hi':'ok',lv=lvH==='warn'||cBad?'warn':lvH==='hi'||cWarn?'hi':'ok';
  return `<div class="tm-tot lv-${lv}" style="margin:8px 0"><div class="tm-tot-h"><b>รวมทั้งถัง (ปุ๋ย ธาตุอาหาร สารเสริม)</b><span>น้ำ ${fmt(M.X.w,1)} ล./ไร่${M.X.wSet?'':' (ยังไม่กรอก ใช้ค่ากลางของพืช)'}</span></div>
- ${M.R.length?`<div class="tm-tot-g"><div><span>รวม</span><b>${pctf(M.tot)}</b></div><div><span>ใช้เพดานรวม</span><b class="${M.hi>1.001?'bad':''}">${Math.round(M.hi*100)}%</b></div></div><div class="tm-hib"><i class="${lvH}" style="width:${Math.min(100,M.hi*100)}%"></i></div>
- <ul class="tm-tl">${M.R.map(x=>`<li><span>${esc(x.p.name)}</span><b>${pctf(x.pct)}</b><em>${Math.round(x.pct/x.cap*100)}% ของเพดาน ${fmt(x.cap,1)}%</em></li>`).join('')}</ul>
- ${M.nS?`<div class="tm-sum"><span>ปุ๋ยเกลือรวม</span><b class="${sOver?'bad':''}">${pctf(M.sPct)}</b><small>เพดาน ${fmt(M.sCap,1)}%</small></div>`:''}
- ${over||sOver?`<div class="note warn small" style="margin-top:8px">เกินเพดาน${over?'รวม':'ปุ๋ยเกลือ'} — ลดอัตราทุกตัวลงเหลือ ~${Math.floor(100/Math.max(M.hi,M.nS>1?M.sPct/M.sCap:0))}% หรือใช้น้ำ ≥ <b>${fmt(Math.ceil(M.wNeed*2)/2,1)} ล./ไร่</b> หรือแยก 2 ถัง</div>`:''}`:''}
+ ${M.R.length?`<div class="tm-tot-g"><div><span>รวม</span><b>${pctf(M.tot)}</b></div><div><span>ค่าเกลือรวม (เทียบปุ๋ยเกลือ)</span><b class="${M.hi>1.001?'bad':''}">${pctf(M.osm)}</b><small>เพดาน ${fmt(M.oc,1)}%</small></div></div><div class="tm-hib"><i class="${M.hi>1.001?'warn':M.hi>0.85?'hi':'ok'}" style="width:${Math.min(100,M.hi*100)}%"></i></div>
+ <ul class="tm-tl">${M.R.map(x=>`<li><span>${esc(pNm(x.p))}</span><b>${pctf(x.pct)}</b><em>${Math.round(x.pct/x.cap*100)}% ของเพดาน ${fmt(x.cap,1)}%${x.w&&x.w!==1?` · ค่าเกลือ ×${fmt(x.w,2)}`:''}</em></li>`).join('')}</ul>
+ ${M.groups.map(g=>`<div class="tm-sum"><span>${MICRO_EL[g.el]||SEC_EL[g.el]||g.el} จาก ${g.its.length} ตัวรวม</span><b class="${g.use>1.001?'bad':''}">${Math.round(g.use*100)}%</b><small>ของเพดาน</small></div>`).join('')}
+ ${M.over?`<div class="note warn small" style="margin-top:8px">เกินเพดาน${[M.own.length?'ของ '+M.own.map(x=>esc(pNm(x.p))).join(', '):'',M.hi>1.001?'ค่าเกลือรวม':'',M.groups.some(g=>g.use>1.001)?'ธาตุซ้ำ':''].filter(Boolean).join(' · ')} — ใช้น้ำ ≥ <b>${fmt(Math.ceil(M.wNeed*2)/2,1)} ล./ไร่</b> หรือลดเหลือ: ${M.R.filter(x=>x.pctA<x.pct-1e-9).map(x=>`${esc(pNm(x.p))} ${Math.round(x.pctA/x.pct*100)}%`).join(', ')}</div>`:''}`:''}
  ${M.skip?`<div class="tiny muted" style="margin-top:6px">ปุ๋ย/สารเสริม ${M.skip} รายการไม่ได้เลือกยี่ห้อจากคลัง จึงยังไม่นับ — พิมพ์ชื่อในช่องยี่ห้อแล้วเลือกรายการ ⭐ หรือบันทึกยี่ห้อในแท็บผสมถังก่อน</div>`:''}${cmp}</div>`}
 /* ---------- ช่องพิมพ์ชื่อยา/ปุ๋ย: มีรายการให้เลือกตามตัวอักษรที่พิมพ์ ----------
    ที่มา: ยี่ห้อที่เคยบันทึก (⭐) · ชื่อการค้าที่รู้จัก · สารสำคัญ (IRAC/FRAC/HRAC) · ปุ๋ยทางใบ ธาตุรอง สารเสริม สารช่วยผสม */
@@ -3922,10 +3975,15 @@ CBP.pfname={noAuto:true,items:(inp,q)=>{if(F){F.name=inp.value;const d=$('#pf-du
   const seen=new Set(mine.map(m=>pfKey(m.p.name)).concat(histI.map(h=>pfKey(h.name))));
   const rest=restL.filter(x=>{const k=pfKey(x.name);if(seen.has(k))return false;seen.add(k);return true}).slice(0,10).map(x=>{const c=x.c,k=kindFromChem(c),K=PK[k[0]];
    return {...x,html:x.t==='tn'?`<b>${hl(x.name,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)} · ${esc(c.th)}${c.g?' · '+esc(gLabel(c.cat,c.g)):''}</span>`:x.t==='act'?`<b>${hl(c.th,q)}</b> <span class="tiny muted">${K.ic} สารสำคัญ${K.n?' '+esc(K.n):''} · ${esc(gLabel(c.cat,c.g))}</span>`:`<b>${hl(c.th,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)}</span>`}});
-  const out=mine.concat(histI,rest),dupN=mineAll.some(p=>pfKey(p.name)===pfKey(q));out.push({t:'typed',html:`<span class="muted">✓ ใช้ชื่อ “${esc(q)}” ${dupN?'เป็นสินค้าใหม่ (ตัวเดิมยังอยู่ — ยี่ห้อเดียวกันมีหลายสูตรได้)':'ตามที่พิมพ์'}</span>`});return out},
+  const preI=(typeof preFind==='function'?preFind(q):[]).filter(x=>{const k=pfKey(x.name);if(seen.has(k)||mineAll.some(p=>pfKey(p.name)===k))return false;seen.add(k);return true}).map(x=>({t:'pre',x,html:preItemHTML(x,q)}));
+  if(typeof preHit==='function'&&preHit(q))preI.push({t:'preAll',html:'⚡ <b>ดูทั้งชุดดวงตะวันเพชร</b> <span class="tiny muted">เลือกหลายรายการแล้วเพิ่มลงคลังทีเดียว</span>'});
+  const out=mine.concat(histI,preI,rest),dupN=mineAll.some(p=>pfKey(p.name)===pfKey(q));out.push({t:'typed',html:`<span class="muted">✓ ใช้ชื่อ “${esc(q)}” ${dupN?'เป็นสินค้าใหม่ (ตัวเดิมยังอยู่ — ยี่ห้อเดียวกันมีหลายสูตรได้)':'ตามที่พิมพ์'}</span>`});return out},
  pick:(inp,it)=>{if(!F)return;
   if(it.t==='mine'){const keep=F._toMix;openProd(it.p,{toMix:keep,fromStar:1});toast('เปิดสินค้าเดิมที่บันทึกไว้');return}
   if(it.t==='typed'){F.name=inp.value;return}
+  if(it.t==='pre'){preFill(it.x);pfRe();const r=$('#pf [data-e="r1"]');if(r&&!num(F.r1))r.focus();toast('เติมข้อมูลจากรายการสำเร็จรูปแล้ว ตรวจกับถุงแล้วกดบันทึก');return}
+  if(it.t==='preAll'){ACT.preOpen();return}
+  delete F.chem;
   if(it.t==='hist'&&!it.c){const k=histKind(it);F.name=it.name;const oc=F.cat;F.kind=k[0];F.cat=PK[k[0]].cat;if(!F._uT)F.unit=PK[k[0]].u;
    if(PK[k[0]].pest&&(it.l.active||it.l.g)){F.activeId='__custom';F.active=it.l.active||'';F.g=it.l.g||''}else if(oc!==F.cat){F.activeId='';F.form=''}
    if(!F.form)F.form=formDetect(it.name)||'';pfFormU();if(k[0]==='flake'||k[0]==='liq'){const n=npkOf(it.name);if(n&&!F.npk)F.npk=n.join('-')}pfRe();const r=$('#pf [data-e="r1"]');if(r)r.focus();return}
@@ -3938,12 +3996,12 @@ CBP.pfname={noAuto:true,items:(inp,q)=>{if(F){F.name=inp.value;const d=$('#pf-du
   pfRe();const r=$('#pf [data-e="r1"]');if(r)r.focus()},
  reset:inp=>{if(F)F.name=inp.value}};
 const NPK_COMMON=['46-0-0','21-0-0','13-0-46','0-52-34','12-61-0','0-0-50','0-0-60','10-52-17','21-21-21','20-20-20','16-16-16','15-15-15','30-20-10','10-20-30','13-13-21','6-12-26','4-24-24','8-24-24','16-20-0','16-16-8','20-8-20','15-0-0'];
-CBP.pfnpk={noAuto:true,items:(inp,q)=>{if(F){F.npk=inp.value;if(F._live)F._live()}q=String(q||'').trim();
+CBP.pfnpk={noAuto:true,items:(inp,q)=>{if(F){if(String(F.npk||'')!==inp.value)delete F.chem;F.npk=inp.value;if(F._live)F._live()}q=String(q||'').trim();
   const mine=[...new Set(S.products.map(p=>String(p.npk||'').trim()).filter(Boolean))];
   const all=[...new Set(mine.concat(NPK_COMMON))];
   const qq=q.replace(/\s+/g,'');const list=qq?all.filter(x=>x.replace(/\s+/g,'').includes(qq)).concat(all.filter(x=>!x.replace(/\s+/g,'').includes(qq)&&fz(q,[x])>0.9)):all.slice(0,12);
   return [...new Set(list)].slice(0,12).map(x=>({x,html:`<b>${hl(x,q)}</b>${mine.includes(x)?' <span class="tiny muted">⭐ เคยใช้</span>':''}`}))},
- pick:(inp,it)=>{if(!F)return;F.npk=it.x;pfRe()},
+ pick:(inp,it)=>{if(!F)return;if(F.npk!==it.x)delete F.chem;F.npk=it.x;pfRe()},
  reset:inp=>{if(F){F.npk=inp.value;if(F._live)F._live()}}};
 Object.assign(ACT,{pfOpen:a=>{const p=S.products.find(x=>x.id===a.dataset.id);if(p){const keep=F&&F._toMix;openProd(p,{toMix:keep})}}});
 /* ---------- ลำดับเทลงถังของสินค้าตัวนี้ (FORMS.ord ชุดเดียวกับหน้าผสมถัง/แผงผสม/ฟอร์มงาน) ---------- */
@@ -3977,10 +4035,25 @@ function pfNutHTML(ch){const k=F.kind;if(!NUT_KINDS.includes(k))return '';const 
  ${more.length?`<details class="fold nut-more"><summary><span>${npkK?'ธาตุรอง/จุลธาตุในสูตร':'ธาตุอื่นในสูตร'} (${more.map(([e])=>lab(e)).join(' ')})</span></summary><div class="nut-g">${more.map(fld).join('')}</div></details>`:''}
  ${hasCaMg?`<div class="fstg" style="margin-top:6px;align-items:center"><span class="tiny muted">ฉลากเขียนแคลเซียม/แมกนีเซียมเป็น</span>${[['','ออกไซด์ CaO MgO'],['1','ธาตุ Ca Mg']].map(([v,l])=>`<button type="button" class="fchip ${(F.nutEl?'1':'')===v?'on':''}" data-act="pfSet" data-k="nutEl" data-v="${v}">${l}</button>`).join('')}</div>`:''}
  <div class="tiny muted">กรอกตาม “ปริมาณธาตุอาหารรับรอง” ข้างกล่อง เว้นว่างได้ — ใช้คิดธาตุที่ได้ต่อไร่ ธาตุที่ข่มกัน และการตกตะกอน${F.unit==='cc'?' · ของเหลวคิด % × น้ำหนักต่อซีซี':''}</div></div>`}
+/* ชื่อแสดงผล: ถ้ามีสินค้าชื่อซ้ำกัน ต่อท้ายด้วยชนิดและสูตร เช่น ดวงตะวันเพชร (ปุ๋ยเกล็ด 13-0-46) */
+function pNm(p){if(!p)return '';const nm=String(p.name||''),k=pfKey(nm);if(!(S.products||[]).some(q=>q.id!==p.id&&pfKey(q.name)===k))return nm;return `${nm} (${[PK[pkOf(p)].n,pSub(p)].filter(Boolean).join(' ')})`}
+/* แบ่ง 2 ถังให้ทุกตัวใส่เต็มฉลาก: ลองทุกวิธีแบ่ง (ปุ๋ยในถังมีไม่กี่ตัว) เลือกวิธีที่ 1) ไม่มีคู่ตกตะกอนรุนแรงอยู่ถังเดียวกัน
+   2) ใช้น้ำน้อยสุด 3) คู่ที่ควรระวังอยู่ด้วยกันน้อยสุด — แต่ละถังต้องการน้ำ = น้ำตอนนี้ × max(เพดานรวมของถัง, ปุ๋ยเกลือหลายตัวรวม ÷ เพดานปุ๋ยเกลือ)
+   เพราะความเข้มแปรผกผันกับน้ำต่อไร่ */
+function tmSplit2(M,X,labU){const its=M.nut.map(o=>({o,p:o.p,cap:o.cap,salt:!!o.salt,w:pOsmW(o.p),els:pEls(o.p),pct:X.w?labU(o)*o.dens/(X.w*10):0,f:pFlags(o.p)})),n=its.length;if(n<2||n>12)return null;
+ const one=(a,b)=>a.ca&&(b.so4||b.po4)?(a.caChel?1:2):a.mgS&&!a.ca&&b.po4?1:a.metS&&b.po4?2:0,cf=(x,y)=>Math.max(one(x.f,y.f),one(y.f,x.f));
+ const need=g=>budNeedW(g,X.w,X.sens);
+ const cnt=(g,lv)=>{let c=0;for(let a=0;a<g.length;a++)for(let b=a+1;b<g.length;b++)if(cf(g[a],g[b])===lv)c++;return c};
+ const lt=(a,b)=>{for(let k=0;k<a.length;k++){if(a[k]<b[k]-1e-9)return true;if(a[k]>b[k]+1e-9)return false}return false};
+ let best=null;for(let m=1;m<(1<<(n-1));m++){const A=[],B=[];its.forEach((x,q)=>((m>>q)&1?A:B).push(x));
+  const w=Math.max(need(A),need(B)),bi=cnt(A,2)+cnt(B,2),wi=cnt(A,1)+cnt(B,1),key=[bi,Math.ceil(Math.max(w,X.w)*2-1e-9)/2,wi,w];
+  if(!best||lt(key,best.key))best={key,w,badIn:bi,warnIn:wi,G:[A,B].sort((a,b)=>need(b)-need(a))}}
+ const all=[];for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)all.push(cf(its[a],its[b]));best.bad0=all.filter(v=>v===2).length;best.warn0=all.filter(v=>v===1).length;
+ return best}
 /* ธาตุอาหารรวมทั้งถัง: กรัม/ไร่ · กรัม/ถัง · ppm (มก./ล.) ในน้ำพ่น */
 function tmNut(M,X){const T={},miss=[];
  M.ok.forEach(o=>{if(!NUT_KINDS.includes(pkOf(o.p)))return;const n=pNut(o.p),ks=Object.keys(n);if(!ks.length){miss.push(o.p);return}
-  const g=o.use*(o.u==='cc'?o.dens:1);ks.forEach(e=>{const v=g*n[e]/100,t=T[e]||(T[e]={g:0,src:[]});t.g+=v;t.src.push([o.p.name,v])})});
+  const g=o.use*(o.u==='cc'?o.dens:1);ks.forEach(e=>{const v=g*n[e]/100,t=T[e]||(T[e]={g:0,src:[]});t.g+=v;t.src.push([pNm(o.p),v])})});
  Object.values(T).forEach(t=>{t.ppm=X.w?t.g*1000/X.w:0;t.tank=t.g*(X.w?X.tank/X.w:0)});
  const el=e=>{if(T[e])return T[e].g;const ox=Object.entries(OX_EL).find(([,v])=>v[0]===e);return ox&&T[ox[0]]?T[ox[0]].g*ox[1][1]:0};
  return {T,miss,el}}
@@ -4083,56 +4156,68 @@ const LV_IC={bad:'⛔',warn:'⚠️',info:'ℹ️',ok:'✅'},LV_RANK={bad:3,warn
 /* ฟอร์มงานบริการ: ความเข้ากันได้ของรายการในถัง (ผังกรมวิชาการเกษตร + การตกตะกอนของปุ๋ยจากคลัง) */
 function jobCompat(j,M){const pp=precipPairs(M.R);
  const items=(j.chems||[]).filter(l=>l.activeId||l.product||l.active).map(l=>{const id=String(l.activeId||''),c=CHEMMAP[id],p=id.startsWith('p:')?S.products.find(x=>'p:'+x.id===id):null;
-  return {name:(p&&p.name)||l.product||(c&&c.th)||l.active||'',activeId:id,active:l.active||'',cat:l.cat}});
+  return {name:(p&&pNm(p))||l.product||(c&&c.th)||l.active||'',activeId:id,active:l.active||'',cat:l.cat}});
  return {pp,D:doaPairs(doaItems(items),j.crop)}}
 function jobCompatHTML(j,M){const {pp,D}=jobCompat(j,M);
  const L=[...pp.bad.map(t=>['bad',t]),...pp.warn.map(t=>['warn',t]),...D.R.map(r=>[r.lv,r.t])].sort((a,b)=>LV_RANK[b[0]]-LV_RANK[a[0]]);
  if(!L.length&&D.n<2)return '';
  return `<div class="jf-cmp"><div class="tm-tot-h"><b>ความเข้ากันได้ในถัง</b><span>${D.n>1?DOA_SRC:'การตกตะกอนของปุ๋ย'}</span></div><ul class="ta-l">${L.map(([lv,t])=>`<li class="${lv}">${LV_IC[lv]} ${esc(t)}</li>`).join('')}${D.n>1?`<li class="ok">✅ ตรวจยา ${D.n} ตัวตามผัง${D.okN?` · ผสมกันได้ ${D.okN} คู่`:''}${D.R.length?` · มีข้อสังเกต ${D.R.length} คู่`:''}</li>`:''}${D.notIn.length?`<li class="info">ℹ️ ${D.notIn.map(esc).join(', ')} ไม่อยู่ในผัง — ดูข้อห้ามผสมบนฉลาก</li>`:''}</ul></div>`}
-/* แผงใหญ่ “ผลวิเคราะห์ถังผสม” */
-function tmAnaHTML(M,X,O){if(!M.ok.length)return '';const N=tmNut(M,X),C=[];
+/* สถานะรวมของถัง: ใช้ทั้งในแผงใหญ่และแถบสรุปใต้รายการที่เลือก */
+function tmAnaStat(M,X,O){const C=[];
  M.bad.forEach(t=>C.push(['bad',t]));M.warn.forEach(t=>C.push(['warn',t]));(O.warn||[]).forEach(t=>C.push(['warn',t]));
  const D=O.doa||{R:[],okN:0,notIn:[],n:0};D.R.forEach(r=>C.push([r.lv,r.t]));
+ if(D.notIn&&D.notIn.length)C.push(['info',`${D.notIn.join(', ')} ไม่อยู่ในผังการผสมสารของกรมวิชาการเกษตร (ผังมี 32 กลุ่มสาร) — ดูข้อห้ามผสมบนฉลาก และลองผสมในขวดก่อน`]);
  C.sort((a,b)=>LV_RANK[b[0]]-LV_RANK[a[0]]);
- const nBad=C.filter(c=>c[0]==='bad').length,nWarn=C.filter(c=>c[0]==='warn').length,over=M.hiFull>1.001&&M.nut.length>1,sOver=M.salts.length>1&&M.saltPct0>M.saltCap*1.001;
+ const nBad=C.filter(c=>c[0]==='bad').length,nWarn=C.filter(c=>c[0]==='warn').length,over=M.hiFull>1.001,sOver=(M.groups||[]).some(g=>g.full>1.001);
  /* อัตราจริงเทียบฉลาก: ลดจากเพดานของตัวเอง เพดานปุ๋ยเกลือ หรือเพดานรวม */
  const labU=o=>o.dose==='max'?o.L2:o.L1,fac=o=>labU(o)>0?o.use/labU(o):1,cut=M.nut.filter(o=>fac(o)<0.995);
  const st=nBad?'bad':(nWarn||cut.length)?'warn':'ok';
  const stT=nBad?`⛔ มีคู่ที่ห้ามผสม ${nBad} ข้อ`:st==='warn'?(nWarn?`⚠️ ผสมได้ แต่ต้องระวัง ${nWarn+(cut.length?1:0)} ข้อ`:`⚠️ ผสมได้ — ลดอัตรา ${cut.length} ตัวให้อยู่ในเพดาน`):'✅ ผสมได้ ค่าอยู่ในเกณฑ์';
+ return {C,D,nBad,nWarn,over,sOver,labU,fac,cut,st,stT}}
+/* แถบสรุปใต้รายการที่เลือก: บอกว่าถังว่าง หรือสถานะถัง + ปุ่มเลื่อนลงไปดูแผงใหญ่ */
+function tmSumHTML(X){X=X||tmCtx();const st=tmState(),n=S.products.length;if(!n)return '';
+ if(!st.items.length)return `<div class="tm-hint">👆 ถังยังว่าง — แตะชื่อยา/ปุ๋ยด้านบนเพื่อใส่ลงถัง ใส่ได้หลายตัว แล้ว <b>📊 ผลวิเคราะห์ถังผสม</b> (ค่าเกลือรวม ความเข้ากันได้ กลุ่มยา) จะขึ้นด้านล่าง${n>1?`<button type="button" class="btn primary" data-act="tmAll">ใส่ทั้ง ${n} รายการลงถัง</button>`:''}</div>`;
+ const M=tmMix(X);if(!M.ok.length)return `<div class="tm-hint">ของในถังยังไม่มีอัตราข้างกล่อง — แตะ “แก้” ที่รายการด้านล่างแล้วใส่อัตรา ผลวิเคราะห์จะขึ้นทันที</div>`;
+ const A=tmAnaStat(M,X,tmOrder(M,X));
+ return `<button type="button" class="tm-jump ${A.st}" data-act="tmJump"><span>📊 ในถัง ${st.items.length} รายการ · ${A.stT}</span><small>${M.nut.length?`ค่าเกลือรวม ${pctf(M.saltPct)} (เพดาน ${fmt(M.saltCap,1)}%)`:'ไม่มีปุ๋ย'} — แตะดูผลวิเคราะห์ ↓</small></button>`}
+/* แผงใหญ่ “ผลวิเคราะห์ถังผสม” */
+function tmAnaHTML(M,X,O){if(!M.ok.length)return '';const N=tmNut(M,X),{C,D,nBad,nWarn,over,sOver,labU,fac,cut,st,stT}=tmAnaStat(M,X,O);
  /* กลุ่มกลไกการออกฤทธิ์ของยา (IRAC แมลง · FRAC รา · HRAC หญ้า) */
  const gOf=o=>o.p.g||((typeof CHEMMAP!=='undefined'&&CHEMMAP[o.p.activeId])||{}).g||'',gLab=o=>gOf(o)?`${({ins:'IRAC',fun:'FRAC',her:'HRAC'})[pkOf(o.p)]||''} ${gOf(o)}`.trim():'',pests=M.ok.filter(o=>o.K.pest&&gLab(o)),gl=pests.map(gLab);
- const grpLine=pests.length>1&&gl.length===new Set(gl).size?`<li class="ok">✅ กลุ่มยาไม่ซ้ำกัน: ${pests.map(o=>`${esc(gLab(o))} (${esc(o.p.name)})`).join(' · ')}</li>`:'';
+ const grpLine=pests.length>1&&gl.length===new Set(gl).size?`<li class="ok">✅ กลุ่มยาไม่ซ้ำกัน: ${pests.map(o=>`${esc(gLab(o))} (${esc(pNm(o.p))})`).join(' · ')}</li>`:'';
  /* ตารางความเข้มและค่าเกลือรายตัว */
  const rows=M.ok.map(o=>{const K=o.K,share=o.cap&&!K.pest&&!K.adj?o.pct/o.cap:null,pa=K.adj?o.tUse*o.dens/(X.tank*10):o.pct;
-  return `<tr><td><i>${K.ic}</i> ${esc(o.p.name)}<small>${esc(K.n)}${pSub(o.p)?' · '+esc(pSub(o.p)):''}${K.pest&&gLab(o)?' · กลุ่ม '+esc(gLab(o)):''}</small></td><td class="n">${pctf(pa)}${cut.includes(o)?`<small class="cut">ลดเหลือ ${Math.round(fac(o)*100)}%</small>`:''}</td><td class="n">${K.pest||K.adj?'—':pIsSalt(o.p)?`<b class="salt">${pctf(pa)}</b>`:`<small>ไม่นับ${pkOf(o.p)==='secE'||(pkOf(o.p)==='micro'&&o.p.chel!==false)?' (คีเลต)':''}</small>`}</td><td class="n">${share!=null?`<b class="${share>1.001?'bad':share>0.85?'hi':''}">${Math.round(share*100)}%</b><small>ของ ${fmt(o.cap,1)}%</small>`:'<small>ฉลากกำหนด</small>'}</td></tr>`}).join('');
+  return `<tr><td><i>${K.ic}</i> ${esc(o.p.name)}<small>${esc(K.n)}${pSub(o.p)?' · '+esc(pSub(o.p)):''}${K.pest&&gLab(o)?' · กลุ่ม '+esc(gLab(o)):''}</small></td><td class="n">${pctf(pa)}${cut.includes(o)?`<small class="cut">ลดเหลือ ${Math.round(fac(o)*100)}%</small>`:''}</td><td class="n">${K.pest||K.adj?'—':!o.osmW?'<small>ไม่นับ</small>':o.osmW>=1?`<b class="salt">${pctf(o.osm)}</b>${o.osmW>1?`<small class="nw">×${fmt(o.osmW,2)}</small>`:''}`:`${pctf(o.osm)}<small class="nw">×${fmt(o.osmW,2)}</small>`}</td><td class="n">${share!=null?`<b class="${share>1.001?'bad':share>0.85?'hi':''}">${Math.round(share*100)}%</b><small>ของ ${fmt(o.cap,1)}%</small>`:'<small class="nw">ฉลากกำหนด</small>'}</td></tr>`}).join('');
  const hp=M.hi*100,hf=M.hiFull*100,all=M.pctNut+M.pctPest+M.pctAdj;
+ const g1=(M.groups||[]).slice().sort((a,b)=>b.use-a.use)[0],gN=g=>MICRO_EL[g.el]||SEC_EL[g.el]||g.el;
  const tot=`<div class="ta-g">
   <div><span>ปุ๋ย ธาตุอาหาร สารเสริม</span><b>${pctf(M.pctNut)}</b></div>
-  <div class="${M.salts.length&&M.saltPct>M.saltCap*0.85?'hi':''}"><span>ค่าเกลือรวม (ปุ๋ยเกลือ)</span><b>${M.salts.length?pctf(M.saltPct):'0%'}</b><small>${M.salts.length?`เพดาน ${fmt(M.saltCap,1)}%${sOver?` · ตามฉลากครบ = ${pctf(M.saltPct0)}`:''}`:'ไม่มีปุ๋ยเกลือ'}</small></div>
-  <div class="${hp>100.1?'bad':over||hp>85?'hi':''}"><span>ใช้เพดานรวมทั้งถัง</span><b>${M.nut.length?Math.round(hp)+'%':'—'}</b><small>${over?`ตามฉลากครบ = ${Math.round(hf)}%`:M.nut.length>1?'บวกสะสมทุกตัว':''}</small></div>
+  <div class="${hp>100.1?'bad':over||hp>85?'hi':''}"><span>ค่าเกลือรวม (เทียบปุ๋ยเกลือ)</span><b>${M.nut.length?pctf(M.saltPct):'0%'}</b><small>เพดาน ${fmt(M.saltCap,1)}%${over?` · ตามฉลากครบ = ${pctf(M.saltPct0)}`:''}</small></div>
+  <div class="${g1&&g1.use>1.001?'bad':g1&&(g1.full>1.001||g1.use>0.85)?'hi':''}"><span>ธาตุเดียวกันจากหลายตัว</span><b>${g1?Math.round(g1.use*100)+'%':'ไม่มี'}</b><small>${g1?`${gN(g1)} ${g1.its.length} ตัว ของเพดาน${g1.full>1.001?` · ตามฉลากครบ = ${Math.round(g1.full*100)}%`:''}`:'ไม่มีธาตุซ้ำให้บวกกัน'}</small></div>
   <div><span>ทุกตัวในถังรวม</span><b>${pctf(all)}</b><small>${[M.pctPest?'ยา '+pctf(M.pctPest):'',M.pctAdj?'สารช่วย '+pctf(M.pctAdj):''].filter(Boolean).join(' · ')}</small></div></div>
-  ${M.nut.length?`<div class="tm-hib"><i class="${hp>100.1?'warn':over||hp>85?'hi':'ok'}" style="width:${Math.min(100,hp)}%"></i></div>`:''}`;
+  ${M.nut.length?`<div class="tm-hib" title="ค่าเกลือรวมเทียบเพดาน"><i class="${hp>100.1?'warn':over||hp>85?'hi':'ok'}" style="width:${Math.min(100,hp)}%"></i></div>`:''}`;
  /* ธาตุอาหารที่ได้ */
  const nk=NUT.filter(([e])=>N.T[e]);
  const nutH=nk.length?`<table class="ta-t"><tr><th>ธาตุ</th><th class="n">กรัม/ไร่</th><th class="n">กรัม/ถัง</th><th class="n">ppm ในน้ำพ่น</th></tr>${nk.map(([e,n])=>{const t=N.T[e];return `<tr><td>${n} <b>${NUT_LAB[e]}</b>${t.src.length>1?`<small>${t.src.map(s=>esc(s[0])+' '+fmt(s[1],s[1]<1?2:1)).join(' + ')}</small>`:''}</td><td class="n">${fmt(t.g,t.g<1?2:1)}</td><td class="n">${fmt(t.tank,t.tank<1?2:1)}</td><td class="n">${fmt(t.ppm,t.ppm<10?1:0)}</td></tr>`}).join('')}</table>`:'';
- const missH=N.miss.length?`<div class="tiny" style="margin-top:4px">ยังไม่ได้ใส่ % ธาตุตามฉลากของ ${N.miss.map(p=>`<button class="lnk" data-act="editProd" data-id="${p.id}">${esc(p.name)}</button>`).join(', ')} — แตะชื่อเพื่อกรอก</div>`:'';
+ const missH=N.miss.length?`<div class="tiny" style="margin-top:4px">ยังไม่ได้ใส่ % ธาตุตามฉลากของ ${N.miss.map(p=>`<button class="lnk" data-act="editProd" data-id="${p.id}">${esc(pNm(p))}</button>`).join(', ')} — แตะชื่อเพื่อกรอก</div>`:'';
  /* ธาตุที่ข่มกัน */
  const A=nutAntag(N);
  const antH=A.length?`<ul class="ta-l">${A.map(x=>`<li class="info"><b>${x.stim?'N → Mg':`${EL_TH[x.a]} ${x.mut?'↔':'→'} ${EL_TH[x.b]}`}</b> ${esc(x.t)}${antVerdict(x)}</li>`).join('')}</ul>
   <div class="tiny muted">สัดส่วนคิดจากน้ำหนักธาตุ เทียบความเข้มข้นธาตุในเนื้อเยื่อพืชที่เติบโตปกติ · ผลข่มกันเด่นชัดเมื่อใส่ทางดินปริมาณมากและใส่ซ้ำ การพ่นทางใบให้ธาตุไม่มาก จึงเป็นข้อมูลประกอบการวางรอบปุ๋ย — เรื่องที่ต้องระวังจริงในถังคือการตกตะกอน (หัวข้อความเข้ากันได้)</div>`:'';
  /* คำแนะนำ */
- const R=[];
- if(cut.length){const fs=[...new Set(cut.map(o=>Math.round(fac(o)*100)))],why=over?`ใส่ตามฉลากครบทุกตัวใช้เพดานรวม ${Math.round(hf)}%`:sOver?`ปุ๋ยเกลือตามฉลากครบ ${pctf(M.saltPct0)} เกินเพดาน ${fmt(M.saltCap,1)}%`:`น้ำ ${fmt(X.w,1)} ล./ไร่ น้อยเกินใส่เต็มฉลาก`;
-  R.push(`${why} — ${cut.length===M.nut.length&&fs.length===1?`แอปลดทุกตัวลงเหลือ ${fs[0]}% ของอัตรา`:`แอปลดอัตราลงแล้ว: ${cut.map(o=>`${esc(o.p.name)} เหลือ ${Math.round(fac(o)*100)}%`).join(', ')}`} (ตัวเลขในรายการและปริมาณเทลงถังเป็นค่าที่ลดแล้ว)`);
-  const wN=Math.ceil(M.needW*2)/2;if(wN>X.w)R.push(`ถ้าจะใส่เต็มอัตรา ใช้น้ำ ≥ <b>${fmt(wN,1)} ล./ไร่</b> <button class="btn sm" data-act="tmUseW" data-w="${wN}">ใช้ค่านี้</button>`);
-  if(over){const sh=M.nut.map(o=>({o,s:X.w?labU(o)*o.dens/(X.w*10)/o.cap:0})).sort((a,b)=>b.s-a.s),top=sh[0],rest=sh.slice(1);
-   const restHi=rest.reduce((a,x)=>a+x.s,0),rs=rest.filter(x=>x.o.salt),restSalt=rs.reduce((a,x)=>a+labU(x.o)*x.o.dens/(X.w*10),0),fit=restHi<=1.001&&(rs.length<2||restSalt<=M.saltCap*1.001);
-   if(rest.length)R.push(fit?`หรือแยก <b>${esc(top.o.p.name)}</b> (ใช้เพดาน ${Math.round(top.s*100)}% ตัวเดียว${top.s>1.001?` — ตัวนี้ตัวเดียวก็ต้องใช้น้ำ ≥ ${fmt(Math.ceil(X.w*top.s*2)/2,1)} ล./ไร่`:''}) ไปพ่นอีกถัง — ตัวที่เหลือใช้เพดาน ${Math.round(restHi*100)}% ใส่เต็มฉลากได้`:`หรือแบ่ง 2 ถัง: ${esc(top.o.p.name)} ถังหนึ่ง ตัวที่เหลืออีกถัง`)}}
- else if(M.nut.length>1&&hp<70)R.push(`ยังเหลือเพดานรวม ${Math.round(100-hp)}% — เพิ่มอัตราได้ถึงค่า “ไม่เกิน” ของแต่ละตัว หรือเติมธาตุที่ขาดได้ (ดูตารางธาตุ)`);
- if(M.bad.length)R.push('คู่ที่ตกตะกอน: แยกพ่นคนละถัง/คนละรอบ หรือเปลี่ยนเป็นแบบคีเลต');
+ const R=[],wN=Math.ceil(M.needW*2)/2,pe=M.ok.filter(o=>o.K.pest);
+ const sp=M.nut.length>1&&(over||sOver||M.bad.length||M.warn.some(t=>/ตกตะกอน/.test(t)))?tmSplit2(M,X,labU):null,w2=sp?Math.ceil(sp.w*2)/2:0;
+ const spTxt=lead=>`${lead} ${w2<=X.w+1e-9?`ใช้น้ำ ${fmt(X.w,1)} ล./ไร่เท่าเดิม`:`ใช้น้ำ ≥ <b>${fmt(w2,1)} ล./ไร่</b>`} ทุกตัวใส่เต็มฉลาก${sp.bad0+sp.warn0>sp.badIn+sp.warnIn?' และแยกคู่ที่ตกตะกอนออกจากกัน':''}: ${sp.G.map((g,i)=>`<b>ถัง ${i+1}</b> ${g.map(x=>esc(pNm(x.o.p))).join(' + ')}`).join(' · ')}${pe.length?` · ยา${pe.length>1?'ทั้ง '+pe.length+' ตัว':''}ใส่ถังไหนก็ได้ตามอัตราฉลาก`:''}${w2>X.w+1e-9?` <button class="btn sm" data-act="tmUseW" data-w="${w2}">ใช้ ${fmt(w2,1)} ล./ไร่</button>`:''}`;
+ let spDone=false;
+ if(cut.length){const rs=o=>[o.pctLab>o.cap*1.001?`ตามฉลากเข้ม ${pctf(o.pctLab)} เกินเพดานของตัวเอง ${fmt(o.cap,1)}%`:'',o.why2==='osm'?'ค่าเกลือรวมเต็ม จึงลดตัวที่กินค่าเกลือมากสุด':'',o.why2==='el'?`${MICRO_EL[o.p.el]||SEC_EL[o.p.el]||'ธาตุ'}ซ้ำกับตัวอื่น`:''].filter(Boolean).join(' และ');
+  R.push(`แอปลดอัตราให้ไม่ไหม้ใบแล้ว: ${cut.map(o=>`${esc(pNm(o.p))} เหลือ ${Math.round(fac(o)*100)}% <span class="muted">(${rs(o)})</span>`).join(', ')} — ตัวเลขในรายการและปริมาณเทลงถังเป็นค่าที่ลดแล้ว`);
+  const big=cut.filter(o=>o.pctLab>o.cap*1.001&&!o.byRai);if(big.length&&X.mult&&X.w){const k=X.mult*20/X.w;R.push(`เหตุหลัก: อัตราข้างกล่อง “ต่อน้ำ 20 ลิตร” คิดสำหรับเครื่องพ่นน้ำมาก (×${X.mult} ≈ ${X.mult*20} ล./ไร่) พอใส่ปริมาณต่อไร่เท่าเดิมในน้ำโดรน ${fmt(X.w,1)} ล./ไร่ ความเข้มเพิ่ม ${fmt(k,k>=10?0:1)} เท่า — ไม่ได้เกิดจากการผสมหลายตัว`)}
+  if(wN>X.w)R.push(`ถ้าจะใส่เต็มอัตราในถังเดียว ใช้น้ำ ≥ <b>${fmt(wN,1)} ล./ไร่</b> <button class="btn sm" data-act="tmUseW" data-w="${wN}">ใช้ค่านี้</button>`);
+  if(sp&&sp.badIn===0&&((w2<=wN*0.9&&w2<wN-0.25)||sp.bad0>0)){R.push(spTxt('หรือแบ่งพ่น 2 ถัง'));spDone=true}}
+ else if(M.nut.length>1&&hp<70)R.push(`ค่าเกลือรวมยังเหลือ ${Math.round(100-hp)}% ของเพดาน — เพิ่มอัตราได้ถึงค่า “ไม่เกิน” ของแต่ละตัว หรือเติมธาตุที่ขาดได้ (ดูตารางธาตุ)`);
+ if(M.bad.length&&!spDone)R.push(sp&&sp.badIn===0?spTxt('คู่ที่ตกตะกอน: แบ่งพ่น 2 ถัง'):'คู่ที่ตกตะกอน: แยกพ่นคนละถัง/คนละรอบ หรือเปลี่ยนเป็นแบบคีเลต');
  if(D.R.some(r=>r.lv==='bad'))R.push('คู่ยาที่ผังกำหนดว่าผสมไม่ได้: แยกพ่นคนละรอบ เว้นตามฉลาก');
  {const hi=A.filter(x=>x.r!=null&&x.x>3&&!x.mut);if(hi.length)R.push(`สัดส่วน ${hi.map(x=>`${EL_TH[x.a]} : ${EL_TH[x.b]}`).join(', ')} สูงกว่าที่พืชใช้ — ปกติของสูตรเน้นธาตุ (เช่น โพแทชสูงช่วงสร้างผล) แต่ถ้าพ่นสูตรนี้ซ้ำหลายรอบ ให้สลับรอบเสริม ${[...new Set(hi.map(x=>EL_TH[x.b]))].join(' ')}`)}
- if(D.notIn.length)R.push(`${D.notIn.map(esc).join(', ')} ไม่อยู่ในผังของกรมวิชาการเกษตร — ดูข้อห้ามผสมบนฉลาก และลองผสมในขวดก่อน`);
  R.push('ผสมครั้งแรกลองในขวดใส 1 ลิตร ตามลำดับเทลงถัง ตั้งทิ้ง 30 นาที — แยกชั้น เป็นก้อน ตกตะกอน หรือร้อน = แยกพ่น');
  const doaLine=D.n>1?`<li class="ok">✅ ตาม${DOA_SRC}: ตรวจ ${D.n} ตัว${D.okN?` · ผสมกันได้ ${D.okN} คู่`:''}${D.R.length?` · มีข้อสังเกต ${D.R.length} คู่ (ด้านบน)`:''}</li>`:'';
  return `<div class="card tm-ana lv-${st}" id="tm-ana">
@@ -4140,15 +4225,76 @@ function tmAnaHTML(M,X,O){if(!M.ok.length)return '';const N=tmNut(M,X),C=[];
  <div class="tiny muted">น้ำ ${fmt(X.w,1)} ล./ไร่ · ถัง ${X.tank} ล. · ${fmt(X.w?X.tank/X.w:0,1)} ไร่/ถัง · ${M.ok.length} รายการ</div>
  <h3>ความเข้มและค่าเกลือ</h3>
  <table class="ta-t"><tr><th>รายการ</th><th class="n">% ในน้ำ</th><th class="n">ค่าเกลือ</th><th class="n">ใช้เพดาน</th></tr>${rows}${M.salts.length?`<tr class="ta-sum"><td>รวมค่าเกลือ</td><td></td><td class="n"><b class="salt">${pctf(M.saltPct)}</b></td><td class="n"><small>เพดาน ${fmt(M.saltCap,1)}%</small></td></tr>`:''}</table>
- ${M.nut.length?'<div class="tiny muted" style="margin-top:4px">ใช้เพดาน = % ในน้ำ ÷ เพดานของตัวนั้น — ทุกตัวรวมกันต้องไม่เกิน 100% เพราะหยดแห้งบนใบแล้วทุกตัวเข้มข้นพร้อมกัน</div>':''}
+ ${M.nut.length?'<div class="tiny muted" style="margin-top:4px">ใช้เพดาน = % ในน้ำ ÷ เพดานของตัวนั้น · ค่าเกลือ = แรงดันออสโมซิสต่อกรัมเทียบ 13-0-46 (แม่ปุ๋ยที่รู้สูตรเคมีคิดจากจำนวนไอออน ÷ มวลโมเลกุล เช่น 0-52-34 ×0.74 ดีเกลือ ×0.41 · ปุ๋ยผสมและปุ๋ยน้ำ ×1 · คีเลต ×0.4 · สารเสริมอินทรีย์ ×0.2) ทุกตัวรวมกันต้องไม่เกินเพดานค่าเกลือ เพราะหยดแห้งบนใบแล้วเข้มขึ้นพร้อมกัน · ธาตุเดียวกันจากหลายตัวบวกกัน · ต่างกลไกไม่บวกข้ามกัน</div>':''}
  ${tot}
  ${nk.length||N.miss.length?`<h3>ธาตุอาหารที่ได้</h3>${nutH}${missH}`:''}
  <h3>ความเข้ากันได้</h3>
  <ul class="ta-l">${C.map(([lv,t])=>`<li class="${lv}">${LV_IC[lv]} ${esc(t).replace(/^(⛔|⚠️|ℹ️) /,'')}</li>`).join('')}${doaLine}${grpLine}${!C.length&&!doaLine&&!grpLine?'<li class="ok">✅ ไม่พบคู่ที่ห้ามผสมหรือตกตะกอน</li>':''}</ul>
  ${antH?`<h3>ธาตุที่ข่มกัน <small class="muted">ข้อมูลประกอบ</small></h3>${antH}`:''}
  <h3>คำแนะนำ</h3><ul class="ta-r">${R.map(t=>`<li>${t}</li>`).join('')}</ul>
- <div class="tiny muted ta-src">ที่มา: เพดานรวมคิดแบบบวกสะสม (หยดแห้งแล้วทุกตัวเข้มข้นพร้อมกัน) · การตกตะกอน: แคลเซียม/แมกนีเซียมกับซัลเฟต/ฟอสเฟต และโลหะซัลเฟตกับฟอสเฟต (Haifa, Purdue Extension) · ${DOA_SRC} · ธาตุข่มกัน: Mulder (1953), Fageria (2001) · สัดส่วนธาตุในพืช: Epstein (1972)</div></div>`}
+ <div class="tiny muted ta-src">ที่มา: ค่าเกลือ = แรงดันออสโมซิสบวกกันทุกตัว (Neumann et al. 1981) ถ่วงตามมวลโมเลกุล (กฎ van 't Hoff) · ต่างกลไกไม่บวกข้ามกัน (หลัก concentration addition / independent action ในพิษวิทยาสารผสม) · ปุ๋ยเกลือทางใบ 1–2% ลดปริมาณน้ำได้แต่ห้ามเข้มจนใบไหม้ (Haifa) · การตกตะกอน: แคลเซียม/แมกนีเซียมกับซัลเฟต/ฟอสเฟต และโลหะซัลเฟตกับฟอสเฟต (Haifa, Purdue Extension) · ${DOA_SRC} · ธาตุข่มกัน: Mulder (1953), Fageria (2001) · สัดส่วนธาตุในพืช: Epstein (1972)</div></div>`}
 /* ==== จบ: ผลวิเคราะห์ถังผสม ==== */
+/* ===== รายการสำเร็จรูป: ดวงตะวันเพชร (DTWP) =====
+   ธาตุ: % ตามฉลาก — N P₂O₅ K₂O จากสูตร · CaO MgO เป็นออกไซด์ (nutEl = ฉลากเขียนเป็นธาตุ Ca/Mg แอปแปลงเป็นออกไซด์ให้) · S และจุลธาตุเป็นธาตุ
+   อัตรา: “ต่อน้ำ 20 ลิตร” ตามข้อความฉลากที่ร้านค้าออนไลน์ลงไว้ (เมืองเกษตร) หรือเว็บบริษัท · ไม่มีอัตรา = ยังไม่พบฉลาก ให้กรอกตามถุง
+   chem: สารเคมีหลัก ใช้คิดค่าเกลือต่อกรัม (OSM_CHEM) · ไม่มี chem = ไม่รู้องค์ประกอบแน่ชัด แอปใช้ค่ากลางของประเภท */
+const PRE_BRAND='ดวงตะวันเพชร DTWP';
+const PRE_GRP=[['flake','แม่ปุ๋ยเกล็ดและธาตุรอง'],['chel','ไฮโดรเมท (คีเลต)'],['liq','ปุ๋ยน้ำ'],['bio','สารเสริมและสารจับใบ']];
+const PRESET_DTWP=[
+ {g:'flake',key:'kno3',name:'ดวงตะวันเพชร 13-0-46',kind:'flake',npk:'13-0-46',r1:'100',r2:'120',unit:'g',chem:'kno3'},
+ {g:'flake',key:'mkp',name:'ดวงตะวันเพชร 0-52-34',kind:'flake',npk:'0-52-34',r1:'50',r2:'100',unit:'g',chem:'mkp'},
+ {g:'flake',key:'map',name:'ดวงตะวันเพชร 12-61-0',kind:'flake',npk:'12-61-0',r1:'100',r2:'120',unit:'g',chem:'map'},
+ {g:'flake',key:'sop',name:'ดวงตะวันเพชร 0-0-50+17S',kind:'flake',npk:'0-0-50',nut:{S:'17'},r1:'20',r2:'30',unit:'g',chem:'sop'},
+ {g:'flake',key:'can',name:'ดวงตะวันเพชร 15-0-0 แคลเซียมไนเตรท',kind:'sec',el:'Ca',nut:{N:'15',CaO:'26'},r1:'100',r2:'120',unit:'g',chem:'can'},
+ {g:'flake',key:'mgn',name:'ดวงตะวันเพชร 10-0-0 แมกนีเซียมไนเตรท',kind:'sec',el:'Mg',nut:{N:'10',MgO:'15'},r1:'50',r2:'100',unit:'g',chem:'mgn',note:'ฉลากเขียน “แมกนีเซียม 15%” คือ MgO (สูตรเคมี Mg(NO₃)₂·6H₂O ให้ MgO 15.7%)'},
+ {g:'flake',key:'mgs',name:'ดวงตะวันเพชร ดีเกลือ แมกนีเซียมซัลเฟต',kind:'sec',el:'Mg',nut:{MgO:'16',S:'12'},r1:'30',r2:'50',unit:'g',chem:'mgs'},
+ {g:'flake',key:'g18',name:'ดวงตะวันเพชร โกรว์-โปร 18-18-18',kind:'flake',npk:'18-18-18',unit:'g',note:'ยังไม่พบอัตราบนฉลาก — กรอกตามถุง'},
+ {g:'flake',key:'n29',name:'ดวงตะวันเพชร 29-9-9',kind:'flake',npk:'29-9-9',r1:'50',r2:'100',unit:'g'},
+ {g:'flake',key:'n16',name:'ดวงตะวันเพชร 16-16-16 3in1',kind:'flake',npk:'16-16-16',r1:'50',r2:'100',unit:'g',note:'หน้าร้านระบุให้ทางน้ำหยด/สปริงเกอร์'},
+ {g:'chel',key:'mix',name:'ไฮโดรเมท MIX EDTA',kind:'micro',el:'mix',chel:true,nut:{MgO:'4',Fe:'3',Mn:'3',Cu:'1',Zn:'1',B:'0.5',Mo:'0.1'},nutEl:true,r1:'3',r2:'5',unit:'g',note:'% ธาตุจากตัวแทนจำหน่าย · ละลายดีที่ pH 4–6.5'},
+ {g:'chel',key:'caedta',name:'ไฮโดรเมทแคลเซียม 9% EDTA',kind:'secE',el:'Ca',nut:{CaO:'9'},nutEl:true,r1:'5',r2:'10',unit:'g',chem:'caedta'},
+ {g:'chel',key:'mgedta',name:'ไฮโดรเมทแมกนีเซียม 6% EDTA',kind:'secE',el:'Mg',nut:{MgO:'6'},nutEl:true,r1:'150',r2:'200',per:'w200',unit:'g',chem:'mgedta',note:'อัตราจากตัวแทนจำหน่าย'},
+ {g:'chel',key:'feedta',name:'ไฮโดรเมทเหล็ก 13% EDTA',kind:'micro',el:'Fe',chel:true,nut:{Fe:'13'},unit:'g',chem:'feedta',note:'คงตัวถึง pH 6.2 · ยังไม่พบอัตราบนฉลาก — กรอกตามถุง'},
+ {g:'chel',key:'fedtpa',name:'ไฮโดรเมทเหล็ก DTPA',kind:'micro',el:'Fe',chel:true,nut:{Fe:'9'},unit:'g',note:'Fe 9–9.5% คงตัวถึง pH 7 · ยังไม่พบอัตราบนฉลาก — กรอกตามถุง'},
+ {g:'liq',key:'n1',name:'เอ็นวัน N1 16-3-3',kind:'liq',npk:'16-3-3',nut:{Fe:'0.011',Mn:'0.01',Zn:'0.012',B:'0.008',Mo:'0.01'},r1:'20',r2:'40',unit:'cc'},
+ {g:'liq',key:'k1',name:'เควัน K1 3-12-15',kind:'liq',npk:'3-12-15',r1:'20',r2:'40',unit:'cc'},
+ {g:'liq',key:'nx20',name:'นิวทริกซ์ 20-4-4',kind:'liq',npk:'20-4-4',r1:'100',r2:'150',unit:'cc'},
+ {g:'liq',key:'nx13',name:'นิวทริกซ์ 13-13-13',kind:'liq',npk:'13-13-13',r1:'100',r2:'150',unit:'cc'},
+ {g:'liq',key:'nx10',name:'นิวทริกซ์ 10-5-20',kind:'liq',npk:'10-5-20',r1:'100',r2:'150',unit:'cc'},
+ {g:'liq',key:'nx4',name:'นิวทริกซ์ 4-24-24',kind:'liq',npk:'4-24-24',r1:'20',r2:'40',unit:'cc'},
+ {g:'liq',key:'nx6',name:'นิวทริกซ์ 6-24-6',kind:'liq',npk:'6-24-6',r1:'20',r2:'40',unit:'cc'},
+ {g:'liq',key:'hical',name:'ไฮเพาเวอร์แคล',kind:'liq',nut:{CaO:'16',MgO:'1',B:'0.1'},r1:'10',r2:'20',unit:'cc',note:'ฉลากไม่บอกว่าแคลเซียมมาจากสารใด'},
+ {g:'bio',key:'amp',name:'ดวงตะวันเพชร อะมิโนพืช',kind:'bio',bio:'amino',r1:'20',r2:'40',unit:'cc'},
+ {g:'bio',key:'amr1',name:'ดวงตะวันเพชร อะมิโนข้าว บำรุงต้น',kind:'bio',bio:'amino',r1:'20',r2:'40',unit:'cc'},
+ {g:'bio',key:'amr2',name:'ดวงตะวันเพชร อะมิโนข้าว รับรวง',kind:'bio',bio:'amino',r1:'20',r2:'40',unit:'cc'},
+ {g:'bio',key:'amd',name:'ดวงตะวันเพชร อะมิโนทุเรียน',kind:'bio',bio:'amino',r1:'10',r2:'20',unit:'cc'},
+ {g:'bio',key:'ssz',name:'ดวงตะวันเพชร ซุปเปอร์ไซส์',kind:'bio',bio:'amino',r1:'20',r2:'30',unit:'cc'},
+ {g:'bio',key:'pms',name:'ดวงตะวันเพชร พลังมันส์',kind:'bio',bio:'amino',r1:'10',r2:'20',unit:'cc'},
+ {g:'bio',key:'sbt',name:'ดวงตะวันเพชร ซูก้าร์บีท',kind:'bio',bio:'sugar',r1:'10',r2:'20',unit:'cc'},
+ {g:'bio',key:'pro',name:'ดวงตะวันเพชร โปรชีวิต พลัส',kind:'bio',bio:'sea',r1:'10',r2:'20',unit:'cc',note:'สาหร่าย Ascophyllum nodosum และสไปรูลินา'},
+ {g:'bio',key:'surf',name:'ดวงตะวันเพชร ซุปเปอร์เซอร์เฟส',kind:'adj',adj:'stick',r1:'2',r2:'3',unit:'cc',note:'สารจับใบ ใส่หลังสุด'}];
+/* สรุปสั้น: ธาตุตามฉลาก · อัตรา */
+function preSum(x){const nu=x.nut||{},a=[];if(x.npk)a.push(x.npk);
+ Object.entries(nu).forEach(([e,v])=>{const lab=x.nutEl&&e==='CaO'?'Ca':x.nutEl&&e==='MgO'?'Mg':(NUT_LAB[e]||e);if(!(x.npk&&['N','P2O5','K2O'].includes(e)))a.push(lab+' '+v)});
+ const u=x.unit==='cc'?'ซีซี':'ก.',per=x.per==='w200'?'200':'20';
+ return [a.join(' · '),x.r1?`${x.r1}${x.r2&&x.r2!==x.r1?'–'+x.r2:''} ${u}/น้ำ ${per} ล.`:'ยังไม่มีอัตรา'].filter(Boolean).join(' · ')}
+function preDoc(x,id){const K=PK[x.kind];const p={id:id||uid(),name:x.name,cat:K.cat,kind:x.kind,per:x.per||'w20',unit:x.unit||K.u,note:x.note||'',pre:'dtwp:'+x.key};
+ ['npk','el','chel','bio','adj','nutEl','r1','r2','chem'].forEach(k=>{if(x[k]!=null)p[k]=x[k]});if(x.nut)p.nut={...x.nut};return p}
+/* เติมฟอร์มสินค้าจากรายการสำเร็จรูป (คง id และสถานะฟอร์ม) */
+function preFill(x){if(!F)return;Object.keys(F).forEach(k=>{if(!k.startsWith('_')&&k!=='id')delete F[k]});Object.assign(F,preDoc(x,F.id));F._uT=1}
+function preFind(q){q=String(q||'').trim();if(!q)return [];
+ if(/^[\d\s.\-–]+$/.test(q)){const sub=s=>String(s||'').toLowerCase().replace(/–/g,'-').replace(/\s+/g,''),qs=sub(q);return PRESET_DTWP.filter(x=>[x.name,x.npk].some(f=>sub(f).includes(qs))).slice(0,6)}
+ return PRESET_DTWP.map(x=>[x,fz(q,[x.name,x.npk||'',PRE_BRAND,PK[x.kind].n])]).filter(r=>r[1]>=0.6).sort((a,b)=>b[1]-a[1]).slice(0,8).map(r=>r[0])}
+const preHit=q=>fz(q,[PRE_BRAND])>=0.6;
+function preItemHTML(x,q){const K=PK[x.kind];return `⚡ <b>${hl(x.name,q)}</b> <span class="tiny muted">${K.ic} ${esc(K.n)} · ${esc(preSum(x))} · รายการสำเร็จรูป</span>`}
+Object.assign(ACT,{
+ preOpen:()=>{const have=new Set(S.products.map(p=>pfKey(p.name)));let nNew=0;
+  const rows=PRE_GRP.map(([g,gn])=>`<div class="pre-g"><div class="pre-gh">${esc(gn)}</div>${PRESET_DTWP.filter(x=>x.g===g).map(x=>{const has=have.has(pfKey(x.name));if(!has)nNew++;
+   return `<label class="pre-it${has?' has':''}"><input type="checkbox" data-pre="${x.key}" ${has?'disabled':'checked'}><span><b>${esc(x.name)}</b><small>${PK[x.kind].ic} ${esc(preSum(x))}${has?' · มีในคลังแล้ว':''}</small></span></label>`}).join('')}</div>`).join('');
+  openModal(`<div class="sh-h"><b>⚡ ชุดดวงตะวันเพชร</b><button class="btn ghost" data-act="close">✕</button></div><div class="sh-b"><div class="tiny muted" style="margin-bottom:8px">% ธาตุตามฉลาก · อัตราต่อน้ำ 20 ลิตรตามข้อความฉลากที่ร้านค้าลงไว้ · ค่าเกลือคิดจากสูตรเคมีของแต่ละตัว — เทียบกับถุงที่ซื้อจริงก่อนใช้ แก้ไขทีหลังได้</div>${rows}</div><div class="sh-f"><button class="btn" data-act="close">ยกเลิก</button><button class="btn primary" data-act="preAdd" ${nNew?'':'disabled'}>เพิ่มที่เลือกลงคลัง</button></div>`,true)},
+ preAdd:async()=>{const ks=[...document.querySelectorAll('#modal [data-pre]:checked')].map(i=>i.dataset.pre);if(!ks.length){toast('ยังไม่ได้เลือกรายการ');return}
+  let n=0;for(const k of ks){const x=PRESET_DTWP.find(y=>y.key===k);if(!x||S.products.some(p=>pfKey(p.name)===pfKey(x.name)))continue;if(await save('products',preDoc(x)))n++;else break}
+  closeModal();toast(n?`เพิ่ม ${n} รายการลงคลังแล้ว — แตะชื่อเพื่อใส่ถัง`:'ไม่มีรายการใหม่')}});
 /* ==== จบ: คลังยา/ปุ๋ยของฉัน + ถังผสม ==== */
 
 
