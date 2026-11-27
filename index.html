@@ -1835,7 +1835,12 @@ const GROUPS={
  her:{'1':'ACCase','2':'ALS','3':'ยับยั้งไมโครทิวบูล','4':'ออกซินสังเคราะห์','5':'ยับยั้ง PSII','9':'EPSPS','10':'กลูตามีนซินธิเทส','13':'DXP (ฟอกขาว)','14':'PPO','15':'VLCFA','22':'PSI (ดึงอิเล็กตรอน)','27':'HPPD'}
 };
 const LOWRISK=g=>/^(M\d|BM)/.test(g)||['NC','UN','UNF','11A'].includes(g);
-const BEE_TOXIC=['1A','1B','2B','3A','4A','4C','5','6','13','22A','30'];
+/* กลุ่มที่เป็นพิษเฉียบพลันสูงต่อผึ้ง (LD50 <2 µg/ตัว) + รายสารในกลุ่มที่ส่วนใหญ่ไม่เป็นพิษ: ไซแอนทรานิลิโพรล (28) */
+const BEE_TOXIC=['1A','1B','2B','3A','4A','4C','5','6','12A','13','21A','22A','30'];const BEE_ID=['cyant'];
+const beeTox=c=>!!c&&(String(c.g||'').split('+').map(x=>x.trim()).some(x=>BEE_TOXIC.includes(x))||BEE_ID.includes(c.id));
+/* สารต้องห้ามในไทย (วัตถุอันตรายชนิดที่ 4): พาราควอต คลอร์ไพริฟอส(-เมทิล) 2563 · ไดโคฟอล 8 ก.ค. 2568 · กลุ่มที่ห้ามก่อนหน้า */
+const BANNED_TH=[['paraquat','พาราควอต'],['chlorpyrifos','คลอร์ไพริฟอส'],['dicofol','ไดโคฟอล'],['methamidophos','เมทามิโดฟอส'],['monocrotophos','โมโนโครโตฟอส'],['endosulfan','เอนโดซัลแฟน'],['dicrotophos','ไดโครโตฟอส'],['EPN','อีพีเอ็น'],['methyl parathion','เมทิลพาราไธออน'],['DDT','ดีดีที'],['lindane','ลินเดน'],['captafol','แคปตาฟอล']];
+const bannedIn=t=>{t=String(t||'');return BANNED_TH.find(([en,th])=>t.includes(th)||(en==='EPN'||en==='DDT'?new RegExp('\\b'+en+'\\b').test(t):new RegExp(en.replace(/ /g,'[\\s-]*'),'i').test(t)))||null};
 const splitG=g=>String(g||'').split('+').map(s=>s.trim()).filter(Boolean);
 const sameGroup=(a,b)=>splitG(a).some(x=>splitG(b).includes(x));
 function gLabel(cat,g){const sys=CATS[cat]?.sys;return g?(sys?sys+' '+g:g):''}
@@ -2573,7 +2578,7 @@ function viewAdvisor(){
   <div class="row between"><b>${CATS[t.cat].ic} ${esc(t.n)}</b><span class="lvl ${t.level}">${lvlTxt[t.level]}</span></div>
   <div class="row" style="gap:4px;margin:6px 0">${t.why.map(w=>`<span class="badge b-adj">${esc(w)}</span>`).join('')}</div>
   ${t.note?`<div class="small muted" style="margin-bottom:6px">${esc(t.note)}</div>`:''}
-  ${t.sols.map(s=>`<div class="sol"><div><b>${esc(s.ch.th)}</b> <span class="badge b-${s.ch.cat}">${esc(gLabel(s.ch.cat,s.ch.g)||CATS[s.ch.cat].s)}</span><div class="tiny muted">${esc(gName(s.ch.cat,s.ch.g))}${TN[s.ch.id]?' · เช่น '+esc(TN[s.ch.id].split(' ')[0]):''}${s.ch.note?' · '+esc(s.ch.note):''}${isFlowerStage(crop,A.stage)&&splitG(s.ch.g).some(x=>BEE_TOXIC.includes(x))&&s.ch.cat==='ins'?' · <b style="color:var(--red)">🐝 ระวังผึ้งช่วงดอกบาน</b>':''}</div></div>${s.st?`<span class="st ${s.st.lvl}" title="${esc(s.st.text)}">${s.st.lvl==='bad'?'เลี่ยง':s.st.lvl==='warn'?'ใช้ไม่นาน':s.st.lvl==='info'?'เสี่ยงดื้อต่ำ':'แนะนำ'}</span>`:''}</div>${s.st&&s.st.lvl!=='ok'&&s.st.lvl!=='info'?`<div class="tiny" style="color:${s.st.lvl==='bad'?'var(--red)':'var(--amber)'};margin:-2px 0 4px">${esc(s.st.text)}</div>`:''}${tmSolHTML(s.ch)}`).join('')}
+  ${t.sols.map(s=>`<div class="sol"><div><b>${esc(s.ch.th)}</b> <span class="badge b-${s.ch.cat}">${esc(gLabel(s.ch.cat,s.ch.g)||CATS[s.ch.cat].s)}</span><div class="tiny muted">${esc(gName(s.ch.cat,s.ch.g))}${TN[s.ch.id]?' · เช่น '+esc(TN[s.ch.id].split(' ')[0]):''}${s.ch.note?' · '+esc(s.ch.note):''}${isFlowerStage(crop,A.stage)&&beeTox(s.ch)&&s.ch.cat==='ins'?' · <b style="color:var(--red)">🐝 ระวังผึ้งช่วงดอกบาน</b>':''}</div></div>${s.st?`<span class="st ${s.st.lvl}" title="${esc(s.st.text)}">${s.st.lvl==='bad'?'เลี่ยง':s.st.lvl==='warn'?'ใช้ไม่นาน':s.st.lvl==='info'?'เสี่ยงดื้อต่ำ':'แนะนำ'}</span>`:''}</div>${s.st&&s.st.lvl!=='ok'&&s.st.lvl!=='info'?`<div class="tiny" style="color:${s.st.lvl==='bad'?'var(--red)':'var(--amber)'};margin:-2px 0 4px">${esc(s.st.text)}</div>`:''}${tmSolHTML(s.ch)}`).join('')}
  </div>`).join('')}</div>`:'<div class="card empty">ไม่พบความเสี่ยงเด่นจากข้อมูลที่เลือก — ลองเลือกระยะพืชหรือสภาพอากาศ</div>'}
  <div id="fly-mix">${flyMixHTML()}</div>
  <div class="grid g2" style="margin-top:14px">
@@ -2584,7 +2589,7 @@ function viewAdvisor(){
  ${STANDALONE?'':`<div class="card" style="margin-top:14px" id="ai-card"><div class="row between"><h2 style="margin:0">🤖 ถามผู้ช่วย AI (วิเคราะห์ละเอียด)</h2><button class="btn accent" data-act="askAI" ${A.aiBusy?'disabled':''}>${A.aiBusy?'กำลังวิเคราะห์…':'วิเคราะห์จากข้อมูลนี้'}</button></div>
   <div class="tiny muted" style="margin-top:4px">ส่งข้อมูลพืช เดือน อากาศ และประวัติแปลง (ไม่รวมชื่อ/เบอร์ลูกค้า) ให้ Claude ช่วยวิเคราะห์เพิ่ม</div>
   <div id="ai-out" class="ai-out" style="margin-top:10px"></div></div>`}
- <div class="note warn small" style="margin-top:14px">⚖️ คำแนะนำนี้เป็นแนวทางทั่วไปตามหลัก IRAC/FRAC และเอกสารกรมวิชาการเกษตร ไม่ใช่ใบสั่งใช้ ต้องเลือกผลิตภัณฑ์ที่ขึ้นทะเบียนกับพืชนั้น ใช้อัตรา วิธีใช้ และระยะเก็บเกี่ยว (PHI) ตามฉลากเสมอ ห้ามใช้สารต้องห้าม (เช่น พาราควอต คลอร์ไพริฟอส)</div>`;
+ <div class="note warn small" style="margin-top:14px">⚖️ คำแนะนำนี้เป็นแนวทางทั่วไปตามหลัก IRAC/FRAC และเอกสารกรมวิชาการเกษตร ไม่ใช่ใบสั่งใช้ ต้องเลือกผลิตภัณฑ์ที่ขึ้นทะเบียนกับพืชนั้น ใช้อัตรา วิธีใช้ และระยะเก็บเกี่ยว (PHI) ตามฉลากเสมอ ห้ามใช้สารต้องห้าม (เช่น พาราควอต คลอร์ไพริฟอส ไดโคฟอล)</div>`;
  return `<div class="adv2"><div class="adv-top"><h1>คำแนะนำการพ่น</h1><div class="sub">เลือกพืชและระยะ แล้วดูค่าบิน ผลต่อพืช และยาที่ควรใช้</div></div>
  ${advCtxHTML(A,plot,crop)}${advTabsHTML(tab,nHigh)}
  <div class="apane ${tab==='wx'?'on':''}" data-pane="wx">${wxPane}</div>
@@ -2638,7 +2643,7 @@ function viewLibrary(){
  ${prods.length?(()=>{const X=tmCtx();return `<div class="card" style="margin-bottom:12px"><div class="pane-h"><h2>ยาและปุ๋ยของฉัน</h2><button class="btn sm" data-act="goMix">🧪 ผสมถัง</button></div><div class="tiny muted" style="margin:-6px 0 8px">แนะนำต่อไร่ คิดจากค่าบินตอนนี้: ${esc(X.cropN)} น้ำ ${fmt(X.w,1)} ล./ไร่</div><table class="tm-lib"><tr><th>ชื่อ</th><th>ประเภท</th><th>ข้างกล่อง</th><th class="n">แนะนำ/ไร่</th></tr>${prods.map(p=>{const o=tmCalc(p,X),K=PK[pkOf(p)];return `<tr data-act="editProd" data-id="${p.id}" style="cursor:pointer"><td class="b">${hl(p.name,q)}<div class="tiny muted">${esc([CHEMMAP[p.activeId]?.th||p.active,pSub(p)].filter(Boolean).join(' · '))}</div></td><td><span class="badge b-${p.cat}">${K.ic} ${esc(K.n)}</span>${p.g&&K.pest?`<div class="tiny muted">${esc(gLabel(p.cat,p.g)||p.g)}</div>`:''}</td><td class="small">${esc(pLabel(p))||'<span class="muted">ยังไม่ใส่อัตรา</span>'}</td><td class="n small">${o.ok?(K.adj?qf(o.tRec,o.u)+'/ถัง':qf(o.rec,o.u)):'—'}${o.short?'<div class="tiny" style="color:var(--amber)">น้ำไม่พอ</div>':''}</td></tr>`}).join('')}</table></div>`})():''}
  <div class="card"><table class="libt"><tr><th>สารสำคัญ</th><th>กลุ่ม</th><th>ใช้กำจัด / ใช้กับ</th><th>หมายเหตุ</th></tr>${list.map(c=>`<tr><td><b>${hl(c.th,q)}</b><div class="tiny muted">${esc(c.en)}${TN[c.id]?' · เช่น '+hl(TN[c.id],q):''}</div></td><td><span class="badge b-${c.cat}">${esc(gLabel(c.cat,c.g)||c.g)}</span><div class="tiny muted">${esc(gName(c.cat,c.g))}</div></td><td class="small">${useCol(c)}</td><td class="small muted">${esc(c.note||'')}</td></tr>`).join('')||`<tr><td colspan="4" class="empty">ไม่พบ “${esc(q)}” ลองพิมพ์คำอื่น</td></tr>`}</table>
  <div class="tiny muted" style="margin-top:8px">ชื่อการค้าเป็นตัวอย่างเพื่อช่วยค้นหาเท่านั้น ตรวจสารสำคัญ อัตรา และพืชที่ขึ้นทะเบียนบนฉลากทุกครั้ง</div></div>
- <div class="note bad small" style="margin-top:12px">🚫 สารที่ห้ามใช้ในประเทศไทยแล้ว เช่น <b>พาราควอต</b> และ <b>คลอร์ไพริฟอส</b> — ไม่ควรรับพ่นแม้ลูกค้าเตรียมมาเอง</div>`;
+ <div class="note bad small" style="margin-top:12px">🚫 สารที่ห้ามใช้ในประเทศไทยแล้ว เช่น <b>พาราควอต</b> <b>คลอร์ไพริฟอส</b> และ <b>ไดโคฟอล</b> (ห้ามตั้งแต่ 8 ก.ค. 2568) — ไม่ควรรับพ่นแม้ลูกค้าเตรียมมาเอง</div>`;
 }
 
 /* ---------- ตั้งค่า ---------- */
@@ -3241,6 +3246,7 @@ function renderChemLines(){
 function lineChem(l){if(!l.activeId)return null;if(l.activeId.startsWith('p:')){const p=S.products.find(x=>'p:'+x.id===l.activeId);return p?{cat:p.cat,g:p.g,th:CHEMMAP[p.activeId]?.th||p.active||p.name,id:p.activeId}:null}if(l.activeId==='__custom')return {cat:l.cat,g:l.g,th:l.active};return CHEMMAP[l.activeId]}
 function updateLineInfo(i){
  const el=$('#clinfo-'+i);if(!el)return;const l=F.chems[i];const ch=lineChem(l);const msgs=[];
+ {const bn=bannedIn((l.product||'')+' '+(l.active||''));if(bn)msgs.push(`<div class="note bad" style="margin-top:4px;padding:5px 9px">🚫 ${esc(bn[1])} เป็นสารต้องห้ามในไทย (วัตถุอันตรายชนิดที่ 4) — ไม่ควรรับพ่นแม้ลูกค้าเตรียมมาเอง</div>`)}
  if(ch&&ch.id&&TG[ch.id]&&['ins','fun','her'].includes(l.cat))msgs.push(`<span class="tiny muted">ใช้กับ: ${esc(TG[ch.id].slice(0,5).join(', '))}</span><br>`);
  if(ch&&ch.g&&CATS[l.cat].sys){msgs.push(`<span class="badge b-${l.cat}">${esc(gLabel(l.cat,ch.g))}</span> <span class="tiny muted">${esc(gName(l.cat,ch.g))}</span>`);
   const plotId=F.plotId&&F.plotId!=='__new'?F.plotId:'';const cid=F.own?ownCustomer()?.id:F.customerId;
@@ -3249,7 +3255,7 @@ function updateLineInfo(i){
   else if(st&&hist.length)msgs.push(`<span class="st ok">✓ ${esc(st.text)}</span>`);
   const dup=F.chems.some((o,k)=>k!==i&&o.cat===l.cat&&(lineChem(o)?.g)&&!splitG(ch.g).every(LOWRISK)&&sameGroup(lineChem(o).g,ch.g));
   if(dup)msgs.push(`<div class="note warn" style="margin-top:4px;padding:5px 9px">⚠️ ในถังนี้มีสารกลุ่มเดียวกันอยู่แล้ว ไม่ควรผสมสารกลุ่มเดียวกัน</div>`);
-  if(l.cat==='ins'&&isFlowerStage(cropOf(F),F.stage)&&splitG(ch.g).some(x=>BEE_TOXIC.includes(x)))msgs.push(`<div class="note warn" style="margin-top:4px;padding:5px 9px">🐝 ระยะดอกบาน — สารกลุ่มนี้มีพิษสูงต่อผึ้ง</div>`);
+  if(l.cat==='ins'&&isFlowerStage(cropOf(F),F.stage)&&beeTox(ch))msgs.push(`<div class="note warn" style="margin-top:4px;padding:5px 9px">🐝 ระยะดอกบาน — สารกลุ่มนี้มีพิษสูงต่อผึ้ง</div>`);
  }
  const tank=syncTank(),wr=num(F.waterRate),rate=num(l.rate);
  if(rate&&wr&&F.service!=='fert'&&F.service!=='seed'){msgs.push(` <span class="tiny muted">ผสมต่อถัง ${fmt(tank,0)} ล.: <b>${fmt(rate*tank/wr,1)} ${esc(l.unit)}</b></span>`)}
@@ -3582,7 +3588,14 @@ function pFlags(p){const k=pkOf(p),nm=String(p.name||'')+' '+String(p.note||''),
  return {ca,caChel:ca&&k==='secE',so4,po4}}
 function pIsSalt(p){const k=pkOf(p);return !!PK[k].salt||(k==='micro'&&p.chel===false)}
 function pDens(p){if(pUnit(p)!=='cc')return 1;const d=num(p.dens);return d>0.5&&d<3?d:(PK[pkOf(p)].dens||1)}
-function pCap(p,sens){const k=pkOf(p),K=PK[k];if(num(p.cap)>0)return num(p.cap);if(!K.cap)return 0;let c=K.cap;if((k==='flake'||k==='liq')&&isSOP(p))c=3;if(sens&&(pIsSalt(p)||k==='secE'))c=Math.min(c,1);return c}
+/* เพดานความเข้มข้นรายธาตุ (% ผลิตภัณฑ์ในน้ำพ่น) จากคำแนะนำการพ่นทางใบ: ซิงค์ซัลเฟต 0.5 · เฟอรัสซัลเฟต 0.2–0.9 · แมงกานีสซัลเฟต 0.2–0.5
+   บอแรกซ์ 0.2 / กรดบอริก 0.15 · คอปเปอร์ซัลเฟต ≤0.2 · โมลิบเดต 0.05–0.1 · คีเลต EDTA ไหม้น้อยกว่าเกลือ ใช้ได้ถึง 1% (โบรอน/โมลิบดีนัมไม่มีรูปคีเลต)
+   เกลือแคลเซียม (แคลเซียมไนเตรต/คลอไรด์) ทางใบ 0.5–1% */
+const MICRO_CAP={salt:{Zn:0.5,Fe:0.5,Mn:0.5,Cu:0.2,B:0.2,Mo:0.1,mix:0.5},chel:{Zn:1,Fe:1,Mn:1,Cu:1,B:0.2,Mo:0.1,mix:1}};
+function pCap(p,sens){const k=pkOf(p),K=PK[k];if(num(p.cap)>0)return num(p.cap);if(!K.cap)return 0;let c=K.cap;if((k==='flake'||k==='liq')&&isSOP(p))c=3;
+ if(k==='micro'){const t=p.chel===false?MICRO_CAP.salt:MICRO_CAP.chel;if(t[p.el]!=null)c=t[p.el]}
+ if(k==='sec'&&p.el==='Ca')c=1;
+ if(sens&&(pIsSalt(p)||k==='secE'))c=Math.min(c,1);return c}
 function pForm(p){const k=pkOf(p),K=PK[k];if(K.pest)return p.form||formDetect(p.name)||'';if(K.adj)return p.adj==='drift'?'DRT':p.adj==='ph'||p.adj==='foam'?'':'ADJ';return pUnit(p)==='g'?'FOLS':'FOL'}
 const HERB_PRE=new Set(['pendi','alach','pretil','butac','clomaz','oxadiaz','smetol']);
 const pMob=p=>{const K=PK[pkOf(p)];if(!K.pest)return null;return (p.activeId&&typeof MOB_ID!=='undefined'&&MOB_ID[p.activeId])||(p.act==='con'?'con':p.act==='sys'?'xy':null)};
@@ -3724,7 +3737,7 @@ function openProd(p,opt){
    <div class="field"><label>การออกฤทธิ์</label><div class="fstg">${ch('act','sys','ดูดซึม')}${ch('act','con','สัมผัส')}${ch('act','','ไม่แน่ใจ')}</div></div>`;
   else if(k==='flake'||k==='liq')sp=`<div class="field"><label>สูตรปุ๋ย</label>${cbHTML('pfnpk',F.npk||'','เช่น 13-0-46','inputmode="text" autocorrect="off" autocapitalize="off" name="pfn'+uid().slice(-4)+'"')}</div>`;
   else if(k==='sec'||k==='secE')sp=`<div class="field"><label>ธาตุหลัก</label><div class="fstg">${Object.entries(SEC_EL).filter(([e])=>k==='sec'||e!=='S').map(([e,n])=>ch('el',e,n)).join('')}</div></div>`;
-  else if(k==='micro')sp=`<div class="field"><label>ธาตุ</label><div class="fstg">${Object.entries(MICRO_EL).map(([e,n])=>ch('el',e,n)).join('')}</div></div><div class="field"><label>รูปแบบ</label><div class="fstg">${ch('chel','true','คีเลต (EDTA)')}${ch('chel','false','ซัลเฟต')}</div><div class="tiny muted">ซัลเฟตนับรวมในเพดานปุ๋ยเกลือ และห้ามผสมกับแคลเซียม</div></div>`;
+  else if(k==='micro')sp=`<div class="field"><label>ธาตุ</label><div class="fstg">${Object.entries(MICRO_EL).map(([e,n])=>ch('el',e,n)).join('')}</div></div><div class="field"><label>รูปแบบ</label><div class="fstg">${ch('chel','true','คีเลต (EDTA)')}${ch('chel','false','ซัลเฟต')}</div><div class="tiny muted">เพดานต่อธาตุ: ซัลเฟต สังกะสี/เหล็ก/แมงกานีส 0.5% · ทองแดง/โบรอน 0.2% · โมลิบดีนัม 0.1% · คีเลต 1% — ซัลเฟตนับรวมในเพดานปุ๋ยเกลือ และห้ามผสมกับแคลเซียม</div></div>`;
   else if(k==='bio')sp=`<div class="field"><label>ชนิด (ไม่ใส่ก็ได้)</label><div class="fstg">${Object.entries(BIO_T).map(([e,n])=>ch('bio',e,n)).join('')}</div></div>`;
   else if(k==='adj')sp=`<div class="field"><label>ชนิด</label><div class="fstg">${Object.entries(ADJ_T).map(([e,n])=>ch('adj',e,n)).join('')}</div></div>`;
   return `<div class="field"><label>ชื่อการค้า/ยี่ห้อ *</label>${cbHTML('pfname',F.name,'พิมพ์ชื่อบนกล่อง ยี่ห้อ หรือสารสำคัญ','enterkeyhint="done" autocorrect="off" autocapitalize="off" name="pfq'+uid().slice(-4)+'"')}<div class="tiny muted" id="pf-dup">${pfDupHTML()}</div></div>
@@ -3797,7 +3810,7 @@ function pfHist(){const lib=new Set(S.products.map(p=>pfKey(p.name))),seen=new S
   if(!nm||lib.has(k)||seen.has(k)||String(l.activeId||'').startsWith('p:'))return;seen.add(k);const c=CHEMMAP[l.activeId]||null;
   out.push({t:'hist',name:nm,c,l,date:j.date,f:[nm,c?c.th:l.active,c?c.en:'']})}));return out}
 const histKind=it=>it.c?kindFromChem(it.c):[CAT_KIND[it.l.cat]||'flake',{}];
-function pfDupHTML(){if(!F||!F.name)return '';const k=pfKey(F.name);const d=S.products.find(p=>p.id!==F.id&&pfKey(p.name)===k);return d?`มีชื่อนี้ในคลังแล้ว <button type="button" class="lnk" data-act="pfOpen" data-id="${d.id}">เปิดของเดิม</button>`:''}
+function pfDupHTML(){if(!F)return '';const bn=bannedIn((F.name||'')+' '+(F.active||''));if(bn)return `<span class="neg"><b>🚫 ${esc(bn[1])} (${esc(bn[0])}) เป็นสารต้องห้ามในไทย (วัตถุอันตรายชนิดที่ 4) — ห้ามผลิต นำเข้า มีไว้ครอบครอง และไม่ควรรับพ่น</b></span>`;if(!F.name)return '';const k=pfKey(F.name);const d=S.products.find(p=>p.id!==F.id&&pfKey(p.name)===k);return d?`มีชื่อนี้ในคลังแล้ว <button type="button" class="lnk" data-act="pfOpen" data-id="${d.id}">เปิดของเดิม</button>`:''}
 CBP.pfname={noAuto:true,items:(inp,q)=>{if(F){F.name=inp.value;const d=$('#pf-dup');if(d)d.innerHTML=pfDupHTML()}q=String(q||'').trim();
   const mineAll=S.products.filter(p=>!F||p.id!==F.id),hist=pfHist(),src=pfSrc();
   const mineF=p=>[p.name,CHEMMAP[p.activeId]?.th||p.active,p.npk,pSub(p)];
@@ -4438,8 +4451,10 @@ const speedUnitSeg=()=>`<span class="wuseg">${[['kmh','กม./ชม.'],['ms','
 const windUnitSeg=()=>`<span class="wuseg">${['ms','kmh'].map(u=>`<button type="button" class="${WU()===u?'on':''}" data-act="windUnit" data-u="${u}">${WU_LAB[u]}</button>`).join('')}</span>`;
 
 /* Delta T (สูตรกระเปาะเปียกของ Stull 2011) */
-function wetBulb(T,RH){return T*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(T+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035}
-function deltaT(T,RH){T=num(T);RH=num(RH);if(!T&&T!==0||!RH||RH<5||RH>100)return null;return Math.max(0,T-wetBulb(T,Math.min(RH,99)))}
+/* อุณหภูมิกระเปาะเปียก: แก้สมการไซโครเมตริก e = es(Tw) − γ(T−Tw), γ = 0.665×10⁻³·P (FAO-56), es แบบ Tetens, P = 101.3 kPa (ระดับน้ำทะเล)
+   แม่นกว่าสูตรประมาณ Stull (2011) ที่คลาดได้ถึง ~0.9°C ตอนร้อนแห้ง ซึ่งพอจะข้ามเกณฑ์ Delta T 10 ได้ */
+function wetBulb(T,RH,P=101.3){const es=x=>0.6108*Math.exp(17.27*x/(x+237.3)),ea=RH/100*es(T),g=0.000665*P;let lo=T-45,hi=T;for(let i=0;i<48;i++){const tw=(lo+hi)/2;if(es(tw)-g*(T-tw)>ea)hi=tw;else lo=tw}return (lo+hi)/2}
+function deltaT(T,RH){T=num(T);RH=num(RH);if(!T&&T!==0||!RH||RH<5||RH>100)return null;return Math.max(0,T-wetBulb(T,Math.min(RH,100)))}
 /* =========================================================
    ตัวตัดสินเดียวทั้งแอป: “ตอนนี้พ่น/หว่านได้ไหม”
    ทุกจุดใช้ชุดนี้: แถบสรุปอากาศด้านบน · การ์ด Delta T · ช่วงเวลา 24 ชม. · ความพร้อมการบินพ่น
@@ -4667,7 +4682,7 @@ function uptakeIdx(env,d){const t=tDry(env,d);if(t==null)return null;let u=Math.
 /* ---------- แบบจำลองจุดละออง: จำนวนจุด/ตร.ซม. = (น้ำต่อพื้นที่ ÷ ปริมาตรละออง) × สัดส่วนที่ลงถึงพืช × การลดลงผ่านชั้นใบ ---------- */
 const FLY_LAI={rice:{seedling:1,tiller:2.5,boot:4,heading:4,milk:4,ripe:3.5,_:3},corn:{emerg:0.8,veg:2.5,tassel:4,grain:3.5,_:3},sugarcane:{plant:1,tiller:2.5,elong:4,ripen:4,_:3},veg:{seedling:1,vegg:2.5,flower:2.5,fruit:3,harvest:3,_:2.5},
  durian:{post:3.5,flush:3,half:3.5,mature:4,bud:4,flower:4,fruitset:4,flushfruit:4,fruit:4,preharvest:4,_:4},rubber:{young:1.5,winter:0.5,newleaf:2,half:3.5,tapping:3,_:3},coconut:{cyoung:1.5,cflower:2,cfruit:2,_:2},other:{_:2.5}};
-const FLY_TGT={fun:{n:'🍄 เชื้อรา',D:50,depth:null},ins:{n:'🐛 แมลง/ไรบนใบ',D:25,depth:null},deep:{n:'🎯 ศัตรูโคนต้น/ใต้ใบ',D:25,depth:1},fol:{n:'💧 ปุ๋ยทางใบ/ฮอร์โมน',D:30,depth:0.4},herb:{n:'🌿 ยาหญ้าสัมผัส/ทั่วไป',D:30,depth:0.3},herbS:{n:'🌱 ยาหญ้าดูดซึม',D:20,depth:0.3},herbP:{n:'💧 ยาคุมหญ้า (ลงน้ำ/ดิน)',D:10,depth:1}};
+const FLY_TGT={fun:{n:'🍄 เชื้อรา',D:50,depth:null},ins:{n:'🐛 แมลง/ไรบนใบ',D:25,depth:null},deep:{n:'🎯 ศัตรูโคนต้น/ใต้ใบ',D:25,depth:1},fol:{n:'💧 ปุ๋ยทางใบ/ฮอร์โมน',D:30,depth:0.4},herb:{n:'🌿 ยาหญ้าสัมผัส/ทั่วไป',D:30,depth:0.3},herbS:{n:'🌱 ยาหญ้าดูดซึม',D:20,depth:0.3},herbP:{n:'💧 ยาคุมหญ้า (ลงน้ำ/ดิน)',D:20,depth:1}};
 const isH=t=>/^herb/.test(t||'');
 const defTgt=svc=>svc==='herb'?'herb':svc==='foliar'?'fol':'fun';
 function tgtFromChems(j){const c=(j.chems||[]).filter(x=>x.active||x.product).map(x=>x.cat);if(j.service==='herb'||c.includes('her'))return 'herb';if(c.includes('fun'))return 'fun';if(c.includes('ins'))return 'ins';if(c.includes('fer')||c.includes('pgr')||j.service==='foliar')return 'fol';return defTgt(j.service)}
@@ -6116,7 +6131,7 @@ function jobSprayPanels(F,mj,a,wx,wv){const cond=wx.cond||[],env=envOf({temp:wx.
  const lines=(F.chems||[]).filter(l=>l.activeId||l.product||l.active);const items=lines.map(l=>({form:lineForm(l),name:(lineChem(l)?.th||l.active||l.product||'').slice(0,40),rate:l.rate,unit:l.unit,cat:l.cat,g:lineChem(l)?.g||l.g}));
  const forms=items.map(x=>x.form).filter(Boolean);const mix=mixPlan(items,wv,F.water||'tap',items.map(x=>x.g||''));
  const burn=burnRisk({crop:cr,stg,tgt:a.tgt,temp:wx.temp,rh:wx.rh,w:wv,d:num(F.drop)||a.d,chems:F.chems,env,forms});
- const bee=lines.some(l=>{const c=lineChem(l);return c&&(CHEMMAP[c.id]?.note||'').includes('ผึ้ง')});
+ const bee=lines.some(l=>{const c=lineChem(l);return c&&(beeTox(c)||(CHEMMAP[c.id]?.note||'').includes('ผึ้ง'))});
  const fsr=lines.map(l=>{const c=lineChem(l);return c&&FER2SRC[c.id]}).filter(Boolean),aj=lines.map(l=>lineChem(l)).find(c=>c&&c.cat==='adj');
  const bio=bioOf({crop:cr,stg,env,d:num(F.drop)||a.d,tgt:a.tgt,mob:mobFromChems(F),srcs:fsr,adjId:aj&&aj.id,hasAdj:!!aj});
  const b=sprayBenefit(mj,{mix,burn,water:F.water||'tap',bio});const dr=mj.drift;
@@ -6140,10 +6155,10 @@ const EL_N={N:'N',P:'P₂O₅',K:'K₂O',S:'S',Ca:'CaO',Mg:'MgO',Zn:'Zn',B:'B',C
 /* ธาตุรองในปุ๋ยที่มีอยู่ */
 Object.assign(MAT.dap,{ex:{S:13}});Object.assign(MAT.as,{ex:{S:24}});Object.assign(MAT.mop,{ex:{Cl:47}});
 Object.assign(MAT,{
- kies:{n:'กีเซอไรต์ (แมกนีเซียม 27% กำมะถัน 22%)',k:'fert',d:2.5,rho:1900,bulk:1.2,cd:0.55,sl:0.95,crh:90,rpmMax:1200,npk:[0,0,0],ex:{Mg:27,S:22}},
- gyp:{n:'ยิปซัมเม็ด (แคลเซียม 32% กำมะถัน 18%)',k:'fert',d:3,rho:2300,bulk:1.1,cd:0.55,sl:0.95,crh:99,rpmMax:1100,npk:[0,0,0],ex:{Ca:32,S:18}},
- cano3:{n:'แคลเซียมไนเตรต 15.5-0-0',k:'fert',d:2.2,rho:1800,bulk:1.1,cd:0.47,sl:1,crh:47,rpmMax:1100,npk:[15.5,0,0],ex:{Ca:26}},
- dolo:{n:'โดโลไมต์เม็ด (ปรับดินกรด)',k:'fert',d:3,rho:2200,bulk:1.2,cd:0.55,sl:0.9,crh:99,rpmMax:1000,npk:[0,0,0],ex:{Ca:30,Mg:18},note:'เม็ดแตกเป็นผงถ้ารอบสูง'},
+ kies:{n:'กีเซอไรต์ (MgO 27% กำมะถัน 22%)',k:'fert',d:2.5,rho:1900,bulk:1.2,cd:0.55,sl:0.95,crh:90,rpmMax:1200,npk:[0,0,0],ex:{Mg:27,S:22}},
+ gyp:{n:'ยิปซัมเม็ด (CaO 32% กำมะถัน 18%)',k:'fert',d:3,rho:2300,bulk:1.1,cd:0.55,sl:0.95,crh:99,rpmMax:1100,npk:[0,0,0],ex:{Ca:32,S:18}},
+ cano3:{n:'แคลเซียมไนเตรต 15.5-0-0 (CaO 26%)',k:'fert',d:2.2,rho:1800,bulk:1.1,cd:0.47,sl:1,crh:47,rpmMax:1100,npk:[15.5,0,0],ex:{Ca:26}},
+ dolo:{n:'โดโลไมต์เม็ด (CaO 30% MgO 18%)',k:'fert',d:3,rho:2200,bulk:1.2,cd:0.55,sl:0.9,crh:99,rpmMax:1000,npk:[0,0,0],ex:{Ca:30,Mg:18},note:'เม็ดแตกเป็นผงถ้ารอบสูง'},
  znso4:{n:'ซิงค์ซัลเฟตเม็ด (สังกะสี 33%)',k:'fert',d:2,rho:2000,bulk:1.0,cd:0.5,sl:0.95,crh:85,rpmMax:1100,npk:[0,0,0],ex:{Zn:33,S:16}},
  boron:{n:'โบรอนเม็ด (B 15%)',k:'fert',d:2.5,rho:1700,bulk:0.95,cd:0.5,sl:0.95,crh:95,rpmMax:1100,npk:[0,0,0],ex:{B:15}}});
 /* สัดส่วนที่พืชดูดใช้ได้ในฤดูนั้น (ส่วนที่เหลือค้างในดิน/ถูกตรึง/ชะล้าง/ระเหย) — ค่าทั่วไปจากงานวิจัยประสิทธิภาพการใช้ปุ๋ย */
