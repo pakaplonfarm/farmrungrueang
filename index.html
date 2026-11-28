@@ -1323,7 +1323,7 @@ table.tx{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
 .tm-tot-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.tm-tot-g>div{background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:12px;padding:7px 10px;display:flex;flex-direction:column}.tm-tot-g span{font-size:11.5px;color:var(--muted)}.tm-tot-g b{font-size:20px;line-height:1.25}.tm-tot-g b.bad{color:#B91C1C}.tm-tot-g small{font-size:11.5px;color:#92400E}
 .tm-hib{height:8px;border-radius:99px;background:#E5E7EB;margin:8px 0 4px;overflow:hidden}.tm-hib i{display:block;height:100%;border-radius:99px;background:#10B981}.tm-hib i.hi{background:#F59E0B}.tm-hib i.warn{background:#EF4444}
 .tm-tl{list-style:none;margin:6px 0 0;padding:0;font-size:13px}.tm-tl li{display:flex;gap:8px;align-items:baseline;padding:3px 0;border-top:1px dashed var(--line)}.tm-tl li:first-child{border-top:0}.tm-tl span{flex:1;min-width:0}.tm-tl b{font-weight:700}.tm-tl em{font-style:normal;font-size:11.5px;color:var(--muted);min-width:120px;text-align:right}
-.tm-tot .tm-sum{margin-top:6px}.tm-scl{margin-top:4px;color:#92400E;font-weight:600}
+.tm-tot .tm-sum{margin-top:6px}.tm-scl{color:var(--ink);background:#F1F8F3;border-left:3px solid var(--brand);border-radius:6px;padding:6px 8px;margin-top:6px;line-height:1.55}.tm-scl b{color:var(--brand)}
 .tm-pc small{font-weight:500;color:var(--muted)}
 .tm-ana{border-width:2px}.tm-ana.lv-ok{border-color:#86EFAC}.tm-ana.lv-warn{border-color:#FCD34D}.tm-ana.lv-bad{border-color:#FCA5A5}
 .ta-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}.ta-h h2{margin:0}
@@ -1708,7 +1708,7 @@ const MONTHS=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','ม�
 const MONTHS_FULL=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 const clone=o=>JSON.parse(JSON.stringify(o??null));
 const isQ=j=>j&&j.status==='queued'; // งานที่จองคิวไว้ ยังไม่นับเป็นรายรับ
-const APP_VER='v79';
+const APP_VER='v80';
 const STANDALONE=!(window.claude&&typeof window.claude.use==='function')&&!/claude|anthropic/i.test(location.hostname); // เปิดจาก GitHub Pages / เว็บทั่วไป
 function toast(t,type){const el=$('#toast');const err=type==='err'||(type!=='ok'&&/ไม่สำเร็จ|ไม่ได้|กรุณา|ไม่มีสิทธิ์|ไม่พบ|เต็ม/.test(t));el.className='';el.innerHTML=(err?'⚠️ ':'✓ ')+esc(t);void el.offsetWidth;el.classList.add('on',err?'err':'ok');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('on'),2800)}
 
@@ -3954,7 +3954,9 @@ function tmRowHTML(o,X,M_){const p=o.p,u=o.u,K=o.K;
  const cap=o.cap,pr=o.pct,pm=X.w?o.max*o.dens/X.w/10:0;
  const bar=cap?`<div class="tm-bar"><i style="width:${Math.min(100,pr/cap*100)}%" class="${pr>cap*1.001?'bad':pr>cap*0.85?'hi':''}"></i></div><div class="tiny tm-pct">เข้ม ${pctf(pr)} <span class="muted">· เพดาน ${capf(cap)}%${X.wf<0.999?` (×${fmt(X.wf,2)} อากาศ)`:''}${o.osmW?` · ค่าเกลือ${o.osmW===1?'เต็ม':' ×'+fmt(o.osmW,2)}`:''}</span></div>`:'';
  const mb=pMob(p);const st=K.pest?`<div class="tiny muted">ยาไม่เช็ก % ห้ามใส่เกินฉลาก${mb&&MOB[mb].D?` · ${MOB[mb].n} ต้องการละออง ≥${MOB[mb].D} จุด/ตร.ซม. ค่าบินคิดน้ำให้แล้ว`:''}</div>`:K.adj?'':'';
- const scl=fx<1?`<div class="tiny tm-scl">↓ ลดเหลือ ${Math.round(fx*100)}% ของอัตรา เพราะ${o.why2==='el'?`${MICRO_EL[p.el]||SEC_EL[p.el]||'ธาตุ'}ซ้ำกับตัวอื่นในถัง รวมกันเกินเพดาน`:`ค่าเกลือรวมทั้งถังเกินเพดาน ${fmt(M_.saltCap,1)}% (ลดตัวที่กินค่าเกลือมากที่สุดก่อน)`} — ดู “ผลวิเคราะห์ถังผสม” ด้านล่าง</div>`:'';
+ /* อัตราที่ลดแล้ว: บอกเป็นขั้นจากฉลาก → เพดานของตัวเอง → แบ่งค่าเกลือ/ธาตุกับตัวอื่น ใช้ “% ของฉลาก” แบบเดียวกับผลวิเคราะห์ */
+ const lab_=o.dose==='max'?o.L2:o.L1,capR=o.capRai!=null&&isFinite(o.capRai)?o.capRai:Infinity,st1=o.dose==='max'?o.max:o.rec;/* อัตราหลังเพดานของตัวเอง ก่อนแบ่งกับตัวอื่น */
+ const scl=fx<1?`<div class="tiny tm-scl">✓ <b>ลดแล้ว</b> — ใช้ ${qf(o.use,u)}/ไร่ (${Math.round(o.use/lab_*100)}% ของฉลาก): ฉลาก ${qf(lab_,u)}${st1<lab_*0.995?` → เข้มได้ไม่เกิน ${capf(o.cap)}% ที่น้ำ ${fmt(X.w,1)} ล. = ${qf(st1,u)}`:''} → ${o.why2==='el'?`${MICRO_EL[p.el]||SEC_EL[p.el]||'ธาตุ'}ซ้ำกับตัวอื่นในถัง แบ่งเพดานกัน`:`แบ่งค่าเกลือกับตัวอื่นในถัง`} เหลือ ${qf(o.use,u)} · ${o.why2==='el'?'ธาตุนี้รวมกัน':'ค่าเกลือรวมทั้งถัง'}พอดีเพดาน ไม่เกิน</div>`:'';
  const shortN=!scl&&o.short?`<div class="note warn small">ใส่ตามฉลากต่ำสุด ${qf(o.L1,u)}/ไร่ ต้องใช้น้ำ <b>${fmt(Math.ceil(o.needW*2)/2,1)} ล./ไร่</b> ขึ้นไป${o.needW>wDrone(X.crop).max?' (เกินที่โดรนพ่นได้ — ใช้อัตราที่ลดแล้ว)':''} ตอนนี้ใส่ได้ไม่เกิน ${qf(o.capRai,u)}/ไร่${X.wf<0.999?` <span class="muted">(รวมผลอากาศ ×${fmt(X.wf,2)})</span>`:''}</div>`:'';
  const kh=pKindHint(p)?`<div class="note warn small">${esc(pKindHint(p))} <button class="lnk" data-act="editProd" data-id="${p.id}">แก้ประเภท</button></div>`:'';
  return `<div class="tm-r">${head}${kh}<div class="tm-qs">${box('แนะนำ',o.rec,o.tRec,o.dose==='rec')}${box('ไม่เกิน',o.max,o.tMax,o.dose==='max')}</div>${bar}${st}${scl}${shortN}<div class="tiny muted tm-why">${esc(o.why||'')}</div></div>`}
@@ -4307,7 +4309,7 @@ function tmAnaStat(M,X,O){const C=[];
  /* อัตราจริงเทียบฉลาก: ลดจากเพดานของตัวเอง เพดานปุ๋ยเกลือ หรือเพดานรวม */
  const labU=o=>o.dose==='max'?o.L2:o.L1,fac=o=>labU(o)>0?o.use/labU(o):1,cut=M.nut.filter(o=>fac(o)<0.995);
  const st=nBad?'bad':(nWarn||cut.length)?'warn':'ok';
- const stT=nBad?`⛔ มีคู่ที่ห้ามผสม ${nBad} ข้อ`:st==='warn'?(nWarn?`⚠️ ผสมได้ แต่ต้องระวัง ${nWarn+(cut.length?1:0)} ข้อ`:`⚠️ ผสมได้ — ลดอัตรา ${cut.length} ตัวให้อยู่ในเพดาน`):'✅ ผสมได้ ค่าอยู่ในเกณฑ์';
+ const stT=nBad?`⛔ มีคู่ที่ห้ามผสม ${nBad} ข้อ`:st==='warn'?(nWarn?`⚠️ ผสมได้ แต่ต้องระวัง ${nWarn+(cut.length?1:0)} ข้อ`:`⚠️ ผสมได้ — แอปลดอัตรา ${cut.length} ตัวให้อยู่ในเพดานแล้ว`):'✅ ผสมได้ ค่าอยู่ในเกณฑ์';
  return {C,D,nBad,nWarn,over,sOver,labU,fac,cut,st,stT}}
 /* แถบสรุปใต้รายการที่เลือก: บอกว่าถังว่าง หรือสถานะถัง + ปุ่มเลื่อนลงไปดูแผงใหญ่ */
 function tmSumHTML(X){X=X||tmCtx();const st=tmState(),n=S.products.length;if(!n)return '';
@@ -4322,12 +4324,12 @@ function tmAnaHTML(M,X,O){if(!M.ok.length)return '';const N=tmNut(M,X),{C,D,nBad
  const grpLine=pests.length>1&&gl.length===new Set(gl).size?`<li class="ok">✅ กลุ่มยาไม่ซ้ำกัน: ${pests.map(o=>`${esc(gLab(o))} (${esc(pNm(o.p))})`).join(' · ')}</li>`:'';
  /* ตารางความเข้มและค่าเกลือรายตัว */
  const rows=M.ok.map(o=>{const K=o.K,share=o.cap&&!K.pest&&!K.adj?o.pct/o.cap:null,pa=K.adj?o.tUse*o.dens/(X.tank*10):o.pct;
-  return `<tr><td><i>${K.ic}</i> ${esc(o.p.name)}<small>${esc(K.n)}${pSub(o.p)?' · '+esc(pSub(o.p)):''}${K.pest&&gLab(o)?' · กลุ่ม '+esc(gLab(o)):''}</small></td><td class="n">${pctf(pa)}${cut.includes(o)?`<small class="cut">ลดเหลือ ${Math.round(fac(o)*100)}%</small>`:''}</td><td class="n">${K.pest||K.adj?'—':!o.osmW?'<small>ไม่นับ</small>':o.osmW>=1?`<b class="salt">${pctf(o.osm)}</b>${o.osmW>1?`<small class="nw">×${fmt(o.osmW,2)}</small>`:''}`:`${pctf(o.osm)}<small class="nw">×${fmt(o.osmW,2)}</small>`}</td><td class="n">${share!=null?`<b class="${share>1.001?'bad':share>0.85?'hi':''}">${Math.round(share*100)}%</b><small>ของ ${capf(o.cap)}%</small>`:'<small class="nw">ฉลากกำหนด</small>'}</td></tr>`}).join('');
+  return `<tr><td><i>${K.ic}</i> ${esc(o.p.name)}<small>${esc(K.n)}${pSub(o.p)?' · '+esc(pSub(o.p)):''}${K.pest&&gLab(o)?' · กลุ่ม '+esc(gLab(o)):''}</small></td><td class="n">${pctf(pa)}${cut.includes(o)?`<small class="cut">ลดแล้ว · ${Math.round(fac(o)*100)}% ของฉลาก</small>`:''}</td><td class="n">${K.pest||K.adj?'—':!o.osmW?'<small>ไม่นับ</small>':o.osmW>=1?`<b class="salt">${pctf(o.osm)}</b>${o.osmW>1?`<small class="nw">×${fmt(o.osmW,2)}</small>`:''}`:`${pctf(o.osm)}<small class="nw">×${fmt(o.osmW,2)}</small>`}</td><td class="n">${share!=null?`<b class="${share>1.001?'bad':share>0.85?'hi':''}">${Math.round(share*100)}%</b><small>ของ ${capf(o.cap)}%</small>`:'<small class="nw">ฉลากกำหนด</small>'}</td></tr>`}).join('');
  const hp=M.hi*100,hf=M.hiFull*100,all=M.pctNut+M.pctPest+M.pctAdj;
  const g1=(M.groups||[]).slice().sort((a,b)=>b.use-a.use)[0],gN=g=>MICRO_EL[g.el]||SEC_EL[g.el]||g.el;
  const tot=`<div class="ta-g">
   <div><span>ปุ๋ย ธาตุอาหาร สารเสริม</span><b>${pctf(M.pctNut)}</b></div>
-  <div class="${hp>100.1?'bad':over||hp>85?'hi':''}"><span>ค่าเกลือรวม (เทียบปุ๋ยเกลือ)</span><b>${M.nut.length?pctf(M.saltPct):'0%'}</b><small>เพดาน ${capf(M.saltCap)}%${X.wf<0.999?` (${capf(M.saltCap/X.wf)}% × อากาศ ${fmt(X.wf,2)})`:''}${over?` · ตามฉลากครบ = ${pctf(M.saltPct0)}`:''}</small></div>
+  <div class="${hp>100.1?'bad':over||hp>85?'hi':''}"><span>ค่าเกลือรวม (เทียบปุ๋ยเกลือ)</span><b>${M.nut.length?pctf(M.saltPct):'0%'}</b><small>เพดาน ${capf(M.saltCap)}%${X.wf<0.999?` (${capf(M.saltCap/X.wf)}% × อากาศ ${fmt(X.wf,2)})`:''}${over?(hp<=100.1?` · ลดแล้ว (ถ้าใส่ตามฉลากครบจะเป็น ${pctf(M.saltPct0)})`:` · ตามฉลากครบ = ${pctf(M.saltPct0)}`):''}</small></div>
   <div class="${g1&&g1.use>1.001?'bad':g1&&(g1.full>1.001||g1.use>0.85)?'hi':''}"><span>ธาตุเดียวกันจากหลายตัว</span><b>${g1?Math.round(g1.use*100)+'%':'ไม่มี'}</b><small>${g1?`${gN(g1)} ${g1.its.length} ตัว ของเพดาน${g1.full>1.001?` · ตามฉลากครบ = ${Math.round(g1.full*100)}%`:''}`:'ไม่มีธาตุซ้ำให้บวกกัน'}</small></div>
   <div><span>ทุกตัวในถังรวม</span><b>${pctf(all)}</b><small>${[M.pctPest?'ยา '+pctf(M.pctPest):'',M.pctAdj?'สารช่วย '+pctf(M.pctAdj):''].filter(Boolean).join(' · ')}</small></div></div>
   ${M.nut.length?`<div class="tm-hib" title="ค่าเกลือรวมเทียบเพดาน"><i class="${hp>100.1?'warn':over||hp>85?'hi':'ok'}" style="width:${Math.min(100,hp)}%"></i></div>`:''}`;
@@ -4349,7 +4351,7 @@ function tmAnaHTML(M,X,O){if(!M.ok.length)return '';const N=tmNut(M,X),{C,D,nBad
   const df=M.nut.map(o=>{const o1=M1.nut.find(x=>x.p.id===o.p.id);return o1&&o1.use>0&&o.use<o1.use*0.995?`${esc(pNm(o.p))} ${qf(o.use,o.u)}/ไร่ <span class="muted">(ช่วงอากาศดี ${qf(o1.use,o1.u)})</span>`:''}).filter(Boolean);
   R.push(`🌡️ ${esc(X.wxc.lab)}: เพดานลดเหลือ <b>×${fmt(X.wf,2)}</b> — ${X.wxc.why.map(esc).join(' · ')}${df.length?`<br>อัตราที่ลดเพราะอากาศ: ${df.join(', ')}`:'<br>ถังนี้ยังอยู่ในเพดานที่ลดแล้ว ไม่ต้องลดอัตรา'}<br>${bw?`ย้ายไปพ่น <b>${bw}</b>`:'เลื่อนไปเช้าตรู่หรือหลัง 17:00 น.'} ใช้เพดานมาตรฐาน${M1.needW>X.w*1.001?(w1<=WD.max?` — ใส่ครบตามฉลากต้องใช้น้ำ ≥ ${fmt(w1,1)} ล./ไร่`:' — อัตราเพิ่มขึ้นแต่ยังไม่ครบฉลาก (ข้อจำกัดของน้ำโดรน)'):' — ใส่ครบตามฉลากด้วยน้ำเท่าเดิม'}`)}
  if(cut.length){const rs=o=>[o.pctLab>o.cap*1.001?`ตามฉลากเข้ม ${pctf(o.pctLab)} เกินเพดานของตัวเอง ${fmt(o.cap,1)}%`:'',o.why2==='osm'?'ค่าเกลือรวมเต็ม จึงลดตัวที่กินค่าเกลือมากสุด':'',o.why2==='el'?`${MICRO_EL[o.p.el]||SEC_EL[o.p.el]||'ธาตุ'}ซ้ำกับตัวอื่น`:''].filter(Boolean).join(' และ');
-  R.push(`แอปลดอัตราให้ไม่ไหม้ใบแล้ว: ${cut.map(o=>`${esc(pNm(o.p))} เหลือ ${Math.round(fac(o)*100)}% <span class="muted">(${rs(o)})</span>`).join(', ')} — ตัวเลขในรายการและปริมาณเทลงถังเป็นค่าที่ลดแล้ว`);
+  R.push(`แอปลดอัตราให้ไม่ไหม้ใบแล้ว: ${cut.map(o=>`${esc(pNm(o.p))} เหลือ ${qf(o.use,o.u)}/ไร่ = ${Math.round(fac(o)*100)}% ของฉลาก <span class="muted">(${rs(o)})</span>`).join(', ')} — ตัวเลขในรายการและปริมาณเทลงถังเป็นค่าที่ลดแล้ว`);
   const big=cut.filter(o=>o.pctLab>o.cap*1.001&&!o.byRai);if(big.length&&X.mult&&X.w){const k=X.mult*20/X.w;R.push(`เหตุหลัก: อัตราข้างกล่อง “ต่อน้ำ 20 ลิตร” คิดสำหรับเครื่องพ่นน้ำมาก (×${X.mult} ≈ ${X.mult*20} ล./ไร่) พอใส่ปริมาณต่อไร่เท่าเดิมในน้ำโดรน ${fmt(X.w,1)} ล./ไร่ ความเข้มเพิ่ม ${fmt(k,k>=10?0:1)} เท่า — ไม่ได้เกิดจากการผสมหลายตัว`)}
   if(wN>X.w&&wN<=WD.max)R.push(`ถ้าจะใส่เต็มอัตราในถังเดียว ใช้น้ำ ≥ <b>${fmt(wN,1)} ล./ไร่</b> <button class="btn sm" data-act="tmUseW" data-w="${wN}">ใช้ค่านี้</button>`);
   else if(wN>WD.max)R.push(`ใส่เต็มอัตราฉลากต้องใช้น้ำ ${fmt(wN,0)} ล./ไร่ — <b>ไม่ต้องตั้งตามนี้</b> เกินที่โดรนพ่นได้ (${esc(WD.n)} ${fmt(WD.lo,0)}–${fmt(WD.hi,0)} ล./ไร่ สูงสุดราว ${fmt(WD.max,1)}) ใช้อัตราที่แอปลดแล้ว ปุ๋ยทางใบเป็นตัวเสริม ธาตุหลักให้ทางดิน${(b=>b?' · '+b:'')(wUpBtn(X,WD))}`);
